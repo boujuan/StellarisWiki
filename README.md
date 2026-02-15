@@ -2,6 +2,8 @@
 
 A tool for fetching and converting Stellaris Wiki pages into clean, token-efficient Markdown optimized for LLM consumption.
 
+> **[Ask any question about Stellaris using the NotebookLM with all parsed wiki docs loaded](https://notebooklm.google.com/notebook/ae857011-2ba6-4312-ad22-a6b8b6c891a3)**
+
 ## Overview
 
 This project fetches game data from the [Stellaris Wiki](https://stellaris.paradoxwikis.com/) and converts it to clean Markdown format. It uses MediaWiki's `action=parse` API to get server-rendered HTML (with all templates expanded), then converts that HTML to structured Markdown.
