@@ -1,0 +1,13 @@
+# Generated output (re-fetch with: python fetch_and_parse.py)
+output_markdown/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+*.egg

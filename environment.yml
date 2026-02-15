@@ -1,0 +1,11 @@
+name: stellaris-scraper
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - tqdm
+  - beautifulsoup4
+  - lxml
+  - pip
+  - pip:
+    - cloudscraper
