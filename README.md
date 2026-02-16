@@ -61,6 +61,7 @@ cloudscraper>=1.2.71    # Bypass Cloudflare protection
 tqdm>=4.66.0            # Progress bars
 beautifulsoup4>=4.11.0  # HTML parsing
 lxml>=4.9.0             # Fast HTML parser backend
+fastmcp>=2.0.0          # MCP server framework
 ```
 
 ## Usage
@@ -116,6 +117,51 @@ python fetch_and_parse.py --output my_wiki_data
 python fetch_and_parse.py --page "Technology" --test
 ```
 
+## MCP Server (StellarisWikiMCP)
+
+An MCP (Model Context Protocol) server is included, allowing Claude Desktop to query the wiki data directly.
+
+### Setup
+
+1. Install FastMCP in the environment (already included in `environment.yml`):
+
+```bash
+micromamba run -n stellaris-scraper pip install fastmcp
+```
+
+2. Add to Claude Desktop config (`~/.config/Claude/claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "StellarisWikiMCP": {
+      "command": "/usr/bin/micromamba",
+      "args": [
+        "run", "-n", "stellaris-scraper", "python",
+        "/path/to/stellaris_wiki_scraper/stellaris_mcp_server.py"
+      ]
+    }
+  }
+}
+```
+
+3. Restart Claude Desktop. The server will appear in the tools list.
+
+### Available Tools
+
+| Tool | Description | Example |
+|------|-------------|---------|
+| `list_pages` | List all 95 available wiki pages | "What Stellaris wiki pages are available?" |
+| `get_page` | Get full content of a page (fuzzy matching) | "Get the Machine traits page" |
+| `search_wiki` | Search across all pages, returns snippets | "Search for Efficient Processors" |
+
+### Testing
+
+```bash
+# Test the server with the MCP inspector
+micromamba run -n stellaris-scraper fastmcp dev stellaris_mcp_server.py
+```
+
 ## Output Format
 
 ### Individual Markdown Files
@@ -159,6 +205,7 @@ stellaris_wiki_scraper/
 │
 ├── fetch_and_parse.py        # Main script: fetch HTML → convert to Markdown
 ├── html_to_markdown.py       # HTML to Markdown converter class
+├── stellaris_mcp_server.py   # MCP server for Claude Desktop
 │
 ├── fetch_specific_pages.py   # Fetch raw wikitext (legacy)
 ├── scraper.py                # Full wiki scraper (legacy)

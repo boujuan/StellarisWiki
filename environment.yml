@@ -7,5 +7,7 @@ dependencies:
   - beautifulsoup4
   - lxml
   - pip
+  - pydantic
   - pip:
     - cloudscraper
+    - fastmcp
