@@ -110,32 +110,31 @@ class HTMLToMarkdown:
         overlapping images. Since images are stripped later, we extract the
         component name and replace the entire grid span with text.
         """
-        # Collect all grid spans first to avoid modifying tree during iteration
+        # Collect all grid spans and extract names before modifying tree
         grid_spans = []
+        grid_span_set = set()
         for span in soup.find_all('span', style=True):
             style = span.get('style', '').replace(' ', '')
             if 'display:inlinegrid' in style:
                 grid_spans.append(span)
+                grid_span_set.add(id(span))
 
+        # First pass: extract names and determine if decorative (before any replacements)
+        replacements = []
         for span in grid_spans:
             component_name = None
 
-            # Strategy 1: <a> with title attribute (Layer 3 link)
             for a_tag in span.find_all('a'):
                 title = a_tag.get('title')
                 if title and 'File:' not in title:
                     component_name = title
                     break
-
-            # Strategy 2: <img> alt text that isn't a filename
             if not component_name:
                 for img in span.find_all('img'):
                     alt = img.get('alt', '')
                     if alt and not alt.endswith('.png') and not alt.endswith('.jpg'):
                         component_name = alt
                         break
-
-            # Strategy 3: href fragment
             if not component_name:
                 for a_tag in span.find_all('a'):
                     href = a_tag.get('href', '')
@@ -143,8 +142,45 @@ class HTMLToMarkdown:
                         component_name = href.split('#')[-1].replace('_', ' ')
                         break
 
-            # Use comma separator so consecutive components don't merge
-            span.replace_with(NavigableString(f'{component_name}, ' if component_name else ''))
+            # Check adjacent non-grid text to decide if decorative
+            is_decorative = False
+            if component_name:
+                next_text = ''
+                for sib in span.next_siblings:
+                    if isinstance(sib, NavigableString):
+                        text = str(sib).strip()
+                        if text:
+                            next_text = text
+                            break
+                    elif isinstance(sib, Tag) and id(sib) not in grid_span_set:
+                        next_text = sib.get_text(strip=True)
+                        break
+                prev_text = ''
+                for sib in span.previous_siblings:
+                    if isinstance(sib, NavigableString):
+                        text = str(sib).strip()
+                        if text:
+                            prev_text = text
+                            break
+                    elif isinstance(sib, Tag) and id(sib) not in grid_span_set:
+                        prev_text = sib.get_text(strip=True)
+                        break
+
+                name_words = [w for w in component_name.lower().split() if len(w) > 2]
+                adjacent = (prev_text + ' ' + next_text).lower()
+                if name_words and all(w in adjacent for w in name_words):
+                    is_decorative = True
+
+            replacements.append((span, component_name, is_decorative))
+
+        # Second pass: do all replacements
+        for span, name, is_decorative in replacements:
+            if is_decorative:
+                span.replace_with(NavigableString(' '))
+            elif name:
+                span.replace_with(NavigableString(f'{name}, '))
+            else:
+                span.replace_with(NavigableString(''))
 
     def _remove_unwanted(self, soup: BeautifulSoup) -> None:
         """Remove navigation, edit links, references, etc."""
@@ -152,10 +188,50 @@ class HTMLToMarkdown:
             for el in soup.select(selector):
                 el.decompose()
 
-        # Remove image elements (keep alt text if processing text)
-        for img in soup.find_all('img'):
-            # Just remove images entirely for cleaner output
-            img.decompose()
+        # Process images: replace with alt text when it carries meaning,
+        # strip decorative icons that duplicate adjacent text
+        for img in list(soup.find_all('img')):
+            alt = img.get('alt', '')
+
+            # Always strip decorative/background images
+            if not alt or any(skip in alt.lower() for skip in [
+                'slot bg', 'slot_bg', 'slot frame', 'slot_frame',
+                'menu icon', 'event button', 'leader trait bg',
+                'pm frame', 'pm_frame',
+            ]):
+                img.decompose()
+                continue
+
+            # Clean alt text
+            label = re.sub(r'\.(png|jpg|gif)$', '', alt, flags=re.IGNORECASE)
+            label = label.replace('_', ' ').strip()
+
+            if not label:
+                img.decompose()
+                continue
+
+            # Check if image is inside a link that has nearby text context
+            parent_a = img.find_parent('a')
+            if parent_a:
+                # If the <a> has a title or adjacent text, the icon is decorative
+                if parent_a.get('title'):
+                    img.decompose()
+                    continue
+                # Check if parent element already has text that covers this
+                parent_el = parent_a.parent
+                if parent_el:
+                    sibling_text = ''
+                    for sib in parent_el.children:
+                        if isinstance(sib, NavigableString):
+                            sibling_text += str(sib)
+                        elif isinstance(sib, Tag) and sib != parent_a:
+                            sibling_text += sib.get_text()
+                    if sibling_text.strip():
+                        img.decompose()
+                        continue
+
+            # Replace with text — this image carries unique meaning
+            img.replace_with(NavigableString(label))
 
         # Remove audio/video
         for el in soup.find_all(['audio', 'video', 'source']):
