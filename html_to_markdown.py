@@ -65,6 +65,9 @@ class HTMLToMarkdown:
         # Remove unwanted elements
         self._remove_unwanted(soup)
 
+        # Preserve bold formatting in markdown
+        self._preprocess_formatting(soup)
+
         # Clean title (remove HTML tags)
         clean_title = self._strip_html(title)
 
@@ -182,6 +185,42 @@ class HTMLToMarkdown:
                 span.replace_with(NavigableString(f'{name}, '))
             else:
                 span.replace_with(NavigableString(''))
+
+    def _preprocess_formatting(self, soup: BeautifulSoup) -> None:
+        """Preserve bold formatting from HTML as markdown **bold** markers.
+
+        Handles three patterns:
+        1. Elements with font-size:larger + font-weight:bold (civic/item names)
+        2. <div> with font-weight:bold only (tradition/building names)
+        3. <b> and <strong> tags (labels, inline bold text)
+
+        Skips <span> with font-weight:bold (modifier values like "+10%").
+        """
+        # 1 & 2. Styled bold elements
+        for el in list(soup.find_all(style=True)):
+            style = el.get('style', '').replace(' ', '').lower()
+            if 'font-weight:bold' not in style:
+                continue
+            text = el.get_text(strip=True)
+            if not text or len(text) > 200:
+                continue
+            # font-size:larger items (any tag) — civic/item names
+            if 'font-size:larger' in style:
+                el.clear()
+                el.append(NavigableString(f'**{text}**'))
+            # <div> with font-weight:bold — tradition/building names
+            # Skip short numeric/modifier values
+            elif el.name == 'div' and len(text) > 2 and not text.lstrip('−+-').replace('.', '').replace('%', '').isdigit():
+                el.clear()
+                el.append(NavigableString(f'**{text}**'))
+
+        # 3. <b> and <strong> tags
+        for tag in list(soup.find_all(['b', 'strong'])):
+            text = tag.get_text(strip=True)
+            if text:
+                tag.replace_with(NavigableString(f'**{text}**'))
+            else:
+                tag.decompose()
 
     def _remove_unwanted(self, soup: BeautifulSoup) -> None:
         """Remove navigation, edit links, references, etc."""
