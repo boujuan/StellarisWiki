@@ -58,6 +58,9 @@ class HTMLToMarkdown:
         """
         soup = BeautifulSoup(html, 'lxml')
 
+        # Pre-process component icons before images are stripped
+        self._preprocess_component_icons(soup)
+
         # Remove unwanted elements
         self._remove_unwanted(soup)
 
@@ -99,6 +102,49 @@ class HTMLToMarkdown:
             soup = BeautifulSoup(text, 'lxml')
             return soup.get_text(strip=True)
         return text
+
+    def _preprocess_component_icons(self, soup: BeautifulSoup) -> None:
+        """Replace {{component}} template grid spans with plain text names.
+
+        The wiki's {{component}} template renders as a 3-layer CSS grid of
+        overlapping images. Since images are stripped later, we extract the
+        component name and replace the entire grid span with text.
+        """
+        # Collect all grid spans first to avoid modifying tree during iteration
+        grid_spans = []
+        for span in soup.find_all('span', style=True):
+            style = span.get('style', '').replace(' ', '')
+            if 'display:inlinegrid' in style:
+                grid_spans.append(span)
+
+        for span in grid_spans:
+            component_name = None
+
+            # Strategy 1: <a> with title attribute (Layer 3 link)
+            for a_tag in span.find_all('a'):
+                title = a_tag.get('title')
+                if title and 'File:' not in title:
+                    component_name = title
+                    break
+
+            # Strategy 2: <img> alt text that isn't a filename
+            if not component_name:
+                for img in span.find_all('img'):
+                    alt = img.get('alt', '')
+                    if alt and not alt.endswith('.png') and not alt.endswith('.jpg'):
+                        component_name = alt
+                        break
+
+            # Strategy 3: href fragment
+            if not component_name:
+                for a_tag in span.find_all('a'):
+                    href = a_tag.get('href', '')
+                    if '#' in href and 'File:' not in href:
+                        component_name = href.split('#')[-1].replace('_', ' ')
+                        break
+
+            # Use comma separator so consecutive components don't merge
+            span.replace_with(NavigableString(f'{component_name}, ' if component_name else ''))
 
     def _remove_unwanted(self, soup: BeautifulSoup) -> None:
         """Remove navigation, edit links, references, etc."""
@@ -498,22 +544,87 @@ class HTMLToMarkdown:
         # Clean up whitespace
         text = re.sub(r'\s+', ' ', text)
 
-        return text.strip()
+        # Clean up trailing comma from component icon preprocessing
+        text = text.strip().rstrip(',').strip()
+
+        return text
 
     def _get_cell_text(self, el: Tag) -> str:
-        """Get text for table cell, handling special formatting."""
-        text = self._get_text(el)
+        """Get text for table cell, preserving list structure with <br> separators."""
+        # Check if cell contains any list elements
+        lists = el.find_all(['ul', 'ol'])
 
-        # Escape pipe characters in table cells
-        text = text.replace('|', '\\|')
+        if not lists:
+            # No lists — use standard text extraction
+            text = self._get_text(el)
+            text = text.replace('|', '\\|')
+            text = text.replace('\n', ' ')
+            text = re.sub(r'\s+', ' ', text)
+            return text.strip()
 
-        # Replace newlines with spaces
-        text = text.replace('\n', ' ')
+        # Cell contains lists — process preserving structure
+        parts = []
+        for child in el.children:
+            if isinstance(child, Tag) and child.name in ['ul', 'ol']:
+                items = self._get_list_items_for_cell(child)
+                parts.extend(items)
+            elif isinstance(child, Tag):
+                # Check if wrapper contains a list
+                inner_lists = child.find_all(['ul', 'ol'])
+                if inner_lists:
+                    for inner_child in child.children:
+                        if isinstance(inner_child, Tag) and inner_child.name in ['ul', 'ol']:
+                            parts.extend(self._get_list_items_for_cell(inner_child))
+                        elif isinstance(inner_child, Tag):
+                            text = self._get_text(inner_child)
+                            if text.strip():
+                                parts.append(text.strip())
+                        elif isinstance(inner_child, NavigableString):
+                            text = str(inner_child).strip()
+                            if text:
+                                parts.append(text)
+                else:
+                    text = self._get_text(child)
+                    if text.strip():
+                        parts.append(text.strip())
+            elif isinstance(child, NavigableString):
+                text = str(child).strip()
+                if text:
+                    parts.append(text)
 
-        # Clean up multiple spaces
-        text = re.sub(r'\s+', ' ', text)
+        result = '<br>'.join(parts)
+        result = result.replace('|', '\\|')
+        result = re.sub(r' +', ' ', result)
+        return result.strip()
 
-        return text.strip()
+    def _get_list_items_for_cell(self, list_el: Tag, indent: int = 0) -> list:
+        """Extract list items for use in table cells with <br> separators."""
+        items = []
+        indent_prefix = '\u00a0\u00a0' * indent  # Non-breaking spaces for indent
+
+        for i, li in enumerate(list_el.find_all('li', recursive=False)):
+            marker = '-' if list_el.name == 'ul' else f'{i+1}.'
+
+            text_parts = []
+            nested_lists = []
+            for child in li.children:
+                if isinstance(child, Tag) and child.name in ['ul', 'ol']:
+                    nested_lists.append(child)
+                elif isinstance(child, Tag):
+                    text_parts.append(self._get_text(child))
+                elif isinstance(child, NavigableString):
+                    text_parts.append(str(child).strip())
+
+            text = ' '.join(filter(None, text_parts))
+            text = re.sub(r'\s+', ' ', text).strip()
+
+            if text:
+                items.append(f"{indent_prefix}{marker} {text}")
+
+            for nested in nested_lists:
+                items.extend(self._get_list_items_for_cell(nested, indent + 1))
+
+        return items
 
 
 def convert_html_to_markdown(html: str, title: str) -> str:
