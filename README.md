@@ -14,13 +14,13 @@ This project fetches game data from the [Stellaris Wiki](https://stellaris.parad
 |----------|-------------|--------|
 | Raw wikitext | ~4.3 MB | Templates not expanded, hard to parse |
 | Parsed to JSON | ~11 MB | JSON overhead, template artifacts |
-| **HTML to Markdown** | **~3.1 MB** | Clean, structured, token-efficient |
+| **HTML to Markdown** | **~3.4 MB** | Clean, structured, token-efficient |
 
 The HTML-to-Markdown approach produces output that is **~70% smaller** than the JSON approach while maintaining all the important game data in a clean, readable format.
 
 ## Features
 
-- Fetches 95 game concept pages using MediaWiki's `action=parse` API (server expands all templates)
+- Fetches 104 game concept pages using MediaWiki's `action=parse` API (server expands all templates)
 - Converts HTML tables to proper Markdown tables
 - Preserves section hierarchy with Markdown headers
 - Removes navigation boxes, edit links, and other wiki chrome
@@ -44,8 +44,8 @@ micromamba create -f environment.yml
 micromamba run -n stellaris-scraper pip install cloudscraper
 
 # Or manually
-micromamba create -n stellaris-scraper python=3.11 tqdm beautifulsoup4 lxml -c conda-forge
-micromamba run -n stellaris-scraper pip install cloudscraper
+micromamba create -n stellaris-scraper python=3.11 tqdm beautifulsoup4 lxml pydantic -c conda-forge
+micromamba run -n stellaris-scraper pip install cloudscraper fastmcp
 ```
 
 ### Using pip
@@ -77,7 +77,7 @@ python fetch_and_parse.py
 ```
 
 This will:
-1. Fetch all 95 predefined game pages from the wiki
+1. Fetch all 104 predefined game pages from the wiki
 2. Convert each to Markdown
 3. Save individual files to `output_markdown/pages/`
 4. Create a combined file at `output_markdown/stellaris_4.2_combined.md`
@@ -151,7 +151,7 @@ micromamba run -n stellaris-scraper pip install fastmcp
 
 | Tool | Description | Example |
 |------|-------------|---------|
-| `list_pages` | List all 95 available wiki pages | "What Stellaris wiki pages are available?" |
+| `list_pages` | List all 104 available wiki pages | "What Stellaris wiki pages are available?" |
 | `get_page` | Get full content of a page (fuzzy matching) | "Get the Machine traits page" |
 | `search_wiki` | Search across all pages, returns snippets | "Search for Efficient Processors" |
 
@@ -207,39 +207,53 @@ stellaris_wiki_scraper/
 ├── html_to_markdown.py       # HTML to Markdown converter class
 ├── stellaris_mcp_server.py   # MCP server for Claude Desktop
 │
-├── fetch_specific_pages.py   # Fetch raw wikitext (legacy)
-├── scraper.py                # Full wiki scraper (legacy)
-├── parser.py                 # Wikitext parser (legacy)
-├── template_resolver.py      # Template mappings (legacy)
-│
 └── output_markdown/          # Markdown output (generated)
-    ├── pages/                # Individual .md files (95 pages)
+    ├── pages/                # Individual .md files (104 pages)
     │   ├── Machine_traits.md
     │   ├── Civics.md
-    │   ├── Corporate_civics.md
+    │   ├── Achievements.md
     │   └── ...
     └── stellaris_4.2_combined.md  # Single combined file
 ```
 
 ## Pages Fetched
 
-The tool fetches 95 game concept pages covering:
+The tool fetches 104 game concept pages covering:
 
 | Category | Pages |
 |----------|-------|
 | **Empire Setup** | Origin, Government, Authorities, Ethics, Civics, Corporate civics, Hive mind civics, Machine intelligence civics, Empire |
 | **Governance** | Council, Agendas, Policies, Edicts, Factions, Traditions, Ascension perks, Situations, Crisis empire |
-| **Species** | Species traits, Biological traits, Machine traits, Population, Species rights |
+| **Species** | Species, Species traits, Biological traits, Machine traits, Population, Species rights |
 | **Leaders** | Leaders, Common leader traits, Commander traits, Scientist traits, Official traits, Paragons |
-| **Economy** | Resources, Trade, Planetary management, Jobs, Districts, Designation, Holdings, Megastructures, Colonization, Terraforming |
-| **Buildings** | Planet capital, Unique buildings, Holdings |
+| **Economy & Buildings** | Resources, Trade, Planetary management, Jobs, Districts, Designation, Holdings, Planet capital, Unique buildings, Megastructures, Colonization, Terraforming |
 | **Technology** | Technology, Physics research, Society research, Engineering research |
-| **Ships** | Ship, Ship designer, Fleet, Core components, Weapon components, Utility components, Mutations, Offensive mutations |
+| **Ships & Components** | Ship, Ship designer, Fleet, Core components, Weapon components, Utility components, Mutations, Offensive mutations |
 | **Military** | Warfare, Space warfare, Land warfare, Army, Bombardment, Starbase |
-| **Exploration** | Exploration, FTL, Discovery, Anomaly, Archaeological site, Astral rift, Relics, Collection, Unique systems, L-Cluster |
-| **Diplomacy** | Diplomacy, Relations, Galactic community, Federations, Subject empire, Intelligence, Espionage, AI personalities |
+| **Exploration** | Exploration, FTL, Discovery, Anomaly, Archaeological site, Astral rift, Celestial object, Planet modifiers, Planetary features, Unique systems, Relics, Collection, L-Cluster, The Shroud |
+| **Diplomacy** | Diplomacy, Relations, Galactic community, Federation, Subject empire, Intelligence, Espionage, AI personalities |
 | **NPCs** | Fallen empire, Spaceborne aliens, Pre-FTL species, Enclaves, Guardians, Marauders, Caravaneers |
-| **Other** | Empire modifiers, Stat modifiers, Events, The Shroud, Console commands, Easter eggs, AI players, Preset empires |
+| **Modifiers & Events** | Empire modifiers, Stat modifiers, Events |
+| **Reference** | Achievements, Crisis, Galaxy settings, Beginner's guide, Hotkeys, Jargon, User interface, Console commands, Easter eggs, AI players, Preset empires, Modding |
+
+## Adding New Pages
+
+To add new pages, edit the `PAGES_TO_FETCH` list in `fetch_and_parse.py`:
+
+```python
+PAGES_TO_FETCH = [
+    # ...existing pages...
+    "New_Page_Title",  # Use the exact wiki page title
+]
+```
+
+Page titles must match the wiki URL (e.g., `https://stellaris.paradoxwikis.com/Achievements` → `"Achievements"`). Pages with spaces in the title work too (e.g., `"Beginner's guide"`).
+
+Then re-run the fetch:
+
+```bash
+micromamba run -n stellaris-scraper python fetch_and_parse.py
+```
 
 ## API Details
 
@@ -313,19 +327,6 @@ If pages have very little content:
 
 Some complex wiki tables with colspan/rowspan may not convert perfectly. The converter handles basic colspan but complex nested tables may be simplified.
 
-## Contributing
-
-To add new pages to fetch, edit the `PAGES_TO_FETCH` list in `fetch_and_parse.py`:
-
-```python
-PAGES_TO_FETCH = [
-    "Origin",
-    "Traditions",
-    # Add new pages here
-    "New_Page_Title",
-]
-```
-
 ## License
 
 This tool is for educational and research purposes. All wiki content is owned by Paradox Interactive and wiki contributors under their respective licenses.
@@ -334,4 +335,4 @@ This tool is for educational and research purposes. All wiki content is owned by
 
 - **Wiki Version**: 4.2 (Stellaris game version)
 - **Python**: 3.11+
-- **Last Updated**: February 2025
+- **Last Updated**: February 2026

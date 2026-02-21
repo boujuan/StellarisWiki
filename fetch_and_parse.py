@@ -21,90 +21,99 @@ from html_to_markdown import HTMLToMarkdown
 
 API_URL = "https://stellaris.paradoxwikis.com/api.php"
 
-# Pages to fetch (same list as fetch_specific_pages.py)
 PAGES_TO_FETCH = [
+    # Empire Setup
     "Origin",
-    "Traditions",
-    "Technology",
-    "Empire_modifiers",
-    "Ascension_perks",
-    "Crisis_empire",
     "Government",
-    "Council",
+    "Authorities",
+    "Ethics",
     "Civics",
-    "Events",
+    "Corporate civics",
+    "Hive mind civics",
+    "Machine intelligence civics",
+    "Empire",
+    # Governance
+    "Council",
+    "Agendas",
     "Policies",
     "Edicts",
     "Factions",
+    "Traditions",
+    "Ascension_perks",
     "Situations",
-    "Resources",
-    "Planetary_management",
-    "Jobs",
-    "Designation",
-    "Warfare",
-    "Starbase",
-    "Ship",
-    "Stat_modifiers",
-    "Exploration",
-    "Celestial_object",
-    "Population",
-    "Leaders",
-    "Ethics",
+    "Crisis_empire",
+    # Species
+    "Species",
     "Species_traits",
-    "Species_rights",
-    "Empire",
     "Biological_traits",
     "Machine_traits",
-    "Discovery",
-    "Anomaly",
-    "Planet_modifiers",
-    "Planetary_features",
-    "Colonization",
-    "Unique_systems",
+    "Population",
+    "Species_rights",
+    # Leaders
+    "Leaders",
     "Common_leader_traits",
     "Commander_traits",
     "Scientist_traits",
     "Official_traits",
     "Paragons",
+    # Economy & Buildings
+    "Resources",
+    "Trade",
+    "Planetary_management",
+    "Jobs",
     "Districts",
-    "Megastructures",
+    "Designation",
+    "Holdings",
     "Planet_capital",
     "Unique_buildings",
-    "Ship_designer",
-    "Core_components",
-    "Weapon_components",
-    "Utility_components",
+    "Megastructures",
+    "Colonization",
+    "Terraforming",
+    # Technology
+    "Technology",
     "Physics_research",
     "Society_research",
     "Engineering_research",
+    # Ships & Components
+    "Ship",
+    "Ship_designer",
+    "Fleet",
+    "Core_components",
+    "Weapon_components",
+    "Utility_components",
+    "Mutations",
+    "Offensive mutations",
+    # Military
+    "Warfare",
     "Space_warfare",
+    "Land warfare",
+    "Army",
+    "Bombardment",
+    "Starbase",
+    # Exploration & Discovery
+    "Exploration",
+    "FTL",
+    "Discovery",
+    "Anomaly",
+    "Archaeological site",
+    "Astral rift",
+    "Celestial_object",
+    "Planet_modifiers",
+    "Planetary_features",
+    "Unique_systems",
+    "Relics",
+    "Collection",
+    "L-Cluster",
     "The_Shroud",
-    "Console_commands",
-    # Civics sub-pages
-    "Corporate civics",
-    "Hive mind civics",
-    "Machine intelligence civics",
     # Diplomacy & Relations
     "Diplomacy",
     "Relations",
     "Galactic community",
-    "Federations",
+    "Federation",
     "Subject empire",
     "Intelligence",
     "Espionage",
     "AI personalities",
-    # Military
-    "Land warfare",
-    "Army",
-    "Fleet",
-    "Bombardment",
-    # Exploration & Discovery
-    "FTL",
-    "Archaeological site",
-    "Astral rift",
-    "Relics",
-    "Collection",
-    "L-Cluster",
     # NPCs & Encounters
     "Fallen empire",
     "Spaceborne aliens",
@@ -113,19 +122,23 @@ PAGES_TO_FETCH = [
     "Guardians",
     "Marauders",
     "Caravaneers",
-    # Economy & Buildings
-    "Trade",
-    "Holdings",
-    "Terraforming",
-    "Authorities",
-    "Agendas",
-    # Ships
-    "Mutations",
-    "Offensive mutations",
-    # Other
+    # Modifiers & Events
+    "Empire_modifiers",
+    "Stat_modifiers",
+    "Events",
+    # Reference & Other
+    "Achievements",
+    "Crisis",
+    "Galaxy settings",
+    "Beginner's guide",
+    "Hotkeys",
+    "Jargon",
+    "User interface",
+    "Console_commands",
     "Easter eggs",
     "AI players",
     "Preset empires",
+    "Modding",
 ]
 
 
@@ -211,25 +224,6 @@ def sanitize_filename(title: str) -> str:
         safe = safe[:200]
     return safe
 
-
-def get_page_titles_from_existing() -> list[str]:
-    """Get list of page titles from existing fetched data in output_4.2/."""
-    pages_dir = Path(__file__).parent / "output_4.2" / "pages"
-    titles = []
-
-    if not pages_dir.exists():
-        return PAGES_TO_FETCH
-
-    for json_file in pages_dir.glob("*.json"):
-        try:
-            with open(json_file, encoding="utf-8") as f:
-                data = json.load(f)
-                if "title" in data:
-                    titles.append(data["title"])
-        except (json.JSONDecodeError, IOError) as e:
-            print(f"Warning: Could not read {json_file}: {e}")
-
-    return titles if titles else PAGES_TO_FETCH
 
 
 def strip_html_from_title(title: str) -> str:
@@ -401,12 +395,6 @@ def main():
         default=0.5,
         help="Delay between API requests in seconds (default: 0.5)"
     )
-    parser.add_argument(
-        "--use-existing",
-        action="store_true",
-        help="Use page list from existing output_4.2/ data"
-    )
-
     args = parser.parse_args()
 
     output_dir = Path(__file__).parent / args.output
@@ -428,14 +416,8 @@ def main():
             print(f"Failed: {args.page}")
             sys.exit(1)
     else:
-        # Process all pages
-        if args.use_existing:
-            page_titles = get_page_titles_from_existing()
-            print(f"Using {len(page_titles)} pages from existing data")
-        else:
-            page_titles = PAGES_TO_FETCH
-            print(f"Using default page list ({len(page_titles)} pages)")
-
+        page_titles = PAGES_TO_FETCH
+        print(f"Processing {len(page_titles)} pages")
         process_all_pages(page_titles, output_dir, args.delay)
 
 
