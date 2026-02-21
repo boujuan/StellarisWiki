@@ -40,13 +40,11 @@ class HTMLToMarkdown:
             '.mw-headline-anchor',   # Headline anchors
             'table.navbox',          # Navigation boxes in table format
             '.navbox-inner',         # Inner navbox content
-            '.collapsible',          # Collapsible navbox elements
         ]
 
         # Table classes to skip (these are navigation, not data)
         self.skip_table_classes = {
-            'navbox', 'navbox-inner', 'collapsible', 'autocollapse',
-            'mw-collapsible', 'navbox-columns-table'
+            'navbox', 'navbox-inner', 'navbox-columns-table'
         }
 
     def convert(self, html: str, title: str) -> str:

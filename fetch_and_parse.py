@@ -11,6 +11,7 @@ import json
 import re
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import cloudscraper
@@ -274,43 +275,88 @@ def process_single_page(session, converter: HTMLToMarkdown, title: str,
     return full_md, True
 
 
-def process_all_pages(page_titles: list[str], output_dir: Path, delay: float = 0.5):
+def _fetch_and_convert(title: str, pages_dir: Path) -> tuple[str, str, bool]:
+    """Fetch and convert a single page (for use in thread pool).
+
+    Each thread creates its own session to avoid sharing state.
+
+    Returns:
+        Tuple of (title, markdown_content, success)
+    """
+    session = create_session()
+    converter = HTMLToMarkdown()
+
+    data = fetch_page_html(session, title)
+    if not data or not data.get("html"):
+        return title, "", False
+
+    markdown = converter.convert(data["html"], data["title"])
+    frontmatter = create_yaml_frontmatter(data["title"], data["categories"])
+    full_md = frontmatter + markdown
+
+    filename = sanitize_filename(title) + ".md"
+    output_path = pages_dir / filename
+    output_path.write_text(full_md, encoding="utf-8")
+
+    return title, full_md, True
+
+
+def process_all_pages(page_titles: list[str], output_dir: Path,
+                      delay: float = 0.5, workers: int = 1):
     """Fetch and convert all pages to Markdown.
 
     Args:
         page_titles: List of page titles to process
         output_dir: Directory for output files
-        delay: Delay between requests in seconds
+        delay: Delay between requests in seconds (used in sequential mode)
+        workers: Number of parallel workers (1 = sequential)
     """
-    session = create_session()
-    converter = HTMLToMarkdown()
-
-    # Create output directory
     pages_dir = output_dir / "pages"
     pages_dir.mkdir(parents=True, exist_ok=True)
 
-    all_markdown = []
+    # Dict to preserve page order for combined file
+    results = {}
     successful = 0
     failed = 0
 
-    print(f"\nProcessing {len(page_titles)} pages...")
+    print(f"\nProcessing {len(page_titles)} pages (workers={workers})...")
     print(f"Output directory: {output_dir}")
     print("-" * 60)
 
-    for title in tqdm(page_titles, desc="Converting", unit=" pages"):
-        full_md, success = process_single_page(
-            session, converter, title, pages_dir, delay
-        )
+    if workers > 1:
+        # Parallel fetching
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            futures = {
+                executor.submit(_fetch_and_convert, title, pages_dir): title
+                for title in page_titles
+            }
+            with tqdm(total=len(page_titles), desc="Converting", unit=" pages") as pbar:
+                for future in as_completed(futures):
+                    title, full_md, success = future.result()
+                    if success:
+                        results[title] = full_md
+                        successful += 1
+                    else:
+                        failed += 1
+                    pbar.update(1)
+    else:
+        # Sequential fetching with rate limiting
+        session = create_session()
+        converter = HTMLToMarkdown()
+        for title in tqdm(page_titles, desc="Converting", unit=" pages"):
+            full_md, success = process_single_page(
+                session, converter, title, pages_dir, delay
+            )
+            if success:
+                results[title] = full_md
+                successful += 1
+            else:
+                failed += 1
 
-        if success:
-            all_markdown.append(full_md)
-            successful += 1
-        else:
-            failed += 1
-
-    # Save combined file
-    if all_markdown:
-        combined = "\n\n---\n\n".join(all_markdown)
+    # Save combined file in original page order
+    if results:
+        ordered_markdown = [results[t] for t in page_titles if t in results]
+        combined = "\n\n---\n\n".join(ordered_markdown)
         combined_path = output_dir / "stellaris_4.2_combined.md"
         combined_path.write_text(combined, encoding="utf-8")
         combined_size = combined_path.stat().st_size
@@ -323,7 +369,6 @@ def process_all_pages(page_titles: list[str], output_dir: Path, delay: float = 0
         print(f"Combined file: {combined_path}")
         print(f"Combined size: {combined_size / 1024 / 1024:.2f} MB")
 
-        # Calculate total individual file sizes
         total_size = sum(f.stat().st_size for f in pages_dir.glob("*.md"))
         print(f"Total individual files size: {total_size / 1024 / 1024:.2f} MB")
 
@@ -385,7 +430,13 @@ def main():
         "--delay",
         type=float,
         default=0.5,
-        help="Delay between API requests in seconds (default: 0.5)"
+        help="Delay between API requests in seconds (default: 0.5, sequential mode only)"
+    )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=4,
+        help="Number of parallel workers (default: 4, use 1 for sequential)"
     )
     args = parser.parse_args()
 
@@ -410,7 +461,7 @@ def main():
     else:
         page_titles = PAGES_TO_FETCH
         print(f"Processing {len(page_titles)} pages")
-        process_all_pages(page_titles, output_dir, args.delay)
+        process_all_pages(page_titles, output_dir, args.delay, args.workers)
 
 
 if __name__ == "__main__":
