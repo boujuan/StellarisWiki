@@ -363,32 +363,115 @@ class HTMLToMarkdown:
 
         table = content.find('table')
         if not table:
-            # Fallback: just get all text
             text = self._get_text(content)
             return f"\n{text}\n" if text else ''
 
-        rows = table.find_all('tr')
         parts = []
 
-        for row in rows:
-            cells = row.find_all(['td', 'th'])
-            for cell in cells:
-                text = self._get_text(cell)
-                if not text:
-                    continue
+        # Extract trigger conditions and MTTH from subheading spans
+        for subheading in table.find_all('span', class_='subheading'):
+            label = subheading.get_text(strip=True)
+            # Get the parent cell and extract content after the subheading
+            cell = subheading.find_parent('td')
+            if not cell:
+                continue
+            # Collect text from siblings after the subheading
+            detail_parts = []
+            for sibling in subheading.find_next_siblings():
+                if sibling.name == 'span' and 'subheading' in sibling.get('class', []):
+                    break
+                text = self._get_text(sibling)
+                if text:
+                    detail_parts.append(text)
+            detail = ' '.join(detail_parts)
+            if label and detail:
+                parts.append(f"\n**{label}** {detail}\n")
+            elif label:
+                parts.append(f"\n**{label}**\n")
 
-                # Detect trigger/MTTH/options sections by content
-                if text.startswith('Trigger conditions:'):
-                    parts.append(f"\n**Trigger conditions:** {text[len('Trigger conditions:'):]}\n")
-                elif text.startswith('Mean time to happen:'):
-                    parts.append(f"\n**Mean time to happen:** {text[len('Mean time to happen:'):]}\n")
-                elif text.startswith('Triggered only:'):
-                    parts.append(f"\n**Triggered only:** {text[len('Triggered only:'):]}\n")
-                else:
-                    # Options section or other content
-                    parts.append(f"\n{text}\n")
+        # Also handle subheading in div form (some events use <div class="subheading">)
+        for subheading_div in table.find_all('div', class_='subheading'):
+            text = subheading_div.get_text(strip=True)
+            if text and not any(text in p for p in parts):
+                parts.append(f"\n**{text}**\n")
+
+        # Extract options: div.option_title contains the choice text,
+        # followed by <ul> with effects
+        for option_title in table.find_all('div', class_='option_title'):
+            choice_text = self._get_text(option_title)
+            if not choice_text:
+                continue
+
+            option_parts = [f"- **Option:** {choice_text}"]
+
+            # Check for "Enabled if:" condition before this option
+            # Walk backwards from the option's parent div to find a preceding <p> with conditions
+            option_wrapper = option_title.find_parent('div', style=True)
+            if option_wrapper:
+                # Check for condition <p> before the wrapper or its parent margin div
+                container = option_wrapper.parent
+                if container and container.get('style', '').startswith('margin'):
+                    # Look for <p> with "Enabled if:" before this container
+                    prev = container.find_previous_sibling('p')
+                    if prev:
+                        cond_text = self._get_text(prev)
+                        if 'Enabled if:' in cond_text:
+                            option_parts.append(f"  - *Condition:* {cond_text}")
+
+                # Collect effect <ul> elements after the option div
+                for sibling in option_wrapper.find_next_siblings():
+                    if isinstance(sibling, Tag):
+                        if sibling.name == 'ul':
+                            effects = self._convert_effect_list(sibling)
+                            if effects:
+                                option_parts.append(effects)
+                        elif sibling.name == 'hr':
+                            break
+                        elif sibling.name == 'div' and 'option_button' in ' '.join(sibling.get('class', [])):
+                            break
+                        elif sibling.name == 'div' and sibling.find('div', class_='option_title'):
+                            break
+                        elif sibling.name == 'p':
+                            text = self._get_text(sibling)
+                            if text:
+                                option_parts.append(f"  - {text}")
+
+            parts.append('\n'.join(option_parts))
+
+        # Fallback: if no options or subheadings found, extract all text
+        if not parts:
+            for row in table.find_all('tr'):
+                for cell in row.find_all(['td', 'th']):
+                    text = self._get_text(cell)
+                    if text:
+                        parts.append(f"\n{text}\n")
 
         return '\n'.join(filter(None, parts))
+
+    def _convert_effect_list(self, ul: Tag, indent: int = 1) -> str:
+        """Convert a <ul> of effects to indented markdown list."""
+        items = []
+        prefix = '  ' * indent
+        for li in ul.find_all('li', recursive=False):
+            # Get direct text (not from nested lists)
+            text_parts = []
+            nested_lists = []
+            for child in li.children:
+                if isinstance(child, Tag) and child.name in ['ul', 'ol']:
+                    nested_lists.append(child)
+                elif isinstance(child, Tag):
+                    text_parts.append(self._get_text(child))
+                elif isinstance(child, NavigableString):
+                    text_parts.append(str(child).strip())
+            text = ' '.join(filter(None, text_parts))
+            text = re.sub(r'\s+', ' ', text).strip()
+            if text:
+                items.append(f"{prefix}- {text}")
+            for nested in nested_lists:
+                nested_md = self._convert_effect_list(nested, indent + 1)
+                if nested_md:
+                    items.append(nested_md)
+        return '\n'.join(items)
 
     def _convert_preformatted(self, el: Tag) -> str:
         """Convert pre/code blocks."""
