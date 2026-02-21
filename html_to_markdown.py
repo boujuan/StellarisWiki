@@ -39,6 +39,7 @@ class HTMLToMarkdown:
             '.mw-headline-anchor',   # Headline anchors
             'table.navbox',          # Navigation boxes in table format
             '.navbox-inner',         # Inner navbox content
+            '.tooltiptext',          # CSS hover tooltip popups
         ]
 
         # Table classes to skip (these are navigation, not data)
@@ -196,6 +197,11 @@ class HTMLToMarkdown:
         ]
         for div in nav_footers:
             div.decompose()
+
+        # Unwrap tooltip wrapper divs — they're inline containers whose
+        # popup content (tooltiptext) was already stripped above
+        for tooltip in list(soup.find_all('div', class_='tooltip')):
+            tooltip.unwrap()
 
         # Process images: replace with alt text when it carries meaning,
         # strip decorative icons that duplicate adjacent text
@@ -436,13 +442,58 @@ class HTMLToMarkdown:
         if 'stellaris-outliner' in classes:
             return self._convert_stellaris_outliner(el)
 
-        # Process children
+        # Check if div has any block-level children
+        block_tags = {
+            'p', 'div', 'table', 'ul', 'ol', 'dl',
+            'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+            'pre', 'blockquote', 'hr',
+        }
+        has_block_children = any(
+            isinstance(child, Tag) and child.name in block_tags
+            for child in el.children
+        )
+
+        if not has_block_children:
+            # Inline-only div — treat as a paragraph
+            text = self._get_text(el)
+            if text.strip():
+                return f"\n{text}\n"
+            return ''
+
+        # Has block-level children — process them, but also capture
+        # inline content that appears between block elements
         md_parts = []
+        inline_buffer = []
+
         for child in el.children:
-            if isinstance(child, Tag):
+            if isinstance(child, Tag) and child.name in block_tags:
+                # Flush any accumulated inline content first
+                if inline_buffer:
+                    inline_text = ' '.join(filter(None, inline_buffer))
+                    inline_text = re.sub(r'\s+', ' ', inline_text).strip()
+                    if inline_text:
+                        md_parts.append(f"\n{inline_text}\n")
+                    inline_buffer = []
+                # Process block element
                 md = self._convert_element(child)
                 if md:
                     md_parts.append(md)
+            elif isinstance(child, Tag):
+                # Inline tag — buffer its text
+                text = self._get_text(child)
+                if text:
+                    inline_buffer.append(text)
+            elif isinstance(child, NavigableString):
+                text = str(child).strip()
+                if text:
+                    inline_buffer.append(text)
+
+        # Flush remaining inline content
+        if inline_buffer:
+            inline_text = ' '.join(filter(None, inline_buffer))
+            inline_text = re.sub(r'\s+', ' ', inline_text).strip()
+            if inline_text:
+                md_parts.append(f"\n{inline_text}\n")
 
         return '\n'.join(md_parts)
 
