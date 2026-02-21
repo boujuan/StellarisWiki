@@ -25,7 +25,6 @@ PAGES_TO_FETCH = [
     # Empire Setup
     "Origin",
     "Government",
-    "Authorities",
     "Ethics",
     "Civics",
     "Corporate civics",
@@ -34,7 +33,6 @@ PAGES_TO_FETCH = [
     "Empire",
     # Governance
     "Council",
-    "Agendas",
     "Policies",
     "Edicts",
     "Factions",
@@ -58,7 +56,6 @@ PAGES_TO_FETCH = [
     "Paragons",
     # Economy & Buildings
     "Resources",
-    "Trade",
     "Planetary_management",
     "Jobs",
     "Districts",
@@ -68,7 +65,6 @@ PAGES_TO_FETCH = [
     "Unique_buildings",
     "Megastructures",
     "Colonization",
-    "Terraforming",
     # Technology
     "Technology",
     "Physics_research",
@@ -77,7 +73,6 @@ PAGES_TO_FETCH = [
     # Ships & Components
     "Ship",
     "Ship_designer",
-    "Fleet",
     "Core_components",
     "Weapon_components",
     "Utility_components",
@@ -87,12 +82,10 @@ PAGES_TO_FETCH = [
     "Warfare",
     "Space_warfare",
     "Land warfare",
-    "Army",
-    "Bombardment",
     "Starbase",
     # Exploration & Discovery
     "Exploration",
-    "FTL",
+    "FTL travel",
     "Discovery",
     "Anomaly",
     "Archaeological site",
@@ -108,11 +101,10 @@ PAGES_TO_FETCH = [
     # Diplomacy & Relations
     "Diplomacy",
     "Relations",
-    "Galactic community",
+    "Galactic Community",
     "Federation",
     "Subject empire",
     "Intelligence",
-    "Espionage",
     "AI personalities",
     # NPCs & Encounters
     "Fallen empire",
