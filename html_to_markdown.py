@@ -188,6 +188,15 @@ class HTMLToMarkdown:
             for el in soup.select(selector):
                 el.decompose()
 
+        # Remove "Game concepts" navigation footer (inline-styled div, no class)
+        nav_footers = [
+            div for div in soup.find_all('div', style=True)
+            if 'border: 1px solid #aaa' in div.get('style', '')
+            and div.get_text(strip=True).startswith('Game concepts')
+        ]
+        for div in nav_footers:
+            div.decompose()
+
         # Process images: replace with alt text when it carries meaning,
         # strip decorative icons that duplicate adjacent text
         for img in list(soup.find_all('img')):
