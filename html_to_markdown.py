@@ -35,7 +35,6 @@ class HTMLToMarkdown:
             '.vertical-navbox',      # Vertical navigation
             '.infobox-navbox-below', # Infobox nav
             'noscript',              # Noscript content
-            '.stellaris-outliner',   # Stellaris wiki outliner boxes
             '.infobox',              # Infoboxes (navigation)
             '.mw-headline-anchor',   # Headline anchors
             'table.navbox',          # Navigation boxes in table format
@@ -161,12 +160,24 @@ class HTMLToMarkdown:
 
     def _convert_table(self, table: Tag) -> str:
         """Convert HTML table to Markdown table."""
-        # Skip navbox tables
         classes = table.get('class', [])
         if isinstance(classes, str):
             classes = classes.split()
+
+        # Skip navbox tables
         if any(c in self.skip_table_classes for c in classes):
             return ''
+
+        # If this table contains event outliner boxes (mildtable layout),
+        # extract and convert the events instead of rendering as a table
+        event_outliners = table.find_all('div', class_='stellaris-outliner')
+        if event_outliners:
+            parts = []
+            for outliner in event_outliners:
+                md = self._convert_stellaris_outliner(outliner)
+                if md:
+                    parts.append(md)
+            return '\n'.join(parts)
 
         rows = table.find_all('tr')
         if not rows:
@@ -278,18 +289,21 @@ class HTMLToMarkdown:
 
     def _convert_div(self, el: Tag) -> str:
         """Convert div by processing its children."""
-        # Check for special div classes that should be skipped entirely
         classes = el.get('class', [])
         if isinstance(classes, str):
             classes = classes.split()
 
         # Classes to skip entirely (don't process children)
         skip_entirely = {
-            'navbox', 'toc', 'stellaris-outliner', 'infobox',
+            'navbox', 'toc', 'infobox',
             'mw-references-wrap', 'catlinks', 'printfooter'
         }
         if any(c in skip_entirely for c in classes):
             return ''
+
+        # Handle stellaris-outliner: version/nav boxes are skipped, event boxes are kept
+        if 'stellaris-outliner' in classes:
+            return self._convert_stellaris_outliner(el)
 
         # Process children
         md_parts = []
@@ -300,6 +314,81 @@ class HTMLToMarkdown:
                     md_parts.append(md)
 
         return '\n'.join(md_parts)
+
+    def _convert_stellaris_outliner(self, el: Tag) -> str:
+        """Convert a stellaris-outliner div, distinguishing navigation from event content."""
+        header_div = el.find('div', class_='stellaris-outliner-header')
+        header_text = header_div.get_text(strip=True) if header_div else ''
+
+        # Skip version/status boxes
+        if header_text.lower() in ('version', ''):
+            return ''
+
+        # Skip navigation infoboxes (they contain infobox-row elements)
+        if el.find('div', class_='infobox-row'):
+            return ''
+
+        # This is an event content box — convert it
+        return self._convert_event_box(el, header_text)
+
+    def _convert_event_box(self, el: Tag, event_name: str) -> str:
+        """Convert an event content box to structured Markdown."""
+        parts = [f"\n### Event: {event_name}\n"]
+
+        content_div = el.find('div', class_='stellaris-outliner-content')
+        if not content_div:
+            return ''
+
+        # Extract event flavor text (plain divs before the hr/collapsible)
+        for child in content_div.children:
+            if isinstance(child, Tag):
+                if child.name == 'hr':
+                    continue
+                if 'mw-collapsible' in child.get('class', []):
+                    # Extract trigger conditions and options from the collapsible
+                    parts.append(self._convert_event_details(child))
+                    continue
+                # Plain div with event text
+                text = self._get_text(child)
+                if text:
+                    parts.append(f"\n{text}\n")
+
+        return '\n'.join(filter(None, parts))
+
+    def _convert_event_details(self, collapsible: Tag) -> str:
+        """Extract trigger conditions, MTTH, and options from an event's collapsible section."""
+        content = collapsible.find('div', class_='mw-collapsible-content')
+        if not content:
+            content = collapsible
+
+        table = content.find('table')
+        if not table:
+            # Fallback: just get all text
+            text = self._get_text(content)
+            return f"\n{text}\n" if text else ''
+
+        rows = table.find_all('tr')
+        parts = []
+
+        for row in rows:
+            cells = row.find_all(['td', 'th'])
+            for cell in cells:
+                text = self._get_text(cell)
+                if not text:
+                    continue
+
+                # Detect trigger/MTTH/options sections by content
+                if text.startswith('Trigger conditions:'):
+                    parts.append(f"\n**Trigger conditions:** {text[len('Trigger conditions:'):]}\n")
+                elif text.startswith('Mean time to happen:'):
+                    parts.append(f"\n**Mean time to happen:** {text[len('Mean time to happen:'):]}\n")
+                elif text.startswith('Triggered only:'):
+                    parts.append(f"\n**Triggered only:** {text[len('Triggered only:'):]}\n")
+                else:
+                    # Options section or other content
+                    parts.append(f"\n{text}\n")
+
+        return '\n'.join(filter(None, parts))
 
     def _convert_preformatted(self, el: Tag) -> str:
         """Convert pre/code blocks."""

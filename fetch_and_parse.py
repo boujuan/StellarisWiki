@@ -13,8 +13,10 @@ import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
+from urllib.parse import unquote
 
 import cloudscraper
+from bs4 import BeautifulSoup, Tag
 from tqdm import tqdm
 
 from html_to_markdown import HTMLToMarkdown
@@ -301,6 +303,155 @@ def _fetch_and_convert(title: str, pages_dir: Path) -> tuple[str, str, bool]:
     return title, full_md, True
 
 
+def extract_event_subpage_links(html: str) -> list[tuple[str, list[str]]]:
+    """Extract event sub-page links from the Events page HTML.
+
+    Parses the stellaris-outliner divs to find categorized event chain links.
+
+    Returns:
+        List of (category_name, [page_titles]) tuples
+    """
+    soup = BeautifulSoup(html, 'lxml')
+    categories = []
+
+    for outliner in soup.find_all('div', class_='stellaris-outliner'):
+        header_div = outliner.find('div', class_='stellaris-outliner-header')
+        if not header_div:
+            continue
+        header_text = header_div.get_text(strip=True)
+
+        # Skip the version/status box
+        if 'version' in header_text.lower() or 'article' in header_text.lower():
+            continue
+
+        content_div = outliner.find('div', class_='stellaris-outliner-content')
+        if not content_div:
+            continue
+
+        page_titles = []
+        for row in content_div.find_all('div', class_='infobox-row-single'):
+            for a in row.find_all('a'):
+                href = a.get('href', '')
+                if not href.startswith('/'):
+                    continue
+                # Extract page title from href (e.g., "/Horizon_Signal" -> "Horizon Signal")
+                page_title = unquote(href.lstrip('/').replace('_', ' '))
+                # Skip self-reference and DLC pages
+                if page_title == 'Events' or not page_title:
+                    continue
+                if page_title not in page_titles:
+                    page_titles.append(page_title)
+
+        if page_titles:
+            categories.append((header_text, page_titles))
+
+    return categories
+
+
+# Pages that are index pages — their sub-page links are extracted from HTML
+# and each sub-page's content is appended to the parent page's markdown.
+COMPOSITE_PAGES = {
+    "Events": extract_event_subpage_links,
+}
+
+
+def _fetch_and_convert_body(title: str) -> tuple[str, str, bool]:
+    """Fetch a page and return only the markdown body (no frontmatter, no file write).
+
+    Used for sub-pages that will be appended to a composite page.
+    """
+    session = create_session()
+    converter = HTMLToMarkdown()
+
+    data = fetch_page_html(session, title)
+    if not data or not data.get("html"):
+        return title, "", False
+
+    markdown = converter.convert(data["html"], data["title"])
+    return title, markdown, True
+
+
+def process_composite_page(title: str, pages_dir: Path,
+                           workers: int = 4) -> tuple[str, bool]:
+    """Process a composite page: fetch main page + all sub-pages, combine into one file.
+
+    Args:
+        title: Main page title (e.g., "Events")
+        pages_dir: Directory for output files
+        workers: Number of parallel workers for sub-page fetching
+
+    Returns:
+        Tuple of (full_markdown_content, success)
+    """
+    print(f"\n  Fetching composite page: {title}")
+
+    # Step 1: Fetch the main page
+    session = create_session()
+    data = fetch_page_html(session, title)
+    if not data or not data.get("html"):
+        return "", False
+
+    # Step 2: Convert main page to markdown
+    converter = HTMLToMarkdown()
+    main_markdown = converter.convert(data["html"], data["title"])
+
+    # Step 3: Extract sub-page links from the raw HTML
+    extract_fn = COMPOSITE_PAGES[title]
+    categories = extract_fn(data["html"])
+
+    # Collect all unique sub-page titles
+    all_subpages = []
+    for _, page_titles in categories:
+        for pt in page_titles:
+            if pt not in all_subpages:
+                all_subpages.append(pt)
+
+    print(f"  Found {len(all_subpages)} sub-pages across {len(categories)} categories")
+
+    # Step 4: Fetch all sub-pages in parallel
+    subpage_content = {}
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = {
+            executor.submit(_fetch_and_convert_body, pt): pt
+            for pt in all_subpages
+        }
+        with tqdm(total=len(all_subpages), desc=f"  Sub-pages", unit=" pages",
+                  leave=False) as pbar:
+            for future in as_completed(futures):
+                pt, md, success = future.result()
+                if success:
+                    subpage_content[pt] = md
+                else:
+                    print(f"\n  Warning: Failed to fetch sub-page '{pt}'")
+                pbar.update(1)
+
+    print(f"  Fetched {len(subpage_content)}/{len(all_subpages)} sub-pages")
+
+    # Step 5: Build the combined markdown
+    parts = [main_markdown]
+
+    for category_name, page_titles in categories:
+        parts.append(f"\n\n---\n\n## {category_name}\n")
+        for pt in page_titles:
+            if pt in subpage_content:
+                parts.append(f"\n{subpage_content[pt]}\n")
+
+    combined_md = "\n".join(parts)
+
+    # Step 6: Add frontmatter and save
+    frontmatter = create_yaml_frontmatter(data["title"], data["categories"])
+    full_md = frontmatter + combined_md
+
+    filename = sanitize_filename(title) + ".md"
+    output_path = pages_dir / filename
+    output_path.write_text(full_md, encoding="utf-8")
+
+    size_kb = output_path.stat().st_size / 1024
+    print(f"  Saved {filename} ({size_kb:.1f} KB)")
+
+    return full_md, True
+
+
 def process_all_pages(page_titles: list[str], output_dir: Path,
                       delay: float = 0.5, workers: int = 1):
     """Fetch and convert all pages to Markdown.
@@ -323,35 +474,49 @@ def process_all_pages(page_titles: list[str], output_dir: Path,
     print(f"Output directory: {output_dir}")
     print("-" * 60)
 
-    if workers > 1:
-        # Parallel fetching
-        with ThreadPoolExecutor(max_workers=workers) as executor:
-            futures = {
-                executor.submit(_fetch_and_convert, title, pages_dir): title
-                for title in page_titles
-            }
-            with tqdm(total=len(page_titles), desc="Converting", unit=" pages") as pbar:
-                for future in as_completed(futures):
-                    title, full_md, success = future.result()
-                    if success:
-                        results[title] = full_md
-                        successful += 1
-                    else:
-                        failed += 1
-                    pbar.update(1)
-    else:
-        # Sequential fetching with rate limiting
-        session = create_session()
-        converter = HTMLToMarkdown()
-        for title in tqdm(page_titles, desc="Converting", unit=" pages"):
-            full_md, success = process_single_page(
-                session, converter, title, pages_dir, delay
-            )
-            if success:
-                results[title] = full_md
-                successful += 1
-            else:
-                failed += 1
+    # Separate composite pages from regular pages
+    composite_titles = [t for t in page_titles if t in COMPOSITE_PAGES]
+    regular_titles = [t for t in page_titles if t not in COMPOSITE_PAGES]
+
+    # Process regular pages
+    if regular_titles:
+        if workers > 1:
+            with ThreadPoolExecutor(max_workers=workers) as executor:
+                futures = {
+                    executor.submit(_fetch_and_convert, title, pages_dir): title
+                    for title in regular_titles
+                }
+                with tqdm(total=len(regular_titles), desc="Regular pages",
+                          unit=" pages") as pbar:
+                    for future in as_completed(futures):
+                        title, full_md, success = future.result()
+                        if success:
+                            results[title] = full_md
+                            successful += 1
+                        else:
+                            failed += 1
+                        pbar.update(1)
+        else:
+            session = create_session()
+            converter = HTMLToMarkdown()
+            for title in tqdm(regular_titles, desc="Regular pages", unit=" pages"):
+                full_md, success = process_single_page(
+                    session, converter, title, pages_dir, delay
+                )
+                if success:
+                    results[title] = full_md
+                    successful += 1
+                else:
+                    failed += 1
+
+    # Process composite pages (these handle their own parallelism)
+    for title in composite_titles:
+        full_md, success = process_composite_page(title, pages_dir, workers)
+        if success:
+            results[title] = full_md
+            successful += 1
+        else:
+            failed += 1
 
     # Save combined file in original page order
     if results:
@@ -443,16 +608,40 @@ def main():
     output_dir = Path(__file__).parent / args.output
 
     if args.page and args.test:
-        test_single_page(args.page, output_dir)
+        if args.page in COMPOSITE_PAGES:
+            pages_dir = output_dir / "pages"
+            pages_dir.mkdir(parents=True, exist_ok=True)
+            full_md, success = process_composite_page(
+                args.page, pages_dir, args.workers
+            )
+            if success:
+                filename = sanitize_filename(args.page) + ".md"
+                output_path = pages_dir / filename
+                print(f"Success! Output saved to: {output_path}")
+                print(f"File size: {output_path.stat().st_size / 1024:.2f} KB")
+                print("\nFirst 2000 characters of output:")
+                print("-" * 60)
+                print(full_md[:2000])
+                if len(full_md) > 2000:
+                    print(f"\n... ({len(full_md) - 2000} more characters)")
+            else:
+                print("Failed to process composite page!")
+                sys.exit(1)
+        else:
+            test_single_page(args.page, output_dir)
     elif args.page:
-        # Process single page without test output
-        session = create_session()
-        converter = HTMLToMarkdown()
         pages_dir = output_dir / "pages"
         pages_dir.mkdir(parents=True, exist_ok=True)
-        full_md, success = process_single_page(
-            session, converter, args.page, pages_dir, args.delay
-        )
+        if args.page in COMPOSITE_PAGES:
+            full_md, success = process_composite_page(
+                args.page, pages_dir, args.workers
+            )
+        else:
+            session = create_session()
+            converter = HTMLToMarkdown()
+            full_md, success = process_single_page(
+                session, converter, args.page, pages_dir, args.delay
+            )
         if success:
             print(f"Processed: {args.page}")
         else:
