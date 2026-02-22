@@ -34,8 +34,14 @@ _EXAMPLES = textwrap.dedent("""\
       Generate interactive HTML dashboard:
         %(prog)s analyze
 
+      Generate dashboard and open in browser:
+        %(prog)s analyze --open
+
       Generate Markdown report instead:
         %(prog)s analyze --format md
+
+      Open existing dashboard in browser:
+        %(prog)s dashboard
 
       Start MCP server for Claude Desktop:
         %(prog)s serve
@@ -64,6 +70,9 @@ _ANALYZE_EXAMPLES = textwrap.dedent("""\
       Generate interactive HTML dashboard:
         %(prog)s
 
+      Generate and open in browser:
+        %(prog)s --open
+
       Generate Markdown report:
         %(prog)s --format md
 
@@ -72,6 +81,12 @@ _ANALYZE_EXAMPLES = textwrap.dedent("""\
 
       Skip all_pages.md generation:
         %(prog)s --no-all-pages
+""")
+
+_DASHBOARD_EXAMPLES = textwrap.dedent("""\
+    examples:
+      Open the dashboard in the default browser:
+        %(prog)s
 """)
 
 _SERVE_EXAMPLES = textwrap.dedent("""\
@@ -156,6 +171,19 @@ def build_parser() -> argparse.ArgumentParser:
         "--no-all-pages", action="store_true",
         help="Skip generating all_pages.md",
     )
+    analyze_p.add_argument(
+        "--open", action="store_true",
+        help="Open the dashboard in the default browser after generation",
+    )
+
+    # -- dashboard ------------------------------------------------------------
+    sub.add_parser(
+        "dashboard",
+        help="Open the analysis dashboard in the default browser",
+        description="Open the previously generated wiki analysis dashboard in the default browser.",
+        epilog=_DASHBOARD_EXAMPLES,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
 
     # -- serve ----------------------------------------------------------------
     serve_p = sub.add_parser(
@@ -191,8 +219,29 @@ def main(argv: list[str] | None = None):
 
     elif args.command == "analyze":
         from src.analyzer import main as analyze_main
-        analyze_main(args)
+        output_path = analyze_main(args)
+        if getattr(args, "open", False) and output_path and output_path.exists():
+            import webbrowser
+            webbrowser.open(output_path.as_uri())
+
+    elif args.command == "dashboard":
+        _open_dashboard()
 
     elif args.command == "serve":
         from src.mcp_server import mcp
         mcp.run(transport=args.transport)
+
+
+def _open_dashboard():
+    """Open the analysis dashboard in the default browser."""
+    import webbrowser
+    from src import OUTPUT_DIR
+
+    dashboard = OUTPUT_DIR / "wiki_analysis.html"
+    if not dashboard.exists():
+        print(f"Dashboard not found: {dashboard}")
+        print("Run 'stellariswiki analyze' first to generate it.")
+        sys.exit(1)
+
+    print(f"Opening {dashboard}")
+    webbrowser.open(dashboard.as_uri())

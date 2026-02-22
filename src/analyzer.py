@@ -2287,6 +2287,8 @@ def main(args=None):
         print(f" | Missing: {data['main_missing']}", end="")
     print(f"\nNot fetched: {len(data['not_fetched']):,}")
 
+    return output_path
+
 
 if __name__ == "__main__":
     # Allow standalone execution: python src/analyzer.py

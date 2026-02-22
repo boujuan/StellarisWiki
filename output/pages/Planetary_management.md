@@ -43,7 +43,7 @@ The formula for available amenities or amenities deficit effect on a planet's ha
 
 The formula for extra amenities ( available amenities > 0 case) contributing to happiness is:
 
-happiness bonus = min ( 20%, 20 * leftlfloor available amenities rightrfloor / leftlfloor pop amenities usage rightrfloor )
+happiness bonus = min(20%,20 * leftlfloor available amenitiesrightrfloor / leftlfloor pop amenities usagerightrfloor)
 
 In other words, it scales from +0% with 0 available amenities, to +20% with twice as many available amenities as necessary.
 

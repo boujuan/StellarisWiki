@@ -218,7 +218,7 @@ Pop political power effects approval rating as well as Faction resource producti
 
 Pop approval rating is a measure of the population's support towards the empire. It is determined by the average happiness of each stratum, weighted by political power. Pops without happiness are treated as having 50% happiness (for example: pops with Nerve Stapled trait, pops with Machine trait). The displayed approval rating is rounded down, as is the displayed stability bonus.
 
-Approval Rating = Sum _^(Pop)happiness * political power / Sum _^(Pop)political power
+Approval Rating = Sum_^Pop happiness * political power / Sum_^Pop political power
 
 Approval rating ranges from 0% to 100% and has a base level of 50%.
 

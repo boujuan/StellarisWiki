@@ -1,6 +1,6 @@
 ---
 title: "Discovery"
-categories: ["4.2", "Game_concepts", "Exploration"]
+categories: ["4.2", "Game_concepts", "Exploration", "Pages_with_math_errors", "Pages_with_math_render_errors"]
 ---
 
 # Discovery
@@ -17,7 +17,7 @@ Archaeology sites are visible on the galaxy map and become grey when fully inves
 
 Each surveyed celestial object has a 5% base chance of spawning an **anomaly** , which is incremented by 0.25%, tracked per scientist, for each consecutive surveyed planet with no anomaly before being reset. Bonuses like the Perfectionist trait, Map The Stars edict and Fear of the Dark origin then each add to a separate multiplier, which is applied to the base spawn chance. The chance to discover an anomaly rises by 50% (to 7.5% in total) by the 10th unsuccessful try with the base chance (5%), by the 7th try with the Perfectionist trait or the Map The Stars edict, and by the 5th try with both of them.
 
-Spawn chance = (0.05 + (increment*0.0025))*(1 + sum of multipliers)
+Spawn chance = (0.05 + (increment*0.0025)) * (1 + sum of multipliers)
 
 Most **archaeological sites** are revealed by surveying, with a 1.23% chance of creating a site if the celestial object can support one. If a site is created this way, the chance to find the next one for this empire is reduced to 0.0246% for 5 years (a reduction of 80%). The AI controlled empires always have a lower chance of discovering archaeological sites (0.0246%) in comparison with the player's empire. Archaeological sites never spawn in a system with a trade value deposits (due to a workaround for a bug with minor artifact deposits).
 

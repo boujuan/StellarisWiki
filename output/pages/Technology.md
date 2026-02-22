@@ -114,11 +114,11 @@ The number of research alternatives per card hand can be increased by the follow
 
 In general, research time can be summarized as the following formula:
 
-Research time = Sum (Research cost - Partial research done) / Monthly research progress
+Research time = Sum(Research cost - Partial research done) / Monthly research progress
 
 Research progress is one of the key elements affecting the time it takes to discover new technologies. It is formulated as follows:
 
-Monthly research progress = Research resource produced * Sum Research speed modifiers + min[Research resource stored,Research resource produced]
+Monthly research progress = Research resource produced * SumResearch speed modifiers + min[Research resource stored,Research resource produced]
 
 While it is possible for the monthly research progress to remain constant during the course of researching a certain technology, it is more than likely to fluctuate – for better or for worse – due to consequences, effects and outcomes of various actions (such as exploration, empire development, expansion, etc.). This, in turn, may increase or decrease the total research time of a given tech.
 

@@ -1,6 +1,6 @@
 ---
 title: "Space warfare"
-categories: ["4.2", "Game_concepts", "Warfare"]
+categories: ["4.2", "Game_concepts", "Warfare", "Pages_with_math_errors", "Pages_with_math_render_errors"]
 ---
 
 # Space warfare
@@ -58,7 +58,7 @@ Three parameters determine the chance of a weapon to hit its target: the accurac
 
 The formula to calculate the chance of a specific attack to hit the target is (remember that evasion is capped at 90 and accuracy plus chance to hit is capped at 100):
 
-actual chance to hit = min(100%,accuracy + chance to hit bonus) - max(0,evasion - tracking)
+actual chance to hit = min(100%,accuracy + chance to hit bonus) - max(0, evasion - tracking)
 
 Battleships, stingers, titans, juggernauts and ion cannons will avoid attacking ships with more than 70 evasion unless there are no enemies with less evasion.
 
@@ -82,7 +82,7 @@ Once a ship loses 50% of its Hull Points, it will attempt to disengage. A ship t
 
 Ships will never disengage if the owner uses the No Retreat War Doctrine policy.
 
-The chance for a ship to disengage is the following: chance = damage / hull * 1.5 * ship multiplier * 1.25 if within friendly borders
+The chance for a ship to disengage is the following: chance = damage / hull * 1.5 * ship multiplier * 1.25 text if within friendly borders
 
 Damage: Amount of damage the hit inflicted Hull: The ship's maximum hull points Ship multiplier: Ship type multiplier
 

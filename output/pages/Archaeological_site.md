@@ -1,6 +1,6 @@
 ---
 title: "Archaeological site"
-categories: ["Potentially_outdated", "4.1", "Exploration", "Pages_with_math_errors", "Pages_with_math_render_errors"]
+categories: ["Potentially_outdated", "4.1", "Exploration"]
 ---
 
 # Archaeological site

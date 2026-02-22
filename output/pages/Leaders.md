@@ -1,6 +1,6 @@
 ---
 title: "Leaders"
-categories: ["Potentially_outdated", "4.1", "Leaders"]
+categories: ["Potentially_outdated", "4.1", "Leaders", "Pages_with_math_errors", "Pages_with_math_render_errors"]
 ---
 
 # Leaders
@@ -157,7 +157,7 @@ Leader experience is defined by LEADER_EXPERIENCE_REQUIREMENT_BASE_VALUE and LEA
 
 | Level | I | II | III | IV | V | VI | VII | VIII | IX | X | N |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| exp to next level | 400 | 1100 | 2100 | 3400 | 5000 | 6900 | 9100 | 11600 | 14400 | 17500 | 150n^(2) + 250n |
+| exp to next level | 400 | 1100 | 2100 | 3400 | 5000 | 6900 | 9100 | 11600 | 14400 | 17500 | 150n^2 + 250n |
 | exp in total | 400 | 1500 | 3600 | 7000 | 12000 | 18900 | 28000 | 39600 | 54000 | 71500 | 50n(n + 1)(n + 3) |
 
 ## Skill level
@@ -273,7 +273,7 @@ Leader's chance to gain a negative trait is dependent on their age compared to t
 
 Predisposition value is modified by above Leader maximum negative traits factors. Which leads to following formula for mortal leader's chance to gain a negative trait, checked yearly. If a leader is eligible to gain one or more negative traits, their yearly chance to gain such is 2% for each eligible negative trait.
 
-Eligibility = floor(Age * 4/lifespan) + leader_level + predisposition - 8 - total_tier_of_negative_traits * 2
+Eligibility = floor(Age * 4 / lifespan) + leader_level + predisposition - 8 - total_tier_of_negative_traits * 2
 
 Immortal leaders are treated as if they are at 25% of their lifespan, always. Their chance to gain negative trait is always 1%.
 

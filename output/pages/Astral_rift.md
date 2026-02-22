@@ -1,6 +1,6 @@
 ---
 title: "Astral rift"
-categories: ["Potentially_outdated", "3.14", "Exploration"]
+categories: ["Potentially_outdated", "3.14", "Exploration", "Pages_with_math_errors", "Pages_with_math_render_errors"]
 ---
 
 # Astral rift

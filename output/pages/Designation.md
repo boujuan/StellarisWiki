@@ -202,7 +202,7 @@ where X, Y, Z are the optional bonus source for the enhanced planetary ascension
 
 The cost of increasing a planet's ascension tier depends on the empire's size and total number of planetary ascension tiers already present in the empire, whether on the same planet or other planets. For example, an empire with 200 size and 3 total ascension tiers (whether from three planets at tier 1, one at tier 3, or one at tier 2 and one at tier 1) would need to spend 5600 unity to increase the ascension tier of a planet. The precise formula is shown below:
 
-ascension unity cost = (empire size * 10) * (1 + 0.6 * total ascension tiers) ; = (200 * 10) * (1 + 0.6 * 3) = 5600
+beginalign ascension unity cost = (empire size * 10) * (1 + 0.6 * total ascension tiers) ; = (200 * 10) * (1 + 0.6 * 3) = 5600 endalign
 
 From there, a formula for the total cost of performing n ascensions can be derived:
 
