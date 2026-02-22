@@ -14,20 +14,25 @@ This project fetches game data from the [Stellaris Wiki](https://stellaris.parad
 |----------|-------------|--------|
 | Raw wikitext | ~4.3 MB | Templates not expanded, hard to parse |
 | Parsed to JSON | ~11 MB | JSON overhead, template artifacts |
-| **HTML to Markdown** | **~3.4 MB** | Clean, structured, token-efficient |
+| **HTML to Markdown** | **~4.9 MB** | Clean, structured, token-efficient |
 
-The HTML-to-Markdown approach produces output that is **~70% smaller** than the JSON approach while maintaining all the important game data in a clean, readable format.
+The HTML-to-Markdown approach produces output that is **~55% smaller** than the JSON approach while maintaining all the important game data in a clean, readable format.
 
 ## Features
 
-- Fetches 104 game concept pages using MediaWiki's `action=parse` API (server expands all templates)
-- Converts HTML tables to proper Markdown tables
+- Fetches 101 game concept pages (+ 99 event/rift sub-pages) using MediaWiki's `action=parse` API
+- Parallel fetching with configurable worker count (default: 4 workers)
+- **Composite pages**: Events and Astral rift pages aggregate sub-page content
+- Converts HTML tables to proper Markdown tables (with list-in-cell support via `<br>`)
 - Preserves section hierarchy with Markdown headers
-- Removes navigation boxes, edit links, and other wiki chrome
+- **Bold formatting** for civic names, tradition names, and building names
+- **LaTeX math formulas** converted to readable plain text
+- **Tabbed content** (MediaWiki Tabber extension) flattened into sequential sections
+- Removes navigation boxes, edit links, tooltips, and other wiki chrome
 - Outputs individual `.md` files per page plus a single combined file
 - YAML frontmatter with title and categories
-- Rate limiting to respect the wiki's servers
-- Retry logic with exponential backoff
+- Content error detection (math render failures, raw LaTeX)
+- Rate limiting and retry logic with exponential backoff
 
 ## Installation
 
@@ -77,10 +82,12 @@ python fetch_and_parse.py
 ```
 
 This will:
-1. Fetch all 104 predefined game pages from the wiki
-2. Convert each to Markdown
-3. Save individual files to `output_markdown/pages/`
-4. Create a combined file at `output_markdown/stellaris_4.2_combined.md`
+1. Fetch all 101 predefined game pages from the wiki
+2. Fetch sub-pages for composite pages (87 event chains + 12 astral rifts)
+3. Convert each to Markdown
+4. Save individual files to `output_markdown/pages/`
+5. Create a combined file at `output_markdown/stellaris_4.2_combined.md`
+6. Print content warnings (if any math render errors remain)
 
 ### Test Single Page
 
@@ -90,6 +97,9 @@ python fetch_and_parse.py --page "Machine_traits" --test
 
 # Process single page without test output
 python fetch_and_parse.py --page "Civics"
+
+# Test a composite page (fetches all sub-pages)
+python fetch_and_parse.py --page "Astral rift" --test
 ```
 
 ### Command Line Options
@@ -99,16 +109,17 @@ python fetch_and_parse.py --page "Civics"
 | `--page TITLE` | Process a single page by title | (all pages) |
 | `--test` | Run in test mode (use with `--page`) | false |
 | `--output DIR` | Output directory | `output_markdown` |
-| `--delay SECONDS` | Delay between API requests | `0.5` |
+| `--delay SECONDS` | Delay between API requests (sequential mode) | `0.5` |
+| `--workers N` | Number of parallel workers | `4` |
 
 ### Examples
 
 ```bash
-# Fetch all pages with default settings
+# Fetch all pages with default settings (4 parallel workers)
 python fetch_and_parse.py
 
-# Faster fetching (be nice to the wiki!)
-python fetch_and_parse.py --delay 0.3
+# Sequential fetching (gentler on the wiki)
+python fetch_and_parse.py --workers 1
 
 # Custom output directory
 python fetch_and_parse.py --output my_wiki_data
@@ -151,7 +162,7 @@ micromamba run -n stellaris-scraper pip install fastmcp
 
 | Tool | Description | Example |
 |------|-------------|---------|
-| `list_pages` | List all 104 available wiki pages | "What Stellaris wiki pages are available?" |
+| `list_pages` | List all available wiki pages | "What Stellaris wiki pages are available?" |
 | `get_page` | Get full content of a page (fuzzy matching) | "Get the Machine traits page" |
 | `search_wiki` | Search across all pages, returns snippets | "Search for Efficient Processors" |
 
@@ -202,39 +213,44 @@ stellaris_wiki_scraper/
 ├── README.md                 # This file
 ├── requirements.txt          # Python dependencies
 ├── environment.yml           # Conda/micromamba environment
+├── all_pages.md              # Complete list of all 4994 wiki pages
 │
 ├── fetch_and_parse.py        # Main script: fetch HTML → convert to Markdown
 ├── html_to_markdown.py       # HTML to Markdown converter class
 ├── stellaris_mcp_server.py   # MCP server for Claude Desktop
 │
 └── output_markdown/          # Markdown output (generated)
-    ├── pages/                # Individual .md files (104 pages)
+    ├── pages/                # Individual .md files (101+ pages)
     │   ├── Machine_traits.md
     │   ├── Civics.md
-    │   ├── Achievements.md
+    │   ├── Events.md         # Composite: main + 87 event sub-pages
+    │   ├── Astral_rift.md    # Composite: main + 12 rift sub-pages
     │   └── ...
-    └── stellaris_4.2_combined.md  # Single combined file
+    └── stellaris_4.2_combined.md  # Single combined file (~4.9 MB)
 ```
 
 ## Pages Fetched
 
-The tool fetches 104 game concept pages covering:
+The tool fetches 101 game concept pages covering:
 
 | Category | Pages |
 |----------|-------|
-| **Empire Setup** | Origin, Government, Authorities, Ethics, Civics, Corporate civics, Hive mind civics, Machine intelligence civics, Empire |
-| **Governance** | Council, Agendas, Policies, Edicts, Factions, Traditions, Ascension perks, Situations, Crisis empire |
+| **Empire Setup** | Origin, Government, Ethics, Civics, Corporate civics, Hive mind civics, Machine intelligence civics, Empire |
+| **Governance** | Council, Policies, Edicts, Factions, Traditions, Ascension perks, Situations, Crisis empire |
 | **Species** | Species, Species traits, Biological traits, Machine traits, Population, Species rights |
 | **Leaders** | Leaders, Common leader traits, Commander traits, Scientist traits, Official traits, Paragons |
-| **Economy & Buildings** | Resources, Trade, Planetary management, Jobs, Districts, Designation, Holdings, Planet capital, Unique buildings, Megastructures, Colonization, Terraforming |
+| **Economy & Buildings** | Resources, Planetary management, Jobs, Districts, Designation, Holdings, Planet capital, Unique buildings, Megastructures, Colonization |
 | **Technology** | Technology, Physics research, Society research, Engineering research |
-| **Ships & Components** | Ship, Ship designer, Fleet, Core components, Weapon components, Utility components, Mutations, Offensive mutations |
-| **Military** | Warfare, Space warfare, Land warfare, Army, Bombardment, Starbase |
-| **Exploration** | Exploration, FTL, Discovery, Anomaly, Archaeological site, Astral rift, Celestial object, Planet modifiers, Planetary features, Unique systems, Relics, Collection, L-Cluster, The Shroud |
-| **Diplomacy** | Diplomacy, Relations, Galactic community, Federation, Subject empire, Intelligence, Espionage, AI personalities |
+| **Ships & Components** | Ship, Ship designer, Core components, Weapon components, Utility components, Mutations, Offensive mutations |
+| **Military** | Warfare, Space warfare, Land warfare, Starbase |
+| **Exploration** | Exploration, FTL travel, Discovery, Anomaly, Archaeological site, Astral rift (+12 sub-pages), Celestial object, Planet modifiers, Planetary features, Unique systems, Relics, Collection, L-Cluster, The Shroud |
+| **Diplomacy** | Diplomacy, Relations, Galactic Community, Federation, Subject empire, Intelligence, AI personalities |
 | **NPCs** | Fallen empire, Spaceborne aliens, Pre-FTL species, Enclaves, Guardians, Marauders, Caravaneers |
-| **Modifiers & Events** | Empire modifiers, Stat modifiers, Events |
-| **Reference** | Achievements, Crisis, Galaxy settings, Beginner's guide, Hotkeys, Jargon, User interface, Console commands, Easter eggs, AI players, Preset empires, Modding |
+| **Modifiers & Events** | Empire modifiers, Stat modifiers, Events (+87 event chain sub-pages) |
+| **Crisis** | Crisis, Prethoryn Scourge, Extradimensional Invaders, Contingency, The Synthetic Queen |
+| **Reference** | Achievements, Effects, Galaxy settings, Beginner's guide, Hotkeys, Jargon, User interface, Console commands, Easter eggs, AI players, Preset empires, Modding |
+
+See [`all_pages.md`](all_pages.md) for the complete list of all 4994 wiki pages (with checkmarks showing which are currently fetched).
 
 ## Adding New Pages
 
@@ -252,8 +268,47 @@ Page titles must match the wiki URL (e.g., `https://stellaris.paradoxwikis.com/A
 Then re-run the fetch:
 
 ```bash
-micromamba run -n stellaris-scraper python fetch_and_parse.py
+python fetch_and_parse.py
 ```
+
+## HTML to Markdown Conversion
+
+The `HTMLToMarkdown` class handles conversion with these features:
+
+### Preprocessing Pipeline
+
+1. **Component icons** — CSS grid spans replaced with text names
+2. **Tabbed content** — MediaWiki Tabber extension flattened to sequential sections
+3. **Math/LaTeX** — Formulas converted to readable plain text (e.g., `\frac{a}{b}` → `a / b`)
+4. **Navigation removal** — Navboxes, footers, tooltips, infoboxes stripped
+5. **Bold formatting** — Civic/tradition/building names preserved as `**bold**`
+6. **Image handling** — Semantic alt text kept, decorative icons stripped
+
+### Elements Converted
+
+| HTML | Markdown |
+|------|----------|
+| `<h2>`, `<h3>`, etc. | `##`, `###`, etc. |
+| `<p>` | Paragraph text |
+| `<table>` | Markdown table |
+| `<ul>`, `<ol>` | `-` or `1.` lists |
+| `<dl>` | Bold terms with descriptions |
+| `<pre>` | Code blocks |
+| `<blockquote>` | `>` quoted text |
+| `<div>` (inline content) | Paragraph text |
+| `<math>` / LaTeX | Plain text formulas |
+| `<tabber>` | Sequential sections with labels |
+
+### Elements Removed
+
+- Navigation boxes (`.navbox`)
+- Navigation footers (Game concepts, Modding, Stellaris bars)
+- Edit section links (`.mw-editsection`)
+- Table of contents (`.toc`)
+- References section
+- Tooltip popups (`.tooltiptext`)
+- Decorative images (icons duplicating adjacent text)
+- Infoboxes (navigation type)
 
 ## API Details
 
@@ -275,35 +330,10 @@ This returns server-rendered HTML with all templates expanded, which is then con
 
 ### Rate Limiting
 
-- Default delay: 0.5 seconds between requests
+- Parallel mode: 4 concurrent workers (configurable with `--workers`)
+- Sequential mode: configurable delay between requests (default: 0.5s)
 - Exponential backoff on errors (2s, 4s, 8s, 16s, 32s)
 - Maximum 5 retries per page
-
-## HTML to Markdown Conversion
-
-The `HTMLToMarkdown` class handles conversion with these features:
-
-### Elements Converted
-
-| HTML | Markdown |
-|------|----------|
-| `<h2>`, `<h3>`, etc. | `##`, `###`, etc. |
-| `<p>` | Paragraph text |
-| `<table>` | Markdown table |
-| `<ul>`, `<ol>` | `-` or `1.` lists |
-| `<dl>` | Bold terms with descriptions |
-| `<pre>` | Code blocks |
-| `<blockquote>` | `>` quoted text |
-
-### Elements Removed
-
-- Navigation boxes (`.navbox`)
-- Edit section links (`.mw-editsection`)
-- Table of contents (`.toc`)
-- References section
-- Images
-- Stellaris outliner boxes
-- Infoboxes (navigation type)
 
 ## Troubleshooting
 
@@ -311,17 +341,13 @@ The `HTMLToMarkdown` class handles conversion with these features:
 
 The tool uses `cloudscraper` to bypass Cloudflare protection. If you get blocked:
 
-1. Increase the delay: `--delay 1.0`
+1. Reduce workers: `--workers 1`
 2. Wait a few minutes and try again
 3. Check if the wiki is accessible in your browser
 
-### Empty Output
+### Content Warnings
 
-If pages have very little content:
-
-1. Check if the page exists on the wiki
-2. Verify your internet connection
-3. Run with `--test` to see raw output
+After processing, the tool reports content warnings for any remaining issues (e.g., math render failures). These are informational — the page is still saved, but some formulas may not have converted cleanly.
 
 ### Missing Tables
 
