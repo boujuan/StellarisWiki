@@ -430,6 +430,20 @@ def prepare_report_data(
     game_uncategorized = []
     for title in classified["game_content"]:
         content_cats = get_content_categories(categories_map.get(title, []))
+        if not content_cats:
+            # Fall back: skip versions + prefix-matched maintenance, then
+            # also skip known maintenance categories if something remains.
+            fallback = []
+            for c in get_display_categories(categories_map.get(title, [])):
+                if VERSION_PATTERN.match(c):
+                    continue
+                if any(c.startswith(pfx) for pfx in cfg.classification.wiki_maintenance_prefixes):
+                    continue
+                fallback.append(c)
+            # Prefer non-maintenance categories in fallback
+            non_maint = [c for c in fallback
+                         if c not in cfg.classification.wiki_maintenance_categories]
+            content_cats = non_maint if non_maint else fallback
         if content_cats:
             # Assign to first meaningful category only to avoid duplication
             game_by_category.setdefault(content_cats[0], []).append(title)
