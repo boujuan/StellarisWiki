@@ -93,6 +93,13 @@ def page_url(title, fragment=""):
     return url
 
 
+def sanitize_filename(title: str) -> str:
+    """Convert page title to safe filename (mirrors fetch_and_parse.sanitize_filename)."""
+    safe = re.sub(r'[<>:"/\\|?*]', "_", title)
+    safe = safe.replace(" ", "_")
+    return safe[:200] if len(safe) > 200 else safe
+
+
 # ---------------------------------------------------------------------------
 # Data Gathering
 # ---------------------------------------------------------------------------
@@ -502,8 +509,9 @@ def generate_markdown_report(data: dict, output_path: Path) -> str:
     w("|---|------|--------|------|------------|")
     for i, p in enumerate(d["fetched_pages_info"], 1):
         status = "yes" if p["file_exists"] else "**MISSING**"
+        file_md = f" ([md](pages/{sanitize_filename(p['title'])}.md))" if p["file_exists"] else ""
         cats = ", ".join(p["categories"]) if p["categories"] else "_(none)_"
-        w(f"| {i} | [{p['title']}]({p['url']}) | {p['source']} | {status} | {cats} |")
+        w(f"| {i} | [{p['title']}]({p['url']}){file_md} | {p['source']} | {status} | {cats} |")
     w("")
 
     # Game content
@@ -707,6 +715,8 @@ tr:hover {{ background: rgba(59,130,246,.05); }}
 .tag {{ display: inline-block; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.75rem;
         background: var(--border); margin: 1px; white-space: nowrap; cursor: pointer; transition: opacity 0.15s; }}
 .tag:hover {{ background: var(--blue); color: white; }}
+.file-link {{ font-size: 0.85rem; margin-left: 0.3rem; text-decoration: none; opacity: 0.6; }}
+.file-link:hover {{ opacity: 1; text-decoration: none; }}
 .generated {{ text-align: center; padding: 2rem; opacity: 0.5; font-size: 0.85rem; }}
 .count {{ font-size: 0.85rem; opacity: 0.7; font-weight: normal; }}
 </style>
@@ -874,9 +884,13 @@ def _html_fetched_table(data):
         cats_html = " ".join(
             f'<span class="tag" data-cat="{_esc(c)}">{_esc(c)}</span>' for c in cats
         ) or '<span style="opacity:0.4">none</span>'
+        file_link = (
+            f' <a class="file-link" href="pages/{_esc(sanitize_filename(p["title"]))}.md"'
+            f' title="View markdown file">&#128196;</a>'
+        ) if p["file_exists"] else ''
         rows.append(
             f'<tr data-source="{source_type}"><td>{i}</td>'
-            f'<td><a href="{_esc(p["url"])}" target="_blank">{_esc(p["title"])}</a></td>'
+            f'<td><a href="{_esc(p["url"])}" target="_blank">{_esc(p["title"])}</a>{file_link}</td>'
             f'<td>{_esc(p["source"])}</td>'
             f'<td>{cats_html}</td>'
             f'<td class="{cls}">{sym}</td></tr>'
