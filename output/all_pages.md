@@ -1,8 +1,8 @@
 # All Stellaris Wiki Pages
 
-Total pages in wiki: 4994
+Total pages in wiki: 4995
 Currently fetched: 224 pages (108 main + 116 composite sub-pages)
-Not fetched: 4770 pages
+Not fetched: 4771 pages
 
 ## All Pages
 
@@ -5002,3 +5002,4 @@ Not fetched: 4770 pages
 | 4992 | Zro |  | https://stellaris.paradoxwikis.com/Zro |
 | 4993 | Zro Distillation |  | https://stellaris.paradoxwikis.com/Zro_Distillation |
 | 4994 | Zroni Storm Caster |  | https://stellaris.paradoxwikis.com/Zroni_Storm_Caster |
+| 4995 | 바이낸스 추천 코드 - BNBMAX |  | https://stellaris.paradoxwikis.com/%EB%B0%94%EC%9D%B4%EB%82%B8%EC%8A%A4_%EC%B6%94%EC%B2%9C_%EC%BD%94%EB%93%9C_-_BNBMAX |
