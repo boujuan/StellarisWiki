@@ -1,0 +1,40 @@
+{% set n_all = fetched_pages_info | length %}
+<section id="fetched" class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <span class="chevron">&#9656;</span>
+        <h2>Fetched Pages <span class="count">({{ n_all }})</span></h2>
+    </div>
+    <div class="section-body open">
+        <div class="filter-bar">
+            <input type="text" class="filter-input" placeholder="Filter fetched pages..."
+                   oninput="filterFetchedTable()">
+            <div class="toggle-group">
+                <button class="toggle-btn active" onclick="setFetchedFilter('all', this)">All ({{ n_all }})</button>
+                <button class="toggle-btn" onclick="setFetchedFilter('disk', this)">Files on disk ({{ files_on_disk }})</button>
+            </div>
+        </div>
+        <table id="fetched-table">
+            <thead><tr>
+                <th onclick="sortTable('fetched-table',0)" style="width:3rem">#</th>
+                <th onclick="sortTable('fetched-table',1)">Page Title</th>
+                <th onclick="sortTable('fetched-table',2)">Source</th>
+                <th onclick="sortTable('fetched-table',3)">Wiki Categories</th>
+                <th onclick="sortTable('fetched-table',4)" style="width:4rem">File</th>
+                <th style="width:2rem"></th>
+            </tr></thead>
+            <tbody>
+            {% for p in fetched_pages_info %}
+                {% set source_type = "main" if p.source == "PAGES_TO_FETCH" else "sub" %}
+                <tr data-source="{{ source_type }}">
+                    <td>{{ loop.index }}</td>
+                    <td><a href="{{ p.url }}" target="_blank">{{ p.title }}</a>{% if p.file_exists %} <a class="file-link" href="pages/{{ p.title | sanitize_filename }}.md" title="View markdown file">&#128196;</a>{% endif %}</td>
+                    <td>{{ p.source }}</td>
+                    <td>{% if p.categories %}{% for c in p.categories %}<span class="tag" data-cat="{{ c }}">{{ c }}</span> {% endfor %}{% else %}<span style="opacity:0.4">none</span>{% endif %}</td>
+                    <td class="{{ 'status-ok' if p.file_exists else 'status-missing' }}">{% if p.file_exists %}✓{% else %}✗{% endif %}</td>
+                    <td>{% if source_type == "main" %}<button class="fetch-btn fetch-btn-remove" data-page="{{ p.title }}" onclick="toggleFetchPage(this)" title="Remove from config">&minus;</button>{% endif %}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>

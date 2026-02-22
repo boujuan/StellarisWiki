@@ -1,0 +1,30 @@
+{% if relevant_redirects %}
+<section id="redirects" class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <span class="chevron">&#9656;</span>
+        <h2>Redirects to Fetched Pages <span class="count">({{ relevant_redirects | length }})</span></h2>
+    </div>
+    <div class="section-body">
+        <p style="margin-bottom:0.75rem">These redirect to pages you already fetch — no action needed.</p>
+        <input type="text" class="filter-input" placeholder="Filter redirects..."
+               oninput="filterTable(this, 'redirects-table')">
+        <table id="redirects-table">
+            <thead><tr>
+                <th onclick="sortTable('redirects-table',0)">Redirect</th>
+                <th onclick="sortTable('redirects-table',1)">Target</th>
+                <th onclick="sortTable('redirects-table',2)">Wiki Categories</th>
+            </tr></thead>
+            <tbody>
+            {% for src, tgt, frag in relevant_redirects %}
+                {% set cats = categories_map.get(tgt, []) | display_categories %}
+                <tr>
+                    <td>{{ src }}</td>
+                    <td><a href="{{ tgt | page_url_with_fragment(frag) }}" target="_blank">{% if frag %}{{ tgt }} &raquo; {{ frag }}{% else %}{{ tgt }}{% endif %}</a></td>
+                    <td>{% if cats %}{% for c in cats %}<span class="tag" data-cat="{{ c }}">{{ c }}</span> {% endfor %}{% else %}<span style="opacity:0.4">none</span>{% endif %}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endif %}

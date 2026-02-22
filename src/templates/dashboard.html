@@ -1,0 +1,47 @@
+{% set n_fetched = fetched_pages_info | length %}
+{% set n_redir_fetched = relevant_redirects | length %}
+{% set n_not_fetched = not_fetched | length %}
+{% set n_redir_other = num_redirects - n_redir_fetched %}
+<section id="dashboard" class="section">
+    <h2 style="margin-bottom:1rem;">Summary Dashboard</h2>
+    <div class="dashboard">
+        <div class="card"><div class="number">{{ "{:,}".format(total_pages) }}</div><div class="label">Total Wiki Pages</div></div>
+        <div class="card"><div class="number">{{ "{:,}".format(num_content) }}</div><div class="label">Content Pages</div></div>
+        <div class="card"><div class="number">{{ "{:,}".format(num_redirects) }}</div><div class="label">Redirects ({{ redirect_pct | round(0) | int }}%)</div></div>
+        <div class="card green"><div class="number">{{ n_fetched }}</div><div class="label">Pages Fetched</div></div>
+        <div class="card green"><div class="number">{{ n_sub_pages }}</div><div class="label">Sub-pages (in composites)</div></div>
+        <div class="card blue"><div class="number">{{ files_on_disk }}</div><div class="label">Files on Disk</div></div>
+        {% if main_missing > 0 %}
+        <div class="card red"><div class="number">{{ main_missing }}</div><div class="label">Missing Files</div></div>
+        {% endif %}
+    </div>
+    <div class="charts-row">
+        <div class="breakdown">
+            <canvas id="pie-wiki" width="160" height="160"></canvas>
+            <div class="pie-legend" id="legend-wiki">
+                <h3>Wiki Structure ({{ "{:,}".format(total_pages) }} pages)</h3>
+            </div>
+        </div>
+        <div class="breakdown">
+            <canvas id="pie-fetched" width="160" height="160"></canvas>
+            <div class="pie-legend" id="legend-fetched">
+                <h3>Fetched Breakdown ({{ n_fetched }} pages)</h3>
+            </div>
+        </div>
+        <div class="breakdown">
+            <canvas id="pie-notfetched" width="160" height="160"></canvas>
+            <div class="pie-legend" id="legend-notfetched">
+                <h3>Not-Fetched Breakdown ({{ n_not_fetched }} pages)</h3>
+            </div>
+        </div>
+    </div>
+    <p class="generated">Generated on {{ generated_at }}</p>
+</section>
+<div class="pie-tooltip" id="pie-tooltip"></div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    initPie('pie-wiki', 'legend-wiki', {{ wiki_structure_data | tojson }});
+    initPie('pie-fetched', 'legend-fetched', {{ fetched_breakdown_data | tojson }});
+    initPie('pie-notfetched', 'legend-notfetched', {{ not_fetched_data | tojson }});
+});
+</script>

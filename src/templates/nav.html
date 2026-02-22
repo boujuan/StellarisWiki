@@ -1,0 +1,31 @@
+{% set gc = classified.game_content | length %}
+{% set dlc = classified.dlc | length %}
+{% set patch = classified.patch | length %}
+{% set disambig = classified.disambiguation | length %}
+{% set modding_count = classified.modding | length %}
+{% set mods = classified.mod | length %}
+{% set redir = relevant_redirects | length %}
+{% set fetched = fetched_pages_info | length %}
+<nav class="nav">
+    <div class="nav-brand"><img src="data:image/x-icon;base64,{{ favicon_b64 }}" alt="Stellaris">Stellaris Wiki Analysis</div>
+    <div class="nav-links">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#fetched">Fetched ({{ fetched }})</a>
+        <a href="#game-content">Game Content ({{ gc }})</a>
+        <a href="#dlc">DLC ({{ dlc }})</a>
+        <a href="#patches">Patches ({{ patch }})</a>
+        {% if disambig %}<a href="#disambiguation">Disambig ({{ disambig }})</a>{% endif %}
+        <a href="#modding">Modding ({{ modding_count }})</a>
+        <a href="#mods">Mods ({{ mods }})</a>
+        <a href="#redirects">Redirects ({{ redir }})</a>
+    </div>
+    <div class="nav-actions">
+        <a class="nav-btn" href="https://stellaris.paradoxwikis.com/" target="_blank" title="Stellaris Wiki"><img src="data:image/x-icon;base64,{{ favicon_b64 }}" alt="" style="width:14px;height:14px;vertical-align:middle"> Wiki</a>
+        <a class="nav-btn" href="https://notebooklm.google.com/notebook/ae857011-2ba6-4312-ad22-a6b8b6c891a3" target="_blank" title="Ask questions in NotebookLM">{{ notebooklm_svg | safe }} NotebookLM</a>
+        <a class="nav-btn" href="https://github.com/boujuan/StellarisWiki/releases/latest/download/stellaris_wiki_pages.zip" title="Download all pages as zip">&#128230; Download</a>
+        <button class="nav-btn" onclick="showModal('refetch-modal')" title="Re-fetch all pages">&#8635; Re-fetch</button>
+        <button class="nav-btn" onclick="expandAllSections()" title="Expand all sections">&#9660; Expand</button>
+        <button class="nav-btn" onclick="collapseAllSections()" title="Collapse all sections">&#9654; Collapse</button>
+    </div>
+    <div class="nav-stats">{{ "{:,}".format(total_pages) }} pages | {{ fetched }} fetched</div>
+</nav>

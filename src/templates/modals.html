@@ -1,0 +1,62 @@
+<div id="pending-bar" class="pending-bar">
+    <span id="pending-info"></span>
+    <button class="apply-btn" onclick="downloadUpdatedConfig()">&#128190; Download config.yaml</button>
+    <button onclick="discardPageChanges()">&#10005; Discard</button>
+</div>
+
+<div id="refetch-modal" class="modal-overlay" onclick="if(event.target===this)hideModal('refetch-modal')">
+    <div class="modal">
+        <h3>Re-fetch Wiki Pages</h3>
+        <p style="font-size:0.85rem;opacity:0.7;margin-bottom:0.5rem">Re-fetch all pages from the Stellaris wiki, regenerate markdown files, and rebuild this dashboard.</p>
+
+        <div class="step">
+            <div class="step-label">1. Clone &amp; install (first time only)</div>
+            <div class="code-block">
+                <pre>git clone https://github.com/boujuan/StellarisWiki.git
+cd StellarisWiki
+pip install -e ".[mcp]"</pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-label">2. Fetch pages &amp; regenerate dashboard</div>
+            <div class="code-block">
+                <pre>stellariswiki fetch
+stellariswiki analyze --open</pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </div>
+
+        <button class="nav-btn" onclick="hideModal('refetch-modal')">Close</button>
+    </div>
+</div>
+
+<div id="remote-instructions-modal" class="modal-overlay" onclick="if(event.target===this)hideModal('remote-instructions-modal')">
+    <div class="modal">
+        <h3>Apply Config Changes</h3>
+        <p style="font-size:0.85rem;opacity:0.7;margin-bottom:0.5rem">Use the +/- buttons to add or remove pages, download the updated config, then re-fetch.</p>
+
+        <div class="step">
+            <div class="step-label">1. Clone &amp; install (first time only)</div>
+            <div class="code-block">
+                <pre>git clone https://github.com/boujuan/StellarisWiki.git
+cd StellarisWiki
+pip install -e ".[mcp]"</pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-label">2. Replace config &amp; re-fetch</div>
+            <div class="code-block">
+                <pre># Copy the downloaded config.yaml to config/config.yaml
+stellariswiki fetch
+stellariswiki analyze --open</pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </div>
+
+        <button class="nav-btn" onclick="hideModal('remote-instructions-modal')">Close</button>
+    </div>
+</div>

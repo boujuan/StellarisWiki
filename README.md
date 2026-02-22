@@ -78,6 +78,7 @@ tqdm>=4.66.0            # Progress bars
 beautifulsoup4>=4.11.0  # HTML parsing
 lxml>=4.9.0             # Fast HTML parser backend
 PyYAML>=6.0             # Config parsing
+Jinja2>=3.1.0           # HTML dashboard templating
 ```
 
 Optional (for MCP server — `pip install -e ".[mcp]"`):
@@ -273,8 +274,13 @@ stellaris_wiki_scraper/
 │   ├── config.py             # Config loader (dataclasses), singleton cfg
 │   ├── fetcher.py            # Fetch wiki HTML → convert to Markdown
 │   ├── converter.py          # HTML to Markdown converter class
-│   ├── analyzer.py           # Wiki coverage analysis + HTML dashboard
-│   └── mcp_server.py         # MCP server for Claude Desktop
+│   ├── analyzer.py           # Wiki coverage analysis + Jinja2 rendering
+│   ├── mcp_server.py         # MCP server for Claude Desktop
+│   └── templates/            # Jinja2 templates for HTML dashboard
+│       ├── report.html       #   Master template (includes all partials)
+│       ├── report.css        #   All CSS styles
+│       ├── report.js         #   All JavaScript
+│       └── *.html            #   14 partial templates (nav, dashboard, etc.)
 ├── .github/workflows/
 │   ├── pages.yml             # Deploy dashboard to GitHub Pages
 │   └── release.yml           # Upload zip as GitHub Release

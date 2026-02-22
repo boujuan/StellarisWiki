@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stellaris Wiki Analysis</title>
+<link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,{{ favicon_b64 }}">
+<style>
+{% include "report.css" %}
+</style>
+</head>
+<body>
+{% include "nav.html" %}
+<div class="container">
+    {% include "dashboard.html" %}
+    {% include "category_filter.html" %}
+    {% include "search_bar.html" %}
+    {% include "fetched_table.html" %}
+    {% include "game_content.html" %}
+    {% include "dlc_section.html" %}
+    {% include "patches_section.html" %}
+    {% include "disambig_section.html" %}
+    {% include "modding_section.html" %}
+    {% include "mods_section.html" %}
+    {% include "redirects_section.html" %}
+</div>
+{% include "modals.html" %}
+{% include "footer.html" %}
+<script>
+const PAGES_TO_FETCH = {{ pages_to_fetch | tojson }};
+const CONFIG_YAML = {{ config_yaml | tojson }};
+const GENERATED_AT = {{ generated_at | tojson }};
+const SEARCH_INDEX = {{ search_index | tojson }};
+{% include "report.js" %}
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% set pages = classified.modding %}
+{% if pages %}
+<section id="modding" class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <span class="chevron">&#9656;</span>
+        <h2>Modding Documentation <span class="count">({{ pages | length }})</span></h2>
+    </div>
+    <div class="section-body">
+        <table><thead><tr><th style="width:2rem"></th><th>Page</th><th>Wiki Categories</th></tr></thead><tbody>
+        {% for t in pages | sort %}
+            {% set cats = categories_map.get(t, []) | display_categories %}
+            <tr>
+                <td><button class="fetch-btn fetch-btn-add" data-page="{{ t }}" onclick="toggleFetchPage(this)" title="Add to config">+</button></td>
+                <td><a href="{{ t | page_url }}" target="_blank">{{ t }}</a></td>
+                <td>{% if cats %}{% for c in cats %}<span class="tag" data-cat="{{ c }}">{{ c }}</span> {% endfor %}{% else %}<span style="opacity:0.4">none</span>{% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody></table>
+    </div>
+</section>
+{% endif %}

@@ -1,0 +1,64 @@
+{% set gc_count = classified.game_content | length %}
+<section id="game-content" class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <span class="chevron">&#9656;</span>
+        <h2>Game Content — Not Fetched <span class="count">({{ gc_count }} pages)</span></h2>
+    </div>
+    <div class="section-body open">
+        <p style="margin-bottom:0.75rem">Stellaris game content pages not in <code>PAGES_TO_FETCH</code>. Each page shows all its wiki categories.</p>
+        <input type="text" class="filter-input" placeholder="Search all game content pages..."
+               oninput="filterAllSubtables(this, 'game-content')">
+
+        {% for cat_name, titles in game_by_category %}
+        <div class="sub-section" data-category="{{ cat_name }}">
+            <div class="sub-header">
+                <input type="checkbox" class="cat-checkbox"
+                       onclick="toggleCategory(this, event)"
+                       title="Select/deselect all pages in this category">
+                <span class="chevron" onclick="toggleSection(this.closest('.sub-header'))"
+                      style="cursor:pointer">&#9656;</span>
+                <h3 onclick="toggleSection(this.closest('.sub-header'))"
+                    style="cursor:pointer">{{ cat_name }} <span class="count">({{ titles | length }})</span></h3>
+            </div>
+            <div class="section-body open">
+                <table><thead><tr>
+                    <th style="width:2rem"></th><th>Page</th><th>Wiki Categories</th>
+                </tr></thead><tbody>
+                {% for t in titles | sort %}
+                    {% set cats = categories_map.get(t, []) %}
+                    <tr>
+                        <td><button class="fetch-btn fetch-btn-add" data-page="{{ t }}" onclick="toggleFetchPage(this)" title="Add to config">+</button></td>
+                        <td><a href="{{ t | page_url }}" target="_blank">{{ t }}</a></td>
+                        <td>{% if cats %}{% for c in cats %}<span class="tag" data-cat="{{ c }}">{{ c }}</span> {% endfor %}{% else %}<span style="opacity:0.4">none</span>{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody></table>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if game_uncategorized %}
+        <div class="sub-section" data-category="__none__">
+            <div class="sub-header">
+                <input type="checkbox" class="cat-checkbox"
+                       onclick="toggleCategory(this, event)"
+                       title="Select/deselect all pages in this category">
+                <span class="chevron" onclick="toggleSection(this.closest('.sub-header'))"
+                      style="cursor:pointer">&#9656;</span>
+                <h3 onclick="toggleSection(this.closest('.sub-header'))"
+                    style="cursor:pointer">No wiki categories <span class="count">({{ game_uncategorized | length }})</span></h3>
+            </div>
+            <div class="section-body open">
+                <table><thead><tr><th style="width:2rem"></th><th>Page</th></tr></thead><tbody>
+                {% for t in game_uncategorized | sort %}
+                    <tr>
+                        <td><button class="fetch-btn fetch-btn-add" data-page="{{ t }}" onclick="toggleFetchPage(this)" title="Add to config">+</button></td>
+                        <td><a href="{{ t | page_url }}" target="_blank">{{ t }}</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody></table>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>

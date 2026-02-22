@@ -1,0 +1,12 @@
+{% set pages = classified.disambiguation %}
+{% if pages %}
+<section id="disambiguation" class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <span class="chevron">&#9656;</span>
+        <h2>Disambiguation Pages <span class="count">({{ pages | length }})</span></h2>
+    </div>
+    <div class="section-body">
+        <p>{% for t in pages | sort %}{% if not loop.first %}, {% endif %}<a href="{{ t | page_url }}" target="_blank">{{ t }}</a>{% endfor %}</p>
+    </div>
+</section>
+{% endif %}

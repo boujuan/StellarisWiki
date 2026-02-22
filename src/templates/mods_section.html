@@ -1,0 +1,35 @@
+{% set mod_pages = classified.mod %}
+{% if mod_pages %}
+<section id="mods" class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <span class="chevron">&#9656;</span>
+        <h2>Total-Conversion Mod Pages <span class="count">({{ mod_pages | length }})</span></h2>
+    </div>
+    <div class="section-body">
+        <p style="margin-bottom:0.75rem">Pages for mods like ST NewHorizons, Star Trek New Civilisations, etc.</p>
+        <input type="text" class="filter-input" placeholder="Search mod pages..."
+               oninput="filterAllSubtables(this, 'mods')">
+
+        {% for mod_name, pages in mod_groups.items() %}
+        <div class="sub-section">
+            <div class="sub-header" onclick="toggleSection(this)">
+                <span class="chevron">&#9656;</span>
+                <h3>{{ mod_name }} <span class="count">({{ pages | length }})</span></h3>
+            </div>
+            <div class="section-body">
+                <table><thead><tr><th style="width:2rem"></th><th>Page</th><th>Wiki Categories</th></tr></thead><tbody>
+                {% for t in pages | sort %}
+                    {% set cats = categories_map.get(t, []) | display_categories %}
+                    <tr>
+                        <td><button class="fetch-btn fetch-btn-add" data-page="{{ t }}" onclick="toggleFetchPage(this)" title="Add to config">+</button></td>
+                        <td><a href="{{ t | page_url }}" target="_blank">{{ t }}</a></td>
+                        <td>{% if cats %}{% for c in cats %}<span class="tag" data-cat="{{ c }}">{{ c }}</span> {% endfor %}{% else %}<span style="opacity:0.4">none</span>{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody></table>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}

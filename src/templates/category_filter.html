@@ -1,0 +1,15 @@
+{% if all_categories %}
+<div class="cat-filter-bar" id="cat-filter-bar">
+    <span class="cat-filter-label">Filter by category:</span>
+    <div class="cat-chips">
+        {% if has_uncategorized %}
+        <span class="cat-chip active" data-cat="__none__" onclick="toggleCategoryFilter(this)" style="font-style:italic">none</span>
+        {% endif %}
+        {% for c in all_categories %}
+        <span class="cat-chip active" data-cat="{{ c }}" onclick="toggleCategoryFilter(this)">{{ c }}</span>
+        {% endfor %}
+    </div>
+    <button class="cat-reset" onclick="disableAllCategoryFilters()">Disable all</button>
+    <button class="cat-reset" onclick="resetCategoryFilters()">Enable all</button>
+</div>
+{% endif %}
