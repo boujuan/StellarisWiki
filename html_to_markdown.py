@@ -415,14 +415,14 @@ class HTMLToMarkdown:
             for el in soup.select(selector):
                 el.decompose()
 
-        # Remove "Game concepts" navigation footer (inline-styled div, no class)
-        nav_footers = [
-            div for div in soup.find_all('div', style=True)
-            if 'border: 1px solid #aaa' in div.get('style', '')
-            and div.get_text(strip=True).startswith('Game concepts')
-        ]
-        for div in nav_footers:
-            div.decompose()
+        # Remove navigation footers (inline-styled divs with border, no class)
+        # These are "Game concepts", "Modding", and "Stellaris" nav bars
+        for div in list(soup.find_all('div', style=True)):
+            if not div.attrs:
+                continue
+            style = div.get('style', '')
+            if 'border: 1px solid #aaa' in style and 'text-align: center' in style:
+                div.decompose()
 
         # Unwrap tooltip wrapper divs — they're inline containers whose
         # popup content (tooltiptext) was already stripped above
