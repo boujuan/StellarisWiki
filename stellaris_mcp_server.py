@@ -12,8 +12,10 @@ from pathlib import Path
 
 from fastmcp import FastMCP
 
+from config import cfg
+
 # Path to markdown pages
-PAGES_DIR = Path(__file__).parent / "output_markdown" / "pages"
+PAGES_DIR = Path(__file__).parent / cfg.defaults.output_dir / "pages"
 
 # In-memory store for wiki pages
 wiki_pages: dict[str, dict] = {}

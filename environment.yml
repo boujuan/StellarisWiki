@@ -6,6 +6,7 @@ dependencies:
   - tqdm
   - beautifulsoup4
   - lxml
+  - pyyaml
   - pip
   - pydantic
   - pip:

@@ -85,8 +85,8 @@ This will:
 1. Fetch all 101 predefined game pages from the wiki
 2. Fetch sub-pages for composite pages (87 event chains + 12 astral rifts)
 3. Convert each to Markdown
-4. Save individual files to `output_markdown/pages/`
-5. Create a combined file at `output_markdown/stellaris_4.2_combined.md`
+4. Save individual files to `output/pages/`
+5. Create a combined file at `output/stellaris_4.2_combined.md`
 6. Print content warnings (if any math render errors remain)
 
 ### Test Single Page
@@ -108,7 +108,7 @@ python fetch_and_parse.py --page "Astral rift" --test
 |--------|-------------|---------|
 | `--page TITLE` | Process a single page by title | (all pages) |
 | `--test` | Run in test mode (use with `--page`) | false |
-| `--output DIR` | Output directory | `output_markdown` |
+| `--output DIR` | Output directory | `output` |
 | `--delay SECONDS` | Delay between API requests (sequential mode) | `0.5` |
 | `--workers N` | Number of parallel workers | `4` |
 
@@ -177,7 +177,7 @@ micromamba run -n stellaris-scraper fastmcp dev stellaris_mcp_server.py
 
 ### Individual Markdown Files
 
-Each page is saved as `output_markdown/pages/{Page_Title}.md`:
+Each page is saved as `output/pages/{Page_Title}.md`:
 
 ```markdown
 ---
@@ -204,7 +204,7 @@ Habitability on the various types of planets...
 
 ### Combined File
 
-All pages are concatenated into `output_markdown/stellaris_4.2_combined.md`, separated by `---` dividers.
+All pages are concatenated into `output/stellaris_4.2_combined.md`, separated by `---` dividers.
 
 ## Project Structure
 
@@ -219,7 +219,7 @@ stellaris_wiki_scraper/
 ├── html_to_markdown.py       # HTML to Markdown converter class
 ├── stellaris_mcp_server.py   # MCP server for Claude Desktop
 │
-└── output_markdown/          # Markdown output (generated)
+└── output/          # Markdown output (generated)
     ├── pages/                # Individual .md files (101+ pages)
     │   ├── Machine_traits.md
     │   ├── Civics.md
@@ -239,7 +239,7 @@ The tool fetches 101 game concept pages covering:
 | **Governance** | Council, Policies, Edicts, Factions, Traditions, Ascension perks, Situations, Crisis empire |
 | **Species** | Species, Species traits, Biological traits, Machine traits, Population, Species rights |
 | **Leaders** | Leaders, Common leader traits, Commander traits, Scientist traits, Official traits, Paragons |
-| **Economy & Buildings** | Resources, Planetary management, Jobs, Districts, Designation, Holdings, Planet capital, Unique buildings, Megastructures, Colonization |
+| **Economy & Buildings** | Resources, Planetary management, Jobs, Districts, Designation, Holdings, Planet capital, Buildings, Unique buildings, Megastructures, Colonization |
 | **Technology** | Technology, Physics research, Society research, Engineering research |
 | **Ships & Components** | Ship, Ship designer, Core components, Weapon components, Utility components, Mutations, Offensive mutations |
 | **Military** | Warfare, Space warfare, Land warfare, Starbase |
@@ -254,13 +254,12 @@ See [`all_pages.md`](all_pages.md) for the complete list of all 4994 wiki pages 
 
 ## Adding New Pages
 
-To add new pages, edit the `PAGES_TO_FETCH` list in `fetch_and_parse.py`:
+To add new pages, edit the `pages_to_fetch` list in `config.yaml`:
 
-```python
-PAGES_TO_FETCH = [
-    # ...existing pages...
-    "New_Page_Title",  # Use the exact wiki page title
-]
+```yaml
+pages_to_fetch:
+  # ...existing pages...
+  - "New_Page_Title"  # Use the exact wiki page title
 ```
 
 Page titles must match the wiki URL (e.g., `https://stellaris.paradoxwikis.com/Achievements` → `"Achievements"`). Pages with spaces in the title work too (e.g., `"Beginner's guide"`).

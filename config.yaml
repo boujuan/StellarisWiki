@@ -1,0 +1,195 @@
+# Stellaris Wiki Scraper Configuration
+# Shared by fetch_and_parse.py, analyze_wiki_pages.py, and stellaris_mcp_server.py
+
+game_version: "4.2"
+
+wiki:
+  api_url: "https://stellaris.paradoxwikis.com/api.php"
+
+defaults:
+  output_dir: "output"
+  workers: 4
+  delay: 0.5              # seconds between requests (fetch_and_parse sequential mode)
+  request_delay: 0.3      # seconds between requests (analyze_wiki_pages)
+  max_retries: 5
+  generate_all_pages: true # Generate all_pages.md when running analyze_wiki_pages.py
+
+# ---------------------------------------------------------------------------
+# Pages to fetch from the wiki
+# ---------------------------------------------------------------------------
+pages_to_fetch:
+  # Empire Setup
+  - "Origin"
+  - "Government"
+  - "Ethics"
+  - "Civics"
+  - "Corporate civics"
+  - "Hive mind civics"
+  - "Machine intelligence civics"
+  - "Empire"
+  # Governance
+  - "Council"
+  - "Policies"
+  - "Edicts"
+  - "Factions"
+  - "Traditions"
+  - "Ascension_perks"
+  - "Situations"
+  - "Crisis_empire"
+  # Species
+  - "Species"
+  - "Species_traits"
+  - "Biological_traits"
+  - "Machine_traits"
+  - "Population"
+  - "Species_rights"
+  # Leaders
+  - "Leaders"
+  - "Common_leader_traits"
+  - "Commander_traits"
+  - "Scientist_traits"
+  - "Official_traits"
+  - "Paragons"
+  # Economy & Buildings
+  - "Resources"
+  - "Planetary_management"
+  - "Jobs"
+  - "Districts"
+  - "Designation"
+  - "Holdings"
+  - "Planet_capital"
+  - "Unique_buildings"
+  - "Buildings"
+  - "Megastructures"
+  - "Colonization"
+  # Technology
+  - "Technology"
+  - "Physics_research"
+  - "Society_research"
+  - "Engineering_research"
+  # Ships & Components
+  - "Ship"
+  - "Ship_designer"
+  - "Core_components"
+  - "Weapon_components"
+  - "Utility_components"
+  - "Mutations"
+  - "Offensive mutations"
+  # Military
+  - "Warfare"
+  - "Space_warfare"
+  - "Land warfare"
+  - "Starbase"
+  # Exploration & Discovery
+  - "Exploration"
+  - "FTL travel"
+  - "Discovery"
+  - "Anomaly"
+  - "Archaeological site"
+  - "Astral rift"
+  - "Celestial_object"
+  - "Planet_modifiers"
+  - "Planetary_features"
+  - "Unique_systems"
+  - "Relics"
+  - "Collection"
+  - "L-Cluster"
+  - "The_Shroud"
+  # Diplomacy & Relations
+  - "Diplomacy"
+  - "Relations"
+  - "Galactic Community"
+  - "Federation"
+  - "Subject empire"
+  - "Intelligence"
+  - "AI personalities"
+  # NPCs & Encounters
+  - "Fallen empire"
+  - "Spaceborne aliens"
+  - "Pre-FTL species"
+  - "Enclaves"
+  - "Guardians"
+  - "Marauders"
+  - "Caravaneers"
+  # Modifiers & Events
+  - "Empire_modifiers"
+  - "Stat_modifiers"
+  - "Events"
+  # Reference & Other
+  - "Achievements"
+  - "Crisis"
+  - "Prethoryn_Scourge"
+  - "Extradimensional_Invaders"
+  - "Contingency"
+  - "The_Synthetic_Queen"
+  - "Effects"
+  - "Galaxy settings"
+  - "Beginner's guide"
+  - "Hotkeys"
+  - "Jargon"
+  - "User interface"
+  - "Console_commands"
+  - "Easter eggs"
+  - "AI players"
+  - "Preset empires"
+  - "Modding"
+
+# Composite pages: index pages whose sub-page links are extracted from HTML.
+# Values are names of Python extractor functions defined in fetch_and_parse.py.
+composite_pages:
+  "Events": "extract_event_subpage_links"
+  "Astral rift": "extract_astral_rift_subpage_links"
+
+# ---------------------------------------------------------------------------
+# Classification rules (used by analyze_wiki_pages.py)
+# ---------------------------------------------------------------------------
+classification:
+  mod_prefixes:
+    - "ST NewHorizons"
+    - "Star Trek New Civilisations"
+    - "SW: Fallen Republic"
+    - "SW Fallen Republic"
+    - "Warhammer Total-Conversion"
+    - "Warhammer 40"
+    - "PHI - mp balancing"
+    - "PHI -"
+    - "Galactic Cold War"
+
+  dlc_titles:
+    - "ancient relics"
+    - "leviathans"
+    - "synthetic dawn"
+    - "apocalypse"
+    - "distant stars"
+    - "megacorp"
+    - "utopia"
+    - "federations"
+    - "nemesis"
+    - "aquatics"
+    - "overlord"
+    - "toxoids"
+    - "first contact"
+    - "galactic paragons"
+    - "astral planes"
+    - "the machine age"
+    - "cosmic storms"
+    - "grand archive"
+    - "plantoids"
+    - "humanoids"
+    - "lithoids"
+    - "necroids"
+    - "downloadable content"
+    - "dlc"
+
+  wiki_maintenance_categories:
+    - "Potentially outdated"
+    - "Pages with broken file links"
+    - "Articles with potentially outdated infoboxes"
+    - "Articles with potentially outdated sections"
+    - "Pages with obsolete icons"
+    - "Pages with unrecognized icon strings"
+    - "Pages with math errors"
+    - "Pages with math render errors"
+    - "Timeless"
+    - "Disambiguation"
+    - "Wiki"

@@ -20,9 +20,7 @@ from bs4 import BeautifulSoup, Tag
 from tqdm import tqdm
 
 from html_to_markdown import HTMLToMarkdown
-
-
-API_URL = "https://stellaris.paradoxwikis.com/api.php"
+from config import cfg
 
 # Known error patterns in wiki-rendered content
 CONTENT_ERROR_PATTERNS = [
@@ -43,122 +41,8 @@ def check_content_errors(title: str, markdown: str) -> list[str]:
             warnings.append(f"{title}: {label} ({len(matches)} occurrence{'s' if len(matches) > 1 else ''})")
     return warnings
 
-PAGES_TO_FETCH = [
-    # Empire Setup
-    "Origin",
-    "Government",
-    "Ethics",
-    "Civics",
-    "Corporate civics",
-    "Hive mind civics",
-    "Machine intelligence civics",
-    "Empire",
-    # Governance
-    "Council",
-    "Policies",
-    "Edicts",
-    "Factions",
-    "Traditions",
-    "Ascension_perks",
-    "Situations",
-    "Crisis_empire",
-    # Species
-    "Species",
-    "Species_traits",
-    "Biological_traits",
-    "Machine_traits",
-    "Population",
-    "Species_rights",
-    # Leaders
-    "Leaders",
-    "Common_leader_traits",
-    "Commander_traits",
-    "Scientist_traits",
-    "Official_traits",
-    "Paragons",
-    # Economy & Buildings
-    "Resources",
-    "Planetary_management",
-    "Jobs",
-    "Districts",
-    "Designation",
-    "Holdings",
-    "Planet_capital",
-    "Unique_buildings",
-    "Megastructures",
-    "Colonization",
-    # Technology
-    "Technology",
-    "Physics_research",
-    "Society_research",
-    "Engineering_research",
-    # Ships & Components
-    "Ship",
-    "Ship_designer",
-    "Core_components",
-    "Weapon_components",
-    "Utility_components",
-    "Mutations",
-    "Offensive mutations",
-    # Military
-    "Warfare",
-    "Space_warfare",
-    "Land warfare",
-    "Starbase",
-    # Exploration & Discovery
-    "Exploration",
-    "FTL travel",
-    "Discovery",
-    "Anomaly",
-    "Archaeological site",
-    "Astral rift",
-    "Celestial_object",
-    "Planet_modifiers",
-    "Planetary_features",
-    "Unique_systems",
-    "Relics",
-    "Collection",
-    "L-Cluster",
-    "The_Shroud",
-    # Diplomacy & Relations
-    "Diplomacy",
-    "Relations",
-    "Galactic Community",
-    "Federation",
-    "Subject empire",
-    "Intelligence",
-    "AI personalities",
-    # NPCs & Encounters
-    "Fallen empire",
-    "Spaceborne aliens",
-    "Pre-FTL species",
-    "Enclaves",
-    "Guardians",
-    "Marauders",
-    "Caravaneers",
-    # Modifiers & Events
-    "Empire_modifiers",
-    "Stat_modifiers",
-    "Events",
-    # Reference & Other
-    "Achievements",
-    "Crisis",
-    "Prethoryn_Scourge",
-    "Extradimensional_Invaders",
-    "Contingency",
-    "The_Synthetic_Queen",
-    "Effects",
-    "Galaxy settings",
-    "Beginner's guide",
-    "Hotkeys",
-    "Jargon",
-    "User interface",
-    "Console_commands",
-    "Easter eggs",
-    "AI players",
-    "Preset empires",
-    "Modding",
-]
+# Backward-compatible alias (analyze_wiki_pages.py imports this)
+PAGES_TO_FETCH = cfg.pages_to_fetch
 
 
 def create_session():
@@ -194,7 +78,7 @@ def fetch_page_html(session, title: str, max_retries: int = 5) -> dict | None:
 
     for attempt in range(max_retries):
         try:
-            response = session.get(API_URL, params=params, timeout=30)
+            response = session.get(cfg.wiki.api_url, params=params, timeout=30)
             response.raise_for_status()
 
             content_type = response.headers.get("Content-Type", "")
@@ -397,12 +281,22 @@ def extract_astral_rift_subpage_links(html: str) -> list[tuple[str, list[str]]]:
     return []
 
 
+# Map config function-name strings to actual callables
+_COMPOSITE_EXTRACTORS = {
+    "extract_event_subpage_links": extract_event_subpage_links,
+    "extract_astral_rift_subpage_links": extract_astral_rift_subpage_links,
+}
+
 # Pages that are index pages — their sub-page links are extracted from HTML
 # and each sub-page's content is appended to the parent page's markdown.
-COMPOSITE_PAGES = {
-    "Events": extract_event_subpage_links,
-    "Astral rift": extract_astral_rift_subpage_links,
-}
+COMPOSITE_PAGES = {}
+for _title, _func_name in cfg.composite_pages.items():
+    if _func_name not in _COMPOSITE_EXTRACTORS:
+        raise ValueError(
+            f"Unknown composite extractor '{_func_name}' for page '{_title}'. "
+            f"Available: {list(_COMPOSITE_EXTRACTORS.keys())}"
+        )
+    COMPOSITE_PAGES[_title] = _COMPOSITE_EXTRACTORS[_func_name]
 
 
 def _fetch_and_convert_body(title: str) -> tuple[str, str, bool]:
@@ -576,7 +470,7 @@ def process_all_pages(page_titles: list[str], output_dir: Path,
     if results:
         ordered_markdown = [results[t] for t in page_titles if t in results]
         combined = "\n\n---\n\n".join(ordered_markdown)
-        combined_path = output_dir / "stellaris_4.2_combined.md"
+        combined_path = output_dir / cfg.combined_filename
         combined_path.write_text(combined, encoding="utf-8")
         combined_size = combined_path.stat().st_size
 
@@ -656,20 +550,20 @@ def main():
     parser.add_argument(
         "--output",
         type=str,
-        default="output_markdown",
-        help="Output directory (default: output_markdown)"
+        default=cfg.defaults.output_dir,
+        help=f"Output directory (default: {cfg.defaults.output_dir})"
     )
     parser.add_argument(
         "--delay",
         type=float,
-        default=0.5,
-        help="Delay between API requests in seconds (default: 0.5, sequential mode only)"
+        default=cfg.defaults.delay,
+        help=f"Delay between API requests in seconds (default: {cfg.defaults.delay}, sequential mode only)"
     )
     parser.add_argument(
         "--workers",
         type=int,
-        default=4,
-        help="Number of parallel workers (default: 4, use 1 for sequential)"
+        default=cfg.defaults.workers,
+        help=f"Number of parallel workers (default: {cfg.defaults.workers}, use 1 for sequential)"
     )
     args = parser.parse_args()
 
@@ -723,7 +617,7 @@ def main():
             print(f"Failed: {args.page}")
             sys.exit(1)
     else:
-        page_titles = PAGES_TO_FETCH
+        page_titles = cfg.pages_to_fetch
         print(f"Processing {len(page_titles)} pages")
         process_all_pages(page_titles, output_dir, args.delay, args.workers)
 
