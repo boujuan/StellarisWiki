@@ -51,7 +51,7 @@ The HTML-to-Markdown approach produces output that is **~55% smaller** than the 
 ```bash
 # Clone and install as editable package
 git clone https://github.com/boujuan/StellarisWiki.git
-cd StellarisWiki/stellaris_wiki_scraper
+cd StellarisWiki
 pip install -e .
 
 # With MCP server support (for Claude Desktop integration)

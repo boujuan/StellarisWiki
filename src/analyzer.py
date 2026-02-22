@@ -1394,7 +1394,7 @@ def _html_modals_and_config(data):
             <div class="step-label">1. Clone &amp; install (first time only)</div>
             <div class="code-block">
                 <pre>git clone https://github.com/boujuan/StellarisWiki.git
-cd StellarisWiki/stellaris_wiki_scraper
+cd StellarisWiki
 pip install -e ".[mcp]"</pre>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
@@ -1422,7 +1422,7 @@ stellariswiki analyze --open</pre>
             <div class="step-label">1. Clone &amp; install (first time only)</div>
             <div class="code-block">
                 <pre>git clone https://github.com/boujuan/StellarisWiki.git
-cd StellarisWiki/stellaris_wiki_scraper
+cd StellarisWiki
 pip install -e ".[mcp]"</pre>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
