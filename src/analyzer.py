@@ -844,8 +844,17 @@ tr:hover {{ background: rgba(59,130,246,.05); }}
           box-shadow: 0 8px 32px rgba(0,0,0,.3); }}
 .modal h3 {{ margin-bottom: 0.75rem; }}
 .modal pre {{ background: var(--bg); padding: 0.75rem; border-radius: 6px; font-size: 0.85rem;
-              overflow-x: auto; margin: 0.5rem 0; }}
+              overflow-x: auto; margin: 0.5rem 0; white-space: pre-wrap; word-break: break-all; }}
 .modal button {{ margin-top: 0.75rem; }}
+.code-block {{ position: relative; }}
+.code-block pre {{ padding-right: 2.5rem; }}
+.copy-btn {{ position: absolute; top: 0.4rem; right: 0.4rem; background: var(--card-bg); border: 1px solid var(--border);
+             border-radius: 4px; padding: 0.2rem 0.45rem; cursor: pointer; font-size: 0.75rem; opacity: 0.7;
+             transition: opacity 0.2s; color: var(--text); }}
+.copy-btn:hover {{ opacity: 1; }}
+.copy-btn.copied {{ color: var(--green); border-color: var(--green); opacity: 1; }}
+.modal .step {{ margin: 0.75rem 0; }}
+.modal .step-label {{ font-weight: 600; font-size: 0.85rem; margin-bottom: 0.25rem; color: var(--accent); }}
 .generated {{ text-align: center; padding: 2rem; opacity: 0.5; font-size: 0.85rem; }}
 .count {{ font-size: 0.85rem; opacity: 0.7; font-weight: normal; }}
 </style>
@@ -1379,10 +1388,27 @@ def _html_modals_and_config(data):
 <div id="refetch-modal" class="modal-overlay" onclick="if(event.target===this)hideModal('refetch-modal')">
     <div class="modal">
         <h3>Re-fetch Wiki Pages</h3>
-        <p>Run these commands in the project directory:</p>
-        <pre>python stellariswiki.py fetch
-python stellariswiki.py analyze</pre>
-        <p style="font-size:0.85rem;opacity:0.7">This will re-fetch all pages from the Stellaris wiki and regenerate the dashboard.</p>
+        <p style="font-size:0.85rem;opacity:0.7;margin-bottom:0.5rem">Re-fetch all pages from the Stellaris wiki, regenerate markdown files, and rebuild this dashboard.</p>
+
+        <div class="step">
+            <div class="step-label">1. Clone &amp; install (first time only)</div>
+            <div class="code-block">
+                <pre>git clone https://github.com/boujuan/StellarisWiki.git
+cd StellarisWiki/stellaris_wiki_scraper
+pip install -e ".[mcp]"</pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-label">2. Fetch pages &amp; regenerate dashboard</div>
+            <div class="code-block">
+                <pre>stellariswiki fetch
+stellariswiki analyze --open</pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </div>
+
         <button class="nav-btn" onclick="hideModal('refetch-modal')">Close</button>
     </div>
 </div>
@@ -1390,12 +1416,28 @@ python stellariswiki.py analyze</pre>
 <div id="remote-instructions-modal" class="modal-overlay" onclick="if(event.target===this)hideModal('remote-instructions-modal')">
     <div class="modal">
         <h3>Apply Config Changes</h3>
-        <p>Replace <code>config/config.yaml</code> in your local clone with the downloaded file, then run:</p>
-        <pre>git clone https://github.com/boujuan/StellarisWiki.git
-cd StellarisWiki
-# Replace config/config.yaml with downloaded file
-python stellariswiki.py fetch
-python stellariswiki.py analyze</pre>
+        <p style="font-size:0.85rem;opacity:0.7;margin-bottom:0.5rem">Use the +/- buttons to add or remove pages, download the updated config, then re-fetch.</p>
+
+        <div class="step">
+            <div class="step-label">1. Clone &amp; install (first time only)</div>
+            <div class="code-block">
+                <pre>git clone https://github.com/boujuan/StellarisWiki.git
+cd StellarisWiki/stellaris_wiki_scraper
+pip install -e ".[mcp]"</pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-label">2. Replace config &amp; re-fetch</div>
+            <div class="code-block">
+                <pre># Copy the downloaded config.yaml to config/config.yaml
+stellariswiki fetch
+stellariswiki analyze --open</pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </div>
+
         <button class="nav-btn" onclick="hideModal('remote-instructions-modal')">Close</button>
     </div>
 </div>
@@ -1951,6 +1993,14 @@ function showModal(id) {
 }
 function hideModal(id) {
     document.getElementById(id).classList.remove('visible');
+}
+function copyCode(btn) {
+    const pre = btn.parentElement.querySelector('pre');
+    navigator.clipboard.writeText(pre.textContent).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
 }
 
 // --- localStorage persistence ---
