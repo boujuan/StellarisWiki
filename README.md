@@ -33,6 +33,7 @@ The HTML-to-Markdown approach produces output that is **~55% smaller** than the 
 - YAML frontmatter with title and categories
 - Content error detection (math render failures, raw LaTeX)
 - Rate limiting and retry logic with exponential backoff
+- **Interactive HTML dashboard** with wiki coverage analysis, category filters, and expand/collapse all sections
 
 ## Installation
 
@@ -213,20 +214,20 @@ stellaris_wiki_scraper/
 ├── README.md                 # This file
 ├── requirements.txt          # Python dependencies
 ├── environment.yml           # Conda/micromamba environment
-├── all_pages.md              # Complete list of all 4994 wiki pages
-│
 ├── fetch_and_parse.py        # Main script: fetch HTML → convert to Markdown
 ├── html_to_markdown.py       # HTML to Markdown converter class
 ├── stellaris_mcp_server.py   # MCP server for Claude Desktop
 │
-└── output/          # Markdown output (generated)
+└── output/          # All generated output
     ├── pages/                # Individual .md files (101+ pages)
     │   ├── Machine_traits.md
     │   ├── Civics.md
     │   ├── Events.md         # Composite: main + 87 event sub-pages
     │   ├── Astral_rift.md    # Composite: main + 12 rift sub-pages
     │   └── ...
-    └── stellaris_4.2_combined.md  # Single combined file (~4.9 MB)
+    ├── stellaris_4.2_combined.md  # Single combined file (~4.9 MB)
+    ├── all_pages.md              # Complete list of all 4994 wiki pages
+    └── wiki_analysis.html        # Interactive analysis dashboard
 ```
 
 ## Pages Fetched
@@ -250,7 +251,7 @@ The tool fetches 101 game concept pages covering:
 | **Crisis** | Crisis, Prethoryn Scourge, Extradimensional Invaders, Contingency, The Synthetic Queen |
 | **Reference** | Achievements, Effects, Galaxy settings, Beginner's guide, Hotkeys, Jargon, User interface, Console commands, Easter eggs, AI players, Preset empires, Modding |
 
-See [`all_pages.md`](all_pages.md) for the complete list of all 4994 wiki pages (with checkmarks showing which are currently fetched).
+See [`all_pages.md`](output/all_pages.md) for the complete list of all 4994 wiki pages (with checkmarks showing which are currently fetched).
 
 ## Adding New Pages
 

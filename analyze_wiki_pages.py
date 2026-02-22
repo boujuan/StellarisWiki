@@ -299,6 +299,11 @@ def get_content_categories(wiki_categories: list[str]) -> list[str]:
             and c.strip() not in cfg.classification.wiki_maintenance_categories]
 
 
+def get_display_categories(wiki_categories: list[str]) -> list[str]:
+    """Return all categories for display (no filtering)."""
+    return [c.strip() for c in wiki_categories if c.strip()]
+
+
 # ---------------------------------------------------------------------------
 # Dynamic file detection
 # ---------------------------------------------------------------------------
@@ -345,11 +350,14 @@ def prepare_report_data(
                 if normalize_title(t) not in {normalize_title(x) for x in fetched_titles}:
                     source = f"Sub-page of {parent}"
                 break
+        # Look up categories (try both space and underscore variants)
+        cats = categories_map.get(t, []) or categories_map.get(t.replace(" ", "_"), [])
         fetched_pages_info.append({
             "title": t,
             "source": source,
             "file_exists": normalize_title(t) in existing_files,
             "url": page_url(t),
+            "categories": get_display_categories(cats),
         })
 
     not_fetched = {t for t in content_titles_set if normalize_title(t) not in all_fetched}
@@ -392,6 +400,37 @@ def prepare_report_data(
         if not matched:
             mod_groups.setdefault("Other mods", []).append(t)
 
+    # Collect all unique categories across ALL pages (keep everything except versions)
+    all_categories = set()
+    for cats in categories_map.values():
+        all_categories.update(get_display_categories(cats))
+    for p in fetched_pages_info:
+        all_categories.update(p["categories"])
+    # Track whether any page has no categories
+    has_uncategorized = any(not p["categories"] for p in fetched_pages_info)
+    if not has_uncategorized:
+        for cats in categories_map.values():
+            if not get_display_categories(cats):
+                has_uncategorized = True
+                break
+
+    # Compute main vs sub-page breakdown
+    main_pages = [p for p in fetched_pages_info if p["source"] == "PAGES_TO_FETCH"]
+    sub_pages = [p for p in fetched_pages_info if p["source"] != "PAGES_TO_FETCH"]
+    # Only main pages are expected to have individual files on disk;
+    # sub-pages are embedded in composite parent files.
+    main_missing = [p for p in main_pages if not p["file_exists"]]
+
+    # Fetched breakdown for pie chart
+    n_composite_parents = len(composite_subpages)
+    fetched_breakdown = [
+        {"label": "Main pages", "value": len(main_pages) - n_composite_parents},
+        {"label": "Composite parents", "value": n_composite_parents},
+    ] + [
+        {"label": f"{parent} sub-pages", "value": len(subs)}
+        for parent, subs in sorted(composite_subpages.items())
+    ]
+
     return {
         "generated_at": time.strftime('%Y-%m-%d %H:%M:%S'),
         "total_pages": total_pages,
@@ -409,8 +448,12 @@ def prepare_report_data(
         "categories_map": categories_map,
         "composite_subpages": composite_subpages,
         "files_on_disk": len(existing_files),
-        "fetched_with_files": sum(1 for p in fetched_pages_info if p["file_exists"]),
-        "fetched_without_files": sum(1 for p in fetched_pages_info if not p["file_exists"]),
+        "n_main_pages": len(main_pages),
+        "n_sub_pages": len(sub_pages),
+        "main_missing": len(main_missing),
+        "fetched_breakdown": fetched_breakdown,
+        "all_categories": sorted(all_categories),
+        "has_uncategorized": has_uncategorized,
     }
 
 
@@ -431,8 +474,10 @@ def generate_markdown_report(data: dict, output_path: Path) -> str:
     w(f"- **Total wiki pages (namespace 0):** {d['total_pages']:,}")
     w(f"- **Redirect pages:** {d['num_redirects']:,} ({d['redirect_pct']:.1f}%)")
     w(f"- **Unique content pages:** {d['num_content']:,}")
-    w(f"- **Currently fetched:** {len(d['all_fetched'])} pages")
-    w(f"- **Files on disk:** {d['fetched_with_files']} present, {d['fetched_without_files']} missing")
+    w(f"- **Currently fetched:** {len(d['all_fetched'])} pages ({d['n_main_pages']} main + {d['n_sub_pages']} sub-pages)")
+    w(f"- **Files on disk:** {d['files_on_disk']}")
+    if d['main_missing'] > 0:
+        w(f"- **Missing files:** {d['main_missing']} main pages without a file on disk")
     w(f"- **Content pages NOT fetched:** {len(d['not_fetched']):,}")
     w("")
 
@@ -531,6 +576,7 @@ def _html_head(data):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stellaris Wiki Analysis</title>
+<link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAD///8B////AUCe/wlAnv8hQJ7/Ef///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BQJ7/BUCe/zdAnv91QJ7/ezeH2mcAAABXAAAAiwAAALMAAACzAAAAiwAAAFcAAAAX////Af///wH///8B////AUCe/w9Anv+TQJ7/gQ0gM0EUFhTJQDcU23JgH+2agSX7tZcp+7ycJ+1/ahvbHxoHxwAAADf///8B////Af///wFAnv8FSqr/bVCl37EiJyPRTUEe62tZIP9zXh//fWgh/5R6Jf+8nSr/5b4w/7eZJ+s6MA7NAAAAN////wH///8B////ASllojdHldHzUIGh91xYOP9BNxf/XHcy/0I/Fv9VSxj/gmsg/7CRJ//guzD/u5on6xsWB8cAAAAX////Af///wEAAABXQ2mD612u5P9Ofp3/NTIf/z09Gf9WcDD/Xn01/09EGP+DbCD/pYom/9OvLf9zYBnbAAAAV////wH///8BAAAAi4F6VO9mlrP/WK3k/z9qgv9CTyb/RVMl/1NtLf8uKQ//RDkT/3VgHv+qjCf/p4sl7QAAAIv///8B////AQAAALO8rnz7n5Vl/02FqP9Xr+j/RYGj/0JVM/86Phv/Jx8P/0xbKP9NQxv/dWEf/62PKPsAAACz////Af///wEAAACz5tqv+76sdP9mZUz/SIOr/1i17/9MndH/P19l/0RRL/9SZjT/U1Ep/2NTH/91YSX7AAAAs////wH///8BAAAAi7mwje3czpn/koFP/1FMNv9KjK//YsD1/5jW+P9/tNH/VImm/y9AR/8YFgv/LicP9QAAAIv///8B////AQAAAFd6dV7b5tuv/83Ai/+EdEP/UVE8/1yYtP/D6v3/0+/+/1d3jf9OWWP/rKyr/w0LBPcAAABX////Af///wEAAAAXExgMx1R2M+twnUT/hJtN/4V0Pf9waUL/p9Tt/3SEjf9cZGr/rKup/09NR/0JBwTfAAAAF////wH///8B////AQAAADckLhfNU3Yy63GeRf+qomD/l4NC/0FRT/9SXGL/4+Da/9XV1f+sq6n/AAAAzQAAAAP///8B////Af///wH///8BAAAANx0bE8d2cFbbtKyG7bCeZPsgHRD/3NnU/01LRvnZ19P/rayr/09PT9MAAABx////Af///wH///8B////Af///wEAAAAXAAAAVwAAAIsAAACzAAAA1QAAAOMAAAChAAAAxU9PT9PEwbz/AAAAvwAAAAP///8B////Af///wH///8B////Af///wH///8B////Af///wEAAAAD////AQAAAAMAAABxAAAAvwAAAHH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//w==">
 <style>
 :root {{
     --bg: #f8fafc; --text: #1e293b; --border: #e2e8f0; --card-bg: #fff;
@@ -554,7 +600,12 @@ a:hover {{ text-decoration: underline; }}
         background: var(--nav-bg); color: var(--nav-text); padding: 0 1rem;
         display: flex; align-items: center; height: 56px; gap: 1rem;
         box-shadow: 0 2px 8px rgba(0,0,0,.15); }}
-.nav-brand {{ font-weight: 700; font-size: 1.1rem; white-space: nowrap; }}
+.nav-brand {{ font-weight: 700; font-size: 1.1rem; white-space: nowrap; display: flex; align-items: center; gap: 0.4rem; }}
+.nav-brand img {{ width: 20px; height: 20px; }}
+.nav-actions {{ display: flex; gap: 0.25rem; white-space: nowrap; }}
+.nav-btn {{ padding: 0.25rem 0.5rem; border: 1px solid rgba(255,255,255,.25); border-radius: 4px;
+            background: transparent; color: var(--nav-text); cursor: pointer; font-size: 0.75rem; }}
+.nav-btn:hover {{ background: rgba(255,255,255,.15); }}
 .nav-links {{ display: flex; gap: 0.25rem; flex-wrap: wrap; flex: 1; }}
 .nav-links a {{ color: var(--nav-text); padding: 0.25rem 0.5rem; border-radius: 4px;
                font-size: 0.85rem; white-space: nowrap; }}
@@ -572,12 +623,40 @@ a:hover {{ text-decoration: underline; }}
 .card.red .number {{ color: var(--red); }}
 .card.blue .number {{ color: var(--blue); }}
 
-.breakdown {{ display: flex; align-items: center; gap: 2rem; margin: 1.5rem 0;
-              flex-wrap: wrap; }}
-.pie-chart {{ width: 140px; height: 140px; border-radius: 50%; flex-shrink: 0; }}
+.charts-row {{ display: flex; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap; }}
+.breakdown {{ display: flex; align-items: center; gap: 1.5rem; flex: 1;
+              min-width: 280px; }}
 .pie-legend {{ font-size: 0.9rem; }}
-.pie-legend div {{ display: flex; align-items: center; gap: 0.5rem; margin: 0.25rem 0; }}
+.pie-legend div {{ display: flex; align-items: center; gap: 0.5rem; margin: 0.25rem 0;
+                   padding: 0.15rem 0.3rem; border-radius: 4px; cursor: pointer; transition: background 0.15s; }}
+.pie-legend div:hover, .pie-legend div.highlight {{ background: var(--border); }}
 .dot {{ width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }}
+.pie-tooltip {{ position: fixed; pointer-events: none; padding: 0.4rem 0.7rem; border-radius: 6px;
+                background: var(--card-bg); border: 1px solid var(--border); font-size: 0.85rem;
+                box-shadow: 0 2px 8px rgba(0,0,0,.2); z-index: 200; display: none; }}
+
+.filter-bar {{ display: flex; gap: 0.75rem; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; }}
+.filter-bar .filter-input {{ margin-bottom: 0; flex: 1; min-width: 200px; }}
+.toggle-group {{ display: flex; }}
+.toggle-btn {{ padding: 0.4rem 0.75rem; border: 1px solid var(--border); background: var(--card-bg);
+               color: var(--text); cursor: pointer; font-size: 0.85rem; white-space: nowrap; }}
+.toggle-btn:first-child {{ border-radius: 6px 0 0 6px; }}
+.toggle-btn:last-child {{ border-radius: 0 6px 6px 0; }}
+.toggle-btn.active {{ background: var(--blue); color: white; border-color: var(--blue); }}
+
+.cat-filter-bar {{ padding: 0.5rem 1rem; background: var(--card-bg); border-bottom: 1px solid var(--border);
+                    display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }}
+.cat-filter-label {{ font-size: 0.8rem; opacity: 0.7; white-space: nowrap; }}
+.cat-chips {{ display: flex; flex-wrap: wrap; gap: 4px; flex: 1; }}
+.cat-chip {{ display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem;
+             background: var(--border); cursor: pointer; user-select: none; transition: opacity 0.15s, background 0.15s;
+             white-space: nowrap; }}
+.cat-chip.active {{ opacity: 1; }}
+.cat-chip:not(.active) {{ opacity: 0.3; text-decoration: line-through; }}
+.cat-chip:hover {{ background: var(--blue); color: white; }}
+.cat-reset {{ font-size: 0.75rem; padding: 0.15rem 0.5rem; border: 1px solid var(--border); border-radius: 4px;
+              background: var(--card-bg); color: var(--text); cursor: pointer; white-space: nowrap; }}
+.cat-reset:hover {{ background: var(--border); }}
 
 .section {{ margin: 2rem 0; }}
 .section-header {{ display: flex; align-items: center; gap: 0.5rem; cursor: pointer;
@@ -608,7 +687,8 @@ tr:hover {{ background: rgba(59,130,246,.05); }}
 .status-ok {{ color: var(--green); font-weight: 700; text-align: center; }}
 .status-missing {{ color: var(--red); font-weight: 700; text-align: center; }}
 .tag {{ display: inline-block; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.75rem;
-        background: var(--border); margin: 1px; white-space: nowrap; }}
+        background: var(--border); margin: 1px; white-space: nowrap; cursor: pointer; transition: opacity 0.15s; }}
+.tag:hover {{ background: var(--blue); color: white; }}
 .generated {{ text-align: center; padding: 2rem; opacity: 0.5; font-size: 0.85rem; }}
 .count {{ font-size: 0.85rem; opacity: 0.7; font-weight: normal; }}
 </style>
@@ -628,7 +708,7 @@ def _html_nav(data):
     fetched = len(d["fetched_pages_info"])
     return f'''
 <nav class="nav">
-    <div class="nav-brand">Stellaris Wiki Analysis</div>
+    <div class="nav-brand"><img src="data:image/x-icon;base64,AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAD///8B////AUCe/wlAnv8hQJ7/Ef///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BQJ7/BUCe/zdAnv91QJ7/ezeH2mcAAABXAAAAiwAAALMAAACzAAAAiwAAAFcAAAAX////Af///wH///8B////AUCe/w9Anv+TQJ7/gQ0gM0EUFhTJQDcU23JgH+2agSX7tZcp+7ycJ+1/ahvbHxoHxwAAADf///8B////Af///wFAnv8FSqr/bVCl37EiJyPRTUEe62tZIP9zXh//fWgh/5R6Jf+8nSr/5b4w/7eZJ+s6MA7NAAAAN////wH///8B////ASllojdHldHzUIGh91xYOP9BNxf/XHcy/0I/Fv9VSxj/gmsg/7CRJ//guzD/u5on6xsWB8cAAAAX////Af///wEAAABXQ2mD612u5P9Ofp3/NTIf/z09Gf9WcDD/Xn01/09EGP+DbCD/pYom/9OvLf9zYBnbAAAAV////wH///8BAAAAi4F6VO9mlrP/WK3k/z9qgv9CTyb/RVMl/1NtLf8uKQ//RDkT/3VgHv+qjCf/p4sl7QAAAIv///8B////AQAAALO8rnz7n5Vl/02FqP9Xr+j/RYGj/0JVM/86Phv/Jx8P/0xbKP9NQxv/dWEf/62PKPsAAACz////Af///wEAAACz5tqv+76sdP9mZUz/SIOr/1i17/9MndH/P19l/0RRL/9SZjT/U1Ep/2NTH/91YSX7AAAAs////wH///8BAAAAi7mwje3czpn/koFP/1FMNv9KjK//YsD1/5jW+P9/tNH/VImm/y9AR/8YFgv/LicP9QAAAIv///8B////AQAAAFd6dV7b5tuv/83Ai/+EdEP/UVE8/1yYtP/D6v3/0+/+/1d3jf9OWWP/rKyr/w0LBPcAAABX////Af///wEAAAAXExgMx1R2M+twnUT/hJtN/4V0Pf9waUL/p9Tt/3SEjf9cZGr/rKup/09NR/0JBwTfAAAAF////wH///8B////AQAAADckLhfNU3Yy63GeRf+qomD/l4NC/0FRT/9SXGL/4+Da/9XV1f+sq6n/AAAAzQAAAAP///8B////Af///wH///8BAAAANx0bE8d2cFbbtKyG7bCeZPsgHRD/3NnU/01LRvnZ19P/rayr/09PT9MAAABx////Af///wH///8B////Af///wEAAAAXAAAAVwAAAIsAAACzAAAA1QAAAOMAAAChAAAAxU9PT9PEwbz/AAAAvwAAAAP///8B////Af///wH///8B////Af///wH///8B////Af///wEAAAAD////AQAAAAMAAABxAAAAvwAAAHH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//w==" alt="Stellaris">Stellaris Wiki Analysis</div>
     <div class="nav-links">
         <a href="#dashboard">Dashboard</a>
         <a href="#fetched">Fetched ({fetched})</a>
@@ -639,87 +719,173 @@ def _html_nav(data):
         <a href="#mods">Mods ({mods})</a>
         <a href="#redirects">Redirects ({redir})</a>
     </div>
+    <div class="nav-actions">
+        <button class="nav-btn" onclick="expandAllSections()" title="Expand all sections">&#9660; Expand</button>
+        <button class="nav-btn" onclick="collapseAllSections()" title="Collapse all sections">&#9654; Collapse</button>
+    </div>
     <div class="nav-stats">{d["total_pages"]:,} pages | {fetched} fetched</div>
 </nav>
 <div class="container">'''
 
 
+def _html_category_filter(data):
+    """Generate global category filter chips at the top of the page."""
+    cats = data.get("all_categories", [])
+    if not cats:
+        return ""
+    chips = []
+    if data.get("has_uncategorized"):
+        chips.append(
+            '<span class="cat-chip active" data-cat="__none__" '
+            'onclick="toggleCategoryFilter(this)" style="font-style:italic">none</span>'
+        )
+    for c in cats:
+        chips.append(
+            f'<span class="cat-chip active" data-cat="{_esc(c)}" '
+            f'onclick="toggleCategoryFilter(this)">{_esc(c)}</span>'
+        )
+    chips_html = "\n        ".join(chips)
+    return f'''
+<div class="cat-filter-bar" id="cat-filter-bar">
+    <span class="cat-filter-label">Filter by category:</span>
+    <div class="cat-chips">
+        {chips_html}
+    </div>
+    <button class="cat-reset" onclick="disableAllCategoryFilters()">Disable all</button>
+    <button class="cat-reset" onclick="resetCategoryFilters()">Enable all</button>
+</div>'''
+
+
 def _html_dashboard(data):
-    """Generate summary dashboard with stat cards and pie chart."""
+    """Generate summary dashboard with stat cards and interactive pie charts."""
     d = data
     cl = d["classified"]
-    total_nf = len(d["not_fetched"])
+    import json as _json
 
-    # Pie chart angles
-    def pct_to_deg(n):
-        return (n / total_nf * 360) if total_nf > 0 else 0
+    total = d["total_pages"]
+    n_fetched = len(d["fetched_pages_info"])
+    n_main = d["n_main_pages"]
+    n_sub = d["n_sub_pages"]
+    n_redir_fetched = len(d["relevant_redirects"])
+    n_not_fetched = len(d["not_fetched"])
+    n_redir_other = d["num_redirects"] - n_redir_fetched
 
-    gc_deg = pct_to_deg(len(cl["game_content"]))
-    dlc_deg = gc_deg + pct_to_deg(len(cl["dlc"]))
-    patch_deg = dlc_deg + pct_to_deg(len(cl["patch"]))
-    modding_deg = patch_deg + pct_to_deg(len(cl["modding"]))
+    missing_html = ""
+    if d["main_missing"] > 0:
+        missing_html = f"""
+        <div class="card red"><div class="number">{d["main_missing"]}</div><div class="label">Missing Files</div></div>"""
+
+    # Pie chart data as JSON for JavaScript
+    wiki_structure_data = _json.dumps([
+        {"label": "Main pages fetched", "value": n_main, "color": "#22c55e"},
+        {"label": "Sub-pages fetched", "value": n_sub, "color": "#14b8a6"},
+        {"label": "Redirects to fetched", "value": n_redir_fetched, "color": "#3b82f6"},
+        {"label": "Not fetched", "value": n_not_fetched, "color": "#f97316"},
+        {"label": "Other redirects", "value": n_redir_other, "color": "#64748b"},
+    ])
+
+    not_fetched_data = _json.dumps([
+        {"label": "Game Content", "value": len(cl["game_content"]), "color": "#3b82f6"},
+        {"label": "DLC", "value": len(cl["dlc"]), "color": "#f97316"},
+        {"label": "Patches", "value": len(cl["patch"]), "color": "#14b8a6"},
+        {"label": "Modding", "value": len(cl["modding"]), "color": "#a855f7"},
+        {"label": "Total-conversion Mods", "value": len(cl["mod"]), "color": "#ef4444"},
+    ])
+
+    # Fetched breakdown: distinct colors for each segment
+    fb_colors = ["#22c55e", "#0ea5e9", "#f97316", "#a855f7", "#ef4444", "#eab308", "#14b8a6"]
+    fb_segments = []
+    for i, seg in enumerate(d["fetched_breakdown"]):
+        fb_segments.append({"label": seg["label"], "value": seg["value"],
+                            "color": fb_colors[i % len(fb_colors)]})
+    fetched_breakdown_data = _json.dumps(fb_segments)
 
     return f'''
 <section id="dashboard" class="section">
     <h2 style="margin-bottom:1rem;">Summary Dashboard</h2>
     <div class="dashboard">
-        <div class="card"><div class="number">{d["total_pages"]:,}</div><div class="label">Total Wiki Pages</div></div>
+        <div class="card"><div class="number">{total:,}</div><div class="label">Total Wiki Pages</div></div>
         <div class="card"><div class="number">{d["num_content"]:,}</div><div class="label">Content Pages</div></div>
         <div class="card"><div class="number">{d["num_redirects"]:,}</div><div class="label">Redirects ({d["redirect_pct"]:.0f}%)</div></div>
-        <div class="card green"><div class="number">{len(d["fetched_pages_info"])}</div><div class="label">Currently Fetched</div></div>
-        <div class="card blue"><div class="number">{d["fetched_with_files"]}</div><div class="label">Files on Disk</div></div>
-        <div class="card red"><div class="number">{d["fetched_without_files"]}</div><div class="label">Missing Files</div></div>
+        <div class="card green"><div class="number">{n_fetched}</div><div class="label">Pages Fetched</div></div>
+        <div class="card green"><div class="number">{n_sub}</div><div class="label">Sub-pages (in composites)</div></div>
+        <div class="card blue"><div class="number">{d["files_on_disk"]}</div><div class="label">Files on Disk</div></div>{missing_html}
     </div>
-    <div class="breakdown">
-        <div class="pie-chart" style="background: conic-gradient(
-            var(--blue) 0deg {gc_deg:.1f}deg,
-            var(--orange) {gc_deg:.1f}deg {dlc_deg:.1f}deg,
-            var(--teal) {dlc_deg:.1f}deg {patch_deg:.1f}deg,
-            var(--purple) {patch_deg:.1f}deg {modding_deg:.1f}deg,
-            var(--red) {modding_deg:.1f}deg 360deg
-        );"></div>
-        <div class="pie-legend">
-            <h3>Not-Fetched Breakdown ({total_nf} pages)</h3>
-            <div><span class="dot" style="background:var(--blue)"></span> Game Content ({len(cl["game_content"])})</div>
-            <div><span class="dot" style="background:var(--orange)"></span> DLC ({len(cl["dlc"])})</div>
-            <div><span class="dot" style="background:var(--teal)"></span> Patches ({len(cl["patch"])})</div>
-            <div><span class="dot" style="background:var(--purple)"></span> Modding ({len(cl["modding"])})</div>
-            <div><span class="dot" style="background:var(--red)"></span> Total-conversion Mods ({len(cl["mod"])})</div>
+    <div class="charts-row">
+        <div class="breakdown">
+            <canvas id="pie-wiki" width="160" height="160"></canvas>
+            <div class="pie-legend" id="legend-wiki">
+                <h3>Wiki Structure ({total:,} pages)</h3>
+            </div>
+        </div>
+        <div class="breakdown">
+            <canvas id="pie-fetched" width="160" height="160"></canvas>
+            <div class="pie-legend" id="legend-fetched">
+                <h3>Fetched Breakdown ({n_fetched} pages)</h3>
+            </div>
+        </div>
+        <div class="breakdown">
+            <canvas id="pie-notfetched" width="160" height="160"></canvas>
+            <div class="pie-legend" id="legend-notfetched">
+                <h3>Not-Fetched Breakdown ({n_not_fetched} pages)</h3>
+            </div>
         </div>
     </div>
     <p class="generated">Generated on {d["generated_at"]}</p>
-</section>'''
+</section>
+<div class="pie-tooltip" id="pie-tooltip"></div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {{
+    initPie('pie-wiki', 'legend-wiki', {wiki_structure_data});
+    initPie('pie-fetched', 'legend-fetched', {fetched_breakdown_data});
+    initPie('pie-notfetched', 'legend-notfetched', {not_fetched_data});
+}});
+</script>'''
 
 
 def _html_fetched_table(data):
-    """Generate fetched pages table with file-exists status."""
+    """Generate fetched pages table with file-exists status and toggle filter."""
     rows = []
+    n_all = len(data["fetched_pages_info"])
+    n_disk = data["files_on_disk"]
     for i, p in enumerate(data["fetched_pages_info"], 1):
         cls = "status-ok" if p["file_exists"] else "status-missing"
         sym = "&#10003;" if p["file_exists"] else "&#10007;"
+        source_type = "main" if p["source"] == "PAGES_TO_FETCH" else "sub"
+        cats = p.get("categories", [])
+        cats_html = " ".join(
+            f'<span class="tag" data-cat="{_esc(c)}">{_esc(c)}</span>' for c in cats
+        ) or '<span style="opacity:0.4">none</span>'
         rows.append(
-            f'<tr><td>{i}</td>'
+            f'<tr data-source="{source_type}"><td>{i}</td>'
             f'<td><a href="{_esc(p["url"])}" target="_blank">{_esc(p["title"])}</a></td>'
             f'<td>{_esc(p["source"])}</td>'
+            f'<td>{cats_html}</td>'
             f'<td class="{cls}">{sym}</td></tr>'
         )
     tbody = "\n".join(rows)
-    n = len(data["fetched_pages_info"])
     return f'''
 <section id="fetched" class="section">
     <div class="section-header" onclick="toggleSection(this)">
         <span class="chevron">&#9656;</span>
-        <h2>Fetched Pages <span class="count">({n})</span></h2>
+        <h2>Fetched Pages <span class="count">({n_all})</span></h2>
     </div>
     <div class="section-body open">
-        <input type="text" class="filter-input" placeholder="Filter fetched pages..."
-               oninput="filterTable(this, 'fetched-table')">
+        <div class="filter-bar">
+            <input type="text" class="filter-input" placeholder="Filter fetched pages..."
+                   oninput="filterFetchedTable()">
+            <div class="toggle-group">
+                <button class="toggle-btn active" onclick="setFetchedFilter('all', this)">All ({n_all})</button>
+                <button class="toggle-btn" onclick="setFetchedFilter('disk', this)">Files on disk ({n_disk})</button>
+            </div>
+        </div>
         <table id="fetched-table">
             <thead><tr>
                 <th onclick="sortTable('fetched-table',0)" style="width:3rem">#</th>
                 <th onclick="sortTable('fetched-table',1)">Page Title</th>
                 <th onclick="sortTable('fetched-table',2)">Source</th>
-                <th onclick="sortTable('fetched-table',3)" style="width:4rem">File</th>
+                <th onclick="sortTable('fetched-table',3)">Wiki Categories</th>
+                <th onclick="sortTable('fetched-table',4)" style="width:4rem">File</th>
             </tr></thead>
             <tbody>{tbody}</tbody>
         </table>
@@ -745,7 +911,7 @@ def _html_game_content(data):
         rows = []
         for t in sorted(titles):
             cats_html = " ".join(
-                f'<span class="tag">{_esc(c)}</span>'
+                f'<span class="tag" data-cat="{_esc(c)}">{_esc(c)}</span>'
                 for c in data["categories_map"].get(t, [])
             ) or '<span style="opacity:0.4">none</span>'
             rows.append(
@@ -796,7 +962,7 @@ def _html_dlc_section(data):
     rows = []
     for t in sorted(pages):
         cats_html = " ".join(
-            f'<span class="tag">{_esc(c)}</span>'
+            f'<span class="tag" data-cat="{_esc(c)}">{_esc(c)}</span>'
             for c in data["categories_map"].get(t, [])
         ) or ""
         rows.append(
@@ -841,10 +1007,17 @@ def _html_modding_section(data):
     pages = data["classified"]["modding"]
     if not pages:
         return ""
-    rows = "\n".join(
-        f'<tr><td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td></tr>'
-        for t in sorted(pages)
-    )
+    row_parts = []
+    for t in sorted(pages):
+        cats = get_display_categories(data["categories_map"].get(t, []))
+        cats_html = " ".join(
+            f'<span class="tag" data-cat="{_esc(c)}">{_esc(c)}</span>' for c in cats
+        ) or '<span style="opacity:0.4">none</span>'
+        row_parts.append(
+            f'<tr><td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td>'
+            f'<td>{cats_html}</td></tr>'
+        )
+    rows = "\n".join(row_parts)
     return f'''
 <section id="modding" class="section">
     <div class="section-header" onclick="toggleSection(this)">
@@ -852,7 +1025,7 @@ def _html_modding_section(data):
         <h2>Modding Documentation <span class="count">({len(pages)})</span></h2>
     </div>
     <div class="section-body">
-        <table><thead><tr><th>Page</th></tr></thead><tbody>{rows}</tbody></table>
+        <table><thead><tr><th>Page</th><th>Wiki Categories</th></tr></thead><tbody>{rows}</tbody></table>
     </div>
 </section>'''
 
@@ -874,10 +1047,17 @@ def _html_mods_section(data):
                oninput="filterAllSubtables(this, 'mods')">''']
 
     for mod_name, pages in sorted(data["mod_groups"].items(), key=lambda x: -len(x[1])):
-        rows = "\n".join(
-            f'<tr><td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td></tr>'
-            for t in sorted(pages)
-        )
+        row_parts = []
+        for t in sorted(pages):
+            cats = get_display_categories(data["categories_map"].get(t, []))
+            cats_html = " ".join(
+                f'<span class="tag" data-cat="{_esc(c)}">{_esc(c)}</span>' for c in cats
+            ) or '<span style="opacity:0.4">none</span>'
+            row_parts.append(
+                f'<tr><td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td>'
+                f'<td>{cats_html}</td></tr>'
+            )
+        rows = "\n".join(row_parts)
         parts.append(f'''
         <div class="sub-section">
             <div class="sub-header" onclick="toggleSection(this)">
@@ -885,7 +1065,7 @@ def _html_mods_section(data):
                 <h3>{_esc(mod_name)} <span class="count">({len(pages)})</span></h3>
             </div>
             <div class="section-body">
-                <table><thead><tr><th>Page</th></tr></thead><tbody>{rows}</tbody></table>
+                <table><thead><tr><th>Page</th><th>Wiki Categories</th></tr></thead><tbody>{rows}</tbody></table>
             </div>
         </div>''')
 
@@ -902,8 +1082,14 @@ def _html_redirects_section(data):
     for src, tgt, frag in redirects:
         display = f"{tgt} &raquo; {_esc(frag)}" if frag else _esc(tgt)
         url = page_url(tgt, frag)
+        # Use target page's categories (redirects themselves have none)
+        cats = get_display_categories(data["categories_map"].get(tgt, []))
+        cats_html = " ".join(
+            f'<span class="tag" data-cat="{_esc(c)}">{_esc(c)}</span>' for c in cats
+        ) or '<span style="opacity:0.4">none</span>'
         row_parts.append(
-            f'<tr><td>{_esc(src)}</td><td><a href="{_esc(url)}" target="_blank">{display}</a></td></tr>'
+            f'<tr><td>{_esc(src)}</td><td><a href="{_esc(url)}" target="_blank">{display}</a></td>'
+            f'<td>{cats_html}</td></tr>'
         )
     rows = "\n".join(row_parts)
     return f'''
@@ -920,6 +1106,7 @@ def _html_redirects_section(data):
             <thead><tr>
                 <th onclick="sortTable('redirects-table',0)">Redirect</th>
                 <th onclick="sortTable('redirects-table',1)">Target</th>
+                <th onclick="sortTable('redirects-table',2)">Wiki Categories</th>
             </tr></thead>
             <tbody>{rows}</tbody>
         </table>
@@ -944,12 +1131,30 @@ function toggleSection(header) {
     }
 }
 
+function expandAllSections() {
+    document.querySelectorAll('.section-body').forEach(body => {
+        body.classList.add('open');
+        const chevron = body.previousElementSibling?.querySelector('.chevron');
+        if (chevron) chevron.style.transform = 'rotate(90deg)';
+    });
+}
+
+function collapseAllSections() {
+    document.querySelectorAll('.section-body').forEach(body => {
+        body.classList.remove('open');
+        const chevron = body.previousElementSibling?.querySelector('.chevron');
+        if (chevron) chevron.style.transform = 'rotate(0deg)';
+    });
+}
+
 function filterTable(input, tableId) {
     const filter = input.value.toLowerCase();
     const table = document.getElementById(tableId);
     if (!table) return;
     table.querySelectorAll('tbody tr').forEach(row => {
-        row.style.display = row.textContent.toLowerCase().includes(filter) ? '' : 'none';
+        const matchesText = row.textContent.toLowerCase().includes(filter);
+        const catHidden = row.dataset.catHidden === 'true';
+        row.style.display = (matchesText && !catHidden) ? '' : 'none';
     });
 }
 
@@ -989,10 +1194,206 @@ function sortTable(tableId, colIndex) {
     rows.forEach(row => tbody.appendChild(row));
 }
 
+/* --- Interactive Pie Charts --- */
+const pieState = {};
+const tooltip = null;
+
+function initPie(canvasId, legendId, segments) {
+    const canvas = document.getElementById(canvasId);
+    const legend = document.getElementById(legendId);
+    if (!canvas || !legend) return;
+
+    const total = segments.reduce((s, d) => s + d.value, 0);
+    if (total === 0) return;
+
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const size = 160;
+    canvas.width = size * dpr;
+    canvas.height = size * dpr;
+    canvas.style.width = size + 'px';
+    canvas.style.height = size + 'px';
+    ctx.scale(dpr, dpr);
+
+    const cx = size / 2, cy = size / 2, r = size / 2 - 4;
+    const state = { segments, total, canvas, ctx, cx, cy, r, size, highlight: -1 };
+    pieState[canvasId] = state;
+
+    // Build legend items
+    const h3 = legend.querySelector('h3');
+    while (legend.lastChild !== h3) legend.removeChild(legend.lastChild);
+    segments.forEach((seg, i) => {
+        const row = document.createElement('div');
+        row.dataset.index = i;
+        row.innerHTML = '<span class="dot" style="background:' + seg.color + '"></span> '
+            + seg.label + ' (' + seg.value + ')';
+        row.addEventListener('mouseenter', () => { state.highlight = i; drawPie(state); row.classList.add('highlight'); });
+        row.addEventListener('mouseleave', () => { state.highlight = -1; drawPie(state); row.classList.remove('highlight'); });
+        legend.appendChild(row);
+    });
+
+    // Canvas hover
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left - cx, y = e.clientY - rect.top - cy;
+        const dist = Math.sqrt(x * x + y * y);
+        const tip = document.getElementById('pie-tooltip');
+        if (dist > r) { state.highlight = -1; drawPie(state); tip.style.display = 'none'; clearLegendHighlight(legend); return; }
+        let angle = Math.atan2(y, x) + Math.PI / 2;
+        if (angle < 0) angle += Math.PI * 2;
+        let cumAngle = 0;
+        for (let i = 0; i < segments.length; i++) {
+            cumAngle += (segments[i].value / total) * Math.PI * 2;
+            if (angle <= cumAngle) {
+                if (state.highlight !== i) { state.highlight = i; drawPie(state); setLegendHighlight(legend, i); }
+                const pct = (segments[i].value / total * 100).toFixed(1);
+                tip.textContent = segments[i].label + ': ' + segments[i].value + ' (' + pct + '%)';
+                tip.style.display = 'block';
+                tip.style.left = (e.clientX + 12) + 'px';
+                tip.style.top = (e.clientY - 8) + 'px';
+                return;
+            }
+        }
+    });
+    canvas.addEventListener('mouseleave', () => {
+        state.highlight = -1; drawPie(state);
+        document.getElementById('pie-tooltip').style.display = 'none';
+        clearLegendHighlight(legend);
+    });
+
+    drawPie(state);
+}
+
+function drawPie(state) {
+    const { segments, total, ctx, cx, cy, r, size, highlight } = state;
+    ctx.clearRect(0, 0, size, size);
+    let startAngle = -Math.PI / 2;
+    segments.forEach((seg, i) => {
+        const sliceAngle = (seg.value / total) * Math.PI * 2;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, highlight === i ? r + 3 : r, startAngle, startAngle + sliceAngle);
+        ctx.closePath();
+        ctx.fillStyle = seg.color;
+        ctx.globalAlpha = (highlight >= 0 && highlight !== i) ? 0.3 : 1;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        startAngle += sliceAngle;
+    });
+}
+
+function setLegendHighlight(legend, idx) {
+    legend.querySelectorAll('div[data-index]').forEach(d => {
+        d.classList.toggle('highlight', parseInt(d.dataset.index) === idx);
+    });
+}
+function clearLegendHighlight(legend) {
+    legend.querySelectorAll('div[data-index]').forEach(d => d.classList.remove('highlight'));
+}
+
+/* --- Global Category Filter --- */
+const disabledCats = new Set();
+
+function toggleCategoryFilter(chip) {
+    const cat = chip.dataset.cat;
+    if (disabledCats.has(cat)) {
+        disabledCats.delete(cat);
+        chip.classList.add('active');
+    } else {
+        disabledCats.add(cat);
+        chip.classList.remove('active');
+    }
+    applyCategoryFilter();
+}
+
+function resetCategoryFilters() {
+    disabledCats.clear();
+    document.querySelectorAll('.cat-chip').forEach(c => c.classList.add('active'));
+    applyCategoryFilter();
+}
+
+function disableAllCategoryFilters() {
+    document.querySelectorAll('.cat-chip').forEach(c => {
+        disabledCats.add(c.dataset.cat);
+        c.classList.remove('active');
+    });
+    applyCategoryFilter();
+}
+
+function applyCategoryFilter() {
+    if (disabledCats.size === 0) {
+        // Fast path: nothing disabled, clear all catHidden
+        document.querySelectorAll('tr[data-cat-hidden]').forEach(r => delete r.dataset.catHidden);
+    } else {
+        document.querySelectorAll('table tbody tr').forEach(row => {
+            const tags = row.querySelectorAll('.tag[data-cat]');
+            if (tags.length === 0) {
+                // Row has no category tags — governed by the "none" filter
+                if (disabledCats.has('__none__')) {
+                    row.dataset.catHidden = 'true';
+                } else {
+                    delete row.dataset.catHidden;
+                }
+                return;
+            }
+            const rowCats = Array.from(tags).map(t => t.dataset.cat);
+            const allDisabled = rowCats.every(c => disabledCats.has(c));
+            if (allDisabled) {
+                row.dataset.catHidden = 'true';
+            } else {
+                delete row.dataset.catHidden;
+            }
+        });
+    }
+    // Dim disabled tags everywhere
+    document.querySelectorAll('.tag[data-cat]').forEach(tag => {
+        tag.style.opacity = disabledCats.has(tag.dataset.cat) ? '0.3' : '';
+    });
+    // Re-run fetched table filter (respects catHidden)
+    filterFetchedTable();
+    // Re-run all other filterTable inputs (redirects, etc.)
+    document.querySelectorAll('.filter-input').forEach(input => {
+        const table = input.closest('.section-body')?.querySelector('table[id]');
+        if (table && table.id !== 'fetched-table') filterTable(input, table.id);
+    });
+    // Re-run sub-table section visibility
+    document.querySelectorAll('.sub-section').forEach(sub => {
+        const visible = sub.querySelectorAll('tbody tr:not([style*="display: none"]):not([data-cat-hidden="true"])');
+        sub.style.display = visible.length > 0 ? '' : 'none';
+    });
+}
+
+/* --- Fetched Table Toggle Filter --- */
+let fetchedFilterMode = 'all';
+function setFetchedFilter(mode, btn) {
+    fetchedFilterMode = mode;
+    btn.closest('.toggle-group').querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterFetchedTable();
+}
+function filterFetchedTable() {
+    const input = document.querySelector('#fetched .filter-input');
+    const text = input ? input.value.toLowerCase() : '';
+    document.querySelectorAll('#fetched-table tbody tr').forEach(row => {
+        const matchesText = row.textContent.toLowerCase().includes(text);
+        const matchesFilter = fetchedFilterMode === 'all' || row.dataset.source === 'main';
+        const catHidden = row.dataset.catHidden === 'true';
+        row.style.display = (matchesText && matchesFilter && !catHidden) ? '' : 'none';
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.section-body.open').forEach(body => {
         const chevron = body.previousElementSibling?.querySelector('.chevron');
         if (chevron) chevron.style.transform = 'rotate(90deg)';
+    });
+    // Make .tag spans in tables clickable to toggle their category
+    document.addEventListener('click', (e) => {
+        const tag = e.target.closest('.tag[data-cat]');
+        if (!tag || tag.closest('.cat-filter-bar')) return;
+        const cat = tag.dataset.cat;
+        const chip = document.querySelector('.cat-chip[data-cat="' + CSS.escape(cat) + '"]');
+        if (chip) toggleCategoryFilter(chip);
     });
 });
 </script>
@@ -1007,6 +1408,7 @@ def generate_html_report(data: dict, output_path: Path) -> str:
         _html_head(data),
         _html_nav(data),
         _html_dashboard(data),
+        _html_category_filter(data),
         _html_fetched_table(data),
         _html_game_content(data),
         _html_dlc_section(data),
@@ -1118,8 +1520,8 @@ def main():
             all_fetched.add(normalize_title(s))
     not_fetched = {t for t in content_titles_set if normalize_title(t) not in all_fetched}
 
-    # 7. Fetch categories (PARALLEL)
-    categories_map = fetch_categories_parallel(not_fetched, workers=args.workers)
+    # 7. Fetch categories for ALL content pages (PARALLEL)
+    categories_map = fetch_categories_parallel(content_titles_set, workers=args.workers)
 
     # 8. Scan existing files
     pages_dir = Path(script_dir) / cfg.defaults.output_dir / "pages"
@@ -1145,7 +1547,7 @@ def main():
 
     # 11. Generate all_pages.md (unless disabled)
     if cfg.defaults.generate_all_pages and not args.no_all_pages:
-        all_pages_path = Path(script_dir) / "all_pages.md"
+        all_pages_path = output_dir / "all_pages.md"
         generate_all_pages_md(
             content_pages, redirect_pages, data["all_fetched"],
             composite_subpages, all_pages_path,
@@ -1156,8 +1558,11 @@ def main():
     print("=" * 60)
     print(f"Total wiki pages: {data['total_pages']:,}")
     print(f"  Content: {data['num_content']:,} | Redirects: {data['num_redirects']:,}")
-    print(f"Fetched: {len(data['all_fetched'])} | Files on disk: {data['files_on_disk']}")
-    print(f"Not fetched: {len(data['not_fetched']):,}")
+    print(f"Fetched: {len(data['all_fetched'])} ({data['n_main_pages']} main + {data['n_sub_pages']} sub-pages)")
+    print(f"Files on disk: {data['files_on_disk']}", end="")
+    if data['main_missing'] > 0:
+        print(f" | Missing: {data['main_missing']}", end="")
+    print(f"\nNot fetched: {len(data['not_fetched']):,}")
 
 
 if __name__ == "__main__":
