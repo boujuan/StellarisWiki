@@ -764,6 +764,31 @@ a:hover {{ text-decoration: underline; }}
               background: var(--card-bg); color: var(--text); cursor: pointer; white-space: nowrap; }}
 .cat-reset:hover {{ background: var(--border); }}
 
+.search-bar {{ position: relative; padding: 0.5rem 1rem; background: var(--card-bg);
+               border-bottom: 1px solid var(--border); }}
+.search-input {{ width: 100%; padding: 0.6rem 2rem 0.6rem 0.8rem;
+                 border: 1px solid var(--border); border-radius: 6px;
+                 background: var(--bg); color: var(--text); font-size: 0.95rem; }}
+.search-input:focus {{ outline: none; border-color: var(--blue); }}
+.search-clear {{ position: absolute; right: 1.5rem; top: 50%;
+                 transform: translateY(-50%); cursor: pointer;
+                 font-size: 1.2rem; color: var(--muted, #64748b); padding: 0.25rem; }}
+.search-results {{ position: absolute; left: 1rem; right: 1rem;
+                   max-height: 60vh; overflow-y: auto;
+                   background: var(--card-bg); border: 1px solid var(--border);
+                   border-radius: 6px; box-shadow: 0 8px 24px rgba(0,0,0,.3);
+                   margin-top: 0.25rem; z-index: 150; }}
+.search-result {{ display: block; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border);
+                  cursor: pointer; color: var(--text); text-decoration: none; }}
+.search-result:hover {{ background: var(--border); text-decoration: none; }}
+.search-result-title {{ font-weight: 600; color: var(--blue); }}
+.search-result-section {{ font-size: 0.85rem; color: var(--muted, #64748b); }}
+.search-result-snippet {{ font-size: 0.85rem; color: var(--text); margin-top: 0.2rem; }}
+.search-result-snippet mark {{ background: var(--yellow); color: #000; border-radius: 2px; padding: 0 1px; }}
+.search-no-results {{ padding: 1rem; text-align: center; color: var(--muted, #64748b); }}
+@keyframes search-highlight {{ 0% {{ background: var(--yellow); }} 100% {{ background: transparent; }} }}
+.search-highlight {{ animation: search-highlight 2s ease-out; }}
+
 .section {{ margin: 2rem 0; }}
 .section-header {{ display: flex; align-items: center; gap: 0.5rem; cursor: pointer;
                    padding: 0.75rem 1rem; background: var(--card-bg); border: 1px solid var(--border);
@@ -869,6 +894,19 @@ def _html_nav(data):
     <div class="nav-stats">{d["total_pages"]:,} pages | {fetched} fetched</div>
 </nav>
 <div class="container">'''
+
+
+def _html_search_bar():
+    """Generate global content search bar."""
+    return '''
+<div class="search-bar" id="search-bar">
+    <input type="text" id="global-search" class="search-input"
+           placeholder="Search pages by title or content..."
+           oninput="onSearchInput()" autocomplete="off">
+    <span id="search-clear" class="search-clear" onclick="clearSearch()"
+          style="display:none">&times;</span>
+    <div id="search-results" class="search-results" style="display:none"></div>
+</div>'''
 
 
 def _html_category_filter(data):
@@ -1335,6 +1373,7 @@ def _html_modals_and_config(data):
         config_yaml_escaped = _json.dumps(config_path.read_text(encoding="utf-8"))
     pages_json = _json.dumps(cfg.pages_to_fetch)
     generated_at_json = _json.dumps(data["generated_at"])
+    search_index_json = _json.dumps(data.get("search_index", []))
     return f'''
 <div id="pending-bar" class="pending-bar">
     <span id="pending-info"></span>
@@ -1370,6 +1409,7 @@ python analyze_wiki_pages.py</pre>
 const PAGES_TO_FETCH = {pages_json};
 const CONFIG_YAML = {config_yaml_escaped};
 const GENERATED_AT = {generated_at_json};
+const SEARCH_INDEX = {search_index_json};
 </script>'''
 
 
@@ -1377,6 +1417,127 @@ def _html_scripts():
     """Generate JavaScript for interactivity."""
     return '''
 <script>
+/* --- Global Content Search --- */
+let _searchTimer = null;
+
+function onSearchInput() {
+    clearTimeout(_searchTimer);
+    const input = document.getElementById('global-search');
+    const query = input.value.trim();
+    document.getElementById('search-clear').style.display = query ? '' : 'none';
+    if (query.length < 2) {
+        document.getElementById('search-results').style.display = 'none';
+        return;
+    }
+    _searchTimer = setTimeout(() => runSearch(query), 150);
+}
+
+function clearSearch() {
+    document.getElementById('global-search').value = '';
+    document.getElementById('search-clear').style.display = 'none';
+    document.getElementById('search-results').style.display = 'none';
+}
+
+function runSearch(query) {
+    const q = query.toLowerCase();
+    const results = [];
+    const seen = new Set();
+    for (const [page, section, text] of SEARCH_INDEX) {
+        const key = page + '|' + section;
+        if (seen.has(key)) continue;
+        const titleMatch = page.toLowerCase().includes(q) || section.toLowerCase().includes(q);
+        const textLower = text.toLowerCase();
+        const contentIdx = textLower.indexOf(q);
+        if (!titleMatch && contentIdx < 0) continue;
+        seen.add(key);
+        let snippet = '';
+        if (contentIdx >= 0) {
+            const start = Math.max(0, contentIdx - 40);
+            const end = Math.min(text.length, contentIdx + query.length + 80);
+            snippet = (start > 0 ? '...' : '') +
+                      text.slice(start, end) +
+                      (end < text.length ? '...' : '');
+        }
+        results.push({page, section, snippet, titleMatch, contentIdx});
+        if (results.length >= 30) break;
+    }
+    results.sort((a, b) => {
+        if (a.titleMatch !== b.titleMatch) return a.titleMatch ? -1 : 1;
+        return 0;
+    });
+    showSearchResults(results, query);
+}
+
+function showSearchResults(results, query) {
+    const container = document.getElementById('search-results');
+    if (results.length === 0) {
+        container.innerHTML = '<div class="search-no-results">No results found</div>';
+        container.style.display = '';
+        return;
+    }
+    const escQ = query.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');
+    const re = new RegExp('(' + escQ + ')', 'gi');
+    const esc = s => s.replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'})[c]);
+    const escText = s => s.replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'})[c]);
+    let html = '';
+    for (const r of results) {
+        const highlighted = r.snippet ? escText(r.snippet).replace(re, '<mark>$1</mark>') : '';
+        const sectionLabel = r.section !== r.page
+            ? '<span class="search-result-section"> &rsaquo; ' + escText(r.section) + '</span>' : '';
+        html += '<div class="search-result" data-page="' + esc(r.page) + '">' +
+                '<div class="search-result-title">' + escText(r.page) + sectionLabel + '</div>' +
+                (highlighted ? '<div class="search-result-snippet">' + highlighted + '</div>' : '') +
+                '</div>';
+    }
+    container.innerHTML = html;
+    container.style.display = '';
+}
+
+document.getElementById('search-results').addEventListener('click', function(e) {
+    const item = e.target.closest('.search-result');
+    if (item && item.dataset.page) navigateToPage(item.dataset.page);
+});
+
+function navigateToPage(title) {
+    // Close search results
+    document.getElementById('search-results').style.display = 'none';
+    // Find the row containing a link whose text matches the page title
+    const allLinks = document.querySelectorAll('table a, table button[data-page]');
+    let targetRow = null;
+    for (const el of allLinks) {
+        if (el.textContent.trim() === title ||
+            (el.dataset && el.dataset.page === title)) {
+            targetRow = el.closest('tr');
+            if (targetRow) break;
+        }
+    }
+    if (!targetRow) return;
+    // Expand all ancestor section-body elements
+    let node = targetRow;
+    while (node) {
+        node = node.parentElement;
+        if (!node) break;
+        if (node.classList && node.classList.contains('section-body') && !node.classList.contains('open')) {
+            node.classList.add('open');
+            const chevron = node.previousElementSibling?.querySelector('.chevron');
+            if (chevron) chevron.style.transform = 'rotate(90deg)';
+        }
+    }
+    // Scroll into view
+    targetRow.scrollIntoView({behavior: 'smooth', block: 'center'});
+    // Highlight
+    targetRow.classList.remove('search-highlight');
+    void targetRow.offsetWidth;  // force reflow to restart animation
+    targetRow.classList.add('search-highlight');
+}
+
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.search-bar')) {
+        document.getElementById('search-results').style.display = 'none';
+    }
+});
+
+/* --- Section Toggle --- */
 function toggleSection(header) {
     const body = header.nextElementSibling;
     const chevron = header.querySelector('.chevron');
@@ -1907,11 +2068,63 @@ document.addEventListener('DOMContentLoaded', () => {
 </html>'''
 
 
+def _strip_markdown(text: str) -> str:
+    """Strip markdown formatting for search indexing."""
+    text = re.sub(r"\|[-:]+\|", " ", text)    # table separator rows
+    text = re.sub(r"[|*#>_`\[\]]", " ", text)  # formatting chars
+    text = re.sub(r"\(https?://[^\)]+\)", " ", text)  # markdown link URLs
+    text = re.sub(r"\s+", " ", text)            # collapse whitespace
+    return text.strip()
+
+
+def _build_search_index(pages_dir: Path) -> list[list[str]]:
+    """Build section-level search index from fetched markdown files.
+
+    Returns list of [page_title, section_heading, searchable_text] tuples.
+    Text is capped at 500 chars per section for size control.
+    """
+    index = []
+    for md_file in sorted(pages_dir.glob("*.md")):
+        title = md_file.stem.replace("_", " ")
+        content = md_file.read_text(encoding="utf-8")
+        # Strip YAML frontmatter
+        content = re.sub(r"^---\n.*?\n---\n", "", content, flags=re.DOTALL)
+        # Split into sections by headings
+        current_heading = title
+        section_lines: list[str] = []
+        for line in content.split("\n"):
+            m = re.match(r"^#{1,4}\s+(.+)", line)
+            if m:
+                # Flush previous section
+                if section_lines:
+                    text = _strip_markdown(" ".join(section_lines))
+                    if len(text) > 30:
+                        index.append([title, current_heading, text[:500]])
+                current_heading = m.group(1).strip()
+                section_lines = []
+            elif line.strip():
+                section_lines.append(line.strip())
+        # Flush last section
+        if section_lines:
+            text = _strip_markdown(" ".join(section_lines))
+            if len(text) > 30:
+                index.append([title, current_heading, text[:500]])
+    return index
+
+
 def generate_html_report(data: dict, output_path: Path) -> str:
     """Generate a self-contained interactive HTML analysis report."""
+    # Build search index from fetched markdown files
+    pages_dir = cfg.output_path / "pages"
+    if pages_dir.exists():
+        data["search_index"] = _build_search_index(pages_dir)
+    else:
+        data["search_index"] = []
+
     parts = [
         _html_head(data),
         _html_nav(data),
+        _html_search_bar(),
         _html_dashboard(data),
         _html_category_filter(data),
         _html_fetched_table(data),
