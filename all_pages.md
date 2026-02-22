@@ -1,114 +1,8 @@
 # All Stellaris Wiki Pages
 
-Total pages: 4994
-Currently fetched: 110 pages
-Not fetched: 4884 pages
-
-## PAGES_TO_FETCH list (101 entries)
-
-```
-  Origin
-  Government
-  Ethics
-  Civics
-  Corporate civics
-  Hive mind civics
-  Machine intelligence civics
-  Empire
-  Council
-  Policies
-  Edicts
-  Factions
-  Traditions
-  Ascension_perks
-  Situations
-  Crisis_empire
-  Species
-  Species_traits
-  Biological_traits
-  Machine_traits
-  Population
-  Species_rights
-  Leaders
-  Common_leader_traits
-  Commander_traits
-  Scientist_traits
-  Official_traits
-  Paragons
-  Resources
-  Planetary_management
-  Jobs
-  Districts
-  Designation
-  Holdings
-  Planet_capital
-  Unique_buildings
-  Megastructures
-  Colonization
-  Technology
-  Physics_research
-  Society_research
-  Engineering_research
-  Ship
-  Ship_designer
-  Core_components
-  Weapon_components
-  Utility_components
-  Mutations
-  Offensive mutations
-  Warfare
-  Space_warfare
-  Land warfare
-  Starbase
-  Exploration
-  FTL travel
-  Discovery
-  Anomaly
-  Archaeological site
-  Astral rift
-  Celestial_object
-  Planet_modifiers
-  Planetary_features
-  Unique_systems
-  Relics
-  Collection
-  L-Cluster
-  The_Shroud
-  Diplomacy
-  Relations
-  Galactic Community
-  Federation
-  Subject empire
-  Intelligence
-  AI personalities
-  Fallen empire
-  Spaceborne aliens
-  Pre-FTL species
-  Enclaves
-  Guardians
-  Marauders
-  Caravaneers
-  Empire_modifiers
-  Stat_modifiers
-  Events
-  Achievements
-  Crisis
-  Prethoryn_Scourge
-  Extradimensional_Invaders
-  Contingency
-  The_Synthetic_Queen
-  Effects
-  Galaxy settings
-  Beginner's guide
-  Hotkeys
-  Jargon
-  User interface
-  Console_commands
-  Easter eggs
-  AI players
-  Preset empires
-  Modding
-```
+Total pages in wiki: 4994
+Currently fetched: 211 pages (101 main + 99 composite sub-pages)
+Not fetched: 4783 pages
 
 ## All Pages
 
@@ -143,13 +37,13 @@ Not fetched: 4884 pages
 | 27 | 3.3 |  | https://stellaris.paradoxwikis.com/3.3 |
 | 28 | 3.3.4 |  | https://stellaris.paradoxwikis.com/3.3.4 |
 | 29 | 3.4 |  | https://stellaris.paradoxwikis.com/3.4 |
-| 30 | 42 Years and 3 Days |  | https://stellaris.paradoxwikis.com/42_Years_and_3_Days |
+| 30 | 42 Years and 3 Days | ✅ | https://stellaris.paradoxwikis.com/42_Years_and_3_Days |
 | 31 | AAR |  | https://stellaris.paradoxwikis.com/AAR |
-| 32 | Abandoned Complex |  | https://stellaris.paradoxwikis.com/Abandoned_Complex |
+| 32 | Abandoned Complex | ✅ | https://stellaris.paradoxwikis.com/Abandoned_Complex |
 | 33 | Abandoned Ecumenopolis |  | https://stellaris.paradoxwikis.com/Abandoned_Ecumenopolis |
 | 34 | Abandoned Gene Clinic |  | https://stellaris.paradoxwikis.com/Abandoned_Gene_Clinic |
 | 35 | Abandoned Observation Outpost |  | https://stellaris.paradoxwikis.com/Abandoned_Observation_Outpost |
-| 36 | Abandoned Terraforming Equipment |  | https://stellaris.paradoxwikis.com/Abandoned_Terraforming_Equipment |
+| 36 | Abandoned Terraforming Equipment | ✅ | https://stellaris.paradoxwikis.com/Abandoned_Terraforming_Equipment |
 | 37 | Academic Recruiter |  | https://stellaris.paradoxwikis.com/Academic_Recruiter |
 | 38 | Accuracy |  | https://stellaris.paradoxwikis.com/Accuracy |
 | 39 | Achievement |  | https://stellaris.paradoxwikis.com/Achievement |
@@ -304,7 +198,7 @@ Not fetched: 4884 pages
 | 188 | Ancient Caretakers |  | https://stellaris.paradoxwikis.com/Ancient_Caretakers |
 | 189 | Ancient Clone Vat |  | https://stellaris.paradoxwikis.com/Ancient_Clone_Vat |
 | 190 | Ancient Control Center |  | https://stellaris.paradoxwikis.com/Ancient_Control_Center |
-| 191 | Ancient Drones |  | https://stellaris.paradoxwikis.com/Ancient_Drones |
+| 191 | Ancient Drones | ✅ | https://stellaris.paradoxwikis.com/Ancient_Drones |
 | 192 | Ancient Knowledge |  | https://stellaris.paradoxwikis.com/Ancient_Knowledge |
 | 193 | Ancient mining drones |  | https://stellaris.paradoxwikis.com/Ancient_mining_drones |
 | 194 | Ancient Mining Drones |  | https://stellaris.paradoxwikis.com/Ancient_Mining_Drones |
@@ -332,17 +226,17 @@ Not fetched: 4884 pages
 | 216 | Anomaly events 3 |  | https://stellaris.paradoxwikis.com/Anomaly_events_3 |
 | 217 | Anomaly events 4 |  | https://stellaris.paradoxwikis.com/Anomaly_events_4 |
 | 218 | Anomaly research speed |  | https://stellaris.paradoxwikis.com/Anomaly_research_speed |
-| 219 | Anti-Alien Task Force |  | https://stellaris.paradoxwikis.com/Anti-Alien_Task_Force |
+| 219 | Anti-Alien Task Force | ✅ | https://stellaris.paradoxwikis.com/Anti-Alien_Task_Force |
 | 220 | Anti-Gravity Engineering |  | https://stellaris.paradoxwikis.com/Anti-Gravity_Engineering |
 | 221 | Antimatter Missiles Tech |  | https://stellaris.paradoxwikis.com/Antimatter_Missiles_Tech |
 | 222 | Antimatter Power |  | https://stellaris.paradoxwikis.com/Antimatter_Power |
 | 223 | Antimatter Reactor |  | https://stellaris.paradoxwikis.com/Antimatter_Reactor |
 | 224 | Antiquarian |  | https://stellaris.paradoxwikis.com/Antiquarian |
 | 225 | Anxiety |  | https://stellaris.paradoxwikis.com/Anxiety |
-| 226 | Anyone Home? |  | https://stellaris.paradoxwikis.com/Anyone_Home%3F |
+| 226 | Anyone Home? |  | https://stellaris.paradoxwikis.com/Anyone_Home? |
 | 227 | Any Other Rock |  | https://stellaris.paradoxwikis.com/Any_Other_Rock |
 | 228 | Ap |  | https://stellaris.paradoxwikis.com/Ap |
-| 229 | Apocalypse |  | https://stellaris.paradoxwikis.com/Apocalypse |
+| 229 | Apocalypse | ✅ | https://stellaris.paradoxwikis.com/Apocalypse |
 | 230 | Apocalypse events |  | https://stellaris.paradoxwikis.com/Apocalypse_events |
 | 231 | Applied Infinity Thesis |  | https://stellaris.paradoxwikis.com/Applied_Infinity_Thesis |
 | 232 | Applied Quantum Physics |  | https://stellaris.paradoxwikis.com/Applied_Quantum_Physics |
@@ -587,7 +481,7 @@ Not fetched: 4884 pages
 | 471 | Black Hole |  | https://stellaris.paradoxwikis.com/Black_Hole |
 | 472 | Black Hole Observatory |  | https://stellaris.paradoxwikis.com/Black_Hole_Observatory |
 | 473 | Black Light Blinded |  | https://stellaris.paradoxwikis.com/Black_Light_Blinded |
-| 474 | Bleached Planet |  | https://stellaris.paradoxwikis.com/Bleached_Planet |
+| 474 | Bleached Planet | ✅ | https://stellaris.paradoxwikis.com/Bleached_Planet |
 | 475 | Bleak |  | https://stellaris.paradoxwikis.com/Bleak |
 | 476 | Blockade |  | https://stellaris.paradoxwikis.com/Blockade |
 | 477 | Blocker |  | https://stellaris.paradoxwikis.com/Blocker |
@@ -655,9 +549,9 @@ Not fetched: 4884 pages
 | 539 | Capital (disambiguation) |  | https://stellaris.paradoxwikis.com/Capital_(disambiguation) |
 | 540 | Caravan Counter |  | https://stellaris.paradoxwikis.com/Caravan_Counter |
 | 541 | Caravaneer |  | https://stellaris.paradoxwikis.com/Caravaneer |
-| 542 | Caravaneer neighbor events |  | https://stellaris.paradoxwikis.com/Caravaneer_neighbor_events |
+| 542 | Caravaneer neighbor events | ✅ | https://stellaris.paradoxwikis.com/Caravaneer_neighbor_events |
 | 543 | Caravaneers | ✅ | https://stellaris.paradoxwikis.com/Caravaneers |
-| 544 | Caravan events |  | https://stellaris.paradoxwikis.com/Caravan_events |
+| 544 | Caravan events | ✅ | https://stellaris.paradoxwikis.com/Caravan_events |
 | 545 | Carbon World |  | https://stellaris.paradoxwikis.com/Carbon_World |
 | 546 | Carefree |  | https://stellaris.paradoxwikis.com/Carefree |
 | 547 | Careful |  | https://stellaris.paradoxwikis.com/Careful |
@@ -715,7 +609,7 @@ Not fetched: 4884 pages
 | 599 | Chemical bliss |  | https://stellaris.paradoxwikis.com/Chemical_bliss |
 | 600 | Chemical Plants |  | https://stellaris.paradoxwikis.com/Chemical_Plants |
 | 601 | Chemical Thrusters Tech |  | https://stellaris.paradoxwikis.com/Chemical_Thrusters_Tech |
-| 602 | Chemical Wasteland |  | https://stellaris.paradoxwikis.com/Chemical_Wasteland |
+| 602 | Chemical Wasteland | ✅ | https://stellaris.paradoxwikis.com/Chemical_Wasteland |
 | 603 | Chemist |  | https://stellaris.paradoxwikis.com/Chemist |
 | 604 | Choral Harmony edict |  | https://stellaris.paradoxwikis.com/Choral_Harmony_edict |
 | 605 | Chosen of the Composer |  | https://stellaris.paradoxwikis.com/Chosen_of_the_Composer |
@@ -809,7 +703,7 @@ Not fetched: 4884 pages
 | 693 | Colonizing |  | https://stellaris.paradoxwikis.com/Colonizing |
 | 694 | Colony |  | https://stellaris.paradoxwikis.com/Colony |
 | 695 | Colony development speed |  | https://stellaris.paradoxwikis.com/Colony_development_speed |
-| 696 | Colony events |  | https://stellaris.paradoxwikis.com/Colony_events |
+| 696 | Colony events | ✅ | https://stellaris.paradoxwikis.com/Colony_events |
 | 697 | Colony ship |  | https://stellaris.paradoxwikis.com/Colony_ship |
 | 698 | Colony ships |  | https://stellaris.paradoxwikis.com/Colony_ships |
 | 699 | Colony Ships |  | https://stellaris.paradoxwikis.com/Colony_Ships |
@@ -822,7 +716,7 @@ Not fetched: 4884 pages
 | 706 | Combat (disambiguation) |  | https://stellaris.paradoxwikis.com/Combat_(disambiguation) |
 | 707 | Combat Knowledge |  | https://stellaris.paradoxwikis.com/Combat_Knowledge |
 | 708 | Combat Training |  | https://stellaris.paradoxwikis.com/Combat_Training |
-| 709 | Comet Sighted |  | https://stellaris.paradoxwikis.com/Comet_Sighted |
+| 709 | Comet Sighted | ✅ | https://stellaris.paradoxwikis.com/Comet_Sighted |
 | 710 | Comet Sighted Through Belt |  | https://stellaris.paradoxwikis.com/Comet_Sighted_Through_Belt |
 | 711 | Coming storm |  | https://stellaris.paradoxwikis.com/Coming_storm |
 | 712 | Command Center |  | https://stellaris.paradoxwikis.com/Command_Center |
@@ -888,7 +782,7 @@ Not fetched: 4884 pages
 | 772 | Consumer Goods |  | https://stellaris.paradoxwikis.com/Consumer_Goods |
 | 773 | Consumer goods cost |  | https://stellaris.paradoxwikis.com/Consumer_goods_cost |
 | 774 | Contact log |  | https://stellaris.paradoxwikis.com/Contact_log |
-| 775 | Contact Report |  | https://stellaris.paradoxwikis.com/Contact_Report |
+| 775 | Contact Report | ✅ | https://stellaris.paradoxwikis.com/Contact_Report |
 | 776 | Contacts |  | https://stellaris.paradoxwikis.com/Contacts |
 | 777 | Contact us |  | https://stellaris.paradoxwikis.com/Contact_us |
 | 778 | Contained Ecosphere |  | https://stellaris.paradoxwikis.com/Contained_Ecosphere |
@@ -938,7 +832,7 @@ Not fetched: 4884 pages
 | 822 | Corrupted Avatar |  | https://stellaris.paradoxwikis.com/Corrupted_Avatar |
 | 823 | Corrupted Defense Directives |  | https://stellaris.paradoxwikis.com/Corrupted_Defense_Directives |
 | 824 | Corrupted Drone |  | https://stellaris.paradoxwikis.com/Corrupted_Drone |
-| 825 | Corvée System |  | https://stellaris.paradoxwikis.com/Corv%C3%A9e_System |
+| 825 | Corvée System |  | https://stellaris.paradoxwikis.com/Corvée_System |
 | 826 | Corvette |  | https://stellaris.paradoxwikis.com/Corvette |
 | 827 | Corvette Assembly Yards |  | https://stellaris.paradoxwikis.com/Corvette_Assembly_Yards |
 | 828 | Corvette Focus |  | https://stellaris.paradoxwikis.com/Corvette_Focus |
@@ -947,7 +841,7 @@ Not fetched: 4884 pages
 | 831 | Cosmic storm |  | https://stellaris.paradoxwikis.com/Cosmic_storm |
 | 832 | Cosmic Storm |  | https://stellaris.paradoxwikis.com/Cosmic_Storm |
 | 833 | Cosmic Storms |  | https://stellaris.paradoxwikis.com/Cosmic_Storms |
-| 834 | Cosmic Storms (DLC) |  | https://stellaris.paradoxwikis.com/Cosmic_Storms_(DLC) |
+| 834 | Cosmic Storms (DLC) | ✅ | https://stellaris.paradoxwikis.com/Cosmic_Storms_(DLC) |
 | 835 | Cosmogenesis |  | https://stellaris.paradoxwikis.com/Cosmogenesis |
 | 836 | Council | ✅ | https://stellaris.paradoxwikis.com/Council |
 | 837 | Council agenda effect duration |  | https://stellaris.paradoxwikis.com/Council_agenda_effect_duration |
@@ -1004,7 +898,7 @@ Not fetched: 4884 pages
 | 888 | Crystal Miner |  | https://stellaris.paradoxwikis.com/Crystal_Miner |
 | 889 | Crystal Mines |  | https://stellaris.paradoxwikis.com/Crystal_Mines |
 | 890 | Crystal Mining Drone |  | https://stellaris.paradoxwikis.com/Crystal_Mining_Drone |
-| 891 | Crystal Rift |  | https://stellaris.paradoxwikis.com/Crystal_Rift |
+| 891 | Crystal Rift | ✅ | https://stellaris.paradoxwikis.com/Crystal_Rift |
 | 892 | Cultivation Drones |  | https://stellaris.paradoxwikis.com/Cultivation_Drones |
 | 893 | Culture Worker |  | https://stellaris.paradoxwikis.com/Culture_Worker |
 | 894 | Cunning |  | https://stellaris.paradoxwikis.com/Cunning |
@@ -1026,7 +920,7 @@ Not fetched: 4884 pages
 | 910 | Cybernetic (disambiguation) |  | https://stellaris.paradoxwikis.com/Cybernetic_(disambiguation) |
 | 911 | Cybernetics |  | https://stellaris.paradoxwikis.com/Cybernetics |
 | 912 | Cybernetics (tradition) |  | https://stellaris.paradoxwikis.com/Cybernetics_(tradition) |
-| 913 | Cyber Security Breach |  | https://stellaris.paradoxwikis.com/Cyber_Security_Breach |
+| 913 | Cyber Security Breach | ✅ | https://stellaris.paradoxwikis.com/Cyber_Security_Breach |
 | 914 | Cyborg |  | https://stellaris.paradoxwikis.com/Cyborg |
 | 915 | Cyborg traits |  | https://stellaris.paradoxwikis.com/Cyborg_traits |
 | 916 | Cybrex |  | https://stellaris.paradoxwikis.com/Cybrex |
@@ -1034,12 +928,12 @@ Not fetched: 4884 pages
 | 918 | Cybrex Mining Hub |  | https://stellaris.paradoxwikis.com/Cybrex_Mining_Hub |
 | 919 | Cybrex Mining Hub Tech |  | https://stellaris.paradoxwikis.com/Cybrex_Mining_Hub_Tech |
 | 920 | Cybrex War Forge |  | https://stellaris.paradoxwikis.com/Cybrex_War_Forge |
-| 921 | Cycle change events |  | https://stellaris.paradoxwikis.com/Cycle_change_events |
+| 921 | Cycle change events | ✅ | https://stellaris.paradoxwikis.com/Cycle_change_events |
 | 922 | Cyto-Revitalization |  | https://stellaris.paradoxwikis.com/Cyto-Revitalization |
 | 923 | Cyto-Revitalization Center |  | https://stellaris.paradoxwikis.com/Cyto-Revitalization_Center |
 | 924 | Daemonic Incursion |  | https://stellaris.paradoxwikis.com/Daemonic_Incursion |
 | 925 | Damage |  | https://stellaris.paradoxwikis.com/Damage |
-| 926 | Dancing Plague |  | https://stellaris.paradoxwikis.com/Dancing_Plague |
+| 926 | Dancing Plague | ✅ | https://stellaris.paradoxwikis.com/Dancing_Plague |
 | 927 | Dangerous tech |  | https://stellaris.paradoxwikis.com/Dangerous_tech |
 | 928 | Dangerous technology |  | https://stellaris.paradoxwikis.com/Dangerous_technology |
 | 929 | Dangerous Wildlife Removal |  | https://stellaris.paradoxwikis.com/Dangerous_Wildlife_Removal |
@@ -1094,7 +988,7 @@ Not fetched: 4884 pages
 | 978 | Deficit |  | https://stellaris.paradoxwikis.com/Deficit |
 | 979 | Defines |  | https://stellaris.paradoxwikis.com/Defines |
 | 980 | Deflectors Tech |  | https://stellaris.paradoxwikis.com/Deflectors_Tech |
-| 981 | Déjà Vu Dig |  | https://stellaris.paradoxwikis.com/D%C3%A9j%C3%A0_Vu_Dig |
+| 981 | Déjà Vu Dig |  | https://stellaris.paradoxwikis.com/Déjà_Vu_Dig |
 | 982 | Delegate |  | https://stellaris.paradoxwikis.com/Delegate |
 | 983 | Delegated Functions |  | https://stellaris.paradoxwikis.com/Delegated_Functions |
 | 984 | Delegate traits |  | https://stellaris.paradoxwikis.com/Delegate_traits |
@@ -1115,7 +1009,7 @@ Not fetched: 4884 pages
 | 999 | Desert Colonization |  | https://stellaris.paradoxwikis.com/Desert_Colonization |
 | 1000 | Desert (disambiguation) |  | https://stellaris.paradoxwikis.com/Desert_(disambiguation) |
 | 1001 | Desert Preference |  | https://stellaris.paradoxwikis.com/Desert_Preference |
-| 1002 | Desert Ruins |  | https://stellaris.paradoxwikis.com/Desert_Ruins |
+| 1002 | Desert Ruins | ✅ | https://stellaris.paradoxwikis.com/Desert_Ruins |
 | 1003 | Desert World |  | https://stellaris.paradoxwikis.com/Desert_World |
 | 1004 | Desiccated |  | https://stellaris.paradoxwikis.com/Desiccated |
 | 1005 | Designation | ✅ | https://stellaris.paradoxwikis.com/Designation |
@@ -1145,9 +1039,9 @@ Not fetched: 4884 pages
 | 1029 | Dictatorial |  | https://stellaris.paradoxwikis.com/Dictatorial |
 | 1030 | Differing war philosophy |  | https://stellaris.paradoxwikis.com/Differing_war_philosophy |
 | 1031 | Difficulty |  | https://stellaris.paradoxwikis.com/Difficulty |
-| 1032 | Digital Refactoring |  | https://stellaris.paradoxwikis.com/Digital_Refactoring |
-| 1033 | Dimensional Conflict |  | https://stellaris.paradoxwikis.com/Dimensional_Conflict |
-| 1034 | Dimensional Dump |  | https://stellaris.paradoxwikis.com/Dimensional_Dump |
+| 1032 | Digital Refactoring | ✅ | https://stellaris.paradoxwikis.com/Digital_Refactoring |
+| 1033 | Dimensional Conflict | ✅ | https://stellaris.paradoxwikis.com/Dimensional_Conflict |
+| 1034 | Dimensional Dump | ✅ | https://stellaris.paradoxwikis.com/Dimensional_Dump |
 | 1035 | Dimensional Fabricator |  | https://stellaris.paradoxwikis.com/Dimensional_Fabricator |
 | 1036 | Dimensional Horror |  | https://stellaris.paradoxwikis.com/Dimensional_Horror |
 | 1037 | Dimensional lock |  | https://stellaris.paradoxwikis.com/Dimensional_lock |
@@ -1163,7 +1057,7 @@ Not fetched: 4884 pages
 | 1047 | Diplomatic action |  | https://stellaris.paradoxwikis.com/Diplomatic_action |
 | 1048 | Diplomatic agreement |  | https://stellaris.paradoxwikis.com/Diplomatic_agreement |
 | 1049 | Diplomatic Corps |  | https://stellaris.paradoxwikis.com/Diplomatic_Corps |
-| 1050 | Diplomatic events |  | https://stellaris.paradoxwikis.com/Diplomatic_events |
+| 1050 | Diplomatic events | ✅ | https://stellaris.paradoxwikis.com/Diplomatic_events |
 | 1051 | Diplomatic Grants |  | https://stellaris.paradoxwikis.com/Diplomatic_Grants |
 | 1052 | Diplomatic integration |  | https://stellaris.paradoxwikis.com/Diplomatic_integration |
 | 1053 | Diplomatic stance |  | https://stellaris.paradoxwikis.com/Diplomatic_stance |
@@ -1187,7 +1081,7 @@ Not fetched: 4884 pages
 | 1071 | Disruptor |  | https://stellaris.paradoxwikis.com/Disruptor |
 | 1072 | Disruptors Tech |  | https://stellaris.paradoxwikis.com/Disruptors_Tech |
 | 1073 | Distant Origin |  | https://stellaris.paradoxwikis.com/Distant_Origin |
-| 1074 | Distant Stars |  | https://stellaris.paradoxwikis.com/Distant_Stars |
+| 1074 | Distant Stars | ✅ | https://stellaris.paradoxwikis.com/Distant_Stars |
 | 1075 | Distant stars events |  | https://stellaris.paradoxwikis.com/Distant_stars_events |
 | 1076 | Distant Stars events |  | https://stellaris.paradoxwikis.com/Distant_Stars_events |
 | 1077 | Distant stars events 1 |  | https://stellaris.paradoxwikis.com/Distant_stars_events_1 |
@@ -1250,7 +1144,7 @@ Not fetched: 4884 pages
 | 1134 | Dreaded |  | https://stellaris.paradoxwikis.com/Dreaded |
 | 1135 | Dread Encampment |  | https://stellaris.paradoxwikis.com/Dread_Encampment |
 | 1136 | Dread Outpost |  | https://stellaris.paradoxwikis.com/Dread_Outpost |
-| 1137 | Drifting Battlefield |  | https://stellaris.paradoxwikis.com/Drifting_Battlefield |
+| 1137 | Drifting Battlefield | ✅ | https://stellaris.paradoxwikis.com/Drifting_Battlefield |
 | 1138 | Driven Assimilator |  | https://stellaris.paradoxwikis.com/Driven_Assimilator |
 | 1139 | Driven Educator |  | https://stellaris.paradoxwikis.com/Driven_Educator |
 | 1140 | Droid |  | https://stellaris.paradoxwikis.com/Droid |
@@ -1409,7 +1303,7 @@ Not fetched: 4884 pages
 | 1293 | Enslave |  | https://stellaris.paradoxwikis.com/Enslave |
 | 1294 | Entangled Dark Matter |  | https://stellaris.paradoxwikis.com/Entangled_Dark_Matter |
 | 1295 | Entertainer |  | https://stellaris.paradoxwikis.com/Entertainer |
-| 1296 | Entertainment Nexus |  | https://stellaris.paradoxwikis.com/Entertainment_Nexus |
+| 1296 | Entertainment Nexus | ✅ | https://stellaris.paradoxwikis.com/Entertainment_Nexus |
 | 1297 | Entourage |  | https://stellaris.paradoxwikis.com/Entourage |
 | 1298 | Entrepreneur |  | https://stellaris.paradoxwikis.com/Entrepreneur |
 | 1299 | Entropic Recursion |  | https://stellaris.paradoxwikis.com/Entropic_Recursion |
@@ -1417,7 +1311,7 @@ Not fetched: 4884 pages
 | 1301 | Environmental Engineer |  | https://stellaris.paradoxwikis.com/Environmental_Engineer |
 | 1302 | Environmentalist |  | https://stellaris.paradoxwikis.com/Environmentalist |
 | 1303 | Envoy |  | https://stellaris.paradoxwikis.com/Envoy |
-| 1304 | Envoy events |  | https://stellaris.paradoxwikis.com/Envoy_events |
+| 1304 | Envoy events | ✅ | https://stellaris.paradoxwikis.com/Envoy_events |
 | 1305 | Envoys |  | https://stellaris.paradoxwikis.com/Envoys |
 | 1306 | Epigenetic Triggers |  | https://stellaris.paradoxwikis.com/Epigenetic_Triggers |
 | 1307 | Erudite |  | https://stellaris.paradoxwikis.com/Erudite |
@@ -1563,7 +1457,7 @@ Not fetched: 4884 pages
 | 1447 | Federation fleet |  | https://stellaris.paradoxwikis.com/Federation_fleet |
 | 1448 | Federation fleet contribution |  | https://stellaris.paradoxwikis.com/Federation_fleet_contribution |
 | 1449 | Federations |  | https://stellaris.paradoxwikis.com/Federations |
-| 1450 | Federations (DLC) |  | https://stellaris.paradoxwikis.com/Federations_(DLC) |
+| 1450 | Federations (DLC) | ✅ | https://stellaris.paradoxwikis.com/Federations_(DLC) |
 | 1451 | Federations DLC |  | https://stellaris.paradoxwikis.com/Federations_DLC |
 | 1452 | Federations election events 1 |  | https://stellaris.paradoxwikis.com/Federations_election_events_1 |
 | 1453 | Federations events |  | https://stellaris.paradoxwikis.com/Federations_events |
@@ -1572,7 +1466,7 @@ Not fetched: 4884 pages
 | 1456 | Felsic |  | https://stellaris.paradoxwikis.com/Felsic |
 | 1457 | Fen Habbanis |  | https://stellaris.paradoxwikis.com/Fen_Habbanis |
 | 1458 | Feral Insight |  | https://stellaris.paradoxwikis.com/Feral_Insight |
-| 1459 | Feral Overload |  | https://stellaris.paradoxwikis.com/Feral_Overload |
+| 1459 | Feral Overload | ✅ | https://stellaris.paradoxwikis.com/Feral_Overload |
 | 1460 | Fertile |  | https://stellaris.paradoxwikis.com/Fertile |
 | 1461 | Fertility Preacher |  | https://stellaris.paradoxwikis.com/Fertility_Preacher |
 | 1462 | Fervent Believer |  | https://stellaris.paradoxwikis.com/Fervent_Believer |
@@ -1586,7 +1480,7 @@ Not fetched: 4884 pages
 | 1470 | Fire rate |  | https://stellaris.paradoxwikis.com/Fire_rate |
 | 1471 | First contact |  | https://stellaris.paradoxwikis.com/First_contact |
 | 1472 | First Contact |  | https://stellaris.paradoxwikis.com/First_Contact |
-| 1473 | First Contact (DLC) |  | https://stellaris.paradoxwikis.com/First_Contact_(DLC) |
+| 1473 | First Contact (DLC) | ✅ | https://stellaris.paradoxwikis.com/First_Contact_(DLC) |
 | 1474 | First contact events |  | https://stellaris.paradoxwikis.com/First_contact_events |
 | 1475 | First contact NPC country types events |  | https://stellaris.paradoxwikis.com/First_contact_NPC_country_types_events |
 | 1476 | First Contact Protocol |  | https://stellaris.paradoxwikis.com/First_Contact_Protocol |
@@ -1608,7 +1502,7 @@ Not fetched: 4884 pages
 | 1492 | Fleet limit |  | https://stellaris.paradoxwikis.com/Fleet_limit |
 | 1493 | Fleet Logistician |  | https://stellaris.paradoxwikis.com/Fleet_Logistician |
 | 1494 | Fleet Management Procedures |  | https://stellaris.paradoxwikis.com/Fleet_Management_Procedures |
-| 1495 | Fleet Maneuvers |  | https://stellaris.paradoxwikis.com/Fleet_Maneuvers |
+| 1495 | Fleet Maneuvers | ✅ | https://stellaris.paradoxwikis.com/Fleet_Maneuvers |
 | 1496 | Fleet modding |  | https://stellaris.paradoxwikis.com/Fleet_modding |
 | 1497 | Fleet Organizer |  | https://stellaris.paradoxwikis.com/Fleet_Organizer |
 | 1498 | Fleet power |  | https://stellaris.paradoxwikis.com/Fleet_power |
@@ -1654,7 +1548,7 @@ Not fetched: 4884 pages
 | 1538 | Foundry Arcology |  | https://stellaris.paradoxwikis.com/Foundry_Arcology |
 | 1539 | Foundry (disambiguation) |  | https://stellaris.paradoxwikis.com/Foundry_(disambiguation) |
 | 1540 | Foundry Drone |  | https://stellaris.paradoxwikis.com/Foundry_Drone |
-| 1541 | Fountain of Youth |  | https://stellaris.paradoxwikis.com/Fountain_of_Youth |
+| 1541 | Fountain of Youth | ✅ | https://stellaris.paradoxwikis.com/Fountain_of_Youth |
 | 1542 | Fragmented Nations |  | https://stellaris.paradoxwikis.com/Fragmented_Nations |
 | 1543 | Franchise Headquarters |  | https://stellaris.paradoxwikis.com/Franchise_Headquarters |
 | 1544 | Franchising |  | https://stellaris.paradoxwikis.com/Franchising |
@@ -1699,7 +1593,7 @@ Not fetched: 4884 pages
 | 1583 | Fusion Missiles Tech |  | https://stellaris.paradoxwikis.com/Fusion_Missiles_Tech |
 | 1584 | Fusion Power |  | https://stellaris.paradoxwikis.com/Fusion_Power |
 | 1585 | Fusion Reactor |  | https://stellaris.paradoxwikis.com/Fusion_Reactor |
-| 1586 | Future Shock |  | https://stellaris.paradoxwikis.com/Future_Shock |
+| 1586 | Future Shock | ✅ | https://stellaris.paradoxwikis.com/Future_Shock |
 | 1587 | Gaia |  | https://stellaris.paradoxwikis.com/Gaia |
 | 1588 | Gaia Creation |  | https://stellaris.paradoxwikis.com/Gaia_Creation |
 | 1589 | Gaia (disambiguation) |  | https://stellaris.paradoxwikis.com/Gaia_(disambiguation) |
@@ -1784,7 +1678,7 @@ Not fetched: 4884 pages
 | 1668 | Gas giant |  | https://stellaris.paradoxwikis.com/Gas_giant |
 | 1669 | Gas Giant |  | https://stellaris.paradoxwikis.com/Gas_Giant |
 | 1670 | Gas giants |  | https://stellaris.paradoxwikis.com/Gas_giants |
-| 1671 | Gas Giant Signal |  | https://stellaris.paradoxwikis.com/Gas_Giant_Signal |
+| 1671 | Gas Giant Signal | ✅ | https://stellaris.paradoxwikis.com/Gas_Giant_Signal |
 | 1672 | Gas Giant Structure |  | https://stellaris.paradoxwikis.com/Gas_Giant_Structure |
 | 1673 | Gas grazer |  | https://stellaris.paradoxwikis.com/Gas_grazer |
 | 1674 | Gas grazers |  | https://stellaris.paradoxwikis.com/Gas_grazers |
@@ -1813,14 +1707,14 @@ Not fetched: 4884 pages
 | 1697 | Generator World |  | https://stellaris.paradoxwikis.com/Generator_World |
 | 1698 | Genes |  | https://stellaris.paradoxwikis.com/Genes |
 | 1699 | Gene Seed Purification |  | https://stellaris.paradoxwikis.com/Gene_Seed_Purification |
-| 1700 | Genesis |  | https://stellaris.paradoxwikis.com/Genesis |
+| 1700 | Genesis | ✅ | https://stellaris.paradoxwikis.com/Genesis |
 | 1701 | Genesis Architects |  | https://stellaris.paradoxwikis.com/Genesis_Architects |
 | 1702 | Genesis Guides |  | https://stellaris.paradoxwikis.com/Genesis_Guides |
 | 1703 | Genesis Symbiotes |  | https://stellaris.paradoxwikis.com/Genesis_Symbiotes |
 | 1704 | Gene tailoring |  | https://stellaris.paradoxwikis.com/Gene_tailoring |
 | 1705 | Gene Tailoring |  | https://stellaris.paradoxwikis.com/Gene_Tailoring |
 | 1706 | Genetic |  | https://stellaris.paradoxwikis.com/Genetic |
-| 1707 | Genetic Crossroads |  | https://stellaris.paradoxwikis.com/Genetic_Crossroads |
+| 1707 | Genetic Crossroads | ✅ | https://stellaris.paradoxwikis.com/Genetic_Crossroads |
 | 1708 | Genetic engineering |  | https://stellaris.paradoxwikis.com/Genetic_engineering |
 | 1709 | Genetic Healthcare |  | https://stellaris.paradoxwikis.com/Genetic_Healthcare |
 | 1710 | Genetic modification |  | https://stellaris.paradoxwikis.com/Genetic_modification |
@@ -1836,7 +1730,7 @@ Not fetched: 4884 pages
 | 1720 | Genomic Services Outreach |  | https://stellaris.paradoxwikis.com/Genomic_Services_Outreach |
 | 1721 | Geo-Engineering Inc. |  | https://stellaris.paradoxwikis.com/Geo-Engineering_Inc. |
 | 1722 | Geology Expert |  | https://stellaris.paradoxwikis.com/Geology_Expert |
-| 1723 | Georadiation Terraforming |  | https://stellaris.paradoxwikis.com/Georadiation_Terraforming |
+| 1723 | Georadiation Terraforming | ✅ | https://stellaris.paradoxwikis.com/Georadiation_Terraforming |
 | 1724 | Geothermal Fracking |  | https://stellaris.paradoxwikis.com/Geothermal_Fracking |
 | 1725 | Gestalt Consciousness |  | https://stellaris.paradoxwikis.com/Gestalt_Consciousness |
 | 1726 | Gestation Drone |  | https://stellaris.paradoxwikis.com/Gestation_Drone |
@@ -1848,7 +1742,7 @@ Not fetched: 4884 pages
 | 1732 | Giga Cannon Tech |  | https://stellaris.paradoxwikis.com/Giga_Cannon_Tech |
 | 1733 | Gigacorp |  | https://stellaris.paradoxwikis.com/Gigacorp |
 | 1734 | Giga-Mall |  | https://stellaris.paradoxwikis.com/Giga-Mall |
-| 1735 | Glacial Crisis |  | https://stellaris.paradoxwikis.com/Glacial_Crisis |
+| 1735 | Glacial Crisis | ✅ | https://stellaris.paradoxwikis.com/Glacial_Crisis |
 | 1736 | Gladiatorial Xeno |  | https://stellaris.paradoxwikis.com/Gladiatorial_Xeno |
 | 1737 | Glandular Acclimation |  | https://stellaris.paradoxwikis.com/Glandular_Acclimation |
 | 1738 | Global Defense Grid |  | https://stellaris.paradoxwikis.com/Global_Defense_Grid |
@@ -1922,7 +1816,7 @@ Not fetched: 4884 pages
 | 1806 | Habitability |  | https://stellaris.paradoxwikis.com/Habitability |
 | 1807 | Habitable |  | https://stellaris.paradoxwikis.com/Habitable |
 | 1808 | Habitable planet |  | https://stellaris.paradoxwikis.com/Habitable_planet |
-| 1809 | Habitable Worlds Survey |  | https://stellaris.paradoxwikis.com/Habitable_Worlds_Survey |
+| 1809 | Habitable Worlds Survey | ✅ | https://stellaris.paradoxwikis.com/Habitable_Worlds_Survey |
 | 1810 | Habitat |  | https://stellaris.paradoxwikis.com/Habitat |
 | 1811 | Habitat administration |  | https://stellaris.paradoxwikis.com/Habitat_administration |
 | 1812 | Habitat Administration |  | https://stellaris.paradoxwikis.com/Habitat_Administration |
@@ -1971,7 +1865,7 @@ Not fetched: 4884 pages
 | 1855 | Heritage Site |  | https://stellaris.paradoxwikis.com/Heritage_Site |
 | 1856 | Heritage Sites |  | https://stellaris.paradoxwikis.com/Heritage_Sites |
 | 1857 | Heroic Past |  | https://stellaris.paradoxwikis.com/Heroic_Past |
-| 1858 | Hidden Vault |  | https://stellaris.paradoxwikis.com/Hidden_Vault |
+| 1858 | Hidden Vault | ✅ | https://stellaris.paradoxwikis.com/Hidden_Vault |
 | 1859 | Hidden worlds |  | https://stellaris.paradoxwikis.com/Hidden_worlds |
 | 1860 | High-Density Munitions |  | https://stellaris.paradoxwikis.com/High-Density_Munitions |
 | 1861 | High-Energy Capacitors |  | https://stellaris.paradoxwikis.com/High-Energy_Capacitors |
@@ -2012,13 +1906,13 @@ Not fetched: 4884 pages
 | 1896 | Holy World |  | https://stellaris.paradoxwikis.com/Holy_World |
 | 1897 | Home Guard |  | https://stellaris.paradoxwikis.com/Home_Guard |
 | 1898 | Home in the Sky |  | https://stellaris.paradoxwikis.com/Home_in_the_Sky |
-| 1899 | Homesick |  | https://stellaris.paradoxwikis.com/Homesick |
+| 1899 | Homesick | ✅ | https://stellaris.paradoxwikis.com/Homesick |
 | 1900 | Homesteader |  | https://stellaris.paradoxwikis.com/Homesteader |
 | 1901 | Homeworld |  | https://stellaris.paradoxwikis.com/Homeworld |
 | 1902 | Honored Warmaster |  | https://stellaris.paradoxwikis.com/Honored_Warmaster |
 | 1903 | Horizon Needle |  | https://stellaris.paradoxwikis.com/Horizon_Needle |
-| 1904 | Horizon signal |  | https://stellaris.paradoxwikis.com/Horizon_signal |
-| 1905 | Horizon Signal |  | https://stellaris.paradoxwikis.com/Horizon_Signal |
+| 1904 | Horizon signal | ✅ | https://stellaris.paradoxwikis.com/Horizon_signal |
+| 1905 | Horizon Signal | ✅ | https://stellaris.paradoxwikis.com/Horizon_Signal |
 | 1906 | Horizon Signal events |  | https://stellaris.paradoxwikis.com/Horizon_Signal_events |
 | 1907 | Horrific Inverse Mass |  | https://stellaris.paradoxwikis.com/Horrific_Inverse_Mass |
 | 1908 | Hostile Climate Adaption |  | https://stellaris.paradoxwikis.com/Hostile_Climate_Adaption |
@@ -2039,7 +1933,7 @@ Not fetched: 4884 pages
 | 1923 | Hull size |  | https://stellaris.paradoxwikis.com/Hull_size |
 | 1924 | Human |  | https://stellaris.paradoxwikis.com/Human |
 | 1925 | Humanoid |  | https://stellaris.paradoxwikis.com/Humanoid |
-| 1926 | Humanoids |  | https://stellaris.paradoxwikis.com/Humanoids |
+| 1926 | Humanoids | ✅ | https://stellaris.paradoxwikis.com/Humanoids |
 | 1927 | Humanoid Species Pack |  | https://stellaris.paradoxwikis.com/Humanoid_Species_Pack |
 | 1928 | Hunger Strike |  | https://stellaris.paradoxwikis.com/Hunger_Strike |
 | 1929 | Hunter-Killer Drone Swarms |  | https://stellaris.paradoxwikis.com/Hunter-Killer_Drone_Swarms |
@@ -2100,7 +1994,7 @@ Not fetched: 4884 pages
 | 1984 | Idyllic Bloom |  | https://stellaris.paradoxwikis.com/Idyllic_Bloom |
 | 1985 | Illicit Research Labs |  | https://stellaris.paradoxwikis.com/Illicit_Research_Labs |
 | 1986 | Illuminated Technocracy |  | https://stellaris.paradoxwikis.com/Illuminated_Technocracy |
-| 1987 | Imminent Eruption |  | https://stellaris.paradoxwikis.com/Imminent_Eruption |
+| 1987 | Imminent Eruption | ✅ | https://stellaris.paradoxwikis.com/Imminent_Eruption |
 | 1988 | Imperial |  | https://stellaris.paradoxwikis.com/Imperial |
 | 1989 | Imperial Center |  | https://stellaris.paradoxwikis.com/Imperial_Center |
 | 1990 | Imperial complex |  | https://stellaris.paradoxwikis.com/Imperial_complex |
@@ -2115,8 +2009,8 @@ Not fetched: 4884 pages
 | 1999 | Imperial Prerogative |  | https://stellaris.paradoxwikis.com/Imperial_Prerogative |
 | 2000 | Imperial Reforms |  | https://stellaris.paradoxwikis.com/Imperial_Reforms |
 | 2001 | Imperial Ruler |  | https://stellaris.paradoxwikis.com/Imperial_Ruler |
-| 2002 | Impossible Corrie |  | https://stellaris.paradoxwikis.com/Impossible_Corrie |
-| 2003 | Impossible Organism |  | https://stellaris.paradoxwikis.com/Impossible_Organism |
+| 2002 | Impossible Corrie | ✅ | https://stellaris.paradoxwikis.com/Impossible_Corrie |
+| 2003 | Impossible Organism | ✅ | https://stellaris.paradoxwikis.com/Impossible_Organism |
 | 2004 | Improved Battleship Hulls |  | https://stellaris.paradoxwikis.com/Improved_Battleship_Hulls |
 | 2005 | Improved Corvette Hulls |  | https://stellaris.paradoxwikis.com/Improved_Corvette_Hulls |
 | 2006 | Improved Cruiser Hulls |  | https://stellaris.paradoxwikis.com/Improved_Cruiser_Hulls |
@@ -2162,7 +2056,7 @@ Not fetched: 4884 pages
 | 2046 | Inefficient Drone Output |  | https://stellaris.paradoxwikis.com/Inefficient_Drone_Output |
 | 2047 | Inefficient Planet Management |  | https://stellaris.paradoxwikis.com/Inefficient_Planet_Management |
 | 2048 | Infernal |  | https://stellaris.paradoxwikis.com/Infernal |
-| 2049 | Infernals |  | https://stellaris.paradoxwikis.com/Infernals |
+| 2049 | Infernals | ✅ | https://stellaris.paradoxwikis.com/Infernals |
 | 2050 | Infested |  | https://stellaris.paradoxwikis.com/Infested |
 | 2051 | Infested world |  | https://stellaris.paradoxwikis.com/Infested_world |
 | 2052 | Infested World |  | https://stellaris.paradoxwikis.com/Infested_World |
@@ -2213,7 +2107,7 @@ Not fetched: 4884 pages
 | 2097 | Interstellar Expansion |  | https://stellaris.paradoxwikis.com/Interstellar_Expansion |
 | 2098 | Interstellar Fleet Traditions |  | https://stellaris.paradoxwikis.com/Interstellar_Fleet_Traditions |
 | 2099 | Interstellar Recruitment Office |  | https://stellaris.paradoxwikis.com/Interstellar_Recruitment_Office |
-| 2100 | Interstellar Refugia |  | https://stellaris.paradoxwikis.com/Interstellar_Refugia |
+| 2100 | Interstellar Refugia | ✅ | https://stellaris.paradoxwikis.com/Interstellar_Refugia |
 | 2101 | Intimidator |  | https://stellaris.paradoxwikis.com/Intimidator |
 | 2102 | Intolerance |  | https://stellaris.paradoxwikis.com/Intolerance |
 | 2103 | Introspective |  | https://stellaris.paradoxwikis.com/Introspective |
@@ -2243,8 +2137,8 @@ Not fetched: 4884 pages
 | 2127 | Isolationist |  | https://stellaris.paradoxwikis.com/Isolationist |
 | 2128 | Isolationist (disambiguation) |  | https://stellaris.paradoxwikis.com/Isolationist_(disambiguation) |
 | 2129 | Isolationist faction |  | https://stellaris.paradoxwikis.com/Isolationist_faction |
-| 2130 | Is There Life In There |  | https://stellaris.paradoxwikis.com/Is_There_Life_In_There |
-| 2131 | Ix Belèn |  | https://stellaris.paradoxwikis.com/Ix_Bel%C3%A8n |
+| 2130 | Is There Life In There | ✅ | https://stellaris.paradoxwikis.com/Is_There_Life_In_There |
+| 2131 | Ix Belèn |  | https://stellaris.paradoxwikis.com/Ix_Belèn |
 | 2132 | Jargon | ✅ | https://stellaris.paradoxwikis.com/Jargon |
 | 2133 | Javorian Pox |  | https://stellaris.paradoxwikis.com/Javorian_Pox |
 | 2134 | Javorian Pox Sample |  | https://stellaris.paradoxwikis.com/Javorian_Pox_Sample |
@@ -2262,7 +2156,7 @@ Not fetched: 4884 pages
 | 2146 | Junkheap |  | https://stellaris.paradoxwikis.com/Junkheap |
 | 2147 | Junk Ratlings |  | https://stellaris.paradoxwikis.com/Junk_Ratlings |
 | 2148 | Junk Rattlings |  | https://stellaris.paradoxwikis.com/Junk_Rattlings |
-| 2149 | Junkyard Orbit |  | https://stellaris.paradoxwikis.com/Junkyard_Orbit |
+| 2149 | Junkyard Orbit | ✅ | https://stellaris.paradoxwikis.com/Junkyard_Orbit |
 | 2150 | Jury-Rigger |  | https://stellaris.paradoxwikis.com/Jury-Rigger |
 | 2151 | Justice Complex |  | https://stellaris.paradoxwikis.com/Justice_Complex |
 | 2152 | Keepers of Knowledge |  | https://stellaris.paradoxwikis.com/Keepers_of_Knowledge |
@@ -2342,7 +2236,7 @@ Not fetched: 4884 pages
 | 2226 | Life-Seeded |  | https://stellaris.paradoxwikis.com/Life-Seeded |
 | 2227 | Lifespan |  | https://stellaris.paradoxwikis.com/Lifespan |
 | 2228 | Lightspeed |  | https://stellaris.paradoxwikis.com/Lightspeed |
-| 2229 | Limbo |  | https://stellaris.paradoxwikis.com/Limbo |
+| 2229 | Limbo | ✅ | https://stellaris.paradoxwikis.com/Limbo |
 | 2230 | Limited buildings |  | https://stellaris.paradoxwikis.com/Limited_buildings |
 | 2231 | Limited Cybernetic |  | https://stellaris.paradoxwikis.com/Limited_Cybernetic |
 | 2232 | Limited Regeneration |  | https://stellaris.paradoxwikis.com/Limited_Regeneration |
@@ -2377,7 +2271,7 @@ Not fetched: 4884 pages
 | 2261 | Lord Commander (disambiguation) |  | https://stellaris.paradoxwikis.com/Lord_Commander_(disambiguation) |
 | 2262 | Lord Commander (job) |  | https://stellaris.paradoxwikis.com/Lord_Commander_(job) |
 | 2263 | Lord of War |  | https://stellaris.paradoxwikis.com/Lord_of_War |
-| 2264 | Lost Amoeba |  | https://stellaris.paradoxwikis.com/Lost_Amoeba |
+| 2264 | Lost Amoeba | ✅ | https://stellaris.paradoxwikis.com/Lost_Amoeba |
 | 2265 | Lost Building Methods |  | https://stellaris.paradoxwikis.com/Lost_Building_Methods |
 | 2266 | Lost Colony |  | https://stellaris.paradoxwikis.com/Lost_Colony |
 | 2267 | Lost to Bureaucracy |  | https://stellaris.paradoxwikis.com/Lost_to_Bureaucracy |
@@ -2447,7 +2341,7 @@ Not fetched: 4884 pages
 | 2331 | Marauder |  | https://stellaris.paradoxwikis.com/Marauder |
 | 2332 | Marauder Empires |  | https://stellaris.paradoxwikis.com/Marauder_Empires |
 | 2333 | Marauder Missiles Tech |  | https://stellaris.paradoxwikis.com/Marauder_Missiles_Tech |
-| 2334 | Marauder neighbor events |  | https://stellaris.paradoxwikis.com/Marauder_neighbor_events |
+| 2334 | Marauder neighbor events | ✅ | https://stellaris.paradoxwikis.com/Marauder_neighbor_events |
 | 2335 | Marauders | ✅ | https://stellaris.paradoxwikis.com/Marauders |
 | 2336 | Marine Machines |  | https://stellaris.paradoxwikis.com/Marine_Machines |
 | 2337 | Maritime Robotics |  | https://stellaris.paradoxwikis.com/Maritime_Robotics |
@@ -2461,7 +2355,7 @@ Not fetched: 4884 pages
 | 2345 | Mass drivers |  | https://stellaris.paradoxwikis.com/Mass_drivers |
 | 2346 | Mass Drivers Tech |  | https://stellaris.paradoxwikis.com/Mass_Drivers_Tech |
 | 2347 | Mass extinction events |  | https://stellaris.paradoxwikis.com/Mass_extinction_events |
-| 2348 | Mass Extinction Through the Ages |  | https://stellaris.paradoxwikis.com/Mass_Extinction_Through_the_Ages |
+| 2348 | Mass Extinction Through the Ages | ✅ | https://stellaris.paradoxwikis.com/Mass_Extinction_Through_the_Ages |
 | 2349 | Massive Crater |  | https://stellaris.paradoxwikis.com/Massive_Crater |
 | 2350 | Massive Glacier Removal |  | https://stellaris.paradoxwikis.com/Massive_Glacier_Removal |
 | 2351 | Mass Produced |  | https://stellaris.paradoxwikis.com/Mass_Produced |
@@ -2517,8 +2411,8 @@ Not fetched: 4884 pages
 | 2401 | Mega Art Installation Tech |  | https://stellaris.paradoxwikis.com/Mega_Art_Installation_Tech |
 | 2402 | Mega-Assembly Systems |  | https://stellaris.paradoxwikis.com/Mega-Assembly_Systems |
 | 2403 | Mega Cannon Tech |  | https://stellaris.paradoxwikis.com/Mega_Cannon_Tech |
-| 2404 | Megacorp |  | https://stellaris.paradoxwikis.com/Megacorp |
-| 2405 | MegaCorp |  | https://stellaris.paradoxwikis.com/MegaCorp |
+| 2404 | Megacorp | ✅ | https://stellaris.paradoxwikis.com/Megacorp |
+| 2405 | MegaCorp | ✅ | https://stellaris.paradoxwikis.com/MegaCorp |
 | 2406 | Mega Corporation |  | https://stellaris.paradoxwikis.com/Mega_Corporation |
 | 2407 | Mega engineering |  | https://stellaris.paradoxwikis.com/Mega_engineering |
 | 2408 | Mega-Engineering |  | https://stellaris.paradoxwikis.com/Mega-Engineering |
@@ -2561,16 +2455,16 @@ Not fetched: 4884 pages
 | 2445 | Message in the Dust |  | https://stellaris.paradoxwikis.com/Message_in_the_Dust |
 | 2446 | Metacognitive Faith |  | https://stellaris.paradoxwikis.com/Metacognitive_Faith |
 | 2447 | Metal Boneyards |  | https://stellaris.paradoxwikis.com/Metal_Boneyards |
-| 2448 | Metallic Puddles |  | https://stellaris.paradoxwikis.com/Metallic_Puddles |
+| 2448 | Metallic Puddles | ✅ | https://stellaris.paradoxwikis.com/Metallic_Puddles |
 | 2449 | Metallurgist |  | https://stellaris.paradoxwikis.com/Metallurgist |
 | 2450 | Meteorite Colony Ship |  | https://stellaris.paradoxwikis.com/Meteorite_Colony_Ship |
 | 2451 | Meticulous |  | https://stellaris.paradoxwikis.com/Meticulous |
-| 2452 | Mharin Kharin |  | https://stellaris.paradoxwikis.com/Mharin_Kharin |
+| 2452 | Mharin Kharin | ✅ | https://stellaris.paradoxwikis.com/Mharin_Kharin |
 | 2453 | Micromanager |  | https://stellaris.paradoxwikis.com/Micromanager |
 | 2454 | Micro-Replicators |  | https://stellaris.paradoxwikis.com/Micro-Replicators |
 | 2455 | Mid-game |  | https://stellaris.paradoxwikis.com/Mid-game |
 | 2456 | Migrating Flock |  | https://stellaris.paradoxwikis.com/Migrating_Flock |
-| 2457 | Migrating Forests |  | https://stellaris.paradoxwikis.com/Migrating_Forests |
+| 2457 | Migrating Forests | ✅ | https://stellaris.paradoxwikis.com/Migrating_Forests |
 | 2458 | Migration |  | https://stellaris.paradoxwikis.com/Migration |
 | 2459 | Migration access |  | https://stellaris.paradoxwikis.com/Migration_access |
 | 2460 | Migration attraction |  | https://stellaris.paradoxwikis.com/Migration_attraction |
@@ -2653,7 +2547,7 @@ Not fetched: 4884 pages
 | 2537 | Missile |  | https://stellaris.paradoxwikis.com/Missile |
 | 2538 | Missile Battery |  | https://stellaris.paradoxwikis.com/Missile_Battery |
 | 2539 | Missiles |  | https://stellaris.paradoxwikis.com/Missiles |
-| 2540 | Missing Scientist |  | https://stellaris.paradoxwikis.com/Missing_Scientist |
+| 2540 | Missing Scientist | ✅ | https://stellaris.paradoxwikis.com/Missing_Scientist |
 | 2541 | Mod |  | https://stellaris.paradoxwikis.com/Mod |
 | 2542 | Mod detection |  | https://stellaris.paradoxwikis.com/Mod_detection |
 | 2543 | Modding | ✅ | https://stellaris.paradoxwikis.com/Modding |
@@ -2695,7 +2589,7 @@ Not fetched: 4884 pages
 | 2579 | Multi-Dimensional Studies |  | https://stellaris.paradoxwikis.com/Multi-Dimensional_Studies |
 | 2580 | Multiplayer |  | https://stellaris.paradoxwikis.com/Multiplayer |
 | 2581 | Murmuring Monolith |  | https://stellaris.paradoxwikis.com/Murmuring_Monolith |
-| 2582 | Mushroom Picking |  | https://stellaris.paradoxwikis.com/Mushroom_Picking |
+| 2582 | Mushroom Picking | ✅ | https://stellaris.paradoxwikis.com/Mushroom_Picking |
 | 2583 | Music |  | https://stellaris.paradoxwikis.com/Music |
 | 2584 | Music modding |  | https://stellaris.paradoxwikis.com/Music_modding |
 | 2585 | Mutagenic Luxury |  | https://stellaris.paradoxwikis.com/Mutagenic_Luxury |
@@ -2714,7 +2608,7 @@ Not fetched: 4884 pages
 | 2598 | Muutagan Crystals |  | https://stellaris.paradoxwikis.com/Muutagan_Crystals |
 | 2599 | Muutagan Liaison |  | https://stellaris.paradoxwikis.com/Muutagan_Liaison |
 | 2600 | Mycorrhizal Ideal |  | https://stellaris.paradoxwikis.com/Mycorrhizal_Ideal |
-| 2601 | Myrmeku Activity |  | https://stellaris.paradoxwikis.com/Myrmeku_Activity |
+| 2601 | Myrmeku Activity | ✅ | https://stellaris.paradoxwikis.com/Myrmeku_Activity |
 | 2602 | Mysterious Labyrinth |  | https://stellaris.paradoxwikis.com/Mysterious_Labyrinth |
 | 2603 | Nanite |  | https://stellaris.paradoxwikis.com/Nanite |
 | 2604 | Nanite Assemblers |  | https://stellaris.paradoxwikis.com/Nanite_Assemblers |
@@ -2780,7 +2674,7 @@ Not fetched: 4884 pages
 | 2664 | Nemesis |  | https://stellaris.paradoxwikis.com/Nemesis |
 | 2665 | Nemma Miner |  | https://stellaris.paradoxwikis.com/Nemma_Miner |
 | 2666 | Nemma Mining Drone |  | https://stellaris.paradoxwikis.com/Nemma_Mining_Drone |
-| 2667 | Nemma World |  | https://stellaris.paradoxwikis.com/Nemma_World |
+| 2667 | Nemma World | ✅ | https://stellaris.paradoxwikis.com/Nemma_World |
 | 2668 | Neo-Concrete Fortifications |  | https://stellaris.paradoxwikis.com/Neo-Concrete_Fortifications |
 | 2669 | Nerve Dampeners |  | https://stellaris.paradoxwikis.com/Nerve_Dampeners |
 | 2670 | Nerve Stapled |  | https://stellaris.paradoxwikis.com/Nerve_Stapled |
@@ -2887,7 +2781,7 @@ Not fetched: 4884 pages
 | 2771 | One Last Hope |  | https://stellaris.paradoxwikis.com/One_Last_Hope |
 | 2772 | One Mind |  | https://stellaris.paradoxwikis.com/One_Mind |
 | 2773 | One Vision |  | https://stellaris.paradoxwikis.com/One_Vision |
-| 2774 | On the Shoulders of Giants |  | https://stellaris.paradoxwikis.com/On_the_Shoulders_of_Giants |
+| 2774 | On the Shoulders of Giants | ✅ | https://stellaris.paradoxwikis.com/On_the_Shoulders_of_Giants |
 | 2775 | Operations |  | https://stellaris.paradoxwikis.com/Operations |
 | 2776 | Opinion |  | https://stellaris.paradoxwikis.com/Opinion |
 | 2777 | Opinion modifier modding |  | https://stellaris.paradoxwikis.com/Opinion_modifier_modding |
@@ -2921,7 +2815,7 @@ Not fetched: 4884 pages
 | 2805 | Orbital Shield Generator |  | https://stellaris.paradoxwikis.com/Orbital_Shield_Generator |
 | 2806 | Orbital Shipyard |  | https://stellaris.paradoxwikis.com/Orbital_Shipyard |
 | 2807 | Orbital Slave Processing Hub |  | https://stellaris.paradoxwikis.com/Orbital_Slave_Processing_Hub |
-| 2808 | Orbital Speed Demon |  | https://stellaris.paradoxwikis.com/Orbital_Speed_Demon |
+| 2808 | Orbital Speed Demon | ✅ | https://stellaris.paradoxwikis.com/Orbital_Speed_Demon |
 | 2809 | Orbital Stock Exchange |  | https://stellaris.paradoxwikis.com/Orbital_Stock_Exchange |
 | 2810 | Orbital Trash Dispersal |  | https://stellaris.paradoxwikis.com/Orbital_Trash_Dispersal |
 | 2811 | Orbital Trash Disperser |  | https://stellaris.paradoxwikis.com/Orbital_Trash_Disperser |
@@ -2961,7 +2855,7 @@ Not fetched: 4884 pages
 | 2845 | Outpost (disambiguation) |  | https://stellaris.paradoxwikis.com/Outpost_(disambiguation) |
 | 2846 | Outraged |  | https://stellaris.paradoxwikis.com/Outraged |
 | 2847 | Overlord |  | https://stellaris.paradoxwikis.com/Overlord |
-| 2848 | Overlord (DLC) |  | https://stellaris.paradoxwikis.com/Overlord_(DLC) |
+| 2848 | Overlord (DLC) | ✅ | https://stellaris.paradoxwikis.com/Overlord_(DLC) |
 | 2849 | Overlord empire |  | https://stellaris.paradoxwikis.com/Overlord_empire |
 | 2850 | Overlord Garrison |  | https://stellaris.paradoxwikis.com/Overlord_Garrison |
 | 2851 | Overseer |  | https://stellaris.paradoxwikis.com/Overseer |
@@ -3297,7 +3191,7 @@ Not fetched: 4884 pages
 | 3181 | Pre-Planned Growth |  | https://stellaris.paradoxwikis.com/Pre-Planned_Growth |
 | 3182 | Pre-sapient |  | https://stellaris.paradoxwikis.com/Pre-sapient |
 | 3183 | Pre-Sapient |  | https://stellaris.paradoxwikis.com/Pre-Sapient |
-| 3184 | Pre-sapients coexistence events |  | https://stellaris.paradoxwikis.com/Pre-sapients_coexistence_events |
+| 3184 | Pre-sapients coexistence events | ✅ | https://stellaris.paradoxwikis.com/Pre-sapients_coexistence_events |
 | 3185 | Pre-sapient species |  | https://stellaris.paradoxwikis.com/Pre-sapient_species |
 | 3186 | Pre-sapient traits |  | https://stellaris.paradoxwikis.com/Pre-sapient_traits |
 | 3187 | Pre sentient |  | https://stellaris.paradoxwikis.com/Pre_sentient |
@@ -3318,7 +3212,7 @@ Not fetched: 4884 pages
 | 3202 | Primitive and pre-sentient species |  | https://stellaris.paradoxwikis.com/Primitive_and_pre-sentient_species |
 | 3203 | Primitive civilization |  | https://stellaris.paradoxwikis.com/Primitive_civilization |
 | 3204 | Primitive civilizations |  | https://stellaris.paradoxwikis.com/Primitive_civilizations |
-| 3205 | Primitive commerce events |  | https://stellaris.paradoxwikis.com/Primitive_commerce_events |
+| 3205 | Primitive commerce events | ✅ | https://stellaris.paradoxwikis.com/Primitive_commerce_events |
 | 3206 | Primitive Dwellings |  | https://stellaris.paradoxwikis.com/Primitive_Dwellings |
 | 3207 | Primitive Factory |  | https://stellaris.paradoxwikis.com/Primitive_Factory |
 | 3208 | Primitive Farms |  | https://stellaris.paradoxwikis.com/Primitive_Farms |
@@ -3350,7 +3244,7 @@ Not fetched: 4884 pages
 | 3234 | Propaganda Machines |  | https://stellaris.paradoxwikis.com/Propaganda_Machines |
 | 3235 | Propaganda Transmissions |  | https://stellaris.paradoxwikis.com/Propaganda_Transmissions |
 | 3236 | Propulsion |  | https://stellaris.paradoxwikis.com/Propulsion |
-| 3237 | Propulsion Proponent Proclamation |  | https://stellaris.paradoxwikis.com/Propulsion_Proponent_Proclamation |
+| 3237 | Propulsion Proponent Proclamation | ✅ | https://stellaris.paradoxwikis.com/Propulsion_Proponent_Proclamation |
 | 3238 | Prospector |  | https://stellaris.paradoxwikis.com/Prospector |
 | 3239 | Prospectorium |  | https://stellaris.paradoxwikis.com/Prospectorium |
 | 3240 | Prospectorium Extractor |  | https://stellaris.paradoxwikis.com/Prospectorium_Extractor |
@@ -3422,7 +3316,7 @@ Not fetched: 4884 pages
 | 3306 | Racket Industrial Enterprise |  | https://stellaris.paradoxwikis.com/Racket_Industrial_Enterprise |
 | 3307 | Radar System |  | https://stellaris.paradoxwikis.com/Radar_System |
 | 3308 | Radiation Shields |  | https://stellaris.paradoxwikis.com/Radiation_Shields |
-| 3309 | Radical Cult |  | https://stellaris.paradoxwikis.com/Radical_Cult |
+| 3309 | Radical Cult | ✅ | https://stellaris.paradoxwikis.com/Radical_Cult |
 | 3310 | Radioactive Flora |  | https://stellaris.paradoxwikis.com/Radioactive_Flora |
 | 3311 | Radio Telescope Array |  | https://stellaris.paradoxwikis.com/Radio_Telescope_Array |
 | 3312 | Radiotrophic |  | https://stellaris.paradoxwikis.com/Radiotrophic |
@@ -3434,7 +3328,7 @@ Not fetched: 4884 pages
 | 3318 | Ranger Lodge |  | https://stellaris.paradoxwikis.com/Ranger_Lodge |
 | 3319 | Ranger Lodge (holding) |  | https://stellaris.paradoxwikis.com/Ranger_Lodge_(holding) |
 | 3320 | Rapid Breeders |  | https://stellaris.paradoxwikis.com/Rapid_Breeders |
-| 3321 | Rapid Desertification |  | https://stellaris.paradoxwikis.com/Rapid_Desertification |
+| 3321 | Rapid Desertification | ✅ | https://stellaris.paradoxwikis.com/Rapid_Desertification |
 | 3322 | Rapid Replicator |  | https://stellaris.paradoxwikis.com/Rapid_Replicator |
 | 3323 | Rare Crystal Manufacturing |  | https://stellaris.paradoxwikis.com/Rare_Crystal_Manufacturing |
 | 3324 | Rare Crystal Mining |  | https://stellaris.paradoxwikis.com/Rare_Crystal_Mining |
@@ -3564,7 +3458,7 @@ Not fetched: 4884 pages
 | 3448 | Ringworlds |  | https://stellaris.paradoxwikis.com/Ringworlds |
 | 3449 | Ring World Tech |  | https://stellaris.paradoxwikis.com/Ring_World_Tech |
 | 3450 | Ripper Cannons Tech |  | https://stellaris.paradoxwikis.com/Ripper_Cannons_Tech |
-| 3451 | Rise of the Manifesti |  | https://stellaris.paradoxwikis.com/Rise_of_the_Manifesti |
+| 3451 | Rise of the Manifesti | ✅ | https://stellaris.paradoxwikis.com/Rise_of_the_Manifesti |
 | 3452 | Ritualistic Implants |  | https://stellaris.paradoxwikis.com/Ritualistic_Implants |
 | 3453 | Ritualistic Implants (leader) |  | https://stellaris.paradoxwikis.com/Ritualistic_Implants_(leader) |
 | 3454 | Rival |  | https://stellaris.paradoxwikis.com/Rival |
@@ -3590,7 +3484,7 @@ Not fetched: 4884 pages
 | 3474 | Rockbreakers |  | https://stellaris.paradoxwikis.com/Rockbreakers |
 | 3475 | Rocketry |  | https://stellaris.paradoxwikis.com/Rocketry |
 | 3476 | Rockworms |  | https://stellaris.paradoxwikis.com/Rockworms |
-| 3477 | Rogue Agent |  | https://stellaris.paradoxwikis.com/Rogue_Agent |
+| 3477 | Rogue Agent | ✅ | https://stellaris.paradoxwikis.com/Rogue_Agent |
 | 3478 | Rogue Servitor |  | https://stellaris.paradoxwikis.com/Rogue_Servitor |
 | 3479 | Royal Gardens |  | https://stellaris.paradoxwikis.com/Royal_Gardens |
 | 3480 | Rubricator |  | https://stellaris.paradoxwikis.com/Rubricator |
@@ -3598,7 +3492,7 @@ Not fetched: 4884 pages
 | 3482 | Rudimentary Node Reformatting |  | https://stellaris.paradoxwikis.com/Rudimentary_Node_Reformatting |
 | 3483 | Ruined Arcology |  | https://stellaris.paradoxwikis.com/Ruined_Arcology |
 | 3484 | Ruined Particle Accelerator |  | https://stellaris.paradoxwikis.com/Ruined_Particle_Accelerator |
-| 3485 | Ruined Planet |  | https://stellaris.paradoxwikis.com/Ruined_Planet |
+| 3485 | Ruined Planet | ✅ | https://stellaris.paradoxwikis.com/Ruined_Planet |
 | 3486 | Ruined Star System |  | https://stellaris.paradoxwikis.com/Ruined_Star_System |
 | 3487 | Ruined Station |  | https://stellaris.paradoxwikis.com/Ruined_Station |
 | 3488 | Ruined World |  | https://stellaris.paradoxwikis.com/Ruined_World |
@@ -3724,7 +3618,7 @@ Not fetched: 4884 pages
 | 3608 | Settler |  | https://stellaris.paradoxwikis.com/Settler |
 | 3609 | Shadow Broker |  | https://stellaris.paradoxwikis.com/Shadow_Broker |
 | 3610 | Shadow Council |  | https://stellaris.paradoxwikis.com/Shadow_Council |
-| 3611 | Shadows of the Shroud |  | https://stellaris.paradoxwikis.com/Shadows_of_the_Shroud |
+| 3611 | Shadows of the Shroud | ✅ | https://stellaris.paradoxwikis.com/Shadows_of_the_Shroud |
 | 3612 | Shady Contacts |  | https://stellaris.paradoxwikis.com/Shady_Contacts |
 | 3613 | Shard |  | https://stellaris.paradoxwikis.com/Shard |
 | 3614 | Shared Burdens |  | https://stellaris.paradoxwikis.com/Shared_Burdens |
@@ -3775,7 +3669,7 @@ Not fetched: 4884 pages
 | 3659 | Shortages |  | https://stellaris.paradoxwikis.com/Shortages |
 | 3660 | Shortcut |  | https://stellaris.paradoxwikis.com/Shortcut |
 | 3661 | Shortcuts |  | https://stellaris.paradoxwikis.com/Shortcuts |
-| 3662 | Shrines to the Old Gods |  | https://stellaris.paradoxwikis.com/Shrines_to_the_Old_Gods |
+| 3662 | Shrines to the Old Gods | ✅ | https://stellaris.paradoxwikis.com/Shrines_to_the_Old_Gods |
 | 3663 | Shrinkspace Depot |  | https://stellaris.paradoxwikis.com/Shrinkspace_Depot |
 | 3664 | Shroud |  | https://stellaris.paradoxwikis.com/Shroud |
 | 3665 | Shroud Beacon |  | https://stellaris.paradoxwikis.com/Shroud_Beacon |
@@ -3787,7 +3681,7 @@ Not fetched: 4884 pages
 | 3671 | Shroud-Touched |  | https://stellaris.paradoxwikis.com/Shroud-Touched |
 | 3672 | Shroudwalker Enclave |  | https://stellaris.paradoxwikis.com/Shroudwalker_Enclave |
 | 3673 | Shroudwalker Teacher |  | https://stellaris.paradoxwikis.com/Shroudwalker_Teacher |
-| 3674 | Shuttle Crash |  | https://stellaris.paradoxwikis.com/Shuttle_Crash |
+| 3674 | Shuttle Crash | ✅ | https://stellaris.paradoxwikis.com/Shuttle_Crash |
 | 3675 | Sight Beyond Sight |  | https://stellaris.paradoxwikis.com/Sight_Beyond_Sight |
 | 3676 | Sign-up Campaign |  | https://stellaris.paradoxwikis.com/Sign-up_Campaign |
 | 3677 | Silicate Transgenesis |  | https://stellaris.paradoxwikis.com/Silicate_Transgenesis |
@@ -4207,7 +4101,7 @@ Not fetched: 4884 pages
 | 4091 | Star Wars New Dawn/Technology |  | https://stellaris.paradoxwikis.com/Star_Wars_New_Dawn/Technology |
 | 4092 | Star Wars New Dawn/Traditions |  | https://stellaris.paradoxwikis.com/Star_Wars_New_Dawn/Traditions |
 | 4093 | Star Wars New Dawn/Traits |  | https://stellaris.paradoxwikis.com/Star_Wars_New_Dawn/Traits |
-| 4094 | Stasis Prison |  | https://stellaris.paradoxwikis.com/Stasis_Prison |
+| 4094 | Stasis Prison | ✅ | https://stellaris.paradoxwikis.com/Stasis_Prison |
 | 4095 | Statecraft |  | https://stellaris.paradoxwikis.com/Statecraft |
 | 4096 | Statecraft (disambiguation) |  | https://stellaris.paradoxwikis.com/Statecraft_(disambiguation) |
 | 4097 | Statecraft (field) |  | https://stellaris.paradoxwikis.com/Statecraft_(field) |
@@ -4368,12 +4262,12 @@ Not fetched: 4884 pages
 | 4252 | Storm Devotion |  | https://stellaris.paradoxwikis.com/Storm_Devotion |
 | 4253 | Storm Environmentalists |  | https://stellaris.paradoxwikis.com/Storm_Environmentalists |
 | 4254 | Stormfire Cannons Tech |  | https://stellaris.paradoxwikis.com/Stormfire_Cannons_Tech |
-| 4255 | Storm Frenzy |  | https://stellaris.paradoxwikis.com/Storm_Frenzy |
+| 4255 | Storm Frenzy | ✅ | https://stellaris.paradoxwikis.com/Storm_Frenzy |
 | 4256 | Story events |  | https://stellaris.paradoxwikis.com/Story_events |
 | 4257 | Strange Asteroid |  | https://stellaris.paradoxwikis.com/Strange_Asteroid |
 | 4258 | Strange Flows |  | https://stellaris.paradoxwikis.com/Strange_Flows |
-| 4259 | Strange Footprints |  | https://stellaris.paradoxwikis.com/Strange_Footprints |
-| 4260 | Strange Station |  | https://stellaris.paradoxwikis.com/Strange_Station |
+| 4259 | Strange Footprints | ✅ | https://stellaris.paradoxwikis.com/Strange_Footprints |
+| 4260 | Strange Station | ✅ | https://stellaris.paradoxwikis.com/Strange_Station |
 | 4261 | Strata |  | https://stellaris.paradoxwikis.com/Strata |
 | 4262 | Strategic Coordination Center |  | https://stellaris.paradoxwikis.com/Strategic_Coordination_Center |
 | 4263 | Strategic resource |  | https://stellaris.paradoxwikis.com/Strategic_resource |
@@ -4382,7 +4276,7 @@ Not fetched: 4884 pages
 | 4266 | Strategist |  | https://stellaris.paradoxwikis.com/Strategist |
 | 4267 | Strategist traits |  | https://stellaris.paradoxwikis.com/Strategist_traits |
 | 4268 | Stratospheric Ionization Elements |  | https://stellaris.paradoxwikis.com/Stratospheric_Ionization_Elements |
-| 4269 | Stratospheric Vents |  | https://stellaris.paradoxwikis.com/Stratospheric_Vents |
+| 4269 | Stratospheric Vents | ✅ | https://stellaris.paradoxwikis.com/Stratospheric_Vents |
 | 4270 | Stratum |  | https://stellaris.paradoxwikis.com/Stratum |
 | 4271 | Streamlined Protocols |  | https://stellaris.paradoxwikis.com/Streamlined_Protocols |
 | 4272 | Strength of Legions |  | https://stellaris.paradoxwikis.com/Strength_of_Legions |
@@ -4403,7 +4297,7 @@ Not fetched: 4884 pages
 | 4287 | Subjects |  | https://stellaris.paradoxwikis.com/Subjects |
 | 4288 | Subject types |  | https://stellaris.paradoxwikis.com/Subject_types |
 | 4289 | Subjugation |  | https://stellaris.paradoxwikis.com/Subjugation |
-| 4290 | Sublight Exploration Probes |  | https://stellaris.paradoxwikis.com/Sublight_Exploration_Probes |
+| 4290 | Sublight Exploration Probes | ✅ | https://stellaris.paradoxwikis.com/Sublight_Exploration_Probes |
 | 4291 | Sublight speed |  | https://stellaris.paradoxwikis.com/Sublight_speed |
 | 4292 | Subnautical |  | https://stellaris.paradoxwikis.com/Subnautical |
 | 4293 | Subsidiary |  | https://stellaris.paradoxwikis.com/Subsidiary |
@@ -4412,7 +4306,7 @@ Not fetched: 4884 pages
 | 4296 | Subspace Sensors |  | https://stellaris.paradoxwikis.com/Subspace_Sensors |
 | 4297 | Subspace Sensors Tech |  | https://stellaris.paradoxwikis.com/Subspace_Sensors_Tech |
 | 4298 | Subspace Snare |  | https://stellaris.paradoxwikis.com/Subspace_Snare |
-| 4299 | Subspace Triangulation |  | https://stellaris.paradoxwikis.com/Subspace_Triangulation |
+| 4299 | Subspace Triangulation | ✅ | https://stellaris.paradoxwikis.com/Subspace_Triangulation |
 | 4300 | Subspace Wormholes |  | https://stellaris.paradoxwikis.com/Subspace_Wormholes |
 | 4301 | Substance Abuser |  | https://stellaris.paradoxwikis.com/Substance_Abuser |
 | 4302 | Subsumed Will |  | https://stellaris.paradoxwikis.com/Subsumed_Will |
@@ -4420,7 +4314,7 @@ Not fetched: 4884 pages
 | 4304 | Subterfuge (disambiguation) |  | https://stellaris.paradoxwikis.com/Subterfuge_(disambiguation) |
 | 4305 | Subterfuge (tradition) |  | https://stellaris.paradoxwikis.com/Subterfuge_(tradition) |
 | 4306 | Subterranean |  | https://stellaris.paradoxwikis.com/Subterranean |
-| 4307 | Subterranean Civilization |  | https://stellaris.paradoxwikis.com/Subterranean_Civilization |
+| 4307 | Subterranean Civilization | ✅ | https://stellaris.paradoxwikis.com/Subterranean_Civilization |
 | 4308 | Subterranean Colonization |  | https://stellaris.paradoxwikis.com/Subterranean_Colonization |
 | 4309 | Subterranean Hollows |  | https://stellaris.paradoxwikis.com/Subterranean_Hollows |
 | 4310 | Subterranean Liaison Officer |  | https://stellaris.paradoxwikis.com/Subterranean_Liaison_Officer |
@@ -4613,7 +4507,7 @@ Not fetched: 4884 pages
 | 4497 | Tachyon Sensors |  | https://stellaris.paradoxwikis.com/Tachyon_Sensors |
 | 4498 | Tachyon Sensors Tech |  | https://stellaris.paradoxwikis.com/Tachyon_Sensors_Tech |
 | 4499 | Tactical Algorithms |  | https://stellaris.paradoxwikis.com/Tactical_Algorithms |
-| 4500 | Tactical Algorithms​ (trait) |  | https://stellaris.paradoxwikis.com/Tactical_Algorithms%E2%80%8B_(trait) |
+| 4500 | Tactical Algorithms​ (trait) |  | https://stellaris.paradoxwikis.com/Tactical_Algorithms​_(trait) |
 | 4501 | Talent Acquisition |  | https://stellaris.paradoxwikis.com/Talent_Acquisition |
 | 4502 | Talented |  | https://stellaris.paradoxwikis.com/Talented |
 | 4503 | Tankbound |  | https://stellaris.paradoxwikis.com/Tankbound |
@@ -4661,7 +4555,7 @@ Not fetched: 4884 pages
 | 4545 | Terraforming Candidate |  | https://stellaris.paradoxwikis.com/Terraforming_Candidate |
 | 4546 | Terraforming cost |  | https://stellaris.paradoxwikis.com/Terraforming_cost |
 | 4547 | Terraforming event |  | https://stellaris.paradoxwikis.com/Terraforming_event |
-| 4548 | Terraforming events |  | https://stellaris.paradoxwikis.com/Terraforming_events |
+| 4548 | Terraforming events | ✅ | https://stellaris.paradoxwikis.com/Terraforming_events |
 | 4549 | Terraforming gas |  | https://stellaris.paradoxwikis.com/Terraforming_gas |
 | 4550 | Terraforming gases |  | https://stellaris.paradoxwikis.com/Terraforming_gases |
 | 4551 | Terraforming Gases |  | https://stellaris.paradoxwikis.com/Terraforming_Gases |
@@ -4673,7 +4567,7 @@ Not fetched: 4884 pages
 | 4557 | Terrestrial Sculpting |  | https://stellaris.paradoxwikis.com/Terrestrial_Sculpting |
 | 4558 | Terror bombing |  | https://stellaris.paradoxwikis.com/Terror_bombing |
 | 4559 | The Advisor |  | https://stellaris.paradoxwikis.com/The_Advisor |
-| 4560 | The Bickering Commanders |  | https://stellaris.paradoxwikis.com/The_Bickering_Commanders |
+| 4560 | The Bickering Commanders | ✅ | https://stellaris.paradoxwikis.com/The_Bickering_Commanders |
 | 4561 | The Broken Gates |  | https://stellaris.paradoxwikis.com/The_Broken_Gates |
 | 4562 | The Choir of the Mind |  | https://stellaris.paradoxwikis.com/The_Choir_of_the_Mind |
 | 4563 | The Chosen |  | https://stellaris.paradoxwikis.com/The_Chosen |
@@ -4683,14 +4577,14 @@ Not fetched: 4884 pages
 | 4567 | The contingency |  | https://stellaris.paradoxwikis.com/The_contingency |
 | 4568 | The Contingency |  | https://stellaris.paradoxwikis.com/The_Contingency |
 | 4569 | The Corridors |  | https://stellaris.paradoxwikis.com/The_Corridors |
-| 4570 | The Cost of Freedom |  | https://stellaris.paradoxwikis.com/The_Cost_of_Freedom |
+| 4570 | The Cost of Freedom | ✅ | https://stellaris.paradoxwikis.com/The_Cost_of_Freedom |
 | 4571 | The Crashed Ship |  | https://stellaris.paradoxwikis.com/The_Crashed_Ship |
 | 4572 | The Crystal Rift |  | https://stellaris.paradoxwikis.com/The_Crystal_Rift |
-| 4573 | The Doorway |  | https://stellaris.paradoxwikis.com/The_Doorway |
+| 4573 | The Doorway | ✅ | https://stellaris.paradoxwikis.com/The_Doorway |
 | 4574 | The Echoes Inside |  | https://stellaris.paradoxwikis.com/The_Echoes_Inside |
 | 4575 | The Elder One |  | https://stellaris.paradoxwikis.com/The_Elder_One |
 | 4576 | The Endless Expanse |  | https://stellaris.paradoxwikis.com/The_Endless_Expanse |
-| 4577 | The Fear of the Dark |  | https://stellaris.paradoxwikis.com/The_Fear_of_the_Dark |
+| 4577 | The Fear of the Dark | ✅ | https://stellaris.paradoxwikis.com/The_Fear_of_the_Dark |
 | 4578 | The Fellowship of the Hammer |  | https://stellaris.paradoxwikis.com/The_Fellowship_of_the_Hammer |
 | 4579 | The Flesh is Weak |  | https://stellaris.paradoxwikis.com/The_Flesh_is_Weak |
 | 4580 | The Fluid |  | https://stellaris.paradoxwikis.com/The_Fluid |
@@ -4698,21 +4592,21 @@ Not fetched: 4884 pages
 | 4582 | The Grand Herald |  | https://stellaris.paradoxwikis.com/The_Grand_Herald |
 | 4583 | The Greater Good |  | https://stellaris.paradoxwikis.com/The_Greater_Good |
 | 4584 | The Great Khan |  | https://stellaris.paradoxwikis.com/The_Great_Khan |
-| 4585 | The Guest |  | https://stellaris.paradoxwikis.com/The_Guest |
+| 4585 | The Guest | ✅ | https://stellaris.paradoxwikis.com/The_Guest |
 | 4586 | The Horde |  | https://stellaris.paradoxwikis.com/The_Horde |
 | 4587 | The Horizon Signal |  | https://stellaris.paradoxwikis.com/The_Horizon_Signal |
-| 4588 | The Hunt for the Hyacinth |  | https://stellaris.paradoxwikis.com/The_Hunt_for_the_Hyacinth |
+| 4588 | The Hunt for the Hyacinth | ✅ | https://stellaris.paradoxwikis.com/The_Hunt_for_the_Hyacinth |
 | 4589 | The infinity machine |  | https://stellaris.paradoxwikis.com/The_infinity_machine |
 | 4590 | The Lattice |  | https://stellaris.paradoxwikis.com/The_Lattice |
 | 4591 | The Library |  | https://stellaris.paradoxwikis.com/The_Library |
 | 4592 | The Living State |  | https://stellaris.paradoxwikis.com/The_Living_State |
-| 4593 | The Machine Age |  | https://stellaris.paradoxwikis.com/The_Machine_Age |
+| 4593 | The Machine Age | ✅ | https://stellaris.paradoxwikis.com/The_Machine_Age |
 | 4594 | The Mechanism |  | https://stellaris.paradoxwikis.com/The_Mechanism |
-| 4595 | The Microverse |  | https://stellaris.paradoxwikis.com/The_Microverse |
+| 4595 | The Microverse | ✅ | https://stellaris.paradoxwikis.com/The_Microverse |
 | 4596 | Theocratic Oligarchy |  | https://stellaris.paradoxwikis.com/Theocratic_Oligarchy |
 | 4597 | Theocratic Republic |  | https://stellaris.paradoxwikis.com/Theocratic_Republic |
 | 4598 | Theoretical Infinity Thesis |  | https://stellaris.paradoxwikis.com/Theoretical_Infinity_Thesis |
-| 4599 | The Ransomeers |  | https://stellaris.paradoxwikis.com/The_Ransomeers |
+| 4599 | The Ransomeers | ✅ | https://stellaris.paradoxwikis.com/The_Ransomeers |
 | 4600 | The Reckoning |  | https://stellaris.paradoxwikis.com/The_Reckoning |
 | 4601 | Thermodynamic Yield Control |  | https://stellaris.paradoxwikis.com/Thermodynamic_Yield_Control |
 | 4602 | Thermophile |  | https://stellaris.paradoxwikis.com/Thermophile |
@@ -4757,7 +4651,7 @@ Not fetched: 4884 pages
 | 4641 | Tomb World |  | https://stellaris.paradoxwikis.com/Tomb_World |
 | 4642 | Tomb World Adaptation |  | https://stellaris.paradoxwikis.com/Tomb_World_Adaptation |
 | 4643 | Tomb World Adaption |  | https://stellaris.paradoxwikis.com/Tomb_World_Adaption |
-| 4644 | Tomb world events |  | https://stellaris.paradoxwikis.com/Tomb_world_events |
+| 4644 | Tomb world events | ✅ | https://stellaris.paradoxwikis.com/Tomb_world_events |
 | 4645 | Tomb World Preference |  | https://stellaris.paradoxwikis.com/Tomb_World_Preference |
 | 4646 | Tomb worlds |  | https://stellaris.paradoxwikis.com/Tomb_worlds |
 | 4647 | Too Angled |  | https://stellaris.paradoxwikis.com/Too_Angled |
@@ -4847,7 +4741,7 @@ Not fetched: 4884 pages
 | 4731 | Unchained Knowledge |  | https://stellaris.paradoxwikis.com/Unchained_Knowledge |
 | 4732 | Undead Army |  | https://stellaris.paradoxwikis.com/Undead_Army |
 | 4733 | Underground Clubs |  | https://stellaris.paradoxwikis.com/Underground_Clubs |
-| 4734 | Underground Vault |  | https://stellaris.paradoxwikis.com/Underground_Vault |
+| 4734 | Underground Vault | ✅ | https://stellaris.paradoxwikis.com/Underground_Vault |
 | 4735 | Under One Rule |  | https://stellaris.paradoxwikis.com/Under_One_Rule |
 | 4736 | Under One Rule events |  | https://stellaris.paradoxwikis.com/Under_One_Rule_events |
 | 4737 | Under the Ice |  | https://stellaris.paradoxwikis.com/Under_the_Ice |
@@ -4855,7 +4749,7 @@ Not fetched: 4884 pages
 | 4739 | Undirected Drones |  | https://stellaris.paradoxwikis.com/Undirected_Drones |
 | 4740 | UNE |  | https://stellaris.paradoxwikis.com/UNE |
 | 4741 | Unemployment |  | https://stellaris.paradoxwikis.com/Unemployment |
-| 4742 | Unexpected Mineral Seams |  | https://stellaris.paradoxwikis.com/Unexpected_Mineral_Seams |
+| 4742 | Unexpected Mineral Seams | ✅ | https://stellaris.paradoxwikis.com/Unexpected_Mineral_Seams |
 | 4743 | Unhappy |  | https://stellaris.paradoxwikis.com/Unhappy |
 | 4744 | Unholy |  | https://stellaris.paradoxwikis.com/Unholy |
 | 4745 | Unified Focus |  | https://stellaris.paradoxwikis.com/Unified_Focus |
@@ -4899,7 +4793,7 @@ Not fetched: 4884 pages
 | 4783 | Utility |  | https://stellaris.paradoxwikis.com/Utility |
 | 4784 | Utility component |  | https://stellaris.paradoxwikis.com/Utility_component |
 | 4785 | Utility components | ✅ | https://stellaris.paradoxwikis.com/Utility_components |
-| 4786 | Utopia |  | https://stellaris.paradoxwikis.com/Utopia |
+| 4786 | Utopia | ✅ | https://stellaris.paradoxwikis.com/Utopia |
 | 4787 | Utopian Communal Housing |  | https://stellaris.paradoxwikis.com/Utopian_Communal_Housing |
 | 4788 | Utopian Idealist |  | https://stellaris.paradoxwikis.com/Utopian_Idealist |
 | 4789 | UV Lasers Tech |  | https://stellaris.paradoxwikis.com/UV_Lasers_Tech |
@@ -4957,7 +4851,7 @@ Not fetched: 4884 pages
 | 4841 | Vultaum Reality Computer |  | https://stellaris.paradoxwikis.com/Vultaum_Reality_Computer |
 | 4842 | Vultaum Reality Computer Tech |  | https://stellaris.paradoxwikis.com/Vultaum_Reality_Computer_Tech |
 | 4843 | Wanderlust |  | https://stellaris.paradoxwikis.com/Wanderlust |
-| 4844 | Wanderlust: Rogue Scientist |  | https://stellaris.paradoxwikis.com/Wanderlust:_Rogue_Scientist |
+| 4844 | Wanderlust: Rogue Scientist | ✅ | https://stellaris.paradoxwikis.com/Wanderlust:_Rogue_Scientist |
 | 4845 | War |  | https://stellaris.paradoxwikis.com/War |
 | 4846 | Warbots |  | https://stellaris.paradoxwikis.com/Warbots |
 | 4847 | Warbots (individualist) |  | https://stellaris.paradoxwikis.com/Warbots_(individualist) |
@@ -5020,7 +4914,7 @@ Not fetched: 4884 pages
 | 4904 | Wet Climate Mods |  | https://stellaris.paradoxwikis.com/Wet_Climate_Mods |
 | 4905 | Wet Preference |  | https://stellaris.paradoxwikis.com/Wet_Preference |
 | 4906 | Whale |  | https://stellaris.paradoxwikis.com/Whale |
-| 4907 | What Happened Here? |  | https://stellaris.paradoxwikis.com/What_Happened_Here%3F |
+| 4907 | What Happened Here? |  | https://stellaris.paradoxwikis.com/What_Happened_Here? |
 | 4908 | Whirlwind Missiles Tech |  | https://stellaris.paradoxwikis.com/Whirlwind_Missiles_Tech |
 | 4909 | Whispers in the Stone |  | https://stellaris.paradoxwikis.com/Whispers_in_the_Stone |
 | 4910 | White peace |  | https://stellaris.paradoxwikis.com/White_peace |
