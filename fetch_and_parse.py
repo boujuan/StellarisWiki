@@ -24,6 +24,25 @@ from html_to_markdown import HTMLToMarkdown
 
 API_URL = "https://stellaris.paradoxwikis.com/api.php"
 
+# Known error patterns in wiki-rendered content
+CONTENT_ERROR_PATTERNS = [
+    (re.compile(r'Failed to parse \(SVG.*?\)'), "Math render error"),
+    (re.compile(r'{\s*\\displaystyle'), "Raw LaTeX not rendered"),
+]
+
+
+def check_content_errors(title: str, markdown: str) -> list[str]:
+    """Check converted markdown for known content errors.
+
+    Returns list of warning strings (empty if no errors).
+    """
+    warnings = []
+    for pattern, label in CONTENT_ERROR_PATTERNS:
+        matches = pattern.findall(markdown)
+        if matches:
+            warnings.append(f"{title}: {label} ({len(matches)} occurrence{'s' if len(matches) > 1 else ''})")
+    return warnings
+
 PAGES_TO_FETCH = [
     # Empire Setup
     "Origin",
@@ -124,6 +143,11 @@ PAGES_TO_FETCH = [
     # Reference & Other
     "Achievements",
     "Crisis",
+    "Prethoryn_Scourge",
+    "Extradimensional_Invaders",
+    "Contingency",
+    "The_Synthetic_Queen",
+    "Effects",
     "Galaxy settings",
     "Beginner's guide",
     "Hotkeys",
@@ -277,20 +301,20 @@ def process_single_page(session, converter: HTMLToMarkdown, title: str,
     return full_md, True
 
 
-def _fetch_and_convert(title: str, pages_dir: Path) -> tuple[str, str, bool]:
+def _fetch_and_convert(title: str, pages_dir: Path) -> tuple[str, str, bool, list[str]]:
     """Fetch and convert a single page (for use in thread pool).
 
     Each thread creates its own session to avoid sharing state.
 
     Returns:
-        Tuple of (title, markdown_content, success)
+        Tuple of (title, markdown_content, success, warnings)
     """
     session = create_session()
     converter = HTMLToMarkdown()
 
     data = fetch_page_html(session, title)
     if not data or not data.get("html"):
-        return title, "", False
+        return title, "", False, []
 
     markdown = converter.convert(data["html"], data["title"])
     frontmatter = create_yaml_frontmatter(data["title"], data["categories"])
@@ -300,7 +324,8 @@ def _fetch_and_convert(title: str, pages_dir: Path) -> tuple[str, str, bool]:
     output_path = pages_dir / filename
     output_path.write_text(full_md, encoding="utf-8")
 
-    return title, full_md, True
+    warnings = check_content_errors(title, full_md)
+    return title, full_md, True, warnings
 
 
 def extract_event_subpage_links(html: str) -> list[tuple[str, list[str]]]:
@@ -494,6 +519,7 @@ def process_all_pages(page_titles: list[str], output_dir: Path,
     results = {}
     successful = 0
     failed = 0
+    all_warnings = []
 
     print(f"\nProcessing {len(page_titles)} pages (workers={workers})...")
     print(f"Output directory: {output_dir}")
@@ -514,10 +540,11 @@ def process_all_pages(page_titles: list[str], output_dir: Path,
                 with tqdm(total=len(regular_titles), desc="Regular pages",
                           unit=" pages") as pbar:
                     for future in as_completed(futures):
-                        title, full_md, success = future.result()
+                        title, full_md, success, page_warnings = future.result()
                         if success:
                             results[title] = full_md
                             successful += 1
+                            all_warnings.extend(page_warnings)
                         else:
                             failed += 1
                         pbar.update(1)
@@ -531,6 +558,7 @@ def process_all_pages(page_titles: list[str], output_dir: Path,
                 if success:
                     results[title] = full_md
                     successful += 1
+                    all_warnings.extend(check_content_errors(title, full_md))
                 else:
                     failed += 1
 
@@ -540,6 +568,7 @@ def process_all_pages(page_titles: list[str], output_dir: Path,
         if success:
             results[title] = full_md
             successful += 1
+            all_warnings.extend(check_content_errors(title, full_md))
         else:
             failed += 1
 
@@ -561,6 +590,13 @@ def process_all_pages(page_titles: list[str], output_dir: Path,
 
         total_size = sum(f.stat().st_size for f in pages_dir.glob("*.md"))
         print(f"Total individual files size: {total_size / 1024 / 1024:.2f} MB")
+
+        if all_warnings:
+            print(f"\n⚠ Content warnings ({len(all_warnings)}):")
+            for w in all_warnings:
+                print(f"  - {w}")
+        else:
+            print("\nNo content warnings.")
 
 
 def test_single_page(title: str, output_dir: Path):
@@ -586,6 +622,13 @@ def test_single_page(title: str, output_dir: Path):
         output_path = pages_dir / filename
         print(f"Success! Output saved to: {output_path}")
         print(f"File size: {output_path.stat().st_size / 1024:.2f} KB")
+
+        warnings = check_content_errors(title, full_md)
+        if warnings:
+            print(f"\n⚠ Content warnings:")
+            for w in warnings:
+                print(f"  - {w}")
+
         print("\nFirst 2000 characters of output:")
         print("-" * 60)
         print(full_md[:2000])
@@ -644,6 +687,13 @@ def main():
                 output_path = pages_dir / filename
                 print(f"Success! Output saved to: {output_path}")
                 print(f"File size: {output_path.stat().st_size / 1024:.2f} KB")
+
+                warnings = check_content_errors(args.page, full_md)
+                if warnings:
+                    print(f"\n⚠ Content warnings:")
+                    for w in warnings:
+                        print(f"  - {w}")
+
                 print("\nFirst 2000 characters of output:")
                 print("-" * 60)
                 print(full_md[:2000])
