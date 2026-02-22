@@ -2,6 +2,8 @@
 
 from pathlib import Path
 
+__version__ = "1.0.0"
+
 # Single source of truth for all project paths.
 # Every module imports these instead of computing its own paths.
 PROJECT_ROOT = Path(__file__).resolve().parent.parent

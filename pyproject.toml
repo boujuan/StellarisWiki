@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stellariswiki"
+dynamic = ["version"]
+description = "Fetch Stellaris Wiki pages and convert to clean, LLM-optimized Markdown"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "boujuan" },
+]
+keywords = ["stellaris", "wiki", "scraper", "markdown", "mediawiki"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Games/Entertainment :: Simulation",
+    "Topic :: Text Processing :: Markup",
+]
+dependencies = [
+    "cloudscraper>=1.2.71",
+    "tqdm>=4.66.0",
+    "beautifulsoup4>=4.11.0",
+    "lxml>=4.9.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+mcp = ["fastmcp>=2.0.0"]
+dev = ["fastmcp>=2.0.0"]
+
+[project.scripts]
+stellariswiki = "src.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/boujuan/StellarisWiki"
+Dashboard = "https://boujuan.github.io/StellarisWiki/"
+Issues = "https://github.com/boujuan/StellarisWiki/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "src.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["src*"]
+
+[tool.setuptools.package-data]
+"*" = ["config/*.yaml"]

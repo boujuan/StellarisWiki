@@ -130,7 +130,7 @@ The empire from the previous examples (same setup) has just finished debris anal
 
 This setup generates the following monthly research progress:
 
-Monthly research progress = 24 * (1 + 0.05 + 0.15) + min[1000,24] = 52.8
+Monthly research progress = 24 * (1 + 0.05 + 0.15) + min[1000, 24] = 52.8
 
 Assuming no further changes impact the above setup, the total research time of the tech would be:
 

@@ -12,3 +12,4 @@ dependencies:
   - pip:
     - cloudscraper
     - fastmcp
+    - -e .

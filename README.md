@@ -45,46 +45,60 @@ The HTML-to-Markdown approach produces output that is **~55% smaller** than the 
 ### Prerequisites
 
 - Python 3.11+
-- micromamba, conda, or pip
 
-### Using micromamba (recommended)
+### Install (recommended)
 
 ```bash
-# Create environment from environment.yml
-micromamba create -f environment.yml
-micromamba run -n stellaris-scraper pip install cloudscraper
+# Clone and install as editable package
+git clone https://github.com/boujuan/StellarisWiki.git
+cd StellarisWiki/stellaris_wiki_scraper
+pip install -e .
 
-# Or manually
-micromamba create -n stellaris-scraper python=3.11 tqdm beautifulsoup4 lxml pydantic -c conda-forge
-micromamba run -n stellaris-scraper pip install cloudscraper fastmcp
+# With MCP server support (for Claude Desktop integration)
+pip install -e ".[mcp]"
 ```
 
-### Using pip
+This installs the `stellariswiki` command globally in your environment.
+
+### Using micromamba
 
 ```bash
-pip install -r requirements.txt
+micromamba create -f environment.yml
+micromamba activate stellaris-scraper
+pip install -e ".[mcp]"
 ```
 
 ### Dependencies
+
+Core dependencies (installed automatically via `pip install`):
 
 ```
 cloudscraper>=1.2.71    # Bypass Cloudflare protection
 tqdm>=4.66.0            # Progress bars
 beautifulsoup4>=4.11.0  # HTML parsing
 lxml>=4.9.0             # Fast HTML parser backend
+PyYAML>=6.0             # Config parsing
+```
+
+Optional (for MCP server — `pip install -e ".[mcp]"`):
+
+```
 fastmcp>=2.0.0          # MCP server framework
 ```
 
 ## Usage
 
+After installation, use the `stellariswiki` command (or `python stellariswiki.py`):
+
+```bash
+stellariswiki --help       # Show all commands and examples
+stellariswiki --version    # Show version
+```
+
 ### Fetch and Convert All Pages to Markdown
 
 ```bash
-# Using micromamba
-micromamba run -n stellaris-scraper python stellariswiki.py fetch
-
-# Or if environment is activated
-python stellariswiki.py fetch
+stellariswiki fetch
 ```
 
 This will:
@@ -99,39 +113,75 @@ This will:
 
 ```bash
 # Test mode shows first 2000 characters of output
-python stellariswiki.py fetch --page "Machine_traits" --test
+stellariswiki fetch --page "Machine_traits" --test
 
 # Process single page without test output
-python stellariswiki.py fetch --page "Civics"
+stellariswiki fetch --page "Civics"
 
 # Test a composite page (fetches all sub-pages)
-python stellariswiki.py fetch --page "Astral rift" --test
+stellariswiki fetch --page "Astral rift" --test
+```
+
+### Analyze Wiki Coverage
+
+```bash
+# Generate interactive HTML dashboard
+stellariswiki analyze
+
+# Generate Markdown report
+stellariswiki analyze --format md
+
+# Skip all_pages.md generation
+stellariswiki analyze --no-all-pages
 ```
 
 ### Command Line Options
 
+**`stellariswiki fetch`**
+
 | Option | Description | Default |
 |--------|-------------|---------|
 | `--page TITLE` | Process a single page by title | (all pages) |
-| `--test` | Run in test mode (use with `--page`) | false |
+| `--test` | Test mode: print first 2000 chars (use with `--page`) | false |
 | `--output DIR` | Output directory | `output` |
-| `--delay SECONDS` | Delay between API requests (sequential mode) | `0.5` |
+| `--delay SEC` | Delay between API requests (sequential mode) | `0.5` |
 | `--workers N` | Number of parallel workers | `4` |
+
+**`stellariswiki analyze`**
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--format {html,md}` | Output format | `html` |
+| `--workers N` | Number of parallel workers for API calls | `4` |
+| `--output PATH` | Output file path | `output/wiki_analysis.{html,md}` |
+| `--no-all-pages` | Skip generating all_pages.md | false |
+
+**`stellariswiki serve`**
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--transport {stdio,sse}` | MCP transport protocol | `stdio` |
 
 ### Examples
 
 ```bash
 # Fetch all pages with default settings (4 parallel workers)
-python stellariswiki.py fetch
+stellariswiki fetch
 
 # Sequential fetching (gentler on the wiki)
-python stellariswiki.py fetch --workers 1
+stellariswiki fetch --workers 1 --delay 1.0
 
 # Custom output directory
-python stellariswiki.py fetch --output my_wiki_data
+stellariswiki fetch --output my_wiki_data
 
 # Test a specific page
-python stellariswiki.py fetch --page "Technology" --test
+stellariswiki fetch --page "Technology" --test
+
+# Generate HTML dashboard + all_pages.md
+stellariswiki analyze
+
+# Start MCP server for Claude Desktop
+stellariswiki serve
 ```
 
 ## MCP Server (StellarisWikiMCP)
@@ -140,10 +190,10 @@ An MCP (Model Context Protocol) server is included, allowing Claude Desktop to q
 
 ### Setup
 
-1. Install FastMCP in the environment (already included in `environment.yml`):
+1. Install with MCP support:
 
 ```bash
-micromamba run -n stellaris-scraper pip install fastmcp
+pip install -e ".[mcp]"
 ```
 
 2. Add to Claude Desktop config (`~/.config/Claude/claude_desktop_config.json`):
@@ -152,11 +202,8 @@ micromamba run -n stellaris-scraper pip install fastmcp
 {
   "mcpServers": {
     "StellarisWikiMCP": {
-      "command": "/usr/bin/micromamba",
-      "args": [
-        "run", "-n", "stellaris-scraper", "python",
-        "/path/to/stellaris_wiki_scraper/stellariswiki.py", "serve"
-      ]
+      "command": "stellariswiki",
+      "args": ["serve"]
     }
   }
 }
@@ -216,11 +263,13 @@ All pages are concatenated into `output/stellaris_4.2_combined.md`, separated by
 
 ```
 stellaris_wiki_scraper/
-├── stellariswiki.py          # CLI entry point (fetch / analyze / serve)
+├── stellariswiki.py          # Script entry point (python stellariswiki.py ...)
+├── pyproject.toml            # Package metadata, dependencies, console_scripts
 ├── config/
 │   └── config.yaml           # Pages to fetch + classification rules
 ├── src/
-│   ├── __init__.py           # Path constants (PROJECT_ROOT, OUTPUT_DIR, etc.)
+│   ├── __init__.py           # Package version + path constants
+│   ├── cli.py                # CLI argument parser + command dispatch
 │   ├── config.py             # Config loader (dataclasses), singleton cfg
 │   ├── fetcher.py            # Fetch wiki HTML → convert to Markdown
 │   ├── converter.py          # HTML to Markdown converter class
@@ -282,7 +331,7 @@ Page titles must match the wiki URL (e.g., `https://stellaris.paradoxwikis.com/A
 Then re-run the fetch:
 
 ```bash
-python stellariswiki.py fetch
+stellariswiki fetch
 ```
 
 ## HTML to Markdown Conversion
@@ -373,6 +422,7 @@ This tool is for educational and research purposes. All wiki content is owned by
 
 ## Version Compatibility
 
+- **Package Version**: 1.0.0
 - **Wiki Version**: 4.2 (Stellaris game version)
 - **Python**: 3.11+
 - **Last Updated**: February 2026
