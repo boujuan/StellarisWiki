@@ -140,12 +140,6 @@ pages_to_fetch:
   - "On actions"
   - "ID"
 
-# Pages available but not fetched by default (modding reference, etc.)
-# Shown in a separate "Optional" section in the dashboard.
-optional_pages:
-  - "Placeholders"
-  - "Scopes/Flat list of scopes"
-
 # ---------------------------------------------------------------------------
 # Composite pages: index pages whose sub-page links are extracted from HTML.
 # Each entry maps a page title to an extractor config with:

@@ -52,7 +52,6 @@ class Config:
     wiki: WikiConfig
     defaults: DefaultsConfig
     pages_to_fetch: list[str]
-    optional_pages: list[str]
     composite_pages: dict[str, CompositePageConfig]
     classification: ClassificationConfig
 
@@ -109,7 +108,6 @@ def load_config(config_path: Path | None = None) -> Config:
             generate_all_pages=raw["defaults"].get("generate_all_pages", True),
         ),
         pages_to_fetch=raw["pages_to_fetch"],
-        optional_pages=raw.get("optional_pages") or [],
         composite_pages=composite_pages,
         classification=ClassificationConfig(
             mod_prefixes=cls_raw["mod_prefixes"],

@@ -159,12 +159,11 @@ tr:hover { background: rgba(59,130,246,.05); }
     <div class="nav-links">
         <a href="#dashboard">Dashboard</a>
         <a href="#fetched">Fetched (224)</a>
-        <a href="#optional">Optional (2)</a>
         <a href="#game-content">Game Content (47)</a>
         <a href="#dlc">DLC (10)</a>
         <a href="#patches">Patches (72)</a>
         <a href="#disambiguation">Disambig (52)</a>
-        <a href="#modding">Modding (64)</a>
+        <a href="#modding">Modding (66)</a>
         <a href="#mods">Mods (236)</a>
         <a href="#redirects">Redirects (3732)</a>
     </div>
@@ -206,18 +205,18 @@ tr:hover { background: rgba(59,130,246,.05); }
         <div class="breakdown">
             <canvas id="pie-notfetched" width="160" height="160"></canvas>
             <div class="pie-legend" id="legend-notfetched">
-                <h3>Not-Fetched Breakdown (481 pages)</h3>
+                <h3>Not-Fetched Breakdown (483 pages)</h3>
             </div>
         </div>
     </div>
-    <p class="generated">Generated on 2026-02-22 17:37:59</p>
+    <p class="generated">Generated on 2026-02-22 17:49:56</p>
 </section>
 <div class="pie-tooltip" id="pie-tooltip"></div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    initPie('pie-wiki', 'legend-wiki', [{"label": "Main pages fetched", "value": 108, "color": "#22c55e"}, {"label": "Sub-pages fetched", "value": 116, "color": "#14b8a6"}, {"label": "Redirects to fetched", "value": 3732, "color": "#3b82f6"}, {"label": "Not fetched", "value": 481, "color": "#f97316"}, {"label": "Other redirects", "value": 557, "color": "#64748b"}]);
+    initPie('pie-wiki', 'legend-wiki', [{"label": "Main pages fetched", "value": 108, "color": "#22c55e"}, {"label": "Sub-pages fetched", "value": 116, "color": "#14b8a6"}, {"label": "Redirects to fetched", "value": 3732, "color": "#3b82f6"}, {"label": "Not fetched", "value": 483, "color": "#f97316"}, {"label": "Other redirects", "value": 557, "color": "#64748b"}]);
     initPie('pie-fetched', 'legend-fetched', [{"label": "Main pages", "value": 105, "color": "#22c55e"}, {"label": "Composite parents", "value": 3, "color": "#0ea5e9"}, {"label": "Astral rift sub-pages", "value": 22, "color": "#f97316"}, {"label": "Events sub-pages", "value": 91, "color": "#a855f7"}, {"label": "Situations sub-pages", "value": 3, "color": "#ef4444"}]);
-    initPie('pie-notfetched', 'legend-notfetched', [{"label": "Game Content", "value": 47, "color": "#3b82f6"}, {"label": "DLC", "value": 10, "color": "#f97316"}, {"label": "Patches", "value": 72, "color": "#14b8a6"}, {"label": "Disambiguation", "value": 52, "color": "#eab308"}, {"label": "Modding", "value": 64, "color": "#a855f7"}, {"label": "Total-conversion Mods", "value": 236, "color": "#ef4444"}]);
+    initPie('pie-notfetched', 'legend-notfetched', [{"label": "Game Content", "value": 47, "color": "#3b82f6"}, {"label": "DLC", "value": 10, "color": "#f97316"}, {"label": "Patches", "value": 72, "color": "#14b8a6"}, {"label": "Disambiguation", "value": 52, "color": "#eab308"}, {"label": "Modding", "value": 66, "color": "#a855f7"}, {"label": "Total-conversion Mods", "value": 236, "color": "#ef4444"}]);
 });
 </script>
 
@@ -557,18 +556,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </section>
 
-<section id="optional" class="section">
-    <div class="section-header" onclick="toggleSection(this)">
-        <span class="chevron">&#9656;</span>
-        <h2>Optional Pages <span class="count">(2)</span></h2>
-    </div>
-    <div class="section-body">
-        <p style="margin-bottom:0.75rem">Modding reference pages available in config but not fetched by default.</p>
-        <table><thead><tr><th style="width:2rem"></th><th>Page</th><th>Notes</th></tr></thead><tbody><tr><td><button class="fetch-btn fetch-btn-add" data-page="Placeholders" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Placeholders" target="_blank">Placeholders</a></td><td>Optional — not fetched by default</td></tr>
-<tr><td><button class="fetch-btn fetch-btn-add" data-page="Scopes/Flat list of scopes" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Scopes/Flat_list_of_scopes" target="_blank">Scopes/Flat list of scopes</a></td><td>Optional — not fetched by default</td></tr></tbody></table>
-    </div>
-</section>
-
 <section id="game-content" class="section">
     <div class="section-header" onclick="toggleSection(this)">
         <span class="chevron">&#9656;</span>
@@ -813,7 +800,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <section id="modding" class="section">
     <div class="section-header" onclick="toggleSection(this)">
         <span class="chevron">&#9656;</span>
-        <h2>Modding Documentation <span class="count">(64)</span></h2>
+        <h2>Modding Documentation <span class="count">(66)</span></h2>
     </div>
     <div class="section-body">
         <table><thead><tr><th style="width:2rem"></th><th>Page</th><th>Wiki Categories</th></tr></thead><tbody><tr><td><button class="fetch-btn fetch-btn-add" data-page="AI modding" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/AI_modding" target="_blank">AI modding</a></td><td><span class="tag" data-cat="3.0">3.0</span> <span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Potentially outdated">Potentially outdated</span></td></tr>
@@ -861,6 +848,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <tr><td><button class="fetch-btn fetch-btn-add" data-page="Mods" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Mods" target="_blank">Mods</a></td><td><span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Timeless">Timeless</span></td></tr>
 <tr><td><button class="fetch-btn fetch-btn-add" data-page="Music modding" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Music_modding" target="_blank">Music modding</a></td><td><span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Timeless">Timeless</span></td></tr>
 <tr><td><button class="fetch-btn fetch-btn-add" data-page="Opinion modifier modding" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Opinion_modifier_modding" target="_blank">Opinion modifier modding</a></td><td><span class="tag" data-cat="2.5">2.5</span> <span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Potentially outdated">Potentially outdated</span></td></tr>
+<tr><td><button class="fetch-btn fetch-btn-add" data-page="Placeholders" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Placeholders" target="_blank">Placeholders</a></td><td><span class="tag" data-cat="Modding">Modding</span></td></tr>
 <tr><td><button class="fetch-btn fetch-btn-add" data-page="Planet Generation modding" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Planet_Generation_modding" target="_blank">Planet Generation modding</a></td><td><span class="tag" data-cat="2.7">2.7</span> <span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Potentially outdated">Potentially outdated</span></td></tr>
 <tr><td><button class="fetch-btn fetch-btn-add" data-page="Planet modding" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Planet_modding" target="_blank">Planet modding</a></td><td><span class="tag" data-cat="3.1">3.1</span> <span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Potentially outdated">Potentially outdated</span></td></tr>
 <tr><td><button class="fetch-btn fetch-btn-add" data-page="Policies modding" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Policies_modding" target="_blank">Policies modding</a></td><td><span class="tag" data-cat="2.6">2.6</span> <span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Potentially outdated">Potentially outdated</span></td></tr>
@@ -869,6 +857,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <tr><td><button class="fetch-btn fetch-btn-add" data-page="Portrait modding" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Portrait_modding" target="_blank">Portrait modding</a></td><td><span class="tag" data-cat="3.3">3.3</span> <span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Potentially outdated">Potentially outdated</span></td></tr>
 <tr><td><button class="fetch-btn fetch-btn-add" data-page="Save-game editing" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Save-game_editing" target="_blank">Save-game editing</a></td><td><span class="tag" data-cat="Articles with potentially outdated sections">Articles with potentially outdated sections</span> <span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Timeless">Timeless</span></td></tr>
 <tr><td><button class="fetch-btn fetch-btn-add" data-page="Scopes" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Scopes" target="_blank">Scopes</a></td><td><span class="tag" data-cat="3.2">3.2</span> <span class="tag" data-cat="Articles with potentially outdated sections">Articles with potentially outdated sections</span> <span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Potentially outdated">Potentially outdated</span></td></tr>
+<tr><td><button class="fetch-btn fetch-btn-add" data-page="Scopes/Flat list of scopes" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Scopes/Flat_list_of_scopes" target="_blank">Scopes/Flat list of scopes</a></td><td><span class="tag" data-cat="3.5">3.5</span> <span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Potentially outdated">Potentially outdated</span></td></tr>
 <tr><td><button class="fetch-btn fetch-btn-add" data-page="Ship modding" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Ship_modding" target="_blank">Ship modding</a></td><td><span class="tag" data-cat="3.0">3.0</span> <span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Potentially outdated">Potentially outdated</span></td></tr>
 <tr><td><button class="fetch-btn fetch-btn-add" data-page="Special Project modding" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Special_Project_modding" target="_blank">Special Project modding</a></td><td><span class="tag" data-cat="3.1">3.1</span> <span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Potentially outdated">Potentially outdated</span></td></tr>
 <tr><td><button class="fetch-btn fetch-btn-add" data-page="Species modding" onclick="toggleFetchPage(this)" title="Add to config">+</button></td><td><a href="https://stellaris.paradoxwikis.com/Species_modding" target="_blank">Species modding</a></td><td><span class="tag" data-cat="Modding">Modding</span> <span class="tag" data-cat="Timeless">Timeless</span></td></tr>
@@ -5058,8 +5047,8 @@ python analyze_wiki_pages.py</pre>
 
 <script>
 const PAGES_TO_FETCH = ["Origin", "Government", "Ethics", "Civics", "Corporate civics", "Hive mind civics", "Machine intelligence civics", "Empire", "Council", "Policies", "Edicts", "Factions", "Traditions", "Ascension_perks", "Situations", "Crisis_empire", "Species", "Species_traits", "Biological_traits", "Machine_traits", "Population", "Species_rights", "Leaders", "Common_leader_traits", "Commander_traits", "Scientist_traits", "Official_traits", "Paragons", "Resources", "Planetary_management", "Jobs", "Districts", "Designation", "Holdings", "Planet_capital", "Unique_buildings", "Buildings", "Megastructures", "Colonization", "Technology", "Physics_research", "Society_research", "Engineering_research", "Ship", "Ship_designer", "Core_components", "Weapon_components", "Utility_components", "Mutations", "Offensive mutations", "Warfare", "Space_warfare", "Land warfare", "Starbase", "Exploration", "FTL travel", "Discovery", "Anomaly", "Archaeological site", "Astral rift", "Astral threads", "Celestial_object", "Planet_modifiers", "Planetary_features", "Unique_systems", "Relics", "Collection", "L-Cluster", "The_Shroud", "Environmental effects", "Diplomacy", "Relations", "Galactic Community", "Federation", "Subject empire", "Intelligence", "AI personalities", "Fallen empire", "Spaceborne aliens", "Pre-FTL species", "Enclaves", "Guardians", "Marauders", "Caravaneers", "Empire_modifiers", "Stat_modifiers", "Events", "Distant Stars projects", "Job base modifiers", "Achievements", "Crisis", "Prethoryn_Scourge", "Extradimensional_Invaders", "Contingency", "The_Synthetic_Queen", "Effects", "Galaxy settings", "Beginner's guide", "Hotkeys", "Jargon", "User interface", "Console_commands", "Easter eggs", "AI players", "Preset empires", "Modding", "On actions", "ID"];
-const CONFIG_YAML = "# Stellaris Wiki Scraper Configuration\n# Shared by fetch_and_parse.py, analyze_wiki_pages.py, and stellaris_mcp_server.py\n\ngame_version: \"4.2\"\n\nwiki:\n  api_url: \"https://stellaris.paradoxwikis.com/api.php\"\n\ndefaults:\n  output_dir: \"output\"\n  workers: 4\n  delay: 0.5              # seconds between requests (fetch_and_parse sequential mode)\n  request_delay: 0.3      # seconds between requests (analyze_wiki_pages)\n  max_retries: 5\n  generate_all_pages: true # Generate all_pages.md when running analyze_wiki_pages.py\n\n# ---------------------------------------------------------------------------\n# Pages to fetch from the wiki\n# ---------------------------------------------------------------------------\npages_to_fetch:\n  # Empire Setup\n  - \"Origin\"\n  - \"Government\"\n  - \"Ethics\"\n  - \"Civics\"\n  - \"Corporate civics\"\n  - \"Hive mind civics\"\n  - \"Machine intelligence civics\"\n  - \"Empire\"\n  # Governance\n  - \"Council\"\n  - \"Policies\"\n  - \"Edicts\"\n  - \"Factions\"\n  - \"Traditions\"\n  - \"Ascension_perks\"\n  - \"Situations\"\n  - \"Crisis_empire\"\n  # Species\n  - \"Species\"\n  - \"Species_traits\"\n  - \"Biological_traits\"\n  - \"Machine_traits\"\n  - \"Population\"\n  - \"Species_rights\"\n  # Leaders\n  - \"Leaders\"\n  - \"Common_leader_traits\"\n  - \"Commander_traits\"\n  - \"Scientist_traits\"\n  - \"Official_traits\"\n  - \"Paragons\"\n  # Economy & Buildings\n  - \"Resources\"\n  - \"Planetary_management\"\n  - \"Jobs\"\n  - \"Districts\"\n  - \"Designation\"\n  - \"Holdings\"\n  - \"Planet_capital\"\n  - \"Unique_buildings\"\n  - \"Buildings\"\n  - \"Megastructures\"\n  - \"Colonization\"\n  # Technology\n  - \"Technology\"\n  - \"Physics_research\"\n  - \"Society_research\"\n  - \"Engineering_research\"\n  # Ships & Components\n  - \"Ship\"\n  - \"Ship_designer\"\n  - \"Core_components\"\n  - \"Weapon_components\"\n  - \"Utility_components\"\n  - \"Mutations\"\n  - \"Offensive mutations\"\n  # Military\n  - \"Warfare\"\n  - \"Space_warfare\"\n  - \"Land warfare\"\n  - \"Starbase\"\n  # Exploration & Discovery\n  - \"Exploration\"\n  - \"FTL travel\"\n  - \"Discovery\"\n  - \"Anomaly\"\n  - \"Archaeological site\"\n  - \"Astral rift\"\n  - \"Astral threads\"\n  - \"Celestial_object\"\n  - \"Planet_modifiers\"\n  - \"Planetary_features\"\n  - \"Unique_systems\"\n  - \"Relics\"\n  - \"Collection\"\n  - \"L-Cluster\"\n  - \"The_Shroud\"\n  - \"Environmental effects\"\n  # Diplomacy & Relations\n  - \"Diplomacy\"\n  - \"Relations\"\n  - \"Galactic Community\"\n  - \"Federation\"\n  - \"Subject empire\"\n  - \"Intelligence\"\n  - \"AI personalities\"\n  # NPCs & Encounters\n  - \"Fallen empire\"\n  - \"Spaceborne aliens\"\n  - \"Pre-FTL species\"\n  - \"Enclaves\"\n  - \"Guardians\"\n  - \"Marauders\"\n  - \"Caravaneers\"\n  # Modifiers & Events\n  - \"Empire_modifiers\"\n  - \"Stat_modifiers\"\n  - \"Events\"\n  - \"Distant Stars projects\"\n  - \"Job base modifiers\"\n  # Reference & Other\n  - \"Achievements\"\n  - \"Crisis\"\n  - \"Prethoryn_Scourge\"\n  - \"Extradimensional_Invaders\"\n  - \"Contingency\"\n  - \"The_Synthetic_Queen\"\n  - \"Effects\"\n  - \"Galaxy settings\"\n  - \"Beginner's guide\"\n  - \"Hotkeys\"\n  - \"Jargon\"\n  - \"User interface\"\n  - \"Console_commands\"\n  - \"Easter eggs\"\n  - \"AI players\"\n  - \"Preset empires\"\n  - \"Modding\"\n  - \"On actions\"\n  - \"ID\"\n\n# Pages available but not fetched by default (modding reference, etc.)\n# Shown in a separate \"Optional\" section in the dashboard.\noptional_pages:\n  - \"Placeholders\"\n  - \"Scopes/Flat list of scopes\"\n\n# ---------------------------------------------------------------------------\n# Composite pages: index pages whose sub-page links are extracted from HTML.\n# Each entry maps a page title to an extractor config with:\n#   extractor: name of Python function in fetch_and_parse.py\n#   extra_subpages: explicit sub-pages to fetch (supplement auto-discovery)\n# ---------------------------------------------------------------------------\ncomposite_pages:\n  \"Events\":\n    extractor: \"extract_event_subpage_links\"\n    extra_subpages:\n      - \"Planet modifier colony events\"\n      - \"Quest for the Toxic God events\"\n      - \"Under One Rule events\"\n      - \"Federations events\"\n  \"Astral rift\":\n    extractor: \"extract_astral_rift_subpage_links\"\n    extra_subpages:\n      - \"Entangled Dark Matter\"\n      - \"Hatching Ground\"\n      - \"Lone Object\"\n      - \"Rockworms\"\n      - \"Subnautical\"\n      - \"The Advisor\"\n      - \"The Corridors\"\n      - \"The Fluid\"\n      - \"The Lattice\"\n      - \"The Mechanism\"\n  \"Situations\":\n    extractor: \"extract_situation_subpage_links\"\n    extra_subpages:\n      - \"Ascension situations\"\n      - \"Origin situations\"\n      - \"Paragon situations\"\n\n# ---------------------------------------------------------------------------\n# Classification rules (used by analyze_wiki_pages.py)\n# ---------------------------------------------------------------------------\nclassification:\n  # Title prefixes that identify mod pages\n  mod_prefixes:\n    - \"ST NewHorizons\"\n    - \"Star Trek New Civilisations\"\n    - \"SW: Fallen Republic\"\n    - \"SW Fallen Republic\"\n    - \"Warhammer Total-Conversion\"\n    - \"Warhammer 40\"\n    - \"WarhammerTotalConversion\"\n    - \"PHI - mp balancing\"\n    - \"PHI -\"\n    - \"Phi mp balancing\"\n    - \"Galactic Cold War\"\n    - \"Star Wars Legacy of the Old Republic\"\n    - \"Star Wars New Dawn\"\n    - \"Master of Stellaris\"\n    - \"Inclusive Civics\"\n    - \"10x System Scale\"\n    - \"Distant Origin\"\n    - \"Endless Frontier\"\n    - \"UI Overhaul Dynamic\"\n    - \"Hydra's More Everything\"\n\n  # Wiki categories that identify mod pages (complement to prefix matching)\n  mod_categories:\n    - \"Mods\"\n    - \"ST NewHorizons\"\n    - \"Star Trek New Civilisations\"\n    - \"SW: Fallen Republic\"\n    - \"Warhammer Total-Conversion\"\n    - \"Galactic Cold War\"\n    - \"Master of Stellaris\"\n    - \"PHI - mp balancing\"\n    - \"Star Wars Legacy of the Old Republic\"\n    - \"Star Wars New Dawn\"\n\n  # Wiki categories that identify disambiguation pages\n  disambiguation_categories:\n    - \"Disambiguation\"\n    - \"Disambig-class articles\"\n\n  dlc_titles:\n    - \"ancient relics\"\n    - \"leviathans\"\n    - \"synthetic dawn\"\n    - \"apocalypse\"\n    - \"distant stars\"\n    - \"megacorp\"\n    - \"utopia\"\n    - \"federations\"\n    - \"nemesis\"\n    - \"aquatics\"\n    - \"overlord\"\n    - \"toxoids\"\n    - \"first contact\"\n    - \"galactic paragons\"\n    - \"astral planes\"\n    - \"the machine age\"\n    - \"cosmic storms\"\n    - \"grand archive\"\n    - \"plantoids\"\n    - \"humanoids\"\n    - \"lithoids\"\n    - \"necroids\"\n    - \"downloadable content\"\n    - \"dlc\"\n\n  # Categories to filter out when grouping game content pages\n  wiki_maintenance_categories:\n    - \"Potentially outdated\"\n    - \"Pages with broken file links\"\n    - \"Articles with potentially outdated infoboxes\"\n    - \"Articles with potentially outdated sections\"\n    - \"Pages with obsolete icons\"\n    - \"Pages with unrecognized icon strings\"\n    - \"Pages with math errors\"\n    - \"Pages with math render errors\"\n    - \"Timeless\"\n    - \"Disambiguation\"\n    - \"Wiki\"\n    # Article quality categories\n    - \"A-class articles\"\n    - \"B-class articles\"\n    - \"C-class articles\"\n    - \"FA-class articles\"\n    - \"Start-class articles\"\n    - \"Stub-class articles\"\n    - \"Mod-class articles\"\n    - \"List-class articles\"\n    - \"Disambig-class articles\"\n    # Wiki maintenance\n    - \"Stubs\"\n    - \"Expand\"\n    - \"Rewrite\"\n    - \"Under construction\"\n    - \"Verification needed\"\n    - \"Candidates for deletion\"\n    - \"Need copy editing\"\n    - \"Need editing\"\n    - \"To be merged\"\n    - \"To be moved\"\n    - \"To be split\"\n    - \"Wikify\"\n    - \"Hidden categories\"\n    - \"Computer generated\"\n    - \"Hatnotes\"\n    # Too-generic categories (useless for content grouping)\n    - \"Stellaris\"\n    - \"Stellaris console\"\n\n  # Prefix patterns for filtering out maintenance/icon/template categories\n  wiki_maintenance_prefixes:\n    - \"Pages with\"\n    - \"Pages using\"\n    - \"Articles with\"\n    - \"Articles by\"\n";
-const GENERATED_AT = "2026-02-22 17:37:59";
+const CONFIG_YAML = "# Stellaris Wiki Scraper Configuration\n# Shared by fetch_and_parse.py, analyze_wiki_pages.py, and stellaris_mcp_server.py\n\ngame_version: \"4.2\"\n\nwiki:\n  api_url: \"https://stellaris.paradoxwikis.com/api.php\"\n\ndefaults:\n  output_dir: \"output\"\n  workers: 4\n  delay: 0.5              # seconds between requests (fetch_and_parse sequential mode)\n  request_delay: 0.3      # seconds between requests (analyze_wiki_pages)\n  max_retries: 5\n  generate_all_pages: true # Generate all_pages.md when running analyze_wiki_pages.py\n\n# ---------------------------------------------------------------------------\n# Pages to fetch from the wiki\n# ---------------------------------------------------------------------------\npages_to_fetch:\n  # Empire Setup\n  - \"Origin\"\n  - \"Government\"\n  - \"Ethics\"\n  - \"Civics\"\n  - \"Corporate civics\"\n  - \"Hive mind civics\"\n  - \"Machine intelligence civics\"\n  - \"Empire\"\n  # Governance\n  - \"Council\"\n  - \"Policies\"\n  - \"Edicts\"\n  - \"Factions\"\n  - \"Traditions\"\n  - \"Ascension_perks\"\n  - \"Situations\"\n  - \"Crisis_empire\"\n  # Species\n  - \"Species\"\n  - \"Species_traits\"\n  - \"Biological_traits\"\n  - \"Machine_traits\"\n  - \"Population\"\n  - \"Species_rights\"\n  # Leaders\n  - \"Leaders\"\n  - \"Common_leader_traits\"\n  - \"Commander_traits\"\n  - \"Scientist_traits\"\n  - \"Official_traits\"\n  - \"Paragons\"\n  # Economy & Buildings\n  - \"Resources\"\n  - \"Planetary_management\"\n  - \"Jobs\"\n  - \"Districts\"\n  - \"Designation\"\n  - \"Holdings\"\n  - \"Planet_capital\"\n  - \"Unique_buildings\"\n  - \"Buildings\"\n  - \"Megastructures\"\n  - \"Colonization\"\n  # Technology\n  - \"Technology\"\n  - \"Physics_research\"\n  - \"Society_research\"\n  - \"Engineering_research\"\n  # Ships & Components\n  - \"Ship\"\n  - \"Ship_designer\"\n  - \"Core_components\"\n  - \"Weapon_components\"\n  - \"Utility_components\"\n  - \"Mutations\"\n  - \"Offensive mutations\"\n  # Military\n  - \"Warfare\"\n  - \"Space_warfare\"\n  - \"Land warfare\"\n  - \"Starbase\"\n  # Exploration & Discovery\n  - \"Exploration\"\n  - \"FTL travel\"\n  - \"Discovery\"\n  - \"Anomaly\"\n  - \"Archaeological site\"\n  - \"Astral rift\"\n  - \"Astral threads\"\n  - \"Celestial_object\"\n  - \"Planet_modifiers\"\n  - \"Planetary_features\"\n  - \"Unique_systems\"\n  - \"Relics\"\n  - \"Collection\"\n  - \"L-Cluster\"\n  - \"The_Shroud\"\n  - \"Environmental effects\"\n  # Diplomacy & Relations\n  - \"Diplomacy\"\n  - \"Relations\"\n  - \"Galactic Community\"\n  - \"Federation\"\n  - \"Subject empire\"\n  - \"Intelligence\"\n  - \"AI personalities\"\n  # NPCs & Encounters\n  - \"Fallen empire\"\n  - \"Spaceborne aliens\"\n  - \"Pre-FTL species\"\n  - \"Enclaves\"\n  - \"Guardians\"\n  - \"Marauders\"\n  - \"Caravaneers\"\n  # Modifiers & Events\n  - \"Empire_modifiers\"\n  - \"Stat_modifiers\"\n  - \"Events\"\n  - \"Distant Stars projects\"\n  - \"Job base modifiers\"\n  # Reference & Other\n  - \"Achievements\"\n  - \"Crisis\"\n  - \"Prethoryn_Scourge\"\n  - \"Extradimensional_Invaders\"\n  - \"Contingency\"\n  - \"The_Synthetic_Queen\"\n  - \"Effects\"\n  - \"Galaxy settings\"\n  - \"Beginner's guide\"\n  - \"Hotkeys\"\n  - \"Jargon\"\n  - \"User interface\"\n  - \"Console_commands\"\n  - \"Easter eggs\"\n  - \"AI players\"\n  - \"Preset empires\"\n  - \"Modding\"\n  - \"On actions\"\n  - \"ID\"\n\n# ---------------------------------------------------------------------------\n# Composite pages: index pages whose sub-page links are extracted from HTML.\n# Each entry maps a page title to an extractor config with:\n#   extractor: name of Python function in fetch_and_parse.py\n#   extra_subpages: explicit sub-pages to fetch (supplement auto-discovery)\n# ---------------------------------------------------------------------------\ncomposite_pages:\n  \"Events\":\n    extractor: \"extract_event_subpage_links\"\n    extra_subpages:\n      - \"Planet modifier colony events\"\n      - \"Quest for the Toxic God events\"\n      - \"Under One Rule events\"\n      - \"Federations events\"\n  \"Astral rift\":\n    extractor: \"extract_astral_rift_subpage_links\"\n    extra_subpages:\n      - \"Entangled Dark Matter\"\n      - \"Hatching Ground\"\n      - \"Lone Object\"\n      - \"Rockworms\"\n      - \"Subnautical\"\n      - \"The Advisor\"\n      - \"The Corridors\"\n      - \"The Fluid\"\n      - \"The Lattice\"\n      - \"The Mechanism\"\n  \"Situations\":\n    extractor: \"extract_situation_subpage_links\"\n    extra_subpages:\n      - \"Ascension situations\"\n      - \"Origin situations\"\n      - \"Paragon situations\"\n\n# ---------------------------------------------------------------------------\n# Classification rules (used by analyze_wiki_pages.py)\n# ---------------------------------------------------------------------------\nclassification:\n  # Title prefixes that identify mod pages\n  mod_prefixes:\n    - \"ST NewHorizons\"\n    - \"Star Trek New Civilisations\"\n    - \"SW: Fallen Republic\"\n    - \"SW Fallen Republic\"\n    - \"Warhammer Total-Conversion\"\n    - \"Warhammer 40\"\n    - \"WarhammerTotalConversion\"\n    - \"PHI - mp balancing\"\n    - \"PHI -\"\n    - \"Phi mp balancing\"\n    - \"Galactic Cold War\"\n    - \"Star Wars Legacy of the Old Republic\"\n    - \"Star Wars New Dawn\"\n    - \"Master of Stellaris\"\n    - \"Inclusive Civics\"\n    - \"10x System Scale\"\n    - \"Distant Origin\"\n    - \"Endless Frontier\"\n    - \"UI Overhaul Dynamic\"\n    - \"Hydra's More Everything\"\n\n  # Wiki categories that identify mod pages (complement to prefix matching)\n  mod_categories:\n    - \"Mods\"\n    - \"ST NewHorizons\"\n    - \"Star Trek New Civilisations\"\n    - \"SW: Fallen Republic\"\n    - \"Warhammer Total-Conversion\"\n    - \"Galactic Cold War\"\n    - \"Master of Stellaris\"\n    - \"PHI - mp balancing\"\n    - \"Star Wars Legacy of the Old Republic\"\n    - \"Star Wars New Dawn\"\n\n  # Wiki categories that identify disambiguation pages\n  disambiguation_categories:\n    - \"Disambiguation\"\n    - \"Disambig-class articles\"\n\n  dlc_titles:\n    - \"ancient relics\"\n    - \"leviathans\"\n    - \"synthetic dawn\"\n    - \"apocalypse\"\n    - \"distant stars\"\n    - \"megacorp\"\n    - \"utopia\"\n    - \"federations\"\n    - \"nemesis\"\n    - \"aquatics\"\n    - \"overlord\"\n    - \"toxoids\"\n    - \"first contact\"\n    - \"galactic paragons\"\n    - \"astral planes\"\n    - \"the machine age\"\n    - \"cosmic storms\"\n    - \"grand archive\"\n    - \"plantoids\"\n    - \"humanoids\"\n    - \"lithoids\"\n    - \"necroids\"\n    - \"downloadable content\"\n    - \"dlc\"\n\n  # Categories to filter out when grouping game content pages\n  wiki_maintenance_categories:\n    - \"Potentially outdated\"\n    - \"Pages with broken file links\"\n    - \"Articles with potentially outdated infoboxes\"\n    - \"Articles with potentially outdated sections\"\n    - \"Pages with obsolete icons\"\n    - \"Pages with unrecognized icon strings\"\n    - \"Pages with math errors\"\n    - \"Pages with math render errors\"\n    - \"Timeless\"\n    - \"Disambiguation\"\n    - \"Wiki\"\n    # Article quality categories\n    - \"A-class articles\"\n    - \"B-class articles\"\n    - \"C-class articles\"\n    - \"FA-class articles\"\n    - \"Start-class articles\"\n    - \"Stub-class articles\"\n    - \"Mod-class articles\"\n    - \"List-class articles\"\n    - \"Disambig-class articles\"\n    # Wiki maintenance\n    - \"Stubs\"\n    - \"Expand\"\n    - \"Rewrite\"\n    - \"Under construction\"\n    - \"Verification needed\"\n    - \"Candidates for deletion\"\n    - \"Need copy editing\"\n    - \"Need editing\"\n    - \"To be merged\"\n    - \"To be moved\"\n    - \"To be split\"\n    - \"Wikify\"\n    - \"Hidden categories\"\n    - \"Computer generated\"\n    - \"Hatnotes\"\n    # Too-generic categories (useless for content grouping)\n    - \"Stellaris\"\n    - \"Stellaris console\"\n\n  # Prefix patterns for filtering out maintenance/icon/template categories\n  wiki_maintenance_prefixes:\n    - \"Pages with\"\n    - \"Pages using\"\n    - \"Articles with\"\n    - \"Articles by\"\n";
+const GENERATED_AT = "2026-02-22 17:49:56";
 </script>
 
 <script>
@@ -5416,42 +5405,51 @@ function discardPageChanges() {
 }
 
 function downloadUpdatedConfig() {
-    // Build updated pages list
-    const current = new Set(typeof PAGES_TO_FETCH !== 'undefined' ? PAGES_TO_FETCH : []);
-    pagesToRemove.forEach(p => current.delete(p));
-    pagesToAdd.forEach(p => current.add(p));
-    const pages = Array.from(current).sort((a, b) => a.localeCompare(b, undefined, {sensitivity: 'base'}));
-
-    // Read original config and replace pages_to_fetch section
     const yaml = typeof CONFIG_YAML !== 'undefined' ? CONFIG_YAML : '';
-    let output;
-    if (yaml) {
-        // Replace pages_to_fetch section: find it and replace until next top-level key
-        const lines = yaml.split('\n');
-        const outLines = [];
-        let inPages = false;
-        for (const line of lines) {
-            if (/^pages_to_fetch:/.test(line)) {
-                inPages = true;
-                outLines.push('pages_to_fetch:');
-                pages.forEach(p => outLines.push('  - "' + p + '"'));
-                continue;
-            }
-            if (inPages) {
-                if (/^\S/.test(line) && line.trim() !== '') {
-                    inPages = false;
-                    outLines.push(line);
-                }
-                // skip old page entries and comments
-                continue;
-            }
+    if (!yaml) return;
+
+    // Modify config in-place: remove deleted pages, append new pages at section end
+    const toAdd = new Set(pagesToAdd);
+    const lines = yaml.split('\n');
+    const outLines = [];
+    let inPages = false;
+    let insertionDone = false;
+
+    for (const line of lines) {
+        if (/^pages_to_fetch:/.test(line)) {
+            inPages = true;
             outLines.push(line);
+            continue;
         }
-        output = outLines.join('\n');
-    } else {
-        // Fallback: just generate the pages list
-        output = 'pages_to_fetch:\n' + pages.map(p => '  - "' + p + '"').join('\n') + '\n';
+        if (inPages) {
+            // Non-indented non-empty line means we left the section
+            if (/^\S/.test(line) && line.trim() !== '') {
+                // Append new pages before leaving
+                if (!insertionDone) {
+                    toAdd.forEach(p => outLines.push('  - "' + p + '"'));
+                    insertionDone = true;
+                }
+                inPages = false;
+                outLines.push(line);
+                continue;
+            }
+            // Inside section: check if this is a page entry
+            const m = line.match(/^\s+-\s+"(.+)"/);
+            if (m) {
+                if (pagesToRemove.has(m[1])) continue;   // skip removed pages
+                toAdd.delete(m[1]);                       // already exists, don't re-add
+            }
+            outLines.push(line);  // keep comments, blank lines, and remaining entries
+            continue;
+        }
+        outLines.push(line);
     }
+    // If file ended while still in pages section
+    if (inPages && !insertionDone) {
+        toAdd.forEach(p => outLines.push('  - "' + p + '"'));
+    }
+
+    const output = outLines.join('\n');
 
     const blob = new Blob([output], {type: 'text/yaml'});
     const a = document.createElement('a');

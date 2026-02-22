@@ -414,10 +414,6 @@ def prepare_report_data(
 
     not_fetched = {t for t in content_titles_set if normalize_title(t) not in all_fetched}
 
-    # Also exclude optional pages from not_fetched (they get their own section)
-    optional_normalized = {normalize_title(t) for t in cfg.optional_pages}
-    not_fetched -= {t for t in not_fetched if normalize_title(t) in optional_normalized}
-
     # Classify
     classified = {"game_content": [], "mod": [], "dlc": [], "patch": [],
                   "modding": [], "disambiguation": []}
@@ -533,7 +529,6 @@ def prepare_report_data(
         "fetched_breakdown": fetched_breakdown,
         "all_categories": sorted(all_categories),
         "has_uncategorized": has_uncategorized,
-        "optional_pages": cfg.optional_pages,
     }
 
 
@@ -849,14 +844,12 @@ def _html_nav(data):
     mods = len(d["classified"]["mod"])
     redir = len(d["relevant_redirects"])
     fetched = len(d["fetched_pages_info"])
-    optional = len(d.get("optional_pages", []))
     return f'''
 <nav class="nav">
     <div class="nav-brand"><img src="data:image/x-icon;base64,{_STELLARIS_FAVICON_B64}" alt="Stellaris">Stellaris Wiki Analysis</div>
     <div class="nav-links">
         <a href="#dashboard">Dashboard</a>
         <a href="#fetched">Fetched ({fetched})</a>
-        {"" if not optional else f'<a href="#optional">Optional ({optional})</a>'}
         <a href="#game-content">Game Content ({gc})</a>
         <a href="#dlc">DLC ({dlc})</a>
         <a href="#patches">Patches ({patch})</a>
@@ -1208,36 +1201,6 @@ def _html_disambiguation_section(data):
     </div>
     <div class="section-body">
         <p>{items}</p>
-    </div>
-</section>'''
-
-
-def _html_optional_section(data):
-    """Generate optional pages section (disabled-by-default modding reference pages)."""
-    pages = data.get("optional_pages", [])
-    if not pages:
-        return ""
-    rows = []
-    for t in pages:
-        add_btn = (
-            f'<button class="fetch-btn fetch-btn-add" data-page="{_esc(t)}" '
-            f'onclick="toggleFetchPage(this)" title="Add to config">+</button>'
-        )
-        rows.append(
-            f'<tr><td>{add_btn}</td>'
-            f'<td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td>'
-            f'<td>Optional — not fetched by default</td></tr>'
-        )
-    tbody = "\n".join(rows)
-    return f'''
-<section id="optional" class="section">
-    <div class="section-header" onclick="toggleSection(this)">
-        <span class="chevron">&#9656;</span>
-        <h2>Optional Pages <span class="count">({len(pages)})</span></h2>
-    </div>
-    <div class="section-body">
-        <p style="margin-bottom:0.75rem">Modding reference pages available in config but not fetched by default.</p>
-        <table><thead><tr><th style="width:2rem"></th><th>Page</th><th>Notes</th></tr></thead><tbody>{tbody}</tbody></table>
     </div>
 </section>'''
 
@@ -1767,42 +1730,51 @@ function discardPageChanges() {
 }
 
 function downloadUpdatedConfig() {
-    // Build updated pages list
-    const current = new Set(typeof PAGES_TO_FETCH !== 'undefined' ? PAGES_TO_FETCH : []);
-    pagesToRemove.forEach(p => current.delete(p));
-    pagesToAdd.forEach(p => current.add(p));
-    const pages = Array.from(current).sort((a, b) => a.localeCompare(b, undefined, {sensitivity: 'base'}));
-
-    // Read original config and replace pages_to_fetch section
     const yaml = typeof CONFIG_YAML !== 'undefined' ? CONFIG_YAML : '';
-    let output;
-    if (yaml) {
-        // Replace pages_to_fetch section: find it and replace until next top-level key
-        const lines = yaml.split('\\n');
-        const outLines = [];
-        let inPages = false;
-        for (const line of lines) {
-            if (/^pages_to_fetch:/.test(line)) {
-                inPages = true;
-                outLines.push('pages_to_fetch:');
-                pages.forEach(p => outLines.push('  - "' + p + '"'));
-                continue;
-            }
-            if (inPages) {
-                if (/^\\S/.test(line) && line.trim() !== '') {
-                    inPages = false;
-                    outLines.push(line);
-                }
-                // skip old page entries and comments
-                continue;
-            }
+    if (!yaml) return;
+
+    // Modify config in-place: remove deleted pages, append new pages at section end
+    const toAdd = new Set(pagesToAdd);
+    const lines = yaml.split('\\n');
+    const outLines = [];
+    let inPages = false;
+    let insertionDone = false;
+
+    for (const line of lines) {
+        if (/^pages_to_fetch:/.test(line)) {
+            inPages = true;
             outLines.push(line);
+            continue;
         }
-        output = outLines.join('\\n');
-    } else {
-        // Fallback: just generate the pages list
-        output = 'pages_to_fetch:\\n' + pages.map(p => '  - "' + p + '"').join('\\n') + '\\n';
+        if (inPages) {
+            // Non-indented non-empty line means we left the section
+            if (/^\\S/.test(line) && line.trim() !== '') {
+                // Append new pages before leaving
+                if (!insertionDone) {
+                    toAdd.forEach(p => outLines.push('  - "' + p + '"'));
+                    insertionDone = true;
+                }
+                inPages = false;
+                outLines.push(line);
+                continue;
+            }
+            // Inside section: check if this is a page entry
+            const m = line.match(/^\\s+-\\s+"(.+)"/);
+            if (m) {
+                if (pagesToRemove.has(m[1])) continue;   // skip removed pages
+                toAdd.delete(m[1]);                       // already exists, don't re-add
+            }
+            outLines.push(line);  // keep comments, blank lines, and remaining entries
+            continue;
+        }
+        outLines.push(line);
     }
+    // If file ended while still in pages section
+    if (inPages && !insertionDone) {
+        toAdd.forEach(p => outLines.push('  - "' + p + '"'));
+    }
+
+    const output = outLines.join('\\n');
 
     const blob = new Blob([output], {type: 'text/yaml'});
     const a = document.createElement('a');
@@ -1943,7 +1915,6 @@ def generate_html_report(data: dict, output_path: Path) -> str:
         _html_dashboard(data),
         _html_category_filter(data),
         _html_fetched_table(data),
-        _html_optional_section(data),
         _html_game_content(data),
         _html_dlc_section(data),
         _html_patches_section(data),
