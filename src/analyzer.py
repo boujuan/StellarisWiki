@@ -2119,9 +2119,9 @@ def generate_html_report(data: dict, output_path: Path) -> str:
     parts = [
         _html_head(data),
         _html_nav(data),
-        _html_search_bar(),
         _html_dashboard(data),
         _html_category_filter(data),
+        _html_search_bar(),
         _html_fetched_table(data),
         _html_game_content(data),
         _html_dlc_section(data),
