@@ -13,6 +13,7 @@ Usage:
 
 import argparse
 import html as html_module
+import json as _json
 import os
 import re
 import sys
@@ -594,6 +595,11 @@ def _esc(text):
     return html_module.escape(str(text))
 
 
+_STELLARIS_FAVICON_B64 = "AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAD///8B////AUCe/wlAnv8hQJ7/Ef///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BQJ7/BUCe/zdAnv91QJ7/ezeH2mcAAABXAAAAiwAAALMAAACzAAAAiwAAAFcAAAAX////Af///wH///8B////AUCe/w9Anv+TQJ7/gQ0gM0EUFhTJQDcU23JgH+2agSX7tZcp+7ycJ+1/ahvbHxoHxwAAADf///8B////Af///wFAnv8FSqr/bVCl37EiJyPRTUEe62tZIP9zXh//fWgh/5R6Jf+8nSr/5b4w/7eZJ+s6MA7NAAAAN////wH///8B////ASllojdHldHzUIGh91xYOP9BNxf/XHcy/0I/Fv9VSxj/gmsg/7CRJ//guzD/u5on6xsWB8cAAAAX////Af///wEAAABXQ2mD612u5P9Ofp3/NTIf/z09Gf9WcDD/Xn01/09EGP+DbCD/pYom/9OvLf9zYBnbAAAAV////wH///8BAAAAi4F6VO9mlrP/WK3k/z9qgv9CTyb/RVMl/1NtLf8uKQ//RDkT/3VgHv+qjCf/p4sl7QAAAIv///8B////AQAAALO8rnz7n5Vl/02FqP9Xr+j/RYGj/0JVM/86Phv/Jx8P/0xbKP9NQxv/dWEf/62PKPsAAACz////Af///wEAAACz5tqv+76sdP9mZUz/SIOr/1i17/9MndH/P19l/0RRL/9SZjT/U1Ep/2NTH/91YSX7AAAAs////wH///8BAAAAi7mwje3czpn/koFP/1FMNv9KjK//YsD1/5jW+P9/tNH/VImm/y9AR/8YFgv/LicP9QAAAIv///8B////AQAAAFd6dV7b5tuv/83Ai/+EdEP/UVE8/1yYtP/D6v3/0+/+/1d3jf9OWWP/rKyr/w0LBPcAAABX////Af///wEAAAAXExgMx1R2M+twnUT/hJtN/4V0Pf9waUL/p9Tt/3SEjf9cZGr/rKup/09NR/0JBwTfAAAAF////wH///8B////AQAAADckLhfNU3Yy63GeRf+qomD/l4NC/0FRT/9SXGL/4+Da/9XV1f+sq6n/AAAAzQAAAAP///8B////Af///wH///8BAAAANx0bE8d2cFbbtKyG7bCeZPsgHRD/3NnU/01LRvnZ19P/rayr/09PT9MAAABx////Af///wH///8B////Af///wEAAAAXAAAAVwAAAIsAAACzAAAA1QAAAOMAAAChAAAAxU9PT9PEwbz/AAAAvwAAAAP///8B////Af///wH///8B////Af///wH///8B////Af///wEAAAAD////AQAAAAMAAABxAAAAvwAAAHH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//w=="
+
+_NOTEBOOKLM_SVG = '<svg style="width:14px;height:14px;vertical-align:middle" viewBox="0 1.14 174.56 127.99"><path fill="currentColor" d="M87.27,1.14C39.07,1.14,0,39.88,0,87.69v41.44h16.09v-4.13c0-19.39,15.84-35.11,35.39-35.11s35.39,15.72,35.39,35.11v4.13h16.09v-4.13c0-28.2-23.05-51.05-51.48-51.05-11.07,0-21.32,3.46-29.72,9.37,8.79-17.32,26.88-29.21,47.77-29.21,29.51,0,53.44,23.74,53.44,53v22.02h16.09v-22.02c0-38.08-31.13-68.96-69.53-68.96-17.27,0-33.06,6.24-45.22,16.58,11.94-22.39,35.65-37.64,62.97-37.64,39.32,0,71.19,31.61,71.19,70.6v41.44h16.09v-41.44C174.55,39.88,135.48,1.14,87.27,1.14Z"/></svg>'
+
+
 def _html_head(data):
     """Generate HTML head with embedded CSS."""
     return f'''<!DOCTYPE html>
@@ -602,7 +608,7 @@ def _html_head(data):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stellaris Wiki Analysis</title>
-<link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAD///8B////AUCe/wlAnv8hQJ7/Ef///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BQJ7/BUCe/zdAnv91QJ7/ezeH2mcAAABXAAAAiwAAALMAAACzAAAAiwAAAFcAAAAX////Af///wH///8B////AUCe/w9Anv+TQJ7/gQ0gM0EUFhTJQDcU23JgH+2agSX7tZcp+7ycJ+1/ahvbHxoHxwAAADf///8B////Af///wFAnv8FSqr/bVCl37EiJyPRTUEe62tZIP9zXh//fWgh/5R6Jf+8nSr/5b4w/7eZJ+s6MA7NAAAAN////wH///8B////ASllojdHldHzUIGh91xYOP9BNxf/XHcy/0I/Fv9VSxj/gmsg/7CRJ//guzD/u5on6xsWB8cAAAAX////Af///wEAAABXQ2mD612u5P9Ofp3/NTIf/z09Gf9WcDD/Xn01/09EGP+DbCD/pYom/9OvLf9zYBnbAAAAV////wH///8BAAAAi4F6VO9mlrP/WK3k/z9qgv9CTyb/RVMl/1NtLf8uKQ//RDkT/3VgHv+qjCf/p4sl7QAAAIv///8B////AQAAALO8rnz7n5Vl/02FqP9Xr+j/RYGj/0JVM/86Phv/Jx8P/0xbKP9NQxv/dWEf/62PKPsAAACz////Af///wEAAACz5tqv+76sdP9mZUz/SIOr/1i17/9MndH/P19l/0RRL/9SZjT/U1Ep/2NTH/91YSX7AAAAs////wH///8BAAAAi7mwje3czpn/koFP/1FMNv9KjK//YsD1/5jW+P9/tNH/VImm/y9AR/8YFgv/LicP9QAAAIv///8B////AQAAAFd6dV7b5tuv/83Ai/+EdEP/UVE8/1yYtP/D6v3/0+/+/1d3jf9OWWP/rKyr/w0LBPcAAABX////Af///wEAAAAXExgMx1R2M+twnUT/hJtN/4V0Pf9waUL/p9Tt/3SEjf9cZGr/rKup/09NR/0JBwTfAAAAF////wH///8B////AQAAADckLhfNU3Yy63GeRf+qomD/l4NC/0FRT/9SXGL/4+Da/9XV1f+sq6n/AAAAzQAAAAP///8B////Af///wH///8BAAAANx0bE8d2cFbbtKyG7bCeZPsgHRD/3NnU/01LRvnZ19P/rayr/09PT9MAAABx////Af///wH///8B////Af///wEAAAAXAAAAVwAAAIsAAACzAAAA1QAAAOMAAAChAAAAxU9PT9PEwbz/AAAAvwAAAAP///8B////Af///wH///8B////Af///wH///8B////Af///wEAAAAD////AQAAAAMAAABxAAAAvwAAAHH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//w==">
+<link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,{_STELLARIS_FAVICON_B64}">
 <style>
 :root {{
     --bg: #f8fafc; --text: #1e293b; --border: #e2e8f0; --card-bg: #fff;
@@ -717,6 +723,34 @@ tr:hover {{ background: rgba(59,130,246,.05); }}
 .tag:hover {{ background: var(--blue); color: white; }}
 .file-link {{ font-size: 0.85rem; margin-left: 0.3rem; text-decoration: none; opacity: 0.6; }}
 .file-link:hover {{ opacity: 1; text-decoration: none; }}
+.fetch-btn {{ width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--border);
+              background: var(--card-bg); cursor: pointer; font-size: 1rem; line-height: 1;
+              display: inline-flex; align-items: center; justify-content: center; padding: 0; }}
+.fetch-btn-add {{ color: var(--green); }}
+.fetch-btn-add:hover {{ background: var(--green); color: white; }}
+.fetch-btn-remove {{ color: var(--red); }}
+.fetch-btn-remove:hover {{ background: var(--red); color: white; }}
+.fetch-btn-add.toggled {{ background: var(--green); color: white; opacity: 1; }}
+.fetch-btn-remove.toggled {{ background: var(--red); color: white; opacity: 1; text-decoration: line-through; }}
+.pending-bar {{ position: fixed; bottom: 0; left: 0; right: 0; background: var(--nav-bg);
+                color: var(--nav-text); padding: 0.5rem 1rem; display: none; align-items: center;
+                justify-content: center; gap: 1rem; z-index: 100;
+                box-shadow: 0 -2px 8px rgba(0,0,0,.15); font-size: 0.9rem; }}
+.pending-bar.visible {{ display: flex; }}
+.pending-bar button {{ padding: 0.3rem 0.75rem; border-radius: 4px; border: 1px solid rgba(255,255,255,.25);
+                       background: transparent; color: var(--nav-text); cursor: pointer; font-size: 0.85rem; }}
+.pending-bar button:hover {{ background: rgba(255,255,255,.15); }}
+.pending-bar .apply-btn {{ background: var(--green); border-color: var(--green); color: white; }}
+.pending-bar .apply-btn:hover {{ background: #16a34a; }}
+.modal-overlay {{ position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 300; display: none;
+                  align-items: center; justify-content: center; }}
+.modal-overlay.visible {{ display: flex; }}
+.modal {{ background: var(--card-bg); border-radius: 12px; padding: 1.5rem; max-width: 520px; width: 90%;
+          box-shadow: 0 8px 32px rgba(0,0,0,.3); }}
+.modal h3 {{ margin-bottom: 0.75rem; }}
+.modal pre {{ background: var(--bg); padding: 0.75rem; border-radius: 6px; font-size: 0.85rem;
+              overflow-x: auto; margin: 0.5rem 0; }}
+.modal button {{ margin-top: 0.75rem; }}
 .generated {{ text-align: center; padding: 2rem; opacity: 0.5; font-size: 0.85rem; }}
 .count {{ font-size: 0.85rem; opacity: 0.7; font-weight: normal; }}
 </style>
@@ -736,7 +770,7 @@ def _html_nav(data):
     fetched = len(d["fetched_pages_info"])
     return f'''
 <nav class="nav">
-    <div class="nav-brand"><img src="data:image/x-icon;base64,AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAD///8B////AUCe/wlAnv8hQJ7/Ef///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BQJ7/BUCe/zdAnv91QJ7/ezeH2mcAAABXAAAAiwAAALMAAACzAAAAiwAAAFcAAAAX////Af///wH///8B////AUCe/w9Anv+TQJ7/gQ0gM0EUFhTJQDcU23JgH+2agSX7tZcp+7ycJ+1/ahvbHxoHxwAAADf///8B////Af///wFAnv8FSqr/bVCl37EiJyPRTUEe62tZIP9zXh//fWgh/5R6Jf+8nSr/5b4w/7eZJ+s6MA7NAAAAN////wH///8B////ASllojdHldHzUIGh91xYOP9BNxf/XHcy/0I/Fv9VSxj/gmsg/7CRJ//guzD/u5on6xsWB8cAAAAX////Af///wEAAABXQ2mD612u5P9Ofp3/NTIf/z09Gf9WcDD/Xn01/09EGP+DbCD/pYom/9OvLf9zYBnbAAAAV////wH///8BAAAAi4F6VO9mlrP/WK3k/z9qgv9CTyb/RVMl/1NtLf8uKQ//RDkT/3VgHv+qjCf/p4sl7QAAAIv///8B////AQAAALO8rnz7n5Vl/02FqP9Xr+j/RYGj/0JVM/86Phv/Jx8P/0xbKP9NQxv/dWEf/62PKPsAAACz////Af///wEAAACz5tqv+76sdP9mZUz/SIOr/1i17/9MndH/P19l/0RRL/9SZjT/U1Ep/2NTH/91YSX7AAAAs////wH///8BAAAAi7mwje3czpn/koFP/1FMNv9KjK//YsD1/5jW+P9/tNH/VImm/y9AR/8YFgv/LicP9QAAAIv///8B////AQAAAFd6dV7b5tuv/83Ai/+EdEP/UVE8/1yYtP/D6v3/0+/+/1d3jf9OWWP/rKyr/w0LBPcAAABX////Af///wEAAAAXExgMx1R2M+twnUT/hJtN/4V0Pf9waUL/p9Tt/3SEjf9cZGr/rKup/09NR/0JBwTfAAAAF////wH///8B////AQAAADckLhfNU3Yy63GeRf+qomD/l4NC/0FRT/9SXGL/4+Da/9XV1f+sq6n/AAAAzQAAAAP///8B////Af///wH///8BAAAANx0bE8d2cFbbtKyG7bCeZPsgHRD/3NnU/01LRvnZ19P/rayr/09PT9MAAABx////Af///wH///8B////Af///wEAAAAXAAAAVwAAAIsAAACzAAAA1QAAAOMAAAChAAAAxU9PT9PEwbz/AAAAvwAAAAP///8B////Af///wH///8B////Af///wH///8B////Af///wEAAAAD////AQAAAAMAAABxAAAAvwAAAHH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//w==" alt="Stellaris">Stellaris Wiki Analysis</div>
+    <div class="nav-brand"><img src="data:image/x-icon;base64,{_STELLARIS_FAVICON_B64}" alt="Stellaris">Stellaris Wiki Analysis</div>
     <div class="nav-links">
         <a href="#dashboard">Dashboard</a>
         <a href="#fetched">Fetched ({fetched})</a>
@@ -748,6 +782,10 @@ def _html_nav(data):
         <a href="#redirects">Redirects ({redir})</a>
     </div>
     <div class="nav-actions">
+        <a class="nav-btn" href="https://stellaris.paradoxwikis.com/" target="_blank" title="Stellaris Wiki"><img src="data:image/x-icon;base64,{_STELLARIS_FAVICON_B64}" alt="" style="width:14px;height:14px;vertical-align:middle"> Wiki</a>
+        <a class="nav-btn" href="https://notebooklm.google.com/notebook/ae857011-2ba6-4312-ad22-a6b8b6c891a3" target="_blank" title="Ask questions in NotebookLM">{_NOTEBOOKLM_SVG} NotebookLM</a>
+        <a class="nav-btn" href="https://github.com/boujuan/StellarisWiki/releases/latest/download/stellaris_wiki_pages.zip" title="Download all pages as zip">&#128230; Download</a>
+        <button class="nav-btn" onclick="showModal('refetch-modal')" title="Re-fetch all pages">&#8635; Re-fetch</button>
         <button class="nav-btn" onclick="expandAllSections()" title="Expand all sections">&#9660; Expand</button>
         <button class="nav-btn" onclick="collapseAllSections()" title="Collapse all sections">&#9654; Collapse</button>
     </div>
@@ -788,7 +826,6 @@ def _html_dashboard(data):
     """Generate summary dashboard with stat cards and interactive pie charts."""
     d = data
     cl = d["classified"]
-    import json as _json
 
     total = d["total_pages"]
     n_fetched = len(d["fetched_pages_info"])
@@ -888,12 +925,23 @@ def _html_fetched_table(data):
             f' <a class="file-link" href="pages/{_esc(sanitize_filename(p["title"]))}.md"'
             f' title="View markdown file">&#128196;</a>'
         ) if p["file_exists"] else ''
+        # Only main pages get a remove button (sub-pages are driven by composite parents)
+        if source_type == "main":
+            action_btn = (
+                f'<button class="fetch-btn fetch-btn-remove" '
+                f'data-page="{_esc(p["title"])}" '
+                f'onclick="toggleFetchPage(this)" title="Remove from config">'
+                f'&minus;</button>'
+            )
+        else:
+            action_btn = ''
         rows.append(
             f'<tr data-source="{source_type}"><td>{i}</td>'
             f'<td><a href="{_esc(p["url"])}" target="_blank">{_esc(p["title"])}</a>{file_link}</td>'
             f'<td>{_esc(p["source"])}</td>'
             f'<td>{cats_html}</td>'
-            f'<td class="{cls}">{sym}</td></tr>'
+            f'<td class="{cls}">{sym}</td>'
+            f'<td>{action_btn}</td></tr>'
         )
     tbody = "\n".join(rows)
     return f'''
@@ -918,6 +966,7 @@ def _html_fetched_table(data):
                 <th onclick="sortTable('fetched-table',2)">Source</th>
                 <th onclick="sortTable('fetched-table',3)">Wiki Categories</th>
                 <th onclick="sortTable('fetched-table',4)" style="width:4rem">File</th>
+                <th style="width:2rem"></th>
             </tr></thead>
             <tbody>{tbody}</tbody>
         </table>
@@ -946,8 +995,13 @@ def _html_game_content(data):
                 f'<span class="tag" data-cat="{_esc(c)}">{_esc(c)}</span>'
                 for c in data["categories_map"].get(t, [])
             ) or '<span style="opacity:0.4">none</span>'
+            add_btn = (
+                f'<button class="fetch-btn fetch-btn-add" data-page="{_esc(t)}" '
+                f'onclick="toggleFetchPage(this)" title="Add to config">+</button>'
+            )
             rows.append(
-                f'<tr><td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td>'
+                f'<tr><td>{add_btn}</td>'
+                f'<td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td>'
                 f'<td>{cats_html}</td></tr>'
             )
         tbody = "\n".join(rows)
@@ -959,7 +1013,7 @@ def _html_game_content(data):
             </div>
             <div class="section-body open">
                 <table><thead><tr>
-                    <th>Page</th><th>Wiki Categories</th>
+                    <th style="width:2rem"></th><th>Page</th><th>Wiki Categories</th>
                 </tr></thead><tbody>{tbody}</tbody></table>
             </div>
         </div>''')
@@ -967,8 +1021,13 @@ def _html_game_content(data):
     if data["game_uncategorized"]:
         rows = []
         for t in sorted(data["game_uncategorized"]):
+            add_btn = (
+                f'<button class="fetch-btn fetch-btn-add" data-page="{_esc(t)}" '
+                f'onclick="toggleFetchPage(this)" title="Add to config">+</button>'
+            )
             rows.append(
-                f'<tr><td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td></tr>'
+                f'<tr><td>{add_btn}</td>'
+                f'<td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td></tr>'
             )
         tbody = "\n".join(rows)
         parts.append(f'''
@@ -978,7 +1037,7 @@ def _html_game_content(data):
                 <h3>No wiki categories <span class="count">({len(data["game_uncategorized"])})</span></h3>
             </div>
             <div class="section-body open">
-                <table><thead><tr><th>Page</th></tr></thead><tbody>{tbody}</tbody></table>
+                <table><thead><tr><th style="width:2rem"></th><th>Page</th></tr></thead><tbody>{tbody}</tbody></table>
             </div>
         </div>''')
 
@@ -997,8 +1056,13 @@ def _html_dlc_section(data):
             f'<span class="tag" data-cat="{_esc(c)}">{_esc(c)}</span>'
             for c in data["categories_map"].get(t, [])
         ) or ""
+        add_btn = (
+            f'<button class="fetch-btn fetch-btn-add" data-page="{_esc(t)}" '
+            f'onclick="toggleFetchPage(this)" title="Add to config">+</button>'
+        )
         rows.append(
-            f'<tr><td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td>'
+            f'<tr><td>{add_btn}</td>'
+            f'<td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td>'
             f'<td>{cats_html}</td></tr>'
         )
     tbody = "\n".join(rows)
@@ -1009,7 +1073,7 @@ def _html_dlc_section(data):
         <h2>DLC Pages <span class="count">({len(pages)})</span></h2>
     </div>
     <div class="section-body">
-        <table><thead><tr><th>Page</th><th>Wiki Categories</th></tr></thead>
+        <table><thead><tr><th style="width:2rem"></th><th>Page</th><th>Wiki Categories</th></tr></thead>
         <tbody>{tbody}</tbody></table>
     </div>
 </section>'''
@@ -1045,8 +1109,13 @@ def _html_modding_section(data):
         cats_html = " ".join(
             f'<span class="tag" data-cat="{_esc(c)}">{_esc(c)}</span>' for c in cats
         ) or '<span style="opacity:0.4">none</span>'
+        add_btn = (
+            f'<button class="fetch-btn fetch-btn-add" data-page="{_esc(t)}" '
+            f'onclick="toggleFetchPage(this)" title="Add to config">+</button>'
+        )
         row_parts.append(
-            f'<tr><td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td>'
+            f'<tr><td>{add_btn}</td>'
+            f'<td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td>'
             f'<td>{cats_html}</td></tr>'
         )
     rows = "\n".join(row_parts)
@@ -1057,7 +1126,7 @@ def _html_modding_section(data):
         <h2>Modding Documentation <span class="count">({len(pages)})</span></h2>
     </div>
     <div class="section-body">
-        <table><thead><tr><th>Page</th><th>Wiki Categories</th></tr></thead><tbody>{rows}</tbody></table>
+        <table><thead><tr><th style="width:2rem"></th><th>Page</th><th>Wiki Categories</th></tr></thead><tbody>{rows}</tbody></table>
     </div>
 </section>'''
 
@@ -1081,12 +1150,17 @@ def _html_mods_section(data):
     for mod_name, pages in sorted(data["mod_groups"].items(), key=lambda x: -len(x[1])):
         row_parts = []
         for t in sorted(pages):
+            add_btn = (
+                f'<button class="fetch-btn fetch-btn-add" data-page="{_esc(t)}" '
+                f'onclick="toggleFetchPage(this)" title="Add to config">+</button>'
+            )
             cats = get_display_categories(data["categories_map"].get(t, []))
             cats_html = " ".join(
                 f'<span class="tag" data-cat="{_esc(c)}">{_esc(c)}</span>' for c in cats
             ) or '<span style="opacity:0.4">none</span>'
             row_parts.append(
-                f'<tr><td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td>'
+                f'<tr><td>{add_btn}</td>'
+                f'<td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td>'
                 f'<td>{cats_html}</td></tr>'
             )
         rows = "\n".join(row_parts)
@@ -1097,7 +1171,7 @@ def _html_mods_section(data):
                 <h3>{_esc(mod_name)} <span class="count">({len(pages)})</span></h3>
             </div>
             <div class="section-body">
-                <table><thead><tr><th>Page</th><th>Wiki Categories</th></tr></thead><tbody>{rows}</tbody></table>
+                <table><thead><tr><th style="width:2rem"></th><th>Page</th><th>Wiki Categories</th></tr></thead><tbody>{rows}</tbody></table>
             </div>
         </div>''')
 
@@ -1144,6 +1218,50 @@ def _html_redirects_section(data):
         </table>
     </div>
 </section>'''
+
+
+def _html_modals_and_config(data):
+    """Generate modals, pending bar, and embedded config data."""
+    config_path = Path(os.path.dirname(os.path.abspath(__file__))) / "config.yaml"
+    config_yaml_escaped = ""
+    if config_path.exists():
+        config_yaml_escaped = _json.dumps(config_path.read_text(encoding="utf-8"))
+    pages_json = _json.dumps(cfg.pages_to_fetch)
+    return f'''
+<div id="pending-bar" class="pending-bar">
+    <span id="pending-info"></span>
+    <button class="apply-btn" onclick="downloadUpdatedConfig()">&#128190; Download config.yaml</button>
+    <button onclick="discardPageChanges()">&#10005; Discard</button>
+</div>
+
+<div id="refetch-modal" class="modal-overlay" onclick="if(event.target===this)hideModal('refetch-modal')">
+    <div class="modal">
+        <h3>Re-fetch Wiki Pages</h3>
+        <p>Run these commands in the project directory:</p>
+        <pre>python fetch_and_parse.py
+python analyze_wiki_pages.py</pre>
+        <p style="font-size:0.85rem;opacity:0.7">This will re-fetch all pages from the Stellaris wiki and regenerate the dashboard.</p>
+        <button class="nav-btn" onclick="hideModal('refetch-modal')">Close</button>
+    </div>
+</div>
+
+<div id="remote-instructions-modal" class="modal-overlay" onclick="if(event.target===this)hideModal('remote-instructions-modal')">
+    <div class="modal">
+        <h3>Apply Config Changes</h3>
+        <p>Replace <code>config.yaml</code> in your local clone with the downloaded file, then run:</p>
+        <pre>git clone https://github.com/boujuan/StellarisWiki.git
+cd StellarisWiki
+# Replace config.yaml with downloaded file
+python fetch_and_parse.py
+python analyze_wiki_pages.py</pre>
+        <button class="nav-btn" onclick="hideModal('remote-instructions-modal')">Close</button>
+    </div>
+</div>
+
+<script>
+const PAGES_TO_FETCH = {pages_json};
+const CONFIG_YAML = {config_yaml_escaped};
+</script>'''
 
 
 def _html_scripts():
@@ -1414,6 +1532,114 @@ function filterFetchedTable() {
     });
 }
 
+/* --- Page Add/Remove Management --- */
+const pagesToAdd = new Set();
+const pagesToRemove = new Set();
+
+function toggleFetchPage(btn) {
+    const page = btn.dataset.page;
+    const isRemove = btn.classList.contains('fetch-btn-remove');
+    if (isRemove) {
+        if (pagesToRemove.has(page)) {
+            pagesToRemove.delete(page);
+            btn.classList.remove('toggled');
+        } else {
+            pagesToRemove.add(page);
+            btn.classList.add('toggled');
+        }
+    } else {
+        if (pagesToAdd.has(page)) {
+            pagesToAdd.delete(page);
+            btn.classList.remove('toggled');
+        } else {
+            pagesToAdd.add(page);
+            btn.classList.add('toggled');
+        }
+    }
+    updatePendingBar();
+}
+
+function updatePendingBar() {
+    const bar = document.getElementById('pending-bar');
+    const info = document.getElementById('pending-info');
+    const total = pagesToAdd.size + pagesToRemove.size;
+    if (total === 0) {
+        bar.classList.remove('visible');
+        return;
+    }
+    const parts = [];
+    if (pagesToAdd.size) parts.push(pagesToAdd.size + ' to add');
+    if (pagesToRemove.size) parts.push(pagesToRemove.size + ' to remove');
+    info.textContent = parts.join(', ');
+    bar.classList.add('visible');
+}
+
+function discardPageChanges() {
+    pagesToAdd.clear();
+    pagesToRemove.clear();
+    document.querySelectorAll('.fetch-btn.toggled').forEach(b => b.classList.remove('toggled'));
+    updatePendingBar();
+}
+
+function downloadUpdatedConfig() {
+    // Build updated pages list
+    const current = new Set(typeof PAGES_TO_FETCH !== 'undefined' ? PAGES_TO_FETCH : []);
+    pagesToRemove.forEach(p => current.delete(p));
+    pagesToAdd.forEach(p => current.add(p));
+    const pages = Array.from(current).sort((a, b) => a.localeCompare(b, undefined, {sensitivity: 'base'}));
+
+    // Read original config and replace pages_to_fetch section
+    const yaml = typeof CONFIG_YAML !== 'undefined' ? CONFIG_YAML : '';
+    let output;
+    if (yaml) {
+        // Replace pages_to_fetch section: find it and replace until next top-level key
+        const lines = yaml.split('\\n');
+        const outLines = [];
+        let inPages = false;
+        for (const line of lines) {
+            if (/^pages_to_fetch:/.test(line)) {
+                inPages = true;
+                outLines.push('pages_to_fetch:');
+                pages.forEach(p => outLines.push('  - "' + p + '"'));
+                continue;
+            }
+            if (inPages) {
+                if (/^\\S/.test(line) && line.trim() !== '') {
+                    inPages = false;
+                    outLines.push(line);
+                }
+                // skip old page entries and comments
+                continue;
+            }
+            outLines.push(line);
+        }
+        output = outLines.join('\\n');
+    } else {
+        // Fallback: just generate the pages list
+        output = 'pages_to_fetch:\\n' + pages.map(p => '  - "' + p + '"').join('\\n') + '\\n';
+    }
+
+    const blob = new Blob([output], {type: 'text/yaml'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'config.yaml';
+    a.click();
+    URL.revokeObjectURL(a.href);
+
+    // Show instructions if on remote
+    if (window.location.protocol !== 'file:') {
+        showModal('remote-instructions-modal');
+    }
+}
+
+/* --- Modal --- */
+function showModal(id) {
+    document.getElementById(id).classList.add('visible');
+}
+function hideModal(id) {
+    document.getElementById(id).classList.remove('visible');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.section-body.open').forEach(body => {
         const chevron = body.previousElementSibling?.querySelector('.chevron');
@@ -1426,6 +1652,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const cat = tag.dataset.cat;
         const chip = document.querySelector('.cat-chip[data-cat="' + CSS.escape(cat) + '"]');
         if (chip) toggleCategoryFilter(chip);
+    });
+    // Close modals on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) overlay.classList.remove('visible');
+        });
     });
 });
 </script>
@@ -1448,6 +1680,7 @@ def generate_html_report(data: dict, output_path: Path) -> str:
         _html_modding_section(data),
         _html_mods_section(data),
         _html_redirects_section(data),
+        _html_modals_and_config(data),
         _html_scripts(),
     ]
     html_str = "\n".join(parts)

@@ -9,5 +9,8 @@ build/
 .env
 *.egg
 
+# Generated archives
+output/*.zip
+
 # Claude Code
 CLAUDE.md

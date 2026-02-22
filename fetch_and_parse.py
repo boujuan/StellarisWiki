@@ -11,6 +11,7 @@ import json
 import re
 import sys
 import time
+import zipfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from urllib.parse import unquote
@@ -485,12 +486,27 @@ def process_all_pages(page_titles: list[str], output_dir: Path,
         total_size = sum(f.stat().st_size for f in pages_dir.glob("*.md"))
         print(f"Total individual files size: {total_size / 1024 / 1024:.2f} MB")
 
+        zip_path = create_zip(pages_dir, output_dir)
+        print(f"Zip archive: {zip_path} ({zip_path.stat().st_size / 1024 / 1024:.2f} MB)")
+
         if all_warnings:
             print(f"\n⚠ Content warnings ({len(all_warnings)}):")
             for w in all_warnings:
                 print(f"  - {w}")
         else:
             print("\nNo content warnings.")
+
+
+def create_zip(pages_dir: Path, output_dir: Path):
+    """Create a zip archive of all markdown files."""
+    zip_path = output_dir / "stellaris_wiki_pages.zip"
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for md_file in sorted(pages_dir.glob("*.md")):
+            zf.write(md_file, f"pages/{md_file.name}")
+        combined = output_dir / cfg.combined_filename
+        if combined.exists():
+            zf.write(combined, combined.name)
+    return zip_path
 
 
 def test_single_page(title: str, output_dir: Path):

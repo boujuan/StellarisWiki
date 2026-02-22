@@ -1,0 +1,28 @@
+name: Create Release with Wiki Pages
+
+on:
+  push:
+    branches: [main]
+    paths: ['output/pages/**', 'output/stellaris_4.2_combined.md']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create zip
+        run: |
+          cd output
+          zip -r ../stellaris_wiki_pages.zip pages/ stellaris_4.2_combined.md
+      - name: Create or update release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: "Stellaris Wiki Pages (latest)"
+          body: "All fetched Stellaris wiki pages as markdown files."
+          files: stellaris_wiki_pages.zip
+          make_latest: true

@@ -36,6 +36,9 @@ The HTML-to-Markdown approach produces output that is **~55% smaller** than the 
 - Content error detection (math render failures, raw LaTeX)
 - Rate limiting and retry logic with exponential backoff
 - **Interactive HTML dashboard** with wiki coverage analysis, category filters, and expand/collapse all sections
+- **Page management buttons**: +/- buttons per page to add/remove from `config.yaml` (downloads modified config)
+- **Zip download**: all fetched pages bundled as `stellaris_wiki_pages.zip` (locally after fetch + GitHub Release)
+- **External links**: Stellaris Wiki and NotebookLM links with favicons in the dashboard nav bar
 
 ## Installation
 
@@ -216,20 +219,28 @@ stellaris_wiki_scraper/
 ├── README.md                 # This file
 ├── requirements.txt          # Python dependencies
 ├── environment.yml           # Conda/micromamba environment
+├── config.yaml               # Pages to fetch + classification rules
+├── config.py                 # Config loader (dataclasses)
 ├── fetch_and_parse.py        # Main script: fetch HTML → convert to Markdown
 ├── html_to_markdown.py       # HTML to Markdown converter class
+├── analyze_wiki_pages.py     # Wiki coverage analysis + HTML dashboard
 ├── stellaris_mcp_server.py   # MCP server for Claude Desktop
+├── .github/workflows/
+│   ├── pages.yml             # Deploy dashboard to GitHub Pages
+│   └── release.yml           # Upload zip as GitHub Release
 │
-└── output/          # All generated output
+└── output/                   # All generated output
     ├── pages/                # Individual .md files (101+ pages)
     │   ├── Machine_traits.md
     │   ├── Civics.md
     │   ├── Events.md         # Composite: main + 87 event sub-pages
     │   ├── Astral_rift.md    # Composite: main + 12 rift sub-pages
     │   └── ...
-    ├── stellaris_4.2_combined.md  # Single combined file (~4.9 MB)
-    ├── all_pages.md              # Complete list of all 4994 wiki pages
-    └── wiki_analysis.html        # Interactive analysis dashboard
+    ├── stellaris_4.2_combined.md   # Single combined file (~4.9 MB)
+    ├── stellaris_wiki_pages.zip    # Zip of all pages (generated, not in git)
+    ├── all_pages.md                # Complete list of all 4994 wiki pages
+    ├── index.html                  # Redirect → wiki_analysis.html
+    └── wiki_analysis.html          # Interactive analysis dashboard
 ```
 
 ## Pages Fetched
