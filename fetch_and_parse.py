@@ -348,10 +348,35 @@ def extract_event_subpage_links(html: str) -> list[tuple[str, list[str]]]:
     return categories
 
 
+def extract_astral_rift_subpage_links(html: str) -> list[tuple[str, list[str]]]:
+    """Extract astral rift sub-page links from the Astral rift page HTML.
+
+    Finds all "(see full rift details)" links pointing to individual rift pages.
+
+    Returns:
+        List of (category_name, [page_titles]) tuples
+    """
+    soup = BeautifulSoup(html, 'lxml')
+    subpages = []
+
+    for a in soup.find_all('a'):
+        if 'full rift details' in a.get_text():
+            href = a.get('href', '').lstrip('/')
+            if href:
+                title = unquote(href.replace('_', ' '))
+                if title not in subpages:
+                    subpages.append(title)
+
+    if subpages:
+        return [("Astral Rift Details", subpages)]
+    return []
+
+
 # Pages that are index pages — their sub-page links are extracted from HTML
 # and each sub-page's content is appended to the parent page's markdown.
 COMPOSITE_PAGES = {
     "Events": extract_event_subpage_links,
+    "Astral rift": extract_astral_rift_subpage_links,
 }
 
 

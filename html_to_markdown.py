@@ -95,7 +95,7 @@ class HTMLToMarkdown:
         result = '\n'.join(filter(None, md_parts))
 
         # Clean up excessive whitespace
-        result = re.sub(r'\n{4,}', '\n\n\n', result)
+        result = re.sub(r'\n{3,}', '\n\n', result)
         result = re.sub(r' +', ' ', result)
 
         return result.strip()
