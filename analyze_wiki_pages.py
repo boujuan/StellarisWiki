@@ -481,6 +481,13 @@ def generate_markdown_report(data: dict, output_path: Path) -> str:
     w(f"- **Content pages NOT fetched:** {len(d['not_fetched']):,}")
     w("")
 
+    w("### Fetched breakdown\n")
+    w("| Component | Count |")
+    w("|-----------|-------|")
+    for seg in d["fetched_breakdown"]:
+        w(f"| {seg['label']} | {seg['value']} |")
+    w("")
+
     w("### Not-fetched breakdown\n")
     w("| Classification | Count |")
     w("|---------------|-------|")
@@ -491,11 +498,12 @@ def generate_markdown_report(data: dict, output_path: Path) -> str:
 
     # Fetched pages
     w(f"## Fetched Pages ({len(d['fetched_pages_info'])})\n")
-    w("| # | Page | Source | File |")
-    w("|---|------|--------|------|")
+    w("| # | Page | Source | File | Categories |")
+    w("|---|------|--------|------|------------|")
     for i, p in enumerate(d["fetched_pages_info"], 1):
         status = "yes" if p["file_exists"] else "**MISSING**"
-        w(f"| {i} | [{p['title']}]({p['url']}) | {p['source']} | {status} |")
+        cats = ", ".join(p["categories"]) if p["categories"] else "_(none)_"
+        w(f"| {i} | [{p['title']}]({p['url']}) | {p['source']} | {status} | {cats} |")
     w("")
 
     # Game content
@@ -519,8 +527,11 @@ def generate_markdown_report(data: dict, output_path: Path) -> str:
 
     # DLC
     w(f"## DLC Pages ({len(d['classified']['dlc'])})\n")
+    w("| Page | Categories |")
+    w("|------|------------|")
     for t in sorted(d["classified"]["dlc"]):
-        w(f"- [{t}]({page_url(t)})")
+        cats = ", ".join(get_display_categories(d["categories_map"].get(t, []))) or "_(none)_"
+        w(f"| [{t}]({page_url(t)}) | {cats} |")
     w("")
 
     # Patches
@@ -531,26 +542,33 @@ def generate_markdown_report(data: dict, output_path: Path) -> str:
 
     # Modding
     w(f"## Modding ({len(d['classified']['modding'])})\n")
+    w("| Page | Categories |")
+    w("|------|------------|")
     for t in sorted(d["classified"]["modding"]):
-        w(f"- [{t}]({page_url(t)})")
+        cats = ", ".join(get_display_categories(d["categories_map"].get(t, []))) or "_(none)_"
+        w(f"| [{t}]({page_url(t)}) | {cats} |")
     w("")
 
     # Mods (individual pages)
     w(f"## Total-Conversion Mods ({len(d['classified']['mod'])})\n")
     for mod_name, pages in sorted(d["mod_groups"].items(), key=lambda x: -len(x[1])):
         w(f"### {mod_name} ({len(pages)} pages)\n")
+        w("| Page | Categories |")
+        w("|------|------------|")
         for t in sorted(pages):
-            w(f"- [{t}]({page_url(t)})")
+            cats = ", ".join(get_display_categories(d["categories_map"].get(t, []))) or "_(none)_"
+            w(f"| [{t}]({page_url(t)}) | {cats} |")
         w("")
 
     # Redirects
     w(f"## Redirects to Fetched Pages ({len(d['relevant_redirects'])})\n")
     if d["relevant_redirects"]:
-        w("| Redirect | Target |")
-        w("|----------|--------|")
+        w("| Redirect | Target | Categories |")
+        w("|----------|--------|------------|")
         for src, tgt, frag in d["relevant_redirects"]:
             target_display = f"{tgt} > {frag}" if frag else tgt
-            w(f"| {src} | [{target_display}]({page_url(tgt, frag)}) |")
+            cats = ", ".join(get_display_categories(d["categories_map"].get(tgt, []))) or "_(none)_"
+            w(f"| {src} | [{target_display}]({page_url(tgt, frag)}) | {cats} |")
     w("")
 
     report = "\n".join(lines)
