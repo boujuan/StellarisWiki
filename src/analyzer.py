@@ -856,6 +856,13 @@ tr:hover {{ background: rgba(59,130,246,.05); }}
 .modal .step {{ margin: 0.75rem 0; }}
 .modal .step-label {{ font-weight: 600; font-size: 0.85rem; margin-bottom: 0.25rem; color: var(--accent); }}
 .generated {{ text-align: center; padding: 2rem; opacity: 0.5; font-size: 0.85rem; }}
+.site-footer {{ text-align: center; padding: 1.5rem 1rem; border-top: 1px solid var(--border);
+                margin-top: 2rem; font-size: 0.8rem; opacity: 0.6; transition: opacity 0.2s; }}
+.site-footer:hover {{ opacity: 1; }}
+.site-footer a {{ color: var(--accent); text-decoration: none; }}
+.site-footer a:hover {{ text-decoration: underline; }}
+.site-footer .avatar {{ width: 28px; height: 28px; border-radius: 50%; vertical-align: middle;
+                        margin-right: 0.35rem; border: 1px solid var(--border); }}
 .count {{ font-size: 0.85rem; opacity: 0.7; font-weight: normal; }}
 </style>
 </head>
@@ -1448,6 +1455,17 @@ const CONFIG_YAML = {config_yaml_escaped};
 const GENERATED_AT = {generated_at_json};
 const SEARCH_INDEX = {search_index_json};
 </script>'''
+
+
+def _html_footer():
+    """Generate site footer with author credit."""
+    return '''
+<footer class="site-footer">
+    <a href="https://github.com/boujuan" target="_blank" rel="noopener">
+        <img class="avatar" src="https://avatars.githubusercontent.com/u/23170621?v=4&size=64" alt="boujuan">
+        boujuan
+    </a>
+</footer>'''
 
 
 def _html_scripts():
@@ -2181,6 +2199,7 @@ def generate_html_report(data: dict, output_path: Path) -> str:
         _html_mods_section(data),
         _html_redirects_section(data),
         _html_modals_and_config(data),
+        _html_footer(),
         _html_scripts(),
     ]
     html_str = "\n".join(parts)
