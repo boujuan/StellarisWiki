@@ -10,6 +10,25 @@ import re
 from bs4 import BeautifulSoup, NavigableString, Tag
 
 
+def _extract_brace_group(s: str) -> tuple[str | None, str]:
+    """Extract content of a {...} group from the start of string s.
+
+    Returns (content, remainder) or (None, s) if no group found.
+    """
+    s = s.lstrip()
+    if not s or s[0] != '{':
+        return None, s
+    depth = 0
+    for i, c in enumerate(s):
+        if c == '{':
+            depth += 1
+        elif c == '}':
+            depth -= 1
+            if depth == 0:
+                return s[1:i], s[i+1:]
+    return None, s
+
+
 class HTMLToMarkdown:
     """Convert MediaWiki HTML to clean Markdown."""
 
@@ -61,6 +80,9 @@ class HTMLToMarkdown:
 
         # Pre-process component icons before images are stripped
         self._preprocess_component_icons(soup)
+
+        # Convert math/LaTeX elements to plain text
+        self._preprocess_math(soup)
 
         # Remove unwanted elements
         self._remove_unwanted(soup)
@@ -185,6 +207,171 @@ class HTMLToMarkdown:
                 span.replace_with(NavigableString(f'{name}, '))
             else:
                 span.replace_with(NavigableString(''))
+
+    def _preprocess_math(self, soup: BeautifulSoup) -> None:
+        """Convert LaTeX math elements to readable plain text.
+
+        MediaWiki's math extension renders <math> tags as SVG/MathML.
+        When the renderer fails, error messages with raw LaTeX leak through.
+        Even when it succeeds, the MathML/SVG is not useful in markdown.
+
+        This handles two HTML patterns:
+        1. Successful render: <span class="mwe-math-element"> with <annotation>
+        2. Failed render: <strong class="error texerror">Failed to parse...{\displaystyle ...}
+        """
+        # Pattern 1: Successfully rendered math elements (inline <span> or block <div>)
+        for el in list(soup.find_all(class_='mwe-math-element')):
+            # Try to get LaTeX from <annotation> tag first
+            ann = el.find('annotation', encoding='application/x-tex')
+            if ann and ann.string:
+                latex = ann.string.strip()
+            else:
+                # Fallback: extract from alt attribute on the fallback <img>
+                img = el.find('img', class_='mwe-math-fallback-image-inline')
+                if img and img.get('alt'):
+                    latex = img['alt'].strip()
+                else:
+                    # Last resort: get raw text and try to find LaTeX
+                    text = el.get_text()
+                    match = re.search(r'\{\\displaystyle\s+(.*)\}', text)
+                    if match:
+                        latex = match.group(0)
+                    else:
+                        continue
+
+            plain = self._latex_to_plain(latex)
+            el.replace_with(NavigableString(plain))
+
+        # Pattern 2: Failed math renders — error messages with embedded LaTeX
+        for el in list(soup.find_all('strong', class_='error')):
+            text = el.get_text()
+            if 'Failed to parse' not in text:
+                continue
+            match = re.search(r'(\{\\displaystyle\s+.*\})\s*$', text)
+            if match:
+                latex = match.group(1)
+                plain = self._latex_to_plain(latex)
+                el.replace_with(NavigableString(plain))
+
+    def _latex_to_plain(self, latex: str) -> str:
+        """Convert a LaTeX math expression to readable plain text.
+
+        Handles the subset of LaTeX used on the Stellaris wiki:
+        fractions, text labels, operators, superscripts, subscripts.
+        """
+        s = latex
+
+        # Strip outer \displaystyle wrapper
+        s = re.sub(r'^\{\\displaystyle\s*', '', s)
+        s = re.sub(r'\}$', '', s)
+
+        # Strip aligned/array environments — flatten to single line
+        s = re.sub(r'\\begin\{aligned\}', '', s)
+        s = re.sub(r'\\end\{aligned\}', '', s)
+        s = re.sub(r'\\begin\{array\}(\{[^}]*\})?', '', s)
+        s = re.sub(r'\\end\{array\}', '', s)
+        # Alignment markers: & = column separator, \\ = row separator
+        s = re.sub(r'\\\\', ' ; ', s)
+        s = s.replace('&', ' ')
+
+        # \text{...} -> contents
+        s = re.sub(r'\\text\{([^}]*)\}', r'\1', s)
+        # \textbf{...} -> contents
+        s = re.sub(r'\\textbf\{([^}]*)\}', r'\1', s)
+
+        # Process \frac iteratively (may appear multiple times)
+        while r'\frac' in s:
+            pos = s.find(r'\frac')
+            rest = s[pos + len(r'\frac'):]
+            num, after_num = _extract_brace_group(rest)
+            den, after_den = _extract_brace_group(after_num)
+            if num is not None and den is not None:
+                num_plain = self._latex_to_plain('{' + num + '}')
+                den_plain = self._latex_to_plain('{' + den + '}')
+                num_simple = not any(c in num_plain for c in '+-')
+                den_simple = not any(c in den_plain for c in '+-')
+                num_str = num_plain if num_simple else f'({num_plain})'
+                den_str = den_plain if den_simple else f'({den_plain})'
+                s = s[:pos] + num_str + ' / ' + den_str + after_den
+            else:
+                break
+
+        # \tfrac same as \frac
+        while r'\tfrac' in s:
+            pos = s.find(r'\tfrac')
+            rest = s[pos + len(r'\tfrac'):]
+            num, after_num = _extract_brace_group(rest)
+            den, after_den = _extract_brace_group(after_num)
+            if num is not None and den is not None:
+                num_plain = self._latex_to_plain('{' + num + '}')
+                den_plain = self._latex_to_plain('{' + den + '}')
+                num_simple = not any(c in num_plain for c in '+-')
+                den_simple = not any(c in den_plain for c in '+-')
+                num_str = num_plain if num_simple else f'({num_plain})'
+                den_str = den_plain if den_simple else f'({den_plain})'
+                s = s[:pos] + num_str + ' / ' + den_str + after_den
+            else:
+                break
+
+        # Operators
+        s = s.replace(r'\cdot', ' * ')
+        s = s.replace(r'\times', ' * ')
+        s = s.replace(r'\div', ' / ')
+        s = s.replace(r'\pm', ' +/- ')
+        s = s.replace(r'\leq', ' <= ')
+        s = s.replace(r'\geq', ' >= ')
+        s = s.replace(r'\neq', ' != ')
+        s = s.replace(r'\approx', ' ~ ')
+        s = s.replace(r'\sum', 'Sum')
+
+        # Spacing commands
+        s = s.replace(r'\,', ' ')
+        s = s.replace(r'\;', ' ')
+        s = s.replace(r'\:', ' ')
+        s = s.replace(r'\!', '')
+        s = s.replace(r'\quad', '  ')
+        s = s.replace(r'\qquad', '   ')
+        s = s.replace(r'\ ', ' ')
+
+        # Delimiters
+        s = s.replace(r'\left(', '(')
+        s = s.replace(r'\right)', ')')
+        s = s.replace(r'\left[', '[')
+        s = s.replace(r'\right]', ']')
+        s = s.replace(r'\left\{', '{')
+        s = s.replace(r'\right\}', '}')
+        s = s.replace(r'\left.', '')
+        s = s.replace(r'\right.', '')
+
+        # Escaped characters
+        s = s.replace(r'\%', '%')
+        s = s.replace(r'\_', '_')
+        s = s.replace(r'\&', '&')
+
+        # Superscripts: ^{...} -> ^(...)
+        s = re.sub(r'\^\{([^}]*)\}', r'^(\1)', s)
+        # Simple superscript: ^x (single char)
+        # (leave as-is, e.g. n^2 is readable)
+
+        # Subscripts: _{...} -> _text
+        s = re.sub(r'_\{([^}]*)\}', r'_\1', s)
+
+        # Remaining braces used for grouping — remove them
+        s = re.sub(r'(?<!\\)\{', '', s)
+        s = re.sub(r'(?<!\\)\}', '', s)
+
+        # Any remaining backslash commands we missed — strip the backslash
+        s = re.sub(r'\\([a-zA-Z]+)', r'\1', s)
+
+        # Normalize spacing around operators
+        s = re.sub(r'\s*=\s*', ' = ', s)
+        s = re.sub(r'\s*(?<![(\[,])\+\s*', ' + ', s)
+        s = re.sub(r'\s*(?<![(\[,])-\s*', ' - ', s)
+
+        # Clean up whitespace
+        s = re.sub(r'\s+', ' ', s).strip()
+
+        return s
 
     def _preprocess_formatting(self, soup: BeautifulSoup) -> None:
         """Preserve bold formatting from HTML as markdown **bold** markers.
