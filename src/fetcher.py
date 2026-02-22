@@ -20,8 +20,9 @@ import cloudscraper
 from bs4 import BeautifulSoup, Tag
 from tqdm import tqdm
 
-from html_to_markdown import HTMLToMarkdown
-from config import cfg
+from src.converter import HTMLToMarkdown
+from src.config import cfg
+from src import PROJECT_ROOT
 
 # Known error patterns in wiki-rendered content
 CONTENT_ERROR_PATTERNS = [
@@ -585,41 +586,47 @@ def test_single_page(title: str, output_dir: Path):
         sys.exit(1)
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Fetch Stellaris Wiki pages and convert to Markdown"
-    )
-    parser.add_argument(
-        "--page",
-        type=str,
-        help="Process a single page (for testing)"
-    )
-    parser.add_argument(
-        "--test",
-        action="store_true",
-        help="Run in test mode (with --page)"
-    )
-    parser.add_argument(
-        "--output",
-        type=str,
-        default=cfg.defaults.output_dir,
-        help=f"Output directory (default: {cfg.defaults.output_dir})"
-    )
-    parser.add_argument(
-        "--delay",
-        type=float,
-        default=cfg.defaults.delay,
-        help=f"Delay between API requests in seconds (default: {cfg.defaults.delay}, sequential mode only)"
-    )
-    parser.add_argument(
-        "--workers",
-        type=int,
-        default=cfg.defaults.workers,
-        help=f"Number of parallel workers (default: {cfg.defaults.workers}, use 1 for sequential)"
-    )
-    args = parser.parse_args()
+def main(args=None):
+    if args is None:
+        parser = argparse.ArgumentParser(
+            description="Fetch Stellaris Wiki pages and convert to Markdown"
+        )
+        parser.add_argument(
+            "--page",
+            type=str,
+            help="Process a single page (for testing)"
+        )
+        parser.add_argument(
+            "--test",
+            action="store_true",
+            help="Run in test mode (with --page)"
+        )
+        parser.add_argument(
+            "--output",
+            type=str,
+            default=None,
+            help=f"Output directory (default: {cfg.defaults.output_dir})"
+        )
+        parser.add_argument(
+            "--delay",
+            type=float,
+            default=None,
+            help=f"Delay between API requests in seconds (default: {cfg.defaults.delay}, sequential mode only)"
+        )
+        parser.add_argument(
+            "--workers",
+            type=int,
+            default=None,
+            help=f"Number of parallel workers (default: {cfg.defaults.workers}, use 1 for sequential)"
+        )
+        args = parser.parse_args()
 
-    output_dir = Path(__file__).parent / args.output
+    # Apply defaults from config for unset values
+    args.output = args.output or cfg.defaults.output_dir
+    args.delay = args.delay if args.delay is not None else cfg.defaults.delay
+    args.workers = args.workers if args.workers is not None else cfg.defaults.workers
+
+    output_dir = PROJECT_ROOT / args.output
 
     if args.page and args.test:
         if args.page in COMPOSITE_PAGES:
@@ -675,4 +682,10 @@ def main():
 
 
 if __name__ == "__main__":
+    # Allow standalone execution: python src/fetcher.py
+    import sys as _sys
+    from pathlib import Path as _Path
+    _root = str(_Path(__file__).resolve().parent.parent)
+    if _root not in _sys.path:
+        _sys.path.insert(0, _root)
     main()

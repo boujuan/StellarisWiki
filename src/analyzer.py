@@ -6,9 +6,9 @@ from redirects, then cross-reference with the pages we already fetch.
 Produces an interactive HTML report (default) or markdown report.
 
 Usage:
-    python analyze_wiki_pages.py                    # HTML report (default)
-    python analyze_wiki_pages.py --format md        # Markdown report
-    python analyze_wiki_pages.py --workers 8        # More parallel workers
+    python stellariswiki.py analyze                  # HTML report (default)
+    python stellariswiki.py analyze --format md      # Markdown report
+    python stellariswiki.py analyze --workers 8      # More parallel workers
 """
 
 import argparse
@@ -25,14 +25,9 @@ from urllib.parse import quote
 import cloudscraper
 from tqdm import tqdm
 
-# ---------------------------------------------------------------------------
-# Shared config + imports from fetch_and_parse.py
-# ---------------------------------------------------------------------------
-script_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, script_dir)
-
-from config import cfg
-from fetch_and_parse import (
+from src import PROJECT_ROOT, CONFIG_PATH, OUTPUT_DIR
+from src.config import cfg
+from src.fetcher import (
     COMPOSITE_PAGES,
     fetch_page_html,
     create_session as fp_create_session,
@@ -1367,7 +1362,7 @@ def _html_redirects_section(data):
 
 def _html_modals_and_config(data):
     """Generate modals, pending bar, and embedded config data."""
-    config_path = Path(os.path.dirname(os.path.abspath(__file__))) / "config.yaml"
+    config_path = CONFIG_PATH
     config_yaml_escaped = ""
     if config_path.exists():
         config_yaml_escaped = _json.dumps(config_path.read_text(encoding="utf-8"))
@@ -1385,8 +1380,8 @@ def _html_modals_and_config(data):
     <div class="modal">
         <h3>Re-fetch Wiki Pages</h3>
         <p>Run these commands in the project directory:</p>
-        <pre>python fetch_and_parse.py
-python analyze_wiki_pages.py</pre>
+        <pre>python stellariswiki.py fetch
+python stellariswiki.py analyze</pre>
         <p style="font-size:0.85rem;opacity:0.7">This will re-fetch all pages from the Stellaris wiki and regenerate the dashboard.</p>
         <button class="nav-btn" onclick="hideModal('refetch-modal')">Close</button>
     </div>
@@ -1395,12 +1390,12 @@ python analyze_wiki_pages.py</pre>
 <div id="remote-instructions-modal" class="modal-overlay" onclick="if(event.target===this)hideModal('remote-instructions-modal')">
     <div class="modal">
         <h3>Apply Config Changes</h3>
-        <p>Replace <code>config.yaml</code> in your local clone with the downloaded file, then run:</p>
+        <p>Replace <code>config/config.yaml</code> in your local clone with the downloaded file, then run:</p>
         <pre>git clone https://github.com/boujuan/StellarisWiki.git
 cd StellarisWiki
-# Replace config.yaml with downloaded file
-python fetch_and_parse.py
-python analyze_wiki_pages.py</pre>
+# Replace config/config.yaml with downloaded file
+python stellariswiki.py fetch
+python stellariswiki.py analyze</pre>
         <button class="nav-btn" onclick="hideModal('remote-instructions-modal')">Close</button>
     </div>
 </div>
@@ -2185,30 +2180,38 @@ def generate_all_pages_md(content_pages, redirect_pages, all_fetched, composite_
 # CLI & Main
 # ---------------------------------------------------------------------------
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Analyze Stellaris wiki pages and generate an interactive report."
-    )
-    parser.add_argument(
-        "--format", choices=["html", "md"], default="html",
-        help="Output format: html (interactive, default) or md (markdown)"
-    )
-    parser.add_argument(
-        "--workers", type=int, default=cfg.defaults.workers,
-        help=f"Number of parallel workers for API calls (default: {cfg.defaults.workers})"
-    )
-    parser.add_argument(
-        "--output", type=str, default=None,
-        help=f"Output file path (default: {cfg.defaults.output_dir}/wiki_analysis.{{html|md}})"
-    )
-    parser.add_argument(
-        "--no-all-pages", action="store_true",
-        help="Skip generating all_pages.md"
-    )
-    args = parser.parse_args()
+def main(args=None):
+    if args is None:
+        parser = argparse.ArgumentParser(
+            description="Analyze Stellaris wiki pages and generate an interactive report."
+        )
+        parser.add_argument(
+            "--format", choices=["html", "md"], default="html",
+            help="Output format: html (interactive, default) or md (markdown)"
+        )
+        parser.add_argument(
+            "--workers", type=int, default=None,
+            help=f"Number of parallel workers for API calls (default: {cfg.defaults.workers})"
+        )
+        parser.add_argument(
+            "--output", type=str, default=None,
+            help=f"Output file path (default: {cfg.defaults.output_dir}/wiki_analysis.{{html|md}})"
+        )
+        parser.add_argument(
+            "--no-all-pages", action="store_true",
+            help="Skip generating all_pages.md"
+        )
+        args = parser.parse_args()
+
+    # Apply defaults from config for unset values
+    if not hasattr(args, 'format') or args.format is None:
+        args.format = "html"
+    args.workers = args.workers if args.workers is not None else cfg.defaults.workers
+    if not hasattr(args, 'no_all_pages'):
+        args.no_all_pages = False
 
     session = create_session()
-    output_dir = Path(script_dir) / cfg.defaults.output_dir
+    output_dir = OUTPUT_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
 
     ext = "html" if args.format == "html" else "md"
@@ -2244,7 +2247,7 @@ def main():
     categories_map = fetch_categories_parallel(content_titles_set, workers=args.workers)
 
     # 8. Scan existing files
-    pages_dir = Path(script_dir) / cfg.defaults.output_dir / "pages"
+    pages_dir = OUTPUT_DIR / "pages"
     existing_files = scan_existing_files(pages_dir)
     print(f"Files on disk: {len(existing_files)}")
 
@@ -2286,4 +2289,10 @@ def main():
 
 
 if __name__ == "__main__":
+    # Allow standalone execution: python src/analyzer.py
+    import sys as _sys
+    from pathlib import Path as _Path
+    _root = str(_Path(__file__).resolve().parent.parent)
+    if _root not in _sys.path:
+        _sys.path.insert(0, _root)
     main()

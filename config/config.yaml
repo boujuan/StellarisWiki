@@ -1,5 +1,5 @@
 # Stellaris Wiki Scraper Configuration
-# Shared by fetch_and_parse.py, analyze_wiki_pages.py, and stellaris_mcp_server.py
+# Shared by src/fetcher.py, src/analyzer.py, and src/mcp_server.py
 
 game_version: "4.2"
 
@@ -9,10 +9,10 @@ wiki:
 defaults:
   output_dir: "output"
   workers: 4
-  delay: 0.5              # seconds between requests (fetch_and_parse sequential mode)
-  request_delay: 0.3      # seconds between requests (analyze_wiki_pages)
+  delay: 0.5              # seconds between requests (fetcher sequential mode)
+  request_delay: 0.3      # seconds between requests (analyzer)
   max_retries: 5
-  generate_all_pages: true # Generate all_pages.md when running analyze_wiki_pages.py
+  generate_all_pages: true # Generate all_pages.md when running analyzer
 
 # ---------------------------------------------------------------------------
 # Pages to fetch from the wiki
@@ -143,7 +143,7 @@ pages_to_fetch:
 # ---------------------------------------------------------------------------
 # Composite pages: index pages whose sub-page links are extracted from HTML.
 # Each entry maps a page title to an extractor config with:
-#   extractor: name of Python function in fetch_and_parse.py
+#   extractor: name of Python function in src/fetcher.py
 #   extra_subpages: explicit sub-pages to fetch (supplement auto-discovery)
 # ---------------------------------------------------------------------------
 composite_pages:
@@ -175,7 +175,7 @@ composite_pages:
       - "Paragon situations"
 
 # ---------------------------------------------------------------------------
-# Classification rules (used by analyze_wiki_pages.py)
+# Classification rules (used by src/analyzer.py)
 # ---------------------------------------------------------------------------
 classification:
   # Title prefixes that identify mod pages

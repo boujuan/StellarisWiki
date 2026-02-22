@@ -81,10 +81,10 @@ fastmcp>=2.0.0          # MCP server framework
 
 ```bash
 # Using micromamba
-micromamba run -n stellaris-scraper python fetch_and_parse.py
+micromamba run -n stellaris-scraper python stellariswiki.py fetch
 
 # Or if environment is activated
-python fetch_and_parse.py
+python stellariswiki.py fetch
 ```
 
 This will:
@@ -99,13 +99,13 @@ This will:
 
 ```bash
 # Test mode shows first 2000 characters of output
-python fetch_and_parse.py --page "Machine_traits" --test
+python stellariswiki.py fetch --page "Machine_traits" --test
 
 # Process single page without test output
-python fetch_and_parse.py --page "Civics"
+python stellariswiki.py fetch --page "Civics"
 
 # Test a composite page (fetches all sub-pages)
-python fetch_and_parse.py --page "Astral rift" --test
+python stellariswiki.py fetch --page "Astral rift" --test
 ```
 
 ### Command Line Options
@@ -122,16 +122,16 @@ python fetch_and_parse.py --page "Astral rift" --test
 
 ```bash
 # Fetch all pages with default settings (4 parallel workers)
-python fetch_and_parse.py
+python stellariswiki.py fetch
 
 # Sequential fetching (gentler on the wiki)
-python fetch_and_parse.py --workers 1
+python stellariswiki.py fetch --workers 1
 
 # Custom output directory
-python fetch_and_parse.py --output my_wiki_data
+python stellariswiki.py fetch --output my_wiki_data
 
 # Test a specific page
-python fetch_and_parse.py --page "Technology" --test
+python stellariswiki.py fetch --page "Technology" --test
 ```
 
 ## MCP Server (StellarisWikiMCP)
@@ -155,7 +155,7 @@ micromamba run -n stellaris-scraper pip install fastmcp
       "command": "/usr/bin/micromamba",
       "args": [
         "run", "-n", "stellaris-scraper", "python",
-        "/path/to/stellaris_wiki_scraper/stellaris_mcp_server.py"
+        "/path/to/stellaris_wiki_scraper/stellariswiki.py", "serve"
       ]
     }
   }
@@ -176,7 +176,7 @@ micromamba run -n stellaris-scraper pip install fastmcp
 
 ```bash
 # Test the server with the MCP inspector
-micromamba run -n stellaris-scraper fastmcp dev stellaris_mcp_server.py
+micromamba run -n stellaris-scraper fastmcp dev src/mcp_server.py
 ```
 
 ## Output Format
@@ -216,25 +216,26 @@ All pages are concatenated into `output/stellaris_4.2_combined.md`, separated by
 
 ```
 stellaris_wiki_scraper/
-├── README.md                 # This file
-├── requirements.txt          # Python dependencies
-├── environment.yml           # Conda/micromamba environment
-├── config.yaml               # Pages to fetch + classification rules
-├── config.py                 # Config loader (dataclasses)
-├── fetch_and_parse.py        # Main script: fetch HTML → convert to Markdown
-├── html_to_markdown.py       # HTML to Markdown converter class
-├── analyze_wiki_pages.py     # Wiki coverage analysis + HTML dashboard
-├── stellaris_mcp_server.py   # MCP server for Claude Desktop
+├── stellariswiki.py          # CLI entry point (fetch / analyze / serve)
+├── config/
+│   └── config.yaml           # Pages to fetch + classification rules
+├── src/
+│   ├── __init__.py           # Path constants (PROJECT_ROOT, OUTPUT_DIR, etc.)
+│   ├── config.py             # Config loader (dataclasses), singleton cfg
+│   ├── fetcher.py            # Fetch wiki HTML → convert to Markdown
+│   ├── converter.py          # HTML to Markdown converter class
+│   ├── analyzer.py           # Wiki coverage analysis + HTML dashboard
+│   └── mcp_server.py         # MCP server for Claude Desktop
 ├── .github/workflows/
 │   ├── pages.yml             # Deploy dashboard to GitHub Pages
 │   └── release.yml           # Upload zip as GitHub Release
 │
 └── output/                   # All generated output
-    ├── pages/                # Individual .md files (101+ pages)
+    ├── pages/                # Individual .md files (108+ pages)
     │   ├── Machine_traits.md
     │   ├── Civics.md
-    │   ├── Events.md         # Composite: main + 87 event sub-pages
-    │   ├── Astral_rift.md    # Composite: main + 12 rift sub-pages
+    │   ├── Events.md         # Composite: main + 91 event sub-pages
+    │   ├── Astral_rift.md    # Composite: main + 22 rift sub-pages
     │   └── ...
     ├── stellaris_4.2_combined.md   # Single combined file (~4.9 MB)
     ├── stellaris_wiki_pages.zip    # Zip of all pages (generated, not in git)
@@ -268,7 +269,7 @@ See [`all_pages.md`](output/all_pages.md) for the complete list of all 4994 wiki
 
 ## Adding New Pages
 
-To add new pages, edit the `pages_to_fetch` list in `config.yaml`:
+To add new pages, edit the `pages_to_fetch` list in `config/config.yaml`:
 
 ```yaml
 pages_to_fetch:
@@ -281,7 +282,7 @@ Page titles must match the wiki URL (e.g., `https://stellaris.paradoxwikis.com/A
 Then re-run the fetch:
 
 ```bash
-python fetch_and_parse.py
+python stellariswiki.py fetch
 ```
 
 ## HTML to Markdown Conversion

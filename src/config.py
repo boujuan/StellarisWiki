@@ -1,18 +1,15 @@
 """
 Shared configuration loader for the Stellaris Wiki scraper.
 
-Loads config.yaml from the project root and provides typed access
-to all configuration values. Used by fetch_and_parse.py,
-analyze_wiki_pages.py, and stellaris_mcp_server.py.
+Loads config/config.yaml and provides typed access to all configuration
+values. Used by all modules in the src package.
 """
 
 import yaml
 from dataclasses import dataclass
 from pathlib import Path
 
-
-PROJECT_ROOT = Path(__file__).parent
-_CONFIG_PATH = PROJECT_ROOT / "config.yaml"
+from src import PROJECT_ROOT, CONFIG_PATH
 
 
 @dataclass
@@ -68,17 +65,16 @@ def load_config(config_path: Path | None = None) -> Config:
     """Load configuration from YAML file.
 
     Args:
-        config_path: Optional override path. Defaults to config.yaml
-                     in the project root.
+        config_path: Optional override path. Defaults to config/config.yaml.
 
     Returns:
         Populated Config dataclass instance.
     """
-    path = config_path or _CONFIG_PATH
+    path = config_path or CONFIG_PATH
     if not path.exists():
         raise FileNotFoundError(
             f"Configuration file not found: {path}\n"
-            f"Expected config.yaml in the project root."
+            f"Expected config/config.yaml in the project root."
         )
 
     with open(path, "r", encoding="utf-8") as f:

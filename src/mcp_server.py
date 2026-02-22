@@ -12,10 +12,11 @@ from pathlib import Path
 
 from fastmcp import FastMCP
 
-from config import cfg
+from src import OUTPUT_DIR
+from src.config import cfg
 
 # Path to markdown pages
-PAGES_DIR = Path(__file__).parent / cfg.defaults.output_dir / "pages"
+PAGES_DIR = OUTPUT_DIR / "pages"
 
 # In-memory store for wiki pages
 wiki_pages: dict[str, dict] = {}
@@ -193,4 +194,9 @@ def search_wiki(query: str, max_results: int = 5) -> str:
 
 
 if __name__ == "__main__":
+    # Allow standalone execution: python src/mcp_server.py
+    import sys as _sys
+    _root = str(Path(__file__).resolve().parent.parent)
+    if _root not in _sys.path:
+        _sys.path.insert(0, _root)
     mcp.run(transport="stdio")
