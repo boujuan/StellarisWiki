@@ -31,10 +31,19 @@ class DefaultsConfig:
 
 
 @dataclass
+class CompositePageConfig:
+    extractor: str
+    extra_subpages: list[str]
+
+
+@dataclass
 class ClassificationConfig:
     mod_prefixes: list[str]
+    mod_categories: set[str]
     dlc_titles: set[str]
     wiki_maintenance_categories: set[str]
+    wiki_maintenance_prefixes: list[str]
+    disambiguation_categories: set[str]
 
 
 @dataclass
@@ -43,7 +52,8 @@ class Config:
     wiki: WikiConfig
     defaults: DefaultsConfig
     pages_to_fetch: list[str]
-    composite_pages: dict[str, str]   # page title -> extractor function name
+    optional_pages: list[str]
+    composite_pages: dict[str, CompositePageConfig]
     classification: ClassificationConfig
 
     @property
@@ -75,6 +85,16 @@ def load_config(config_path: Path | None = None) -> Config:
     with open(path, "r", encoding="utf-8") as f:
         raw = yaml.safe_load(f)
 
+    # Parse composite_pages: values are dicts with extractor + extra_subpages
+    composite_pages = {}
+    for title, val in raw.get("composite_pages", {}).items():
+        composite_pages[title] = CompositePageConfig(
+            extractor=val["extractor"],
+            extra_subpages=val.get("extra_subpages") or [],
+        )
+
+    cls_raw = raw["classification"]
+
     return Config(
         game_version=raw["game_version"],
         wiki=WikiConfig(
@@ -89,12 +109,18 @@ def load_config(config_path: Path | None = None) -> Config:
             generate_all_pages=raw["defaults"].get("generate_all_pages", True),
         ),
         pages_to_fetch=raw["pages_to_fetch"],
-        composite_pages=raw.get("composite_pages", {}),
+        optional_pages=raw.get("optional_pages") or [],
+        composite_pages=composite_pages,
         classification=ClassificationConfig(
-            mod_prefixes=raw["classification"]["mod_prefixes"],
-            dlc_titles=set(raw["classification"]["dlc_titles"]),
+            mod_prefixes=cls_raw["mod_prefixes"],
+            mod_categories=set(cls_raw.get("mod_categories") or []),
+            dlc_titles=set(cls_raw["dlc_titles"]),
             wiki_maintenance_categories=set(
-                raw["classification"]["wiki_maintenance_categories"]
+                cls_raw["wiki_maintenance_categories"]
+            ),
+            wiki_maintenance_prefixes=cls_raw.get("wiki_maintenance_prefixes") or [],
+            disambiguation_categories=set(
+                cls_raw.get("disambiguation_categories") or []
             ),
         ),
     )

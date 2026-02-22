@@ -1120,3 +1120,369 @@ Chapters which terminate the rift are noted in red .
 | **B** | **De-escalation**<br>- small astral threads reward ( 40 , 50 , or 60 )<br>- Difficulty 1: Proceed to **chapter 4** . | | | |
 | | | | | |
 | 4 | | **Lost Junker**<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- 24x society output ( 500~1 000 000 )<br>- In 1 year, receive a new Level 6 Commander with Rift Warped trait and a random specialization.<br>- Ends the rift. | | |
+
+
+
+---
+
+## Additional Sub-pages
+
+
+# Entangled Dark Matter
+
+**Entangled Dark Matter** is a non-unique Astral rift ; therefore this storyline can be encountered multiple times within a single game.
+
+## Summary of possible outcomes
+
+These are all of the possible end results for terminating the rift. This table does not include rewards given for intervening chapters.
+
+| Chapter | Outcome | Astral Threads Reward |
+|---|---|---|
+| 3 | **Unlimited Current**<br>- 48x dark matter output ( 700~30 000 )<br>- Ends the rift. | Large |
+| **4/5-A** | **Absorbed Consciousness**<br>- If not Psychic and not Gestalt:<br>  - Removes all scientist traits, sets it to a skill level 5 scholar with Resilient, Planar Theorist, Psychic, Riftwalker and Foreign Consciousness<br>- If Psychic:<br>  - Adds Resilient and Foreign Consciousness, adds or upgrades Planar Theorist<br>- If Gestalt:<br>  - Adds the Foreign Consciousness empire modifier (+5% research speed)<br>- Ends the rift. | Large |
+| **5/6-A** | **Compassion/Extermination**<br>- **48xdark matter output (700~30 000)**<br>- **Ends the rift.** | Large |
+| **5/6-B** | **Life in a Cage**<br>- Adds a 25 physics and engineering deposit to the Astral Rift for 10 years<br>- **Ends the rift.** | Large |
+
+## Chapter Detail
+
+This is a detailed list of all chapters in this rift. The reward below each chapter name is issued when a selection is made, regardless of which one was chosen.
+
+Chapters which terminate the rift are noted in red .
+
+| Chapter | | | Choices | | |
+|---|---|---|---|---|---|
+| 1 | | **Strange Mesh**<br>- 6x dark matter output ( 100~1000 ) | Difficulty<br>2: "Examine the mesh."<br>- Proceed to **chapter 2** . | | Difficulty<br>2: "Approach the mass of dark matter."<br>- Proceed to **chapter 2/3-A** . |
+| | | | | | |
+| 2 | | **Limited Current**<br>- 18x engineering output ( 350~100 000 ) | Difficulty<br>4: "Remove the device."<br>- Proceed to **chapter 3-A** . | | Difficulty<br>2: "Investigate the captive mass."<br>- Proceed to **chapter 2/3-A.** |
+| | | | | | |
+| 2/3 | | **Telepathic Communication/Communications Established**<br>(name depends on if leader is<br>organic species<br>)<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>1: "We are [scientist species]."/<br>"We are strangers to this place."/ "We are explorers from another world."<br>- Proceed to **chapter 3/4-A.** | | |
+| | | | | | |
+| 3 | | **Unlimited Current**<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- 48x dark matter output ( 700~30 000 )<br>- Ends the rift. | | | |
+| | | | | | |
+| **3/4** | | **An Ominous Proposal**<br>- small astral threads reward ( 40 , 50 , or 60 ) | If not<br>Egalitarian<br>Difficulty 3: "Offer this scientist as a vessel."<br>/ Gestalt "Assimilate the entity."<br>- Proceed to **chapter 4/5-A.**<br>- Can fail if not Psychic<br>- Difficulty 2 difficulty if Psychic | | Difficulty<br>2: "Deny this proposal."/<br>Gestalt "Deny assimilation"<br>- Proceed to **chapter 4/5-B.** |
+| | | | | | |
+| 4/5 | A | **Absorbed Consciousness**<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- If not Psychic and not Gestalt:<br>  - Removes all scientist traits, sets it to a skill level 5 scholar with Resilient, Planar Theorist, Psychic, Riftwalker and Foreign Consciousness<br>- If Psychic:<br>  - Adds Resilient and Foreign Consciousness, adds or upgrades Planar Theorist<br>- If Gestalt:<br>  - Adds the foreign consciousness Empire modifier (+5% Research speed)<br>- Ends the rift. | If failed:<br>**Unfortunate Complications**<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- 48x dark matter output ( 700~30 000 )<br>- Ends the rift. | | |
+| B | **A Prisoner's Plea**<br>- small astral threads reward ( 40 , 50 , or 60 ) | If not<br>Barbaric Despoilers or<br>Genocidal:<br>Difficulty 2: "Euthanize the ethereal creature."<br>- Proceed to **chapter 5/6-A.** | If not<br>Barbaric Despoilers or<br>Genocidal:<br>Difficulty 2: "Kill it."<br>- Proceed to **chapter 5/6-A.** | Difficulty<br>3: "Preserve the captive for study.":<br>- Proceed to **chapter 5/6-B.** | |
+| | | | | | |
+| 5/6 | A | **Compassion/Extermination**<br>- **largeastral threads reward (140,150, or160)**<br>- **48xdark matter output (700~30 000)**<br>- **Ends the rift.** | | | |
+| 5/6 | B | **Life in a Cage**<br>- **largeastral threads reward (140,150, or160)**<br>- Adds a 25 physics and engineering deposit to the Astral Rift for 10 years<br>- **Ends the rift.** | | | |
+
+
+# Hatching Ground
+
+**Hatching Ground** is a non-unique Astral rift ; therefore this storyline can be encountered multiple times within a single game.
+
+## Summary of Possible Outcomes
+
+These are all of the possible end results for terminating the rift. This table does not include rewards given for intervening chapters.
+
+| Chapter | Outcome | Astral Threads Reward |
+|---|---|---|
+| 4 | **Astral Migration / Astral Spawning**<br>- 18x unity output ( 250~1 000 000 ) | Large |
+
+## Chapter Detail
+
+This is a detailed list of all chapters in this rift. The reward below each chapter name is issued when a selection is made, regardless of which one was chosen.
+
+Chapters which terminate the rift are noted in red .
+
+| Chapter | | | Choices | |
+|---|---|---|---|---|
+| 1 | | **Giant Eggs**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>2: "Fascinating."<br>- Proceed to **chapter 2** . | |
+| | | | | |
+| 2 | | **Star Drinkers**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>6: "Get closer."<br>- Proceed to **chapter** **3-A** . | Difficulty<br>2: "Maintain a safe distance."<br>- Proceed to **chapter 3-B** . |
+| | | | | |
+| 3 | **A** | **Friendly Hatchlings** | Difficulty<br>2: "Remarkable."/"They are comparable to our ships!"<br>- Proceed to **chapter 4-A** .<br>- If organic shipset:<br>  - 48x society output ( 1000~1 000 000 )<br>- If mechanical shipset:<br>  - 48x engineering output ( 1000~1 000 000 ) (regardless of shipset) | Difficulty<br>2: "Neither Avian or Arthropoid. Very peculiar."<br>- Gain medium DNA reward<br>- 48x engineering output ( 1000~1 000 000 ) (regardless of shipset) |
+| **B** | **Solar Sailing**<br>- Gain lonely planet Empire modifier for 15 years (+15% Propulsion research speed) | Difficulty<br>2: "Impressive."<br>- Proceed to **chapter 4-B** . | | |
+| | | | | |
+| 4 | **A** | **Astral Spawning**<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- 18x unity output ( 250~1 000 000 )<br>- Ends the rift. | | |
+| **B** | **Astral Migration**<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- 18x unity output ( 250~1 000 000 )<br>- Ends the rift. | | | |
+
+
+# Lone Object
+
+**Lone Object** is a non-unique Astral rift ; therefore this storyline can be encountered multiple times within a single game.
+
+## Summary of Possible Outcomes
+
+These are all of the possible end results for terminating the rift. This table does not include rewards given for intervening chapters.
+
+| Chapter | Outcome | Astral Threads Reward |
+|---|---|---|
+| 3/4 | | Medium |
+| 3/4/5 Success | **Tomb Raiding**<br>- If leader is Psychic:<br>  - Gain a random Psionics technology<br>- 12x minerals output ( 150~2000 )<br>- 6x alloys output ( 100~1000 )<br>- 500 Rare Crystals<br>- 12x unity output ( 150~100 000 ) | Large |
+| 3/4/5 Failure | **Grave Guardians**<br>- Generate a hostile fleet of 10-30 (scaling linearly from mid to endgame) powerful Crystalline entity ships | |
+
+## Chapter Detail
+
+This is a detailed list of all chapters in this rift. The reward below each chapter name is issued when a selection is made, regardless of which one was chosen.
+
+Chapters which terminate the rift are noted in red .
+
+Some of the events in chapters 2, 3, 4, and 5 of this rift can be encountered in either order. In this table those events are marked as chapter "2/3", "3/4", and "3/4/5". The in-game rift dialog will display chapter numbers for those events according to the order in which they were encountered.
+
+| Chapter | | Choices | | |
+|---|---|---|---|---|
+| 1 | **Floating Mystery**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>4: "Attempt to translate the glyphs."<br>- Proceed to **chapter 2** . | Difficulty<br>2: "Scan its entire perimeter."<br>- Proceed to **chapter** **2/3** . | |
+| | | | | |
+| 2 | **Millions of Glyphs**<br>- 18x society output ( 350~100 000 ) | Difficulty<br>2: "Scan its entire perimeter."<br>- Proceed to **chapter** **2/3** . | Difficulty<br>6: "Blast it open."<br>- Proceed to **chapter 3/4/5** .<br>- Can fail | |
+| | | | | |
+| 2/3 | **An Ancient Seal** small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>2: "Send a drone through the crack."<br>- Proceed to **chapter 3/4** . | Difficulty<br>6: "Blast it open."<br>- Proceed to **chapter 3/4/5** .<br>- Can fail | |
+| | | | | |
+| 3/4 | **Clouded Passageways** | "Take samples and return."<br>- medium astral threads reward ( 90 , 100 , or 110 )<br>- Ends the rift. | Difficulty<br>6: "Engage destructive exploration."<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- Proceed to **chapter 3/4/5** .<br>- Can fail. | |
+| | | | | |
+| 3/4/5 | On success:<br>**Tomb Raiding**<br>- If leader is Psychic:<br>  - Gain a random Psionics technology<br>- 12x minerals output ( 150~2000 )<br>- 6x alloys output ( 100~1000 )<br>- 500 Rare Crystals<br>- 12x unity output ( 150~100 000 )<br>- medium astral threads reward ( 90 , 100 , or 110 )<br>- Ends the rift. | On failure:<br>**Grave Guardians**<br>- Generate a hostile fleet of 10-30 (scaling linearly from mid to endgame) powerful Crystalline entity ships<br>- Ends the rift. | | |
+
+
+# Rockworms
+
+**Rockworms** is a non-unique Astral rift ; therefore this storyline can be encountered multiple times within a single game.
+
+## Summary of Possible Outcomes
+
+These are all of the possible end results for terminating the rift. This table does not include rewards given for intervening chapters.
+
+| Chapter | Outcome | Astral Threads Reward |
+|---|---|---|
+| 3/4 | "We've pushed our luck far enough. Return at once."/<br>Evolutionary Predators: "Gather the samples and return."<br>- **6xunity output (100~100 000)**<br>- Gain 15% of a random Biology technology<br>- If Evolutionary Predators:<br>  - Gain 20 Adaptive Evolution progress and Lithoid DNA<br>- End astral rift | |
+| 4/5/6-A | **Pulled Free** | Large |
+| 4/5/6-B (Success) | **Rupture**<br>- Gain Rockworm Hive planetary decision<br>- If Evolutionary Predators:<br>  - Gain 20 Adaptive Evolution progress and Lithoid DNA | |
+| 4/5/6-B (Failure) | **Digested**<br>- Gain 15% of a random Biology technology<br>- Scientist dies and returns a year later with Partially Digested | Small |
+
+## Chapter Detail
+
+This is a detailed list of all chapters in this rift. The reward below each chapter name is issued when a selection is made, regardless of which one was chosen.
+
+Chapters which terminate the rift are noted in red .
+
+Some of the events in chapters 2, 3, 4, 5, and 6 of this rift can be encountered in either order. In this table those events are marked as chapter "2/3", "3/4", "3/4/5", and "4/5/6". The in-game rift dialog will display chapter numbers for those events according to the order in which they were encountered.
+
+| Chapter | | | Choices | |
+|---|---|---|---|---|
+| 1 | | **Endless Rock**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>2: "Continue surface observations."<br>- Proceed to **chapter 2** . | Difficulty<br>5: "Explore the tunnels."<br>- Proceed to **chapter** **2/3** . |
+| | | | | |
+| 2 | | **Sky Plankton**<br>- Gain 15% of a random Biology technology | Difficulty<br>2: "Sample the microorganisms."<br>- Proceed to **chapter** **3/4/5** . | Difficulty<br>5: "Explore the worms' tunnels."<br>- Proceed to **chapter 2/3** .<br>- Can fail |
+| | | | | |
+| 2/3 | | **Tunnels**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>5: "Send a drone through the crack."<br>- Proceed to **chapter 3/4/5** . | Difficulty<br>2: "Proceed onward."<br>- Proceed to **chapter 3/4** . |
+| | | | | |
+| 3/4 | | **The Nursery**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>5: "Capture a live specimen."<br>- Proceed to **chapter 3/4/5** . | "We've pushed our luck far enough. Return at once."/<br>Evolutionary Predators: "Gather the samples and return."<br>- **6xunity output (100~100 000)**<br>- Gain 15% of a random Biology technology<br>- If Evolutionary Predators:<br>  - Gain 20 Adaptive Evolution progress and Lithoid DNA<br>- End astral rift |
+| | | | | |
+| 3/4/5 | | **Swallowed**<br>- small astral threads reward ( 40 , 50 , or 60 ) | If has<br>Exotic Gas Refining or any<br>Exotic Gases:<br>Difficulty 2: "Set explosive charges."<br>- −100 Exotic Gases<br>- Proceed to **chapter 4/5/6-B** .<br>- Can fail | Difficulty<br>1: "Pull emergency anchor."<br>- Proceed to **chapter 4/5/6-A.** |
+| | | | | |
+| 4/5/6 | A | **Pulled Free**<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- End astral rift | | |
+| B | **Rupture (success)**<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- Gain Rockworm Hive planetary decision<br>- If Evolutionary Predators:<br>  - Gain 20 Adaptive Evolution progress and Lithoid DNA<br>- End astral rift | | **Digested (fail)**<br>- **smallastral threads reward (40,50, or60)**<br>- Gain 15% of a random Biology technology<br>- Scientist dies and returns a year later with Partially Digested<br>- End astral rift | |
+
+
+# Subnautical
+
+**Subnautical** is a non-unique Astral rift ; therefore this storyline can be encountered multiple times within a single game.
+
+## Summary of Possible Outcomes
+
+These are all of the possible end results for terminating the rift. This table does not include rewards given for intervening chapters.
+
+| Chapter | Outcome | Astral Threads Reward |
+|---|---|---|
+| 6-A | **Awakening**<br>- **24xsociety output (500~1 000 000)**<br>- Celestial Tear<br>- Ends the rift. | Small |
+| 6-B | **Awakening**<br>- **48xsociety output (1000~1 000 000)**<br>- Celestial Tear<br>- Ends the rift. | Small |
+| 6-C | **Awakening**<br>- **96xsociety output (2000~2 000 000)**<br>- Celestial Tear<br>- Ends the rift. | Small |
+
+## Chapter Detail
+
+This is a detailed list of all chapters in this rift. The reward below each chapter name is issued when a selection is made, regardless of which one was chosen.
+
+Chapters which terminate the rift are noted in red .
+
+| Chapter | | | Choices | | |
+|---|---|---|---|---|---|
+| 1 | | **Submerged**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty 1: "Dive deeper." Proceed to **chapter 2** . | Difficulty 1: "Head to the surface." Proceed to **chapter** **2** . | |
+| | | | | | |
+| 2 | | **Unexpected Results**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty 2: "Activate the engines." Proceed to **chapter** **3-A** . | Difficulty 5 ( Difficulty 2 if Aquatic or Waterproof): "Don pressure suits. We swim." Proceed to **chapter 3-B** . | |
+| | | | | | |
+| 3 | **A** | **A Planet-Sized Bubble**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty 1: "Interesting." Proceed to **chapter 4** . | | |
+| **B** | **We Swim**<br>- medium astral threads reward ( 90 , 100 , or 110 ) | Difficulty 1: "Fascinating." Proceed to **chapter 4** . | | | |
+| | | | | | |
+| 4 | | **Planetoid Bubbles**<br>- small astral threads reward ( 40 , 50 , or 60 )<br>- 18x physics output ( 350~100 000 ) | Difficulty<br>6: "Try to communicate."<br>- Proceed to **chapter 5-A** . | Difficulty 2: "Approach the Object." Proceed to **chapter 5-B** . | |
+| | | | | | |
+| 5 | **A** | **Communication**<br>- **smallastral threads reward (40,50, or60)** | If not Barbaric Despoilers or Genocidal: Difficulty 1:"Greetings." Proceed to **chapter 6-A** . | Difficulty 3: "What are you?" Proceed to **chapter 6-B** . | If not Barbaric Despoilers or Genocidal: Difficulty 6: "Do you need help?" Proceed to **chapter 6-C** . |
+| **B** | **The Approach**<br>- **smallastral threads reward (40,50, or60)**<br>- **18xphysics output (350~100 000)** | Difficulty 3: "Get closer..." Proceed to **chapter 6-A** . | | | |
+| | | | | | |
+| 6 | **A** | **Awakening**<br>- **smallastral threads reward (40,50, or60)**<br>- **24xsociety output (500~1 000 000)**<br>- Celestial Tear<br>- Ends the rift. | | | |
+| **B** | **Awakening**<br>- **smallastral threads reward (40,50, or60)**<br>- **48xsociety output (1000~1 000 000)**<br>- Celestial Tear<br>- Ends the rift. | | | | |
+| **C** | **Awakening**<br>- **smallastral threads reward (40,50, or60)**<br>- **96xsociety output (2000~2 000 000)**<br>- Celestial Tear<br>- Ends the rift. | | | | |
+
+
+# The Advisor
+
+**The Advisor** is a non-unique Astral rift ; therefore this storyline can be encountered multiple times within a single game.
+
+## Summary of Possible Outcomes
+
+These are all of the possible end results for terminating the rift. This table does not include rewards given for intervening chapters.
+
+After finishing the rift (or the event triggered by ending **3/4-A** ), the player will have the option to re-enable the tutorial.
+
+| Chapter | Outcome | Astral Threads Reward |
+|---|---|---|
+| 3/4-A | **Further 'Assistance'**<br>- Scientist disappears, returning in 5 years with the Rift Warped trait and a random one between:<br>  - Spark of Genius<br>  - Meticulous<br>  - Roamer | |
+| 4/5-A | **Scrapping the Machine**<br>- 18x alloys output ( 250~5000 )<br>- 20% Progress in a random Computing technology<br>- Advisor Core | Large |
+| 4/5-B | **Good Riddance**<br>- 24x engineering output ( 500~1 000 000 ) | |
+
+## Chapter Detail
+
+This is a detailed list of all chapters in this rift. The reward below each chapter name is issued when a selection is made, regardless of which one was chosen.
+
+Chapters which terminate the rift are noted in red .
+
+Some of the events in chapters 2, 3, 4, and 5 of this rift can be encountered in either order. In this table those events are marked as chapter "2/3", "3/4", and "4/5". The in-game rift dialog will display chapter numbers for those events according to the order in which they were encountered.
+
+| Chapter | | | Choices | |
+|---|---|---|---|---|
+| 1 | | **A Familiar Place**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>1: "Ask for assistance."<br>- Proceed to **chapter 2** . | Difficulty<br>3: "Disable this thing."<br>- Proceed to **chapter** **2/3** . |
+| | | | | |
+| 2 | | **Assisting the Assistant**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>1: "Ask for FURTHER assistance."<br>- Proceed to **chapter** **3/4-A** . | Difficulty<br>3: "Disable this thing."<br>- Proceed to **chapter 2/3** . |
+| | | | | |
+| 2/3 | | **Unable to Disable**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>1: "Placate the machine."<br>- Proceed to **chapter 3/4-A** . | Difficulty<br>6: "Discharge an electromagnetic pulse."<br>- Proceed to **chapter 3/4-B** . |
+| | | | | |
+| 3/4 | A | **Further 'Assistance'**<br>- Scientist disappears, returning in 5 years with the Rift Warped trait and a random one between:<br>  - Spark of Genius<br>  - Meticulous<br>  - Roamer<br>- End astral rift | | |
+| B | **Electromagnetic Pulse**<br>- 24x engineering output ( 500~1 000 000 ) | Difficulty<br>6: "Attempt to recover its core."<br>- Proceed to **chapter 4/5-A** . | Difficulty<br>2: "Destroy the machine completely."<br>- Proceed to **chapter 4/5-B** . | |
+| | | | | |
+| 4/5 | A | **Scrapping the Machine**<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- 18x alloys output ( 250~5000 )<br>- 20% Progress in a random Computing technology<br>- Advisor Core<br>- End astral rift | | |
+| B | **Good Riddance**<br>- 24x engineering output ( 500~1 000 000 )<br>- End astral rift | | | |
+
+
+# The Corridors
+
+**The Corridors** is a non-unique Astral rift ; therefore this storyline can be encountered multiple times within a single game.
+
+## Summary of Possible Outcomes
+
+These are all of the possible end results for terminating the rift. This table does not include rewards given for intervening chapters.
+
+| Chapter | Outcome | Astral Threads Reward |
+|---|---|---|
+| 4-A Success | **A Formula**<br>- Gain **Procedural Space** Empire modifier (+1 max districts, +1 max branch office buildings on all owned planets) | |
+| 4-A Failure | **Entombed**<br>- Scientist disappears, returning in 5 years with the Rift Warped trait and a random one between:<br>  - Spark of Genius<br>  - Meticulous<br>  - Roamer | |
+| 4-B | | Large |
+
+## Chapter Detail
+
+This is a detailed list of all chapters in this rift. The reward below each chapter name is issued when a selection is made, regardless of which one was chosen.
+
+Chapters which terminate the rift are noted in red .
+
+| Chapter | | | Choices | |
+|---|---|---|---|---|
+| 1 | | **Corridors**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>4: "Break through the floor."<br>- Proceed to **chapter 2-A** . | Difficulty<br>2: "Open the walls."<br>- Proceed to **chapter** **2-B** . |
+| | | | | |
+| 2 | A | **Impossible "Glass"**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>1: "Fascinating."<br>- Proceed to **chapter** **3** . | |
+| B | **Regeneration**<br>- 18x physics output ( 350~100 000 ) | Difficulty<br>1: "Fascinating."<br>- Proceed to **chapter** **3** . | | |
+| | | | | |
+| 3 | | **The Terminal** | Difficulty<br>6: "Hack it."<br>- Proceed to **chapter 4-A** .<br>- Can fail. | Difficulty<br>2: "Strip it for parts."<br>- Proceed to **chapter 4-B** . |
+| | | | | |
+| 4 | A | On success:<br>**A Formula**<br>- Gain **Procedural Space** Empire modifier (+1 max districts, +1 max branch office buildings on all owned planets)<br>- **Ends the rift.** | | On failure:<br>**Entombed**<br>- Scientist disappears, returning in 5 years with the Rift Warped trait and a random one between:<br>  - Spark of Genius<br>  - Meticulous<br>  - Roamer<br>- **Ends the rift.** |
+| B | **Astral Computer**<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- **Ends the rift.** | | | |
+
+
+# The Fluid
+
+**The Fluid** is a non-unique Astral rift ; therefore this storyline can be encountered multiple times within a single game.
+
+## Summary of Possible Outcomes
+
+These are all of the possible end results for terminating the rift. This table does not include rewards given for intervening chapters.
+
+| Chapter | Outcome | Astral Threads Reward |
+|---|---|---|
+| 4/5-A | Gain **Rift Fluid Samples** Empire modifier (biology research speed +10%) for 5/10 years | Large |
+| 4/5-B Success | **Dissolution**<br>- Plasmic Core | |
+| 4/5-B Failure | **Dissolved**<br>- Gain **Rift Fluid Samples** Empire modifier for 10 years<br>- Scientist and science ship are destroyed | |
+
+## Chapter Detail
+
+This is a detailed list of all chapters in this rift. The reward below each chapter name is issued when a selection is made, regardless of which one was chosen.
+
+Chapters which terminate the rift are noted in red .
+
+Some of the events in chapters 2, 3, 4, and 5 of this rift can be encountered in either order. In this table those events are marked as chapter "2/3", "3/4", and "4/5". The in-game rift dialog will display chapter numbers for those events according to the order in which they were encountered.
+
+| Chapter | | | Choices | |
+|---|---|---|---|---|
+| 1 | | **The Fluid**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>5: "Deploy sample collection rig."<br>- Proceed to **chapter 2** . | Difficulty<br>2: "Proceed forward at ease."<br>- Proceed to **chapter** **2/3** . |
+| | | | | |
+| 2 | | **Snagged**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>2: "Cut it loose. The risk isn't worth it."<br>- Proceed to **chapter** **2/3** . | If has<br>Exotic Gas Refining or any<br>Exotic Gases:<br>Difficulty 2: "Use emergency gasses."<br>- −50 Exotic Gases<br>- Proceed to **chapter 2/3** . |
+| | | | | |
+| 2/3 | | **The Chamber**<br>- small astral threads reward ( 40 , 50 , or 60 ) if cut loose<br>- Dimensional Endothelial Lining if used gases | Difficulty<br>2: "Follow the flow outward."<br>- Proceed to **chapter 3/4** .<br>- +200 Exotic Gases if used gases before | Difficulty<br>5: "Explore the crystalline orifice."<br>- Proceed to **chapter 3/4** .<br>- If used gases before, +200 Rare Crystals |
+| | | | | |
+| 3/4 | | **The Blob**<br>- **smallastral threads reward (40,50, or60)** | Difficulty<br>1: "Pull anchor. Return immediately."<br>- Proceed to **chapter 4/5-A** . | If has<br>Exotic Gas Refining or any<br>Exotic Gases:<br>Difficulty 6: "Use emergency gasses."<br>- −100 Exotic Gases<br>- Proceed to **chapter 4/5-B** .<br>- Can fail |
+| | | | | |
+| 4/5 | A | **Extraction**<br>- Gain **Rift Fluid Samples** Empire modifier (biology research speed +10%) for 10 years (5 if picked "Cut it loose" in chapter 2)<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- Ends the rift. | | |
+| B | On success:<br>**Dissolution**<br>- Plasmic Core<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- Ends the rift. | On failure:<br>**Dissolved**<br>- Gain **Rift Fluid Samples** Empire modifier for 10 years<br>- Scientist and science ship are destroyed<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- Ends the rift. | | |
+
+
+# The Lattice
+
+**The Lattice** is a non-unique Astral rift ; therefore this storyline can be encountered multiple times within a single game.
+
+## Summary of Possible Outcomes
+
+These are all of the possible end results for terminating the rift. This table does not include rewards given for intervening chapters.
+
+| Chapter | Outcome | Astral Threads Reward |
+|---|---|---|
+| 6-A | **Dimensional Containers**<br>- Gain 9 Fractal Seed planetary decisions | Large |
+| 6-B | **Close Encounters**<br>- Gain 3 Fractal Seed planetary decisions | |
+
+## Chapter Detail
+
+This is a detailed list of all chapters in this rift. The reward below each chapter name is issued when a selection is made, regardless of which one was chosen.
+
+Chapters which terminate the rift are noted in red .
+
+| Chapter | | | Choices | |
+|---|---|---|---|---|
+| 1 | | **Strange Geometry**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>3: "Explore further."<br>- Proceed to **chapter 2-A** . | Difficulty<br>2: "Stay put. Study the surroundings."<br>- Proceed to **chapter** **2-B** . |
+| | | | | |
+| 2 | A | **Multi-Dimensional Patterns**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>1: "Continue your investigations."<br>- Proceed to **chapter** **3** . | |
+| B | **Multi-Dimensional Analysis**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>1: "Study further."<br>- Proceed to **chapter** **3** . | | |
+| | | | | |
+| 3 | | **Message in a Bottle**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>1: "Can it be trusted?"<br>- Proceed to **chapter 4** . | |
+| | | | | |
+| 4 | | **Time Traveling**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>3: "Unsettling..."<br>- Proceed to **chapter 5** . | |
+| | | | | |
+| 5 | | **Fractal Seeds** | Difficulty<br>6: "Retrieve the globes."<br>- Proceed to **chapter 6-A** . | Difficulty<br>2: "We are done here."<br>- Proceed to **chapter 6-B** . |
+| | | | | |
+| 6 | A | **Dimensional Containers**<br>- Gain 9 Fractal Seed planetary decisions<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- End astral rift | | |
+| B | **Close Encounters**<br>- Gain 3 Fractal Seed planetary decisions<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- End astral rift | | | |
+
+
+# The Mechanism
+
+**The Mechanism** is a non-unique Astral rift ; therefore this storyline can be encountered multiple times within a single game.
+
+## Summary of Possible Outcomes
+
+These are all of the possible end results for terminating the rift. This table does not include rewards given for intervening chapters.
+
+| Chapter | Outcome | Astral Threads Reward |
+|---|---|---|
+| 3-A | **If It Ain't Broke...**<br>- 96x engineering output ( 2000~2 000 000 ) | Large |
+| 4 Success | **Success**<br>- Continuum | |
+| 4 Failure | **Shatter**<br>- Scientist ages by 20 years<br>- 96x engineering output ( 2000~2 000 000 ) | Large |
+
+## Chapter Detail
+
+This is a detailed list of all chapters in this rift. The reward below each chapter name is issued when a selection is made, regardless of which one was chosen.
+
+Chapters which terminate the rift are noted in red .
+
+| Chapter | | | Choices | |
+|---|---|---|---|---|
+| 1 | | **Gears and Pinions**<br>- small astral threads reward ( 40 , 50 , or 60 ) | Difficulty<br>3: "Explore the fog."<br>- Proceed to **chapter 2** . | |
+| | | | | |
+| 2 | | **Dimensional Machine**<br>- 18x engineering output ( 350~100 000 ) | Difficulty<br>1: "Interfering would be irresponsible."<br>- Proceed to **chapter** **3-A** . | Difficulty<br>6: "Jam the gears."<br>- Proceed to **chapter 3-B** . |
+| | | | | |
+| 3 | A | **If It Ain't Broke...**<br>- 96x engineering output ( 2000~2 000 000 )<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- Ends the rift. | | |
+| 3 | B | **Jammed**<br>- medium astral threads reward ( 90 , 100 , or 110 ) | Difficulty<br>6: "Use caution."<br>- Proceed to **chapter** **4** .<br>- Can fail. | |
+| | | | | |
+| 4 | | On success:<br>**Success**<br>- Continuum<br>- Ends the rift. | On failure:<br>**Shatter**<br>- Scientist ages by 20 years<br>- 96x engineering output ( 2000~2 000 000 )<br>- large astral threads reward ( 140 , 150 , or 160 )<br>- Ends the rift. | |

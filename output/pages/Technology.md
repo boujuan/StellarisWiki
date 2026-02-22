@@ -114,11 +114,11 @@ The number of research alternatives per card hand can be increased by the follow
 
 In general, research time can be summarized as the following formula:
 
-Research time = Sum (Research cost - Partial research done) / Monthly research progress
+Research time = Sum(Research cost - Partial research done) / Monthly research progress
 
 Research progress is one of the key elements affecting the time it takes to discover new technologies. It is formulated as follows:
 
-Monthly research progress = Research resource produced * SumResearch speed modifiers + min[Research resource stored,Research resource produced]
+Monthly research progress = Research resource produced * Sum Research speed modifiers + min[Research resource stored,Research resource produced]
 
 While it is possible for the monthly research progress to remain constant during the course of researching a certain technology, it is more than likely to fluctuate – for better or for worse – due to consequences, effects and outcomes of various actions (such as exploration, empire development, expansion, etc.). This, in turn, may increase or decrease the total research time of a given tech.
 
@@ -130,7 +130,7 @@ The empire from the previous examples (same setup) has just finished debris anal
 
 This setup generates the following monthly research progress:
 
-Monthly research progress = 24 * (1 + 0.05 + 0.15) + min[1000, 24] = 52.8
+Monthly research progress = 24 * (1 + 0.05 + 0.15) + min[1000,24] = 52.8
 
 Assuming no further changes impact the above setup, the total research time of the tech would be:
 
@@ -331,7 +331,7 @@ Research speed represents a given expertise in a particular research area or fie
 
 Research speed boosts the effective research production in the following manner:
 
-Effective research production = Research resource produced * SumResearch speed modifiers
+Effective research production = Research resource produced * Sum Research speed modifiers
 
 The most immediate sources of research speed modifiers are the scientists in your council. As the applied bonus depends on a scientist's skill level and overall traits, it is recommended to assign newly recruited scientists to command a science ship . Scientists on exploration duty tend to gain experience faster and, if one is in luck, they may also gain a new trait beneficial to research while leveling up.
 

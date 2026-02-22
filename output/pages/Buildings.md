@@ -5,12 +5,9 @@ categories: ["Potentially_outdated", "4.1", "Economy"]
 
 # Buildings
 
-
 **Buildings** are the third level of world development, requiring both districts and specializations to be constructed. Buildings may be ruined by orbital bombardment or collateral damage . Buildings that are ruined can be repaired for half of their cost and construction time.
 
-
 ## Building sets
-
 
 Each building belongs to one or more building sets . A building can only be built in a district that permits one of its building sets and does not exclude any of them, which depends on its specialization . Changing the specialization of a district may change what buildings are supported and the new specialization's tooltip will display which existing buildings will be retained and which ones will be removed.
 
@@ -21,30 +18,21 @@ Each building belongs to one or more building sets . A building can only be buil
 - Resource districts can accept relevant resource buildings, including output boosters such as the Energy Grid. Notably, Bio-Reactors are considered agriculture buildings, since they alter Farmer jobs to produce energy. Some specializations can accept others, for example Mineral Research Support (mining district specialization) can also accept an Applied Mechanics Institute.
  - Agrarian Idyll empires can build Agrarian Villages specializations which can accept any "urban" buildings, including energy and mineral extraction.
 
-
 ## Capital buildings
-
 
 Main article: Planet capital
 
-
 The capital always occupies the first building slot and provides some of the basic housing, amenities, defense armies, jobs that reduce crime, as well as other jobs which vary depending on empire authority and civics. Upgrading the capital is one of the ways of unlocking additional building slots. Capital buildings cannot be demolished, downgraded, disabled, or ruined by orbital bombardment or collateral damage, and are automatically converted to the appropriate type if the planet is traded, ceded, or conquered by another empire with a different authority or if the planet designation is changed.
-
 
 ## Unique buildings
 
-
 Main article: Unique buildings
-
 
 Unique buildings are buildings that can only be built a limited number of times per planet or empire, and typically provide effects beyond the creation of jobs. Many of them require the capital to have reached a certain level.
 
-
 ## Housing buildings
 
-
 Housing buildings come in two levels and increase Housing and Amenities. They are converted if the world is conquered by an empire that uses a different building line.
-
 
 | Tier | Building | Housing | Amenities | Upkeep | Cost | Requirements | Building Sets |
 |---|---|---|---|---|---|---|---|
@@ -57,12 +45,9 @@ Housing buildings come in two levels and increase Housing and Amenities. They ar
 | I | **Drone Storage** A storage area for Drones to undergo maintenance. | +1500 | +1500 | −2 | - Time 360<br>- 400 | Machine Intelligence | - Government<br>- Urban |
 | II | **Upgraded Drone Storage** With the latest upgrades, while undergoing maintenance a portion of Drones' power-generation can be re-directed to the grid. | +3000 | +3000 | - −3<br>- −1 | - Time 480<br>- 600<br>- 50 | - Micro-Replicators<br>- Tier II capital | - Government<br>- Urban |
 
-
 ## Law enforcement buildings
 
-
 Law enforcement buildings usually come in two levels and provide jobs which generate defense armies and Unity while reducing Crime/Deviancy. They are converted if the world is conquered by an empire that uses a different building line.
-
 
 | Tier | Building | Effects | Upkeep | Cost | Requirements | Building Sets |
 |---|---|---|---|---|---|---|
@@ -72,12 +57,9 @@ Law enforcement buildings usually come in two levels and provide jobs which gene
 | II | **Center of Guidance** Covering every aspect of life in society. Within this massive complex of schools and training facilities any deviation can be corrected. | - +500 Educator jobs<br>- +1 Research per 100 Civilians<br>- +2 Consumer Goods Upkeep per 100 Civilians | - −2<br>- −1 | - Time 480<br>- 600<br>- 50 | - Colonial Centralization<br>- Tier II capital | - Urban<br>- Government |
 | I | **Sentinel Posts** These are the outposts from which Patrol Drones scan the Consciousness for signs of deviancy and malfunction. | +200 Hunter-Seeker Drone jobs | −2 | - Time 360<br>- 400 | Gestalt Consciousness | - Urban<br>- Government |
 
-
 ## Unity buildings
 
-
 The following buildings provide jobs that produce Unity. They are converted if the world is conquered by an empire that uses a different building. Rogue Servitor buildings will instead convert to Housing buildings.
-
 
 | Building | Effects | Upkeep | Cost | Requirements | Building Sets |
 |---|---|---|---|---|---|
@@ -89,12 +71,9 @@ The following buildings provide jobs that produce Unity. They are converted if t
 | **Organic Sanctuary** This sanctuary provides a sealed environment where organics can thrive in a safe and above all controlled manner. The organics within have their housing needs completely fulfilled. | +1500 Bio-Trophies | −2 | - Time 360<br>- 400 | Rogue Servitor | - Urban<br>- Unity |
 | **Organic Paradise** An AI-controlled artificial paradise designed to satisfy every need a sapient organic being might have, just so long as it does not express a need for self-determination. The organics within have their housing needs completely fulfilled | +3000 Bio-Trophies | - −5<br>- −1 | - Time 480<br>- 600<br>- 50 | - Rogue Servitor<br>- Idyllic Architecture technology | |
 
-
 ## Research buildings
 
-
 Research buildings come in three levels and provide jobs for all fields of research. They can only be constructed in specializations that allow research buildings.
-
 
 | Tier | Building | Effects | Upkeep | Cost | Requirements |
 |---|---|---|---|---|---|
@@ -102,12 +81,9 @@ Research buildings come in three levels and provide jobs for all fields of resea
 | II | **Research Complexes** Upgraded research facilities with a very large staff capacity. | - +120 Biologists<br>- +120 Engineers<br>- +120 Physicists | - −5<br>- −1 | - Time 480<br>- 600<br>- 50 | Exotic Materials Labs |
 | III | **Advanced Research Complexes** These advanced research facilities have the very latest science equipment along with an extremely large staff capacity. | - +180 Biologists<br>- +180 Engineers<br>- +180 Physicists<br>- Extradimensional Experimentation:<br>  - +1 Dimensional Portal Researcher<br>  - +1 Zro upkeep | - −8<br>- −2 | - Time 600<br>- 800<br>- 100 | Multi-Dimensional Studies |
 
-
 ## Foundry buildings
 
-
 Foundry buildings come in three levels and provide jobs that produce Alloys.
-
 
 | Tier | Building | Jobs | Upkeep | Cost | Requirements | Building Sets |
 |---|---|---|---|---|---|---|
@@ -115,12 +91,9 @@ Foundry buildings come in three levels and provide jobs that produce Alloys.
 | II | **Alloy Mega-Forges** These massive forges can assist the end-stage production of alloys in our industries across the planet. | +400 Metallurgists | −5 | - Time 480<br>- 600 | Holographic Casts technology | - Industrial<br>- Foundry |
 | III | **Alloy Nano-Plants** Large industrial fabricators geared towards increasing the production of alloys on the planet. | +600 Metallurgists | - −8<br>- −4 | - Time 480<br>- 600<br>- 200 | - No Penal Colony<br>- No Gestation World<br>- Nano-Separators technology | - Industrial<br>- Foundry |
 
-
 ## Factory buildings
 
-
 Factory buildings come in three levels and provide jobs that produce Consumer Goods.
-
 
 | Tier | Building | Jobs | Upkeep | Cost | Requirements | Building Sets |
 |---|---|---|---|---|---|---|
@@ -128,12 +101,9 @@ Factory buildings come in three levels and provide jobs that produce Consumer Go
 | II | **Civilian Fabricators** Large industrial fabricators geared towards increasing the production of consumer goods on the planet. | +400 Artisans | - −5<br>- −2 | - Time 480<br>- 600<br>- 100 | - Empire uses Consumer Goods<br>- Nano-Circuit Assembly technology | - Industrial<br>- Factory |
 | III | **Civilian Repli-Complexes** Nearly anything can be replicated at the kiosks in these complexes. | +600 Artisans | - −8<br>- −4 | - Time 600<br>- 800<br>- 200 | Replicator Kiosks technology | - Industrial<br>- Factory |
 
-
 ## Military buildings
 
-
 Military buildings provide Soldier jobs which produce defense armies and naval capacity.
-
 
 | Tier | Building | Effects | Upkeep | Cost | Requirements | Building Sets |
 |---|---|---|---|---|---|---|
@@ -142,12 +112,9 @@ Military buildings provide Soldier jobs which produce defense armies and naval c
 | I | **Bone Garrison** A plethora of fiercely territorial symbionts may be housed in this cocooned proving ground, poised in case they need ever be called upon. | +100 Tamersymbiont | −5 | - Time 240<br>- 200<br>- 600 | Wilderness | - Government<br>- Fortress |
 | II | **Bone Fortress** This sprawling facility of hardy training grounds and accommodations ensures the defenders housed within are braced for any planetary incursion. | - +200 Tamersymbiont<br>- Provides FTL inhibitor if FTL Inhibition technology has been researched | - −8<br>- −1 | - Time 360<br>- 400<br>- 800<br>- 50 | - Global Defense Grid technology<br>- Tier II Capital | - Government<br>- Fortress |
 
-
 ## Extraction buildings
 
-
 Extraction buildings provide jobs that produce basic resources.
-
 
 | Building | Effects | Upkeep | Cost | Requirements | Building Sets |
 |---|---|---|---|---|---|
@@ -155,9 +122,7 @@ Extraction buildings provide jobs that produce basic resources.
 | **Voltaic Production Yard** Dedicated to large-scale energy generation, this building houses power cells, plasma conduits, and high-output generator arrays. | +200 Technicians | −2 | - Time 360<br>- 400 | - No Wilderness<br>- No Resort World | - Urban<br>- Generator |
 | **Hydroponics Farms** Hydroponics Farms produce nutrient-rich vegetable matter tailored for consumption by local Pops. | - +200 Farmers | −2 | - Time 360<br>- 400 | - No Wilderness<br>- No Resort World<br>- No Machine World<br>- Empire uses food | - Hydroponics |
 
-
 ## Other buildings
-
 
 | Building | Effects | Upkeep | Cost | Requirements | Building Sets |
 |---|---|---|---|---|---|
@@ -170,12 +135,9 @@ Extraction buildings provide jobs that produce basic resources.
 | **Nanite Transmuter** This factory mass-produces a variety of rare resources using extremely advanced nanites. A Nanite Deficit will halt production. | - +5 Exotic Gases<br>- +5 Rare Crystals<br>- +5 Volatile Motes | - −5<br>- −2 | - Time 600<br>- 1000 | - No Resort World<br>- No Thrall-World<br>- Nanite Transmutation technology<br>- Empire Nanite stockpile > 0<br>- Tier II capital | - Industrial<br>- Foundry<br>- Factory |
 | **Nanotech Cauldron** Operating at a molecular level, the swarm can easily reconfigure mineral structures into sturdy alloy lattices. | +15 Alloys | - −30<br>- −3 | - Time 480<br>- 800 | - No Thrall-World<br>- No Resort World<br>- Molecular Reconfiguration tradition | - Industrial<br>- Foundry |
 
-
 ## Wilderness buildings
 
-
 Wilderness buildings can only be constructed by empires with the Wilderness origin.
-
 
 | Building | Jobs | Upkeep | Cost | Requirements | Building Sets |
 |---|---|---|---|---|---|
@@ -184,12 +146,9 @@ Wilderness buildings can only be constructed by empires with the Wilderness orig
 | **Chemical Digester** Special canopies facilitate the precise humidity and temperature controls required to grow exacting, artificial Rare Crystals. | +100 Crystalsymbiont | −5 | - Time 600<br>- 400<br>- 600 | - Wilderness<br>- Rare Crystal Manufacturing technology | - Government<br>- Foundry |
 | **Exotic Gas Filters** Highly specialized microbes and nano-organisms react with mundane aerosols to produce these refined Exotic Gases. | +100 Gaseosymbionte | −5 | - Time 600<br>- 400<br>- 600 | - Wilderness<br>- Exotic Gas Refining technology | - Government<br>- Foundry |
 
-
 ## Experimentation buildings
 
-
 Experimentation buildings can only be constructed by empires with the Experimental Sentencing, Judicial R&D or Corrective Consciousness civic. They can only be constructed in specializations that allow research buildings and are destroyed if an empire without any of the civics conquers the world.
-
 
 | Tier | Building | Effects | Upkeep | Cost | Requirements |
 |---|---|---|---|---|---|
@@ -197,27 +156,20 @@ Experimentation buildings can only be constructed by empires with the Experiment
 | II | **Experimentation Complex** A campus of top-secret technology and internment facilities, where lawbreaking individuals are used as subjects in experiments led by the empire's top researchers. | - +200 Experiment Engineeers<br>- +200 Test Subjects<br>- +10% Materialist Ethics Attraction | - −2<br>- −2 | - Time 480<br>- 600<br>- 50 | Exotic Materials Labs |
 | III | **Experimentation Nexus** A network of maximum-security technology and internment centers. Teams of elite researchers conduct pioneering experiments on individuals drawn from the empire's underworld. | - +300 Experiment Engineeers<br>- +300 Test Subjects<br>- +15% Materialist Ethics Attraction<br>- Extradimensional Experimentation:<br>  - +1 Dimensional Portal Researcher<br>  - +1 Zro upkeep | - −2<br>- −2<br>- −1 | - Time 600<br>- 800<br>- 100 | Multi-Dimensional Studies |
 
-
 ## Automation buildings
-
 
 Automation buildings automate workforce for the districts and buildings within the same district, freeing pops for other important jobs. The amount of automation buildings are limited to one per district, with a maximum of four per planet: one in the central district, and one per specialized district (energy, mining, agriculture). Both central district specialization slots count as part of the central district.
 
-
 Output is affected by most modifiers, like some edicts and support districts, and upkeep increases with the amount of districts they generate workforce for.
-
 
 | Tier | Building | Effects | Upkeep | Cost |
 |---|---|---|---|---|
 | I | **Automation Building** A plaque on the wall reads: 'it automates.' | - +25% Automated Workforce | - −8 per District if basic resource<br>- −10 per District otherwise | - Time 360<br>- 600 |
 | II | **Optimization building** Those who have been there say, 'It optimizes.' | - +50% Automated Workforce | - −10 per District if basic resource<br>- −12 per District otherwise | - Time 480<br>- 600 |
 
-
 ## Fallen empire buildings
 
-
 Fallen empire buildings are efficient buildings that are cheap to upgrade and do not increase in upkeep at higher tiers. They are not converted if the world is conquered by an empire lacking the technology to build them and can also be repaired if ruined.
-
 
 There are four ways an empire can get access to fallen empire building technologies:
 
@@ -226,9 +178,7 @@ There are four ways an empire can get access to fallen empire building technolog
 - If The Machine Age is enabled, empires with the Cosmogenesis ascension perk who have reached the required crisis level can draw the technologies as research options.
 - If BioGenesis is enabled, one of the tasks assigned by the Shattered Fragment fallen empires can have a random fallen empire technology as a reward.
 
-
 Empires with the Wilderness origin must additionally pay 400 Biomass to build or upgrade all fallen empire buildings.
-
 
 | Tier I Building | Tier I Effects | Tier II Building | Tier II Effects | Upkeep | Cost | Requirements | Building Sets |
 |---|---|---|---|---|---|---|---|
@@ -252,12 +202,9 @@ Empires with the Wilderness origin must additionally pay 400 Biomass to build or
 | - Virtual Bliss Plaza<br>- **Virtual Bliss Plaza** | - +600 Entertainer | - Omni-Bliss Nexus<br>- **Omni-Bliss Nexus** | - +600 Entertainer<br>- +10000 Amenities | - −15<br>- −3<br>- −2 | - 800<br>- 300 (Tier I) | - No Thrall-World<br>- No Penal Colony<br>- No Gestalt Consciousness<br>- **Virtual Bliss Plaza**<br>- **Omni-Bliss Nexus** (Tier II) | - Fallen Empire<br>- Urban |
 | - Quantum Innovation Nexus<br>- **Quantum Innovation Nexus** | - +200 Physicists<br>- +200 Biologists<br>- +200 Engineers | - Transcendental Innovation Department<br>- **Transcendental Innovation Department** | - +400 Physicists<br>- +400 Biologists<br>- +400 Engineers<br>- +20 Research | - −30<br>- −5<br>- −2 | - 800<br>- 300 (Tier I) | - No Resort World<br>- No Thrall-World<br>- No Penal Colony<br>- **Quantum Innovation Nexus**<br>- **Transcendental Innovation Department** (Tier II) | - Fallen Empire<br>- Research<br>- Physics<br>- Society<br>- Engineering |
 
-
 ### Unique fallen empire buildings
 
-
 The following fallen empire buildings cannot be constructed and can only be found on special fallen empire worlds.
-
 
 | Building | Produces | Upkeep | World (fallen empire) | Building Sets |
 |---|---|---|---|---|
@@ -265,12 +212,9 @@ The following fallen empire buildings cannot be constructed and can only be foun
 | **Phased Empyrean Shrine** Exclusively used for communing with the spirits of the Shroud, this temple manifests only partially in our dimension. | - −25% Shroud Delve Cost<br>- +300 Augur of the Shroud if Fallen Empire<br>- +600 Telepaths with Psi Corps<br>- +25% Administrator output without Psi Corps | - −10<br>- −3<br>- −2 | Sky Temple (Holy Guardians) | - Fallen Empire<br>- Unity |
 | **Master Archive** This repository houses knowledge from multiple galactic ages, yet the ability to operate its arcane retrieval system is lost. Extracted data scraps prove invaluable. | - +2 Research Alternatives<br>- +100 Research<br>- +1000 Archivists if Fallen Empire<br>- +600 Science Directors | - −30<br>- −5<br>- −1 | The Archives (Keepers of Knowledge) | - Fallen Empire<br>- Research<br>- Physics<br>- Society<br>- Engineering |
 
-
 ## Pre-FTL buildings
 
-
 Pre-FTL buildings can be found on planets owned by pre-FTL civilizations. They have negligible output and no upkeep and are removed or converted if the civilization is conquered or discovers FTL.
-
 
 | Building | Produces | Requirements |
 |---|---|---|

@@ -87,6 +87,7 @@ pages_to_fetch:
   - "Anomaly"
   - "Archaeological site"
   - "Astral rift"
+  - "Astral threads"
   - "Celestial_object"
   - "Planet_modifiers"
   - "Planetary_features"
@@ -95,6 +96,7 @@ pages_to_fetch:
   - "Collection"
   - "L-Cluster"
   - "The_Shroud"
+  - "Environmental effects"
   # Diplomacy & Relations
   - "Diplomacy"
   - "Relations"
@@ -115,6 +117,8 @@ pages_to_fetch:
   - "Empire_modifiers"
   - "Stat_modifiers"
   - "Events"
+  - "Distant Stars projects"
+  - "Job base modifiers"
   # Reference & Other
   - "Achievements"
   - "Crisis"
@@ -133,17 +137,54 @@ pages_to_fetch:
   - "AI players"
   - "Preset empires"
   - "Modding"
+  - "On actions"
+  - "ID"
 
+# Pages available but not fetched by default (modding reference, etc.)
+# Shown in a separate "Optional" section in the dashboard.
+optional_pages:
+  - "Placeholders"
+  - "Scopes/Flat list of scopes"
+
+# ---------------------------------------------------------------------------
 # Composite pages: index pages whose sub-page links are extracted from HTML.
-# Values are names of Python extractor functions defined in fetch_and_parse.py.
+# Each entry maps a page title to an extractor config with:
+#   extractor: name of Python function in fetch_and_parse.py
+#   extra_subpages: explicit sub-pages to fetch (supplement auto-discovery)
+# ---------------------------------------------------------------------------
 composite_pages:
-  "Events": "extract_event_subpage_links"
-  "Astral rift": "extract_astral_rift_subpage_links"
+  "Events":
+    extractor: "extract_event_subpage_links"
+    extra_subpages:
+      - "Planet modifier colony events"
+      - "Quest for the Toxic God events"
+      - "Under One Rule events"
+      - "Federations events"
+  "Astral rift":
+    extractor: "extract_astral_rift_subpage_links"
+    extra_subpages:
+      - "Entangled Dark Matter"
+      - "Hatching Ground"
+      - "Lone Object"
+      - "Rockworms"
+      - "Subnautical"
+      - "The Advisor"
+      - "The Corridors"
+      - "The Fluid"
+      - "The Lattice"
+      - "The Mechanism"
+  "Situations":
+    extractor: "extract_situation_subpage_links"
+    extra_subpages:
+      - "Ascension situations"
+      - "Origin situations"
+      - "Paragon situations"
 
 # ---------------------------------------------------------------------------
 # Classification rules (used by analyze_wiki_pages.py)
 # ---------------------------------------------------------------------------
 classification:
+  # Title prefixes that identify mod pages
   mod_prefixes:
     - "ST NewHorizons"
     - "Star Trek New Civilisations"
@@ -151,9 +192,36 @@ classification:
     - "SW Fallen Republic"
     - "Warhammer Total-Conversion"
     - "Warhammer 40"
+    - "WarhammerTotalConversion"
     - "PHI - mp balancing"
     - "PHI -"
     - "Galactic Cold War"
+    - "Star Wars Legacy of the Old Republic"
+    - "Star Wars New Dawn"
+    - "Master of Stellaris"
+    - "Inclusive Civics"
+    - "10x System Scale"
+    - "Distant Origin"
+    - "Endless Frontier"
+    - "UI Overhaul Dynamic"
+
+  # Wiki categories that identify mod pages (complement to prefix matching)
+  mod_categories:
+    - "Mods"
+    - "ST NewHorizons"
+    - "Star Trek New Civilisations"
+    - "SW: Fallen Republic"
+    - "Warhammer Total-Conversion"
+    - "Galactic Cold War"
+    - "Master of Stellaris"
+    - "PHI - mp balancing"
+    - "Star Wars Legacy of the Old Republic"
+    - "Star Wars New Dawn"
+
+  # Wiki categories that identify disambiguation pages
+  disambiguation_categories:
+    - "Disambiguation"
+    - "Disambig-class articles"
 
   dlc_titles:
     - "ancient relics"
@@ -181,6 +249,7 @@ classification:
     - "downloadable content"
     - "dlc"
 
+  # Categories to filter out when grouping game content pages
   wiki_maintenance_categories:
     - "Potentially outdated"
     - "Pages with broken file links"
@@ -193,3 +262,39 @@ classification:
     - "Timeless"
     - "Disambiguation"
     - "Wiki"
+    # Article quality categories
+    - "A-class articles"
+    - "B-class articles"
+    - "C-class articles"
+    - "FA-class articles"
+    - "Start-class articles"
+    - "Stub-class articles"
+    - "Mod-class articles"
+    - "List-class articles"
+    - "Disambig-class articles"
+    # Wiki maintenance
+    - "Stubs"
+    - "Expand"
+    - "Rewrite"
+    - "Under construction"
+    - "Verification needed"
+    - "Candidates for deletion"
+    - "Need copy editing"
+    - "Need editing"
+    - "To be merged"
+    - "To be moved"
+    - "To be split"
+    - "Wikify"
+    - "Hidden categories"
+    - "Computer generated"
+    - "Hatnotes"
+    # Too-generic categories (useless for content grouping)
+    - "Stellaris"
+    - "Stellaris console"
+
+  # Prefix patterns for filtering out maintenance/icon/template categories
+  wiki_maintenance_prefixes:
+    - "Pages with"
+    - "Pages using"
+    - "Articles with"
+    - "Articles by"

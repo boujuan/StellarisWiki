@@ -218,7 +218,7 @@ Pop political power effects approval rating as well as Faction resource producti
 
 Pop approval rating is a measure of the population's support towards the empire. It is determined by the average happiness of each stratum, weighted by political power. Pops without happiness are treated as having 50% happiness (for example: pops with Nerve Stapled trait, pops with Machine trait). The displayed approval rating is rounded down, as is the displayed stability bonus.
 
-Approval Rating = Sum_^Pop happiness * political power / Sum_^Pop political power
+Approval Rating = Sum _^(Pop)happiness * political power / Sum _^(Pop)political power
 
 Approval rating ranges from 0% to 100% and has a base level of 50%.
 
@@ -289,7 +289,7 @@ The formula for available amenities or amenities deficit effect on a planet's ha
 
 The formula for extra amenities ( available amenities > 0 case) contributing to happiness is:
 
-happiness bonus = min(20%,20 * leftlfloor available amenitiesrightrfloor / leftlfloor pop amenities usagerightrfloor)
+happiness bonus = min ( 20%, 20 * leftlfloor available amenities rightrfloor / leftlfloor pop amenities usage rightrfloor )
 
 In other words, it scales from +0% with 0 available amenities, to +20% with twice as many available amenities as necessary.
 

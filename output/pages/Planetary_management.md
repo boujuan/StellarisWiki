@@ -49,7 +49,7 @@ In other words, it scales from +0% with 0 available amenities, to +20% with twic
 
 The formula for a amenities deficit ( available amenities < 0 case) affecting happiness is:
 
-happiness penalty = max ( - 50%, 200/3 * leftlfloor available amenities rightrfloor / leftlfloor pop amenities usage rightrfloor )
+happiness penalty = max(-50%,200/3 * leftlfloor available amenitiesrightrfloor / leftlfloor pop amenities usagerightrfloor)
 
 In other words, it scales from +0% with 0 available amenities, to −50% when the planet has less than 25% of amenities needed.
 

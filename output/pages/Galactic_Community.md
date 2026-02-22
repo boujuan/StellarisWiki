@@ -1,6 +1,6 @@
 ---
 title: "Galactic Community"
-categories: ["4.2", "Diplomacy", "Pages_with_math_errors", "Pages_with_math_render_errors"]
+categories: ["4.2", "Diplomacy"]
 ---
 
 # Galactic Community

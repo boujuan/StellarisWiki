@@ -180,7 +180,7 @@ The effect of planetary ascension can be enhanced by the following bonuses:
 
 Planetary designation effects are affected by the following formula:
 
-modifier after planetary ascension = modifier before planetary ascension*(100 + tier * 25 * (100 + X + Y + Z) / 100)/100
+modifier after planetary ascension = modifier before planetary ascension * (100 + tier * 25 * (100 + X + Y + Z) / 100)/100
 
 where X, Y, Z are the optional bonus source for the enhanced planetary ascension effect from the table above (values: 25 | 20 | 25). A few examples of typical effects values are listed in the table:
 

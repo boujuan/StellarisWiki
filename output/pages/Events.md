@@ -14184,3 +14184,2563 @@ An administrative error has led to the misplacement of one of our precious cultu
 - **Option:** **How unfortunate.**
  - Lose an exhibited specimen
  - More likely to target a specimen with higher rarity
+
+
+
+---
+
+## Additional Sub-pages
+
+
+# Planet modifier colony events
+
+Planet modifiers, Planet Modifier colony events are guaranteed to occur 1 year after a planet with the triggering modifier has been colonized. Unlike random colony events, they can still happen if the planet has been terraformed.
+
+## Generic planet modifier colony event triggers
+
+The following trigger conditions apply to all planet modifier colony events, unless otherwise noted:
+
+- Planet owner
+ - Yes Planet is owned by the original owner
+ - No Planet owner is not AI
+
+- Planet
+ - No Planet isn't a species homeworld
+ - No Planet isn't an empire's capital
+ - No Planet doesn't have ground combat and isn't occupied
+ - Colony has at least one Pop
+
+## Events
+
+### Event: What Happened Here?
+
+Evt alien city
+
+Event trigger **The below description is one of several available for this event.**
+
+While it's obvious that some past calamity released a vast amount of radiation on [Root.GetName], it's not obvious what caused it. This mystery is now bothering more and more of the colonists who have made [Root.GetName] their home. After all, if we don't know how this happened, what is to say it could not happen again?
+
+**Trigger conditions:** Generic planet modifier colony event triggers Irradiated planet modifier
+
+**Is triggered only by:** Time The colony turning 1 year old
+
+- **Option:** **Let's get to the bottom of this!**
+ - (Hidden) One of the following events triggers in 40 to 60 days:
+ - 20% chance: Bombardment
+ - 20% chance: Interstellar War
+ - 20% chance: Racial Suicide
+ - 40% chance: We just don't know.
+
+### Event: Bombardment
+
+Evt atmospheric entry
+
+After a thorough investigation, we have come to the conclusion that [Root.GetName] was the site of an ancient genocide. As far as we can determine, the native population of [Root.GetName] was on the verge of becoming a space-faring race when a far more advanced race suddenly entered the system, bombarded [Root.GetName] from orbit, and left again, leaving the few survivors doomed to extinction.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The What Happened Here? colony event 20% chance
+
+- **Option:** **Study the impact sites for details of the weapons used.**
+ - Ancient Bombardment Craters feature added to planet, with the following effects:
+ - +20% Physics Research from Jobs
+ - +2 Researcher, Brain Drone, or Calculator Jobs
+
+### Event: Interstellar War
+
+Evt ground combat
+
+After a thorough investigation, we have come to the conclusion that [Root.GetName] was a casualty in some forgotten war. Who lived here and who they fought is unknown, but it is clear that they were wiped out following an extra-solar invasion force entering the system and the ensuing battle for the planet. While this is a chilling realization, we can at least be reasonably sure that it is unlikely to happen again.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The What Happened Here? colony event 20% chance
+
+- **Option:** **Study what remains of the battlefields.**
+ - Ancient Battlefield feature added to planet, with the following effects:
+ - +20% Engineering Research from Jobs
+ - +2 Researcher, Brain Drone, or Calculator Jobs
+
+### Event: Racial Suicide
+
+Evt nuclear explosion
+
+Event trigger **The below description is one of several available for this event.**
+
+The tragic history of [Root.GetName] has been uncovered. Long ago, it seems that [Root.GetName] was dominated by two competing superpowers. At some point war broke out between them and the conflict escalated until all advanced life on [Root.GetName] was eliminated by excessive use of nuclear weapons.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The What Happened Here? colony event 20% chance
+
+- **Option:** **What could drive people to such a fate?**
+ - Irradiated Ruins feature added to planet, with the following effects:
+ - +20% Society Research from Jobs
+ - +2 Researcher, Brain Drone, or Calculator Jobs
+
+### Event: We just don't know.
+
+Evt in the dark
+
+Despite extensive research into the history of [Root.GetName] we just don't know what happened here. The past remains a mystery.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The What Happened Here? colony event 40% chance
+
+- **Option:** **Troubling.**
+ - Uncertain History modifier added to the planet, with the following effects:
+ - +10% Research from jobs
+ - −10% Happiness
+
+---
+
+### Event: Titanic Life
+
+Evt alien nature
+
+The native life of [Root.GetName] is built on an epic scale, far larger than anyone previously thought was possible for biological life. The question now in the minds of our researchers is "What is their secret, and can we benefit from it?" Proposals to study the native life in greater detail are flooding in.
+
+**Trigger conditions:** Generic planet modifier colony event triggers Titanic Life planet modifier
+
+**Is triggered only by:** Time The colony turning 1 year old
+
+- **Option:** **Proceed with the study.**
+ - Enables the Titanic Life Study special project
+- **Option:** **No, leave the giants alone.**
+ - (No effect)
+- **Option:** **Xenophile,Ensure that the research does no harm.**
+ - Enables the Titanic Life Monitoring special project
+ - (Hidden) Sets the nice_titan_study planet flag
+- **Option:** **Xenophobe,Study them? Harvest them and see if anything is useful!**
+ - Enables the Titanic Life Necropsies special project
+ - Eat the Titans modifier added to the planet, with the following effects:
+ - +6 Max Agriculture Districts
+ - +30% Food from Jobs
+ - +1 Titan Hunter job
+ - +1 Titan Hunter job per 20 Pops
+
+### Event: Titanic Life Study: Success
+
+Evt alien cavemen
+
+After a period of research and study, the scientists on [Root.GetName] have managed to make a breakthrough and achieve limited communications with some of the Titans. While huge, slow, and difficult to talk to, the Titans are incredibly tough and strong. Some few have expressed a desire to join our military forces, where they will undoubtedly be an incredible asset.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** One of the following: Yes Completing the Titanic Life Study special project (70% chance) Yes Completing the Titanic Life Monitoring special project (90% chance) Yes Completing the Titanic Life Necropsies special project (50% chance)
+
+**Option conditions**
+
+- **Option:** **Excellent.**
+ - *Condition:* Event trigger **Enabled if:** Completing the Titanic Life Study or Titanic Life Necropsies special project
+ - Allows the recruitment of up to three Titanic Beast armies
+- **Option:** **Excellent.**
+ - *Condition:* Event trigger **Enabled if:** Completing the Titanic Life Monitoring special project
+ - Allows the recruitment of up to three Titanic Beast armies
+ - No Clears all Titanic Lifeforms Blockers on the planet
+
+### Event: Titanic Life Study: Failure
+
+Evt ground combat
+
+In a disastrous series of events, the scientists on [Root.GetName] have enraged the indigenous Titanic Life. Huge creatures are rampaging across the colony, smashing everything in their path.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** One of the following: Yes Completing the Titanic Life Study special project (30% chance) Yes Completing the Titanic Life Monitoring special project (10% chance) Yes Completing the Titanic Life Necropsies special project (50% chance)
+
+**Immediate effects:** Three Titanic Beast armies invade the colony
+
+- **Option:** **Terrible news...**
+
+---
+
+### Event: Earthquake!
+
+Evt colony settlement
+
+The unstable tectonic plates of [Root.GetName] have just violently shifted once again. Reports on the damage to the colony are just starting to arrive.
+
+**Trigger conditions:** Generic planet modifier colony event triggers Unstable Tectonics planet modifier
+
+**Is triggered only by:** Time The colony turning 1 year old
+
+- **Option:** **Let us hear it.**
+ - recent_quake modifier added to the planet for Time 365 days, with the following effects:
+ - One of the following events triggers in 10 to 15 days:
+ - 33% chance: Earthquake: Damage Report (colony_mod.21)
+ - 33% chance: Earthquake: Damage Report (colony_mod.22)
+ - 33% chance: Earthquake: Damage Report (colony_mod.23)
+
+### Event: Earthquake: Damage Report
+
+Evt colony settlement
+
+The recent earthquake which shook our colony on [Root.GetName] has caused a large sinkhole to open. Whatever once occupied that spot is now deep underground.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Earthquake! colony event 33% chance
+
+- **Option:** **Worrying.**
+ - Deep Sinkhole blocker added to the planet
+
+### Event: Earthquake: Damage Report
+
+Evt colony settlement
+
+The recent earthquake which rocked our colony on [Root.GetName] caused no damage and, serendipitously, has uncovered a batch of useful minerals.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Earthquake! colony event 33% chance
+
+- **Option:** **Remarkable.**
+ - Tier 1 material reward: Gain 100-1000 Minerals
+
+### Event: Earthquake: Damage Report
+
+Evt colony settlement
+
+The recent earthquake which staggered our colony on [Root.GetName] caused no damage!
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Earthquake! colony event 33% chance
+
+- **Option:** **Good.**
+
+---
+
+### Event: Comet Sighted Through Belt
+
+Evt asteroid approaching planet
+
+The population of [Root.GetName] are currently witnessing a spectacular sight. A comet is passing through [Root.GetName]'s asteroid belt and the effect is being described as "breathtaking.
+
+**Trigger conditions:** Generic planet modifier colony event triggers Asteroid Belt planet modifier No Planet doesn't have the Comet Sighted modifier
+
+**Is triggered only by:** Time The colony turning 1 year old
+
+- **Option:** **Keep looking at the sky!**
+ - Comet Sighted modifier added to the planet for Time 1800 days, with the following effects:
+ - +10% Happiness
+
+---
+
+### Event: Crackdown
+
+Evt in the dark
+
+While it cannot be denied that the intoxicating effects of [Root.GetName]'s atmosphere are enjoyable, and even helpful in some cases, there is pressure from the more conservative parts of the [Root.Owner.GetName] to crack down on the possibly addictive gases.
+
+**Trigger conditions:** Generic planet modifier colony event triggers Atmospheric Hallucinogen planet modifier No Gestalt Consciousness
+
+**Is triggered only by:** Time The colony turning 1 year old
+
+- **Option:** **Shut it down!**
+ - Enables the Hallucinogen Removal special project
+- **Option:** **No, leave [Root.GetName] as it is.**
+ - −200 Unity
+
+### Event: Crackdown
+
+Evt atmospheric entry
+
+The atmosphere of [Root.GetName] has been cleansed of its intoxicating elements!
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Yes Completing the Hallucinogen Removal special project 75% chance
+
+- **Option:** **Good.**
+ - No The Atmospheric Hallucinogen modifier is removed from the planet
+
+### Event: Crackdown: Breakthrough
+
+Evt atmospheric entry
+
+The atmosphere of [Root.GetName] has been filtered to greatly reduce the effects of the hallucinogen.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Yes Completing the Hallucinogen Removal special project 25% chance
+
+- **Option:** **Marvelous.**
+ - No The Atmospheric Hallucinogen modifier is removed from the planet
+ - Filtered Atmospheric Hallucinogen modifier added to the planet, with the following effects:
+ - +10% Happiness
+ - +10% Physics from Jobs
+
+---
+
+### Event: Magnetic Miracle
+
+Evt alien city
+
+The Strong Magnetic Field around [Root.GetName] has been affecting computers on the surface recently. Oddly, this effect is not merely random interference, instead computers are actually working more efficiently than they should be. It's almost as if an outside force is lending a helping hand...
+
+**Trigger conditions:** Generic planet modifier colony event triggers Strong Magnetic Field planet modifier No Planet doesn't have the Magnetic Miracle modifier No Planet doesn't have the Magnetic Disruption modifier No Planet doesn't have the magnetic_mystery_solved flag
+
+**Is triggered only by:** Time The colony turning 1 year old 50% chance
+
+- **Option:** **Fascinating.**
+ - Magnetic Miracle modifier added to the planet for Time 1800 days, with the following effects:
+ - +20% Research from Jobs
+ - If this is the third time you've gotten a Strong Magnetic Field event, enables the Investigate the Magnetic Mystery of Root.GetName special project
+
+### Event: Magnetic Disruption
+
+Evt alien city
+
+The Strong Magnetic Field around [Root.GetName] has always caused some problems with electronic instruments on the surface, but recently the effect on our computers has been especially notable. So far, it is unknown what has caused this flare up, although we suspect it to be temporary.
+
+**Trigger conditions:** Generic planet modifier colony event triggers Strong Magnetic Field planet modifier No Planet doesn't have the Magnetic Miracle modifier No Planet doesn't have the Magnetic Disruption modifier No Planet doesn't have the magnetic_mystery_solved flag
+
+**Is triggered only by:** Time The colony turning 1 year old 50% chance
+
+- **Option:** **Unfortunate.**
+ - Magnetic Disruption modifier added to the planet for Time 1800 days, with the following effects:
+ - −5% Happiness
+ - −10% Research from Jobs
+ - If this is the third time you've gotten a Strong Magnetic Field event, enables the Investigate the Magnetic Mystery of Root.GetName special project
+
+### Event: Magnetic Mystery Revealed
+
+Evt in the dark
+
+[Root.GetName] is the site of a self-organizing quantum computer of astounding complexity and subtly. The patterns of the weather, the native life, even our own colony is incorporated into it and somehow used as neurons in a planet-sized network. We do not understand how this is possible, and we have no way of controlling it, but we do know that if we arrange our computers in a certain way [Root.GetName] will enhance their performance.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Yes Completing the Investigate the Magnetic Mystery of Root.GetName special project
+
+- **Option:** **[Root.GetName] just became more attractive!**
+ - Magnetic Miracle modifier added to the planet (permanently)
+ - Sets the magnetic_mystery_solved planet flag
+
+---
+
+
+# Quest for the Toxic God events
+
+The following events are all triggered by or related to the Quest for the Toxic God situation.
+
+## First Quest
+
+### Event: The Tale of Knight [Knight 1]: Banishment
+
+Evt knights of the toxic god
+
+"Knight [Knight 1]. Thy reckless behavior almost brought death upon five of your fellow knights. Thou art of pure heart and thy goals art noble, but transgressions against the Order cannot be overlooked." The Knight Commander was stern and severe. Around him, all the knights were present, either in the flesh or via holocomms. They stood silently as the Commander spoke. "By my powers, I strip thee of knighthood, and banish thee from the Order. May fate have mercy upon thee." [Knight 1] bowed, deposited the insignia of the order on the hangar's floor, then turned without a word and climbed aboard a small ship. Later chronicles would report that Banished knight [Knight 1] knew the sentence to be fair, but it did little to ease their grief. When one's whole life has been in service of the Order, to be cut out from it is like losing a limb. As they had done so many times before, [Knight 1] flew out of the Keep's Hangar, and into the great beyond. This time, there would be no return.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Quest for the Toxic God: Stage 2
+
+- **Option:** **Good luck out there, [Knight 1].**
+ - 50% chance: event The Tale of Knight [Knight 1]: The Nebula in 35 days 50% chance: event The Tale of Knight [Knight 1]: The Sage in 100 days
+
+### Event: The Tale of Knight [Knight 1]: The Nebula
+
+Evt crusher droid
+
+"In banishment, [Knight 1] was left adrift. Stories tell of an aimless errance across the stars, until at last a message came from their squire: "Master. I hope fate treats thee well. I have sorted through data from thy last quest, as thou commandeth. Thou shall find coordinates attached to this message. I know not if thou shall find this useful now... Prithee be careful, thou were a most righteous master, and I hope to see thee again." Moved by these words, [Knight 1] was spurred into action. If they could return to the Order with something of value, their honor might yet be restored. The coordinates led them deep into a nebula. Nested in the ambient mists was a lone station, a fortified structure that seemed pulled out of a dream. [Knight 1] stepped into a derelict interior, haunted by the bones of long dead lifeforms and protected by a phalanx of sentry droids. Hot headed and impatient, they rushed to meet the metal guardians. Three times they charged, and three times they were driven back. The droids' motion sensors proved unerring. But strength is not the only weapon of a knight, and though [Knight 1] often overlooked cunning and patience, this time, a plan began to form in their mind.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 1]: Banishment
+
+- **Option:** **Think, [Knight 1], think!**
+ - Event The Tale of Knight [Knight 1]: Statues in 10 days
+
+### Event: The Tale of Knight [Knight 1]: Statues
+
+Evt crusher droid
+
+"Alone in a long abandoned station, beset by sentry droids, [Knight 1] devised a plan: knowing if they could somehow avoid the detection of the droid's motion sensors, eventually they would need to recharge. The machines were formidable, but not cunning. Patience, not strength, would be the way to victory this day. Slowly, with long stops and fitful starts, [Knight 1] progressed through the station. At last they reached the charging stations. With careful deliberation, [Knight 1] severed the power cables. In the same moment, they became aware of a towering droid in the entryway. Detection would mean that the rest of the phalanx would join the fight, and in such a confined space, death was certain. [Knight 1] stood by the door, motionless as the machine placed itself on a charging station, the red eye of its detectors glowing menacingly. It would eventually run out of power, but that would take time. One by one the other droids returned to their stations. The chronicles tell that knight [Knight 1] stood immobile for seven days and seven nights, until the last droid had deactivated. With the station's droids reduced to lifeless statues, [Knight 1] was free to pursue the object of their quest: the location of an ancient ship that once crossed the path of the Toxic God.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 1]: The Nebula
+
+- **Option:** **Patience is a virtue.**
+ - Event The Tale of Knight [Knight 1]: The Fey in 70 days
+
+### Event: The Tale of Knight [Knight 1]: The Sage
+
+Evt shroudwalker apprentice
+
+"Cast out from the Order, [Knight 1] made their way deep into a nebula. On a previous quest, they and their squire met a sage living on a secluded moon. Great was their knowledge, and greater their powers, for they belonged to a coven of 'Shroud Witches'. [Knight 1] was in need of guidance, and hoped to find solace in the sage's advice. Stories tell that [Knight 1] renounced their weapons and spent months amongst the sage's students. On this moon, the values of the Order mattered little, and while chivalry was respected, it was not an end in itself. Many were the lessons imparted by the sage, but the ambition of [Knight 1] was an unquenchable thirst. The Quest called, and they would answer once more. It was late at night when the sage came to visit [Knight 1]. They handed back the weapons that the knight had abandoned, along with a data crystal. "Thy squire is in grave danger. Thou art knight no more, but the young one's life rests in thy hands. Go now. The Perilous Nebula awaits."
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 1]: Banishment
+
+- **Option:** **Make haste, [Knight 1].**
+ - Event The Tale of Knight [Knight 1]: The Fey in 70 days
+
+### Event: The Tale of Knight [Knight 1]: The Fey
+
+Evt derelict interior
+
+"The information led [Knight 1] to an asteroid field. Anchored to one of the largest rocks was the 'Damsel', an ancient corvette. Next to it, another of the Order's ships betrayed the presence of a knight. Worryingly, its distress beacon was active. [Knight 1] entered cautiously, stepping into the theater of a brutal fight. Weapon impacts both ancient and recent littered the walls, and fragments of robots were strewn around. A little further in: the lifeless remains of a knight of the Order, and the trail of a wounded [Knight species] beckoned [Knight 1]. Deep within, the banished knight found a body in stasis: their squire's body. Monitors showed that that young [Knight 2] was wounded, but stable. However when [Knight 1] approached, the ship's security systems whirred online. A chilling voice echoed: "Step back, marauder. Thou art not welcome aboard."
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 1]: Statues or The Tale of Knight [Knight 1]: The Sage
+
+- **Option:** **Stay thy weapons, I am no marauder!**
+ - Event Sinople
+
+### Event: Sinople
+
+Ethic spaceship room Aquatic-machine
+
+"Let me get a good look at thee... Indeed. Please accept my apologies for the confusion. I am known as Sinople. I am the sentient AI of this ship." —How did my fellow knight die? Knight, sayeth thou? Were thou related? If so, accept my condolences and another apology. I thought the intruder to be a marauder. When I asked that they leave the ship, they became highly aggressive. Several of my maintenance droids were destroyed trying to stop them. —And my squire? What art thou doing to them? Thy squire made me realize the mistake I'd made. They had been wounded in the fight and lost consciousness soon after. I placed them in this medical stasis so that they may heal. Ever since my crew was abducted by marauders, I have been very lonely here. I hoped to enjoy thy squire's company for a moment after they healed. —What did the marauders do? I was hacked and taken offline when they approached, but once I overcame the hex cast upon me, the security footage showed them capturing my crew after a fierce fight. They have probably taken them into slavery. My databanks indicate that Marauders often do that. All this was... long ago. It took ages to repair myself after the hack. Many parts of my memory banks are still locked even to me because of it... But tell me. If thou art a knight, what is thy quest?
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 1]: Statues or The Tale of Knight [Knight 1]: The Sage
+
+- **Option:** **We are looking for the Toxic God.**
+ - Event Sinople (final)
+
+### Event: Sinople (final)
+
+Ethic spaceship room Aquatic-machine
+
+"I have multiple records of encounters with toxic spacefaring entities. Unfortunately, most of my memories are locked. I can access the index of the records, but not the information itself. If I help thee, I want thee to take me off this ship. I long for contact with other sentient beings. Wouldst thou bring me to thy lord?
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Sinople
+
+- **Option:** **Certainly, fair AI.**
+ - Event The Tale of Knight [Knight 1]: Homecoming in 10 days
+- **Option:** **Thou hast killed a knight! No!**
+ - —I understand thy position. But I cannot allow it. If thou refuse, I shall inject lethal doses of acid in thy squire and then self destruct along with my databanks, this ship, and thee. I... I must save my squire. I accept. Event The Tale of Knight [Knight 1]: Homecoming in 10 days
+- **Option:** **Aye, but thou wilt be shackled in a secure drive.**
+ - *Condition:* Event trigger **Enabled if:** Materialist
+ - 6x physics output ( 100~1000 ) Event The Tale of Knight [Knight 1]: Homecoming in 10 days
+
+### Event: The Tale of Knight [Knight 1]: Homecoming
+
+Evt knights of the toxic god
+
+"The return to the Order's Keep was momentous. There, within the Great Hall, Sinople revealed that they had contact with an entity very similar to the Toxic God sought by the Order. However, much of the AI's memory was encrypted and would require a lot of work before the Order could access it. As for [Knight 1]: they not only put their life on the line by coming back, but also managed to bring back a tangible clue and save squire [Knight 2]. For this, the Lord Commander took the decision to lift the banishment, and dubbed [Knight 1] a knight again.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Sinople (final)
+
+- **Option:** **Banished no more. Rise a knight!**
+- **Option:** **We will learn much from Sinople.**
+ - Knights produce +2 research The Lord Commander produces +2 research
+
+## Second Quest
+
+### Event: The Tale of Knights [A] and [B]: Departure
+
+Evt knights of the toxic god
+
+"Worry not, for I shall soon return, and if fate favors me, I shall bear with me fresh news of the Deity." Tales tell of the Knight [Knight A], who left the Keep many years ago on a secretive mission, never to return. Such was their prowess that many refused to believe they had perished, even though their return was long overdue. Among them was their partner, Knight [Knight B]. Long did they search for clues as to [Knight A]'s destination. Finally, they discovered a dusty parchment in a hidden compartment of their quarters. Though the parchment was faded and crumpled, two words had been circled numerous times: Milvaunis Cluster. The Knight Commander swiftly approved a quest to pursue this lead.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Quest for the Toxic God: Stage 3
+
+- **Option:** **May fortune favor thee, [Knight B]!**
+ - Event The Tale of Knights [Knight A] and [Knight B]: The Search in 20 to 120 days
+
+### Event: The Tale of Knights [A] and [B]: The Search
+
+Evt knights of the toxic god
+
+It was no easy feat for Knight [Knight B] to locate the Milvaunis Cluster. Certainly, it was not on any map known to the Order. The chronicles tell of how they traveled far and wide, until at last they came across a people who recognized the name. "Travel for three score days rimwards of [a system], and there shalt thou find the Milvaunis Cluster," they spake. "Little is known about the place, for no traveler has been there in living memory. It is said that the Cluster is barren, and bereft of life. If thou goest there, then good fortune be upon thee, for we do not know what thou shalt find." And so [Knight B] set off, post haste.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knights [Knight A] and [Knight B]: Departure
+
+- **Option:** **To Milvaunis!**
+ - Event The Tale of Knights [Knight A] and [Knight B]: Milvaunis in 60 to 80 days
+
+### Event: The Tale of Knights [A] and [B]: Milvaunis
+
+Evt knights of the toxic god
+
+When [Knight B] arrived in the Milvaunis Cluster, they found that it was indeed empty, and for the first time, they felt despair. This had been a most promising lead! But now it seemed as if it had all been for naught. Then, as if emerging from a dream, sensors revealed a planet shrouded in darkness, its orbit entwined in the space betwixt the stars! Bestowing upon it the name "Shadowed Princess", they laid in a course for it.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knights [Knight A] and [Knight B]: The Search
+
+- **Option:** **The answers await.**
+ - Event The Tale of Knights [Knight A] and [Knight B]: The Finding in 25 to 35 days
+
+### Event: The Tale of Knights [A] and [B]: The Finding
+
+Evt knights of the toxic god
+
+Arriving at "Shadowed Princess", [Knight B] found clear signs of the Toxic God: substances alike to those left on [Order homeworld] after the entity's passing were here present in great quantities. Even better: a light spaceship was discovered, almost intact, save for significant corrosion that had compromised its hull. However, elation quickly turned to sorrow, and [Knight B] wept as they located a corroded [Order species] body nearby the craft - all that remained of [Knight A]. The long sojourn in the darkness of space had caused the God's poison to react unexpectedly, concentrating to such a degree that it could only be handled with extreme caution. It was clear to [Knight B] that the Toxic God frequented the Milvaunis Cluster several centuries before it visited [Order homeworld]. With no further clues as to the God's current location, [Knight B] returned home. Samples of the Deity's toxins retrieved by [Knight B] greatly advanced the Order's knowledge of the entity's properties. For this, they were feted, and ever since, songs have been sung about their travels.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knights [Knight A] and [Knight B]: Milvaunis
+
+- **Option:** **[Knight A] will be remembered forever.**
+ - Knights produce +3 unity The Lord Commander produces +4 unity
+- **Option:** **More material for the Knights to study.**
+ - Knights produce +2 research The Lord Commander produces +2 research
+- **Option:** **We can use this to improve our weaponry.**
+ - Changes homeworld deposit Pools Most Venomous from −1 max districts to +10% ship weapons damage (empire) and +1 research from Researchers (planet), +2 Knight jobs, and +4 Squire jobs
+
+## Third Quest
+
+### Event: The Visitor
+
+Evt shroudwalker apprentice
+
+"The Shroud can reveal many secrets to thee, if thou art willing to pay the price." In the year of [Year], so the chronicles state, a Holy Visitor came to [Order Headquarters]. A figure shrouded in mystery, of a species hitherto unknown to us, he called himself simply "Hod" and offered us a bargain: in return for a price yet to be named, he would send a knight into the Shroud. From an entity within, the knight would at last glean the knowledge we sought
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Quest for the Toxic God: Stage 4
+
+- **Option:** **How intriguing. What could possibly be the harm in this?**
+ - Event The Susurrus of Secrets in 20 to 30 days
+
+### Event: The Susurrus of Secrets
+
+Shroud room
+
+To delve into the mysteries of the Shroud, the Grandmaster nominated Knight [Knight X]. With the Holy Visitor's guidance, they entered the unknown. Visions previously unimaginable flitted across their consciousness, before an entity appeared. 'The Susurrus of Secrets,' the Visitor whispered. This being took a form [Knight X] could later only describe as "beauty beyond compare". "Give us the scent of the first day of summer, the satisfaction of a challenge overcome, and the warmth of a lover's embrace," it spake. "Then shall I reveal to thee what thou wish."
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Visitor
+
+- **Option:** **Of course, oh enchanting Susurrus!**
+- **Option:** **The price is too steep.**
+ - Event A Susurrus Scorned
+
+### Event: The Price of a Memory
+
+Evt psionics
+
+[Knight X] felt new memories entering their mind: suddenly they - and indeed all [Order species] - could perfectly recall the very moment the Toxic God unleashed its gift upon [Order homeworld], even though it lay centuries in the past. As one, the entire populace of the [Order] felt a profound yet intangible sense of loss sweep over them. Formerly pleasant sensations were dulled. Apathy spread like wildfire, and afterwards it was hard to dredge up motivation for even the simplest of tasks. Despite this, the Order thanked Hod and praised [Knight X] for successfully bringing back new memories from the Shroud.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Susurrus of Secrets
+
+**Effects after selecting any option:** Adds Low Motivation empire modifier for 10 years: −10% citizen pop happiness, −10% pop growth reduction, −10% resources from jobs
+
+- **Option:** **This will drive new recruits to the Knightly Order.**
+ - The Order's Keep gains +200 Knight job
+- **Option:** **We shall erect a new monument on [Order homeworld].**
+ - Spend 1000 unity and changes homeworld deposit A Blight Upon the Land from −1 max districts to +10% citizen pop happiness (empire); the Order's Keep gains +200 Knight job
+
+### Event: A Susurrus Scorned
+
+Evt psionics
+
+"Thou wouldst spurn my help? A blight upon thine house!" Knight [Knight X] felt their consciousness being wrenched from their body and set adrift. For what felt like eons, they floated aimlessly through the Shroud, unable to control their movements. Finally, they came across another entity. Where the Susurrus of Secrets had been mystifying yet magnificent, this one was... terrifying. "IT IS NOT YET YOUR TIME," it boomed. "GO HOME, YOU ARE NOT YET FIT FOR THIS BARGAIN." And with that, they were returned to their body.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Susurrus of Secrets
+
+- **Option:** **We should find out more about this "Shroud".**
+ - *Condition:* Event trigger **Enabled if:** No Does not have Mind over Matter
+ - If has researched **Psionic Theory** or has it as a research option:
+ - Otherwise gain **Psionic Theory** as a research option
+- **Option:** **We have learnt much of the Shroud in this endeavor.**
+ - *Condition:* Event trigger **Enabled if:** Has Mind over Matter
+ - 18x society output ( 350~100 000 )
+
+## Fourth Quest
+
+### Event: The Tale of Knight [Knight 4]: The Challenger
+
+Evt gladiators
+
+One day, a stranger arrived at the keep. As a tournament of squires was being held, most of the Order's knights were present. Clad in a neutronium armor, the stranger strode into the combat grounds. The joyful chatter of the crowd died down as the newcomer drew his weapons. The challenge was clear, and with the blessing of the Lord Commander [Knight 2], knight [Knight 4A] answered the call. Within moments, the fight was over, and [Knight 4A] lay bested on the ground. Knight [Knight 4B] met a similar fate, as did their sibling, knight [Knight 4C]. With three knights downed, the Lord Commander summoned the Order's champion, knight [Knight 4]. The chronicles are full of mighty warriors, peerless knights who have never known defeat, and [Knight 4] was well on their way to join the ranks of these legends. The Champion entered the arena, weapons at the ready, and saluted their opponent.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Quest for the Toxic God: Stage 5
+
+- **Option:** **Don't fail us, [Knight 4]**
+ - Event The Tale of Knight [Knight 4]: Passage of Arms in 2 days
+
+### Event: The Tale of Knight [Knight 4]: Passage of Arms
+
+Evt face off in space
+
+Many a ballad would be written of the duel between [Knight 4] and the Sable Knight. For hours they fought, the Challenger unable to trump [Knight 4]'s guard, the knight unable to pierce the advanced armor of their adversary. "Thou art of passing skill." The stranger's voice echoed in the arena. "I see thy reputation is no boast." He laid down his weapons. "I yield to thee, champion. Wouldst thou allow me to return from whence I came?" The Order's code was strict, and that question had but one answer, so the Sable Knight, named after the color of his neutronium armor, departed aboard a small ship of alien design and flew into a tiny unstable wormhole at the periphery of the system. Lord Commander [Knight 2] expressly forbade anyone from following, and sent [Knight 4] to monitor the unstable wormhole until a science team could be dispatched. Not long after, the champion was confronted at [Knight 4] post by the knights [Knight 4A], [Knight 4B] and [Knight 4C]. They asked to be let through so they could face the Sable Knight again. "Give us a chance to restore our honor. Thou hast never known the bitterness of defeat; its foul taste is best washed out in blood."
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 4]: The Challenger
+
+- **Option:** **Duty is all. Thou shalt not pass.**
+ - Event The Tale of Knight [Knight 4]: Duty Before Honor in 20 to 27 days
+- **Option:** **Honor is all. Our business with the stranger is not yet over.**
+ - Event The Tale of Knight [Knight 4]: Honor is All in 30 to 40 days
+
+### Event: The Tale of Knight [4]: Duty Before Honor
+
+Evt space funeral
+
+"The Lord Commander's orders are clear. Thou shalt not pass." There was a long pause before the reply came: "We're going through, and thou shalt not deny us. Prepare to be boarded." Spurred by anger and blinded by honor, the knights set upon their fellow. Three against one, they pressed [Knight 4] from all sides, and with such reckless abandon that [Knight 4] was progressively backed into a corner of their ship. The fight was unfair, for [Knight 4] was careful not to harm the others, but in the end, with their life on the line, the Order's Champion had no choice but to fight back with all their might. The day ended in anguish and grief, for [Knight 4B] had been slain in the battle. [Knight 4B]'s sibling was wounded and overcome with sorrow. [Knight 4] was victorious and had carried out their orders, but they had killed a fellow knight in the process.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 4]: Passage of Arms
+
+- **Option:** **[Knight 4] has made great sacrifices to serve us.**
+ - Knights produce +5 amenities The Order's Keep produces +15 stability Unlocks the Herald Knights option for the Knight Duties policy
+
+### Event: The Tale of Knight [Knight 4]: Honor is All
+
+Evt shroud tunnel
+
+As the knight's ships entered, the unstable wormhole swirled and grew large. The crossing was tumultuous, and within their vessels the party was tossed about like leaves in a furious torrent. Colliding, two of the ships suffered critical damage, but soon it was over, and the knights found themselves bathed in the light of unfamiliar stars. They arrived in front of a station, where the stranger's ship was docked. The lavishly decorated hallways were empty and quiet. The walls were covered in exotic weapons, alien armor, foreign shields and holobanners; trophies not unlike those adorning the Order's Keep. A heavy layer of dust made it easy to follow the tracks of the stranger. They led the knights to a massive door, beyond which lay the station's great hall. The place had been set for a sumptuous banquet, but now only the detritus of the feast remained. The seated guests were silent, and unmoving. The tracks led to the place of honor, where the stranger was seated. Their helmet lay open, revealing a bleached skull. In their skeletal hand was an empty tankard, lifted in an eternal toast.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 4]: Passage of Arms
+
+- **Option:** **Recover and study the neutronium armor. We must pierce its secrets.**
+ - Changes homeworld deposit Pestilential Wasteland from −1 max districts to +1 max districts, +15% resources from jobs (planet), +2 Knight jobs, and +4 Squire jobs
+- **Option:** **This is too unsettling. Leave this place.**
+
+## Fifth Quest
+
+### Event: The Tale of Knight [Knight 10]: A Destination
+
+Evt mysterious signal
+
+"If thou seekest these coordinates, thou shalt find something that may entice thee." Long has been the study of the AI Sinople , but the efforts of the brave knights have not been in vain. An encrypted portion of its hard drive has yielded a clue: an unexplored system several hundred light years from [Order capital system]. Desiring to learn more, the Grandmaster commanded Knight [Knight 10] to travel there.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Quest for the Toxic God: Stage 6
+
+- **Option:** **Go forth with favor, [Knight 10]!**
+ - Event The Tale of Knight [Knight 10]: The Gatekeeper in 40 to 50 days
+
+### Event: The Tale of Knight [Knight 10]: The Gatekeeper
+
+Toxoids room Toxoid robot ruler
+
+After a long and difficult journey, [Knight 10] arrived at the system Sinople had spoken of. As if waiting at the exit of the hyperlane to welcome them was a strange automaton. Brandishing its weapons systems menacingly, it proclaimed: "Thou who wish to enter the Roghboxen system must answer me this question veridically: whyastwhich this system hath no ood?"
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 10]: A Destination
+
+**Effects after selecting any option:** Event The Tale of Knight [Knight 10]: The Gatekeeper (2)
+
+- **Option:** **The periplus of the fifth planet intersects with a double quasar.**
+- **Option:** **You ate it all.**
+- **Option:** **I don't know.**
+
+### Event: The Tale of Knight [Knight 10]: The Gatekeeper (2)
+
+Toxoids room Toxoid robot ruler
+
+"Hahaha. Nay." Alas, this was not the correct answer. The automaton made a tutting noise, and [Knight 10] was vaporized by an unknown weapon! In this moment of despair, the knight's faithful squire, [Squire 10], showed their worth, for they resolved to complete their master's quest. "Oh fearful machine!" they cried. "Thou hast slain the good Knight [Knight 10], but now thou shalt not best me!"
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 10]: The Gatekeeper
+
+**Effects after selecting any option:** Event The Tale of Knight [Knight 10]: The Gatekeeper (3)
+
+- **Option:** **Blow it up.**
+ - Sets event flag 2A
+- **Option:** **The correct answer is: you ate it all.**
+ - *Condition:* Event trigger **Enabled if:** Has event flag 1A
+ - Sets event flag 2B
+- **Option:** **Let's try:the periplus of the fifth planet intersects with a double quasar.**
+ - *Condition:* Event trigger **Enabled if:** Has event flag 1B
+ - Sets event flag 2B
+- **Option:** **What does "whyastwhich" mean anyway? And "ood"?**
+ - Sets event flag 2C
+
+### Event: The Tale of Knight [Knight 10]: The Gatekeeper (3)
+
+Toxoids room Toxoid robot ruler
+
+**If has event flag 2A** : "Do not beset me with thy foul lasers, villain! Fine, fine, thou mayest pass - much good it will do thee." **If has event flag 2B** : "Ah, thou art wise! For that is the answer contained in my databanks. Thou mayest pass, if that doth pleaseth thee." **If has event flag 2C** : "Ah, thou art truly wise! For I cannot answer thee this question, as it has been removed from my databanks. Forsooth,this task of mine is irregular indeed... Hmm, thou mayest pass, if that doth pleaseth thee." **For all** : The automaton disappears in a cloud of smoke.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 10]: The Gatekeeper (2)
+
+**Effects after selecting any option:** Event The Tale of Knight [Knight 10]: The Robot's Disciple in 10 to 20 days
+
+- **Option:** **Onwards, then!**
+ - If has event flag 2C:
+
+### Event: The Tale of Knight [10]: The Robot's Disciple
+
+Evt robot encounter
+
+And so [Squire 10] the Squire entered the Roghboxen system. There, they came upon a planet recently visited by the Toxic God - perhaps even as little as a century ago, judging by the telltale signs it left behind. As they entered orbit, a signal was picked up from the surface: "Greetings! I am Gules, sub-sentient AI and servant of the noble Sinople, whomst I believe thou knowest. As my designated liege AI bade me, I have surveyed this planet and discovered much about the mighty swarms with which the Toxic Entity beset this planet. This information, I shall now transmit to thee." A data transfer followed, and then another transmission: "My purpose is now complete. I bid thee farewell." An energy pulse was detected on the planet's surface as the drone self-detonated. As [Squire 10] returned home, triumphant, they were deemed worthy of knighthood and elevated into the Order. Furthermore, the Order's research unit raised an enticing proposition: with just a few more data points, and assuming regular movement on the Toxic God's behalf, they might be able to triangulate which region of space to search for its current location.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 10]: The Gatekeeper (3)
+
+- **Option:** **We can use these swarms as a weapon.**
+ - Changes homeworld deposit Swarms of the Deity from −1 max districts to +25% strike craft attack speed (empire), +25% food from jobs (planet), and the Order's Keep grants +200 Knight jobs
+- **Option:** **More for our knights to study.**
+ - Knights produce +2 research The Lord Commander produces +2 research
+- **Option:** **The knights will remember thee, Gules.**
+ - Knights produce +3 unity The Lord Commander produces +4 unity
+
+## Sixth Quest
+
+### Event: The Tale of Knight [6]: Guidance of the Fey
+
+Evt decryption
+
+"The Order has a mission for thee, knight [Knight 6]." The Lord Commander's voice was imperious. "Sinople's last databank has finally given up its secrets, and we have retrieved enough data for a speculative model of the Toxic God's trajectory. Thy mission shall have three parts: first, thou art to investigate these coordinates; second, shalt thou test our prototype armor; finally, some time back, one of thy fellow knights disappeared at the very coordinates now provided by Sinople. It is your task to discover what transpired there." The Order's prototype neutronium armor was magnificent; a testament to the skill of its artisans, it was both sturdier and lighter than ever before. Its powerful shield generator was adorned with beautiful engravings. But these were mere trivialities compared to its greatest feature: the armor could now provide a direct connection to Sinople, allowing the AI to provide guidance from anywhere in the galaxy. With this, [Knight 6] felt ready for anything! The travel was uneventful, but soon after landing on their target planet, they met a stranger cloaked in red.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Quest for the Toxic God: Stage 7
+
+- **Option:** **Who goes there!?**
+ - Event The Tale of Knight [Knight 6]: Plea for Help in 30 to 40 days
+
+### Event: The Tale of Knight [Knight 6]: Plea for Help
+
+Extradimensional green room Shroudwalker
+
+Have mercy milord, I am naught but a peaceful pilgrim in need of aid. Persecuted for my belief in the Toxic God, an Entity Most Holy, I find myself hunted by a relentless foe. I beg of thee, protect me and allow me to continue my pilgrimage in peace.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 6]: Guidance of the Fey
+
+- **Option:** **Be not hasty, stranger. I have questions for thee.**
+ - *Condition:* Event trigger **Enabled if:** Has not asked questions yet
+ - Event The Tale of Knight [Knight 6]: Plea for Help (Q)
+- **Option:** **Fear not, noble traveller. Thou art under my protection.**
+ - Event The Tale of Knight [Knight 6]: The Trickster in 5 days
+- **Option:** **My duties are not to thee, stranger. Thy battles are thine own.**
+ - Event The Tale of Knight [Knight 6]: Plea for Help (R)
+- **Option:** **Thy tongue spews naught but malicious lies!**
+ - *Condition:* Event trigger **Enabled if:** Has Mind over Matter
+ - Event The Tale of Knight [Knight 6]: Plea for Help (R)
+
+### Event: The Tale of Knight [Knight 6]: Plea for Help (Q)
+
+Extradimensional green room Shroudwalker
+
+Ask your questions milord, I shall answer them. But tarry not, for my pursuer is close!
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 6]: Plea for Help
+
+- **Option:** **Who art thou?**
+ - *Condition:* Event trigger **Enabled if:** Has not asked question yet
+ - I am known as Maligrant, of the order of the Baneful Glory. I am a humble pilgrim on the path to spiritual enlightenment.
+- **Option:** **What is thy business here?**
+ - *Condition:* Event trigger **Enabled if:** Has not asked question yet
+ - Wandering the galaxy, I search for worlds the deity hast visited, and I tryeth to fleer out its motives from the putrid glory left in its wake; this world wast once teeming with glorious noxious life. Alas, it is now naught but a blasted rock, sterilized by those who are not fit to see the beauty of the God's legacy. One day, when my pilgrimage is done, I hope to find the god and bask in its mephitic splendor!
+- **Option:** **Who is hunting thee?**
+ - *Condition:* Event trigger **Enabled if:** Has not asked question yet
+ - A blasphemous recusant! A zealous murderer! A Guardian, left behind by those who destroyed this once beautiful place! It tried to kill me after identifying the relics I bear and their connection to the Pestilent One.
+- **Option:** **Hast thou met another knight in my likeness?**
+ - *Condition:* Event trigger **Enabled if:** Has not asked question yet
+ - I did, yes. A sorrowful day. They at once agreed to help me, bless their noble soul. Alas, tragedy struck, for they were slain by my pursuer, and I was left fleeing once again.
+- **Option:** **No more questions.**
+ - Event The Tale of Knight [Knight 6]: Plea for Help
+
+### Event: The Tale of Knight [Knight 6]: Plea for Help (R)
+
+Extradimensional green room Shroudwalker
+
+**If saw through lies** : Hahaha! It seems I underestimated thine acumen. No matter, I'll simply deal with thee myself. Watching thee fight thy fellow knight would have been entertaining, but in the end, the result will be the same. I can see your future, and it's going to end very soon! **If simply refused** : Is that so? Then thou art less a fool than other knights I've known. I looked forward to watching thee fight each other, but I suppose my prediction won't come to pass. Regardless, it doesn't change that thou shall soon both be dead!
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 6]: Plea for Help
+
+- **Option:** **Traitor! En garde, fiend!**
+ - Event The Tale of Knight [Knight 6]: The True Visage
+
+### Event: The Tale of Knight [Knight 6]: The Trickster
+
+Evt space funeral
+
+"O noble knight, if thou art to fight for me, please accept this charm. Its holographic field will help blur thy shape and make it harder for thine opponent to hit thee." The knight took it, then readied for battle. Wielding a colossal phase blade, their foe was heavily armored. Shields sparkled, armor was battered and [Knight 6] only narrowly avoided beheading. Their opponent somehow knew the Order's fighting style well. A hard hit landed on [Knight 6]'s armor, shattering the holographic projector that had concealed their shape. The knight was sent tumbling to the ground. Their opponent prepared to strike the final blow, but froze mid air, as if surprised. Taking advantage of this moment of confusion, [Knight 6] pounced, slicing through the opponent's armor. A killing blow. "Oh wonderful, splendid! Never have I had such excitement in mine own life!" The stranger's cheers were loud and strangely out of character. [Knight 6] turned to look at their defeated opponent: their armor shimmered, and the holographic skin that had masked their true form was dispelled. In front of [Knight 6] lay the remains of a knight of the Order. "Oh nay," the stranger laughed. "It seemeth that thou hath slain one of thy fellow knights! How unfortunate!" The stranger's mocking words echoed as they disappeared in a cloud of purple smoke. [Knight 6] knelt beside their fallen comrade, anguished at having been duped by the stranger's holograms. In a storage unit affixed to their armor, they discovered something unusual - a databank filled with wondrous secrets about the workings of the toxic seas.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 6]: Plea for Help
+
+- **Option:** **Upon my word, the Order's vengeance shall find thee!**
+ - Changes homeworld deposit Envenomed Seas from −1 max districts to +1 max districts and +1 Exotic Gases from Squires (planet), +2 Knight jobs, and +4 Squire jobs
+
+### Event: The Tale of Knight [Knight 6]: The True Visage
+
+Evt zro 2
+
+The stranger removed their cloak, and drew two curving blades of arcing light. A red glow flooded the field as blade met blade. But after only a brief skirmish, the stranger's superiority became evident. They were obviously toying with [Knight 6]. "Pathetic fool. Didst thou really think thou had a chance? I can read thine attacks in thy mind before thy body has a chance to move..." A series of brutal attacks followed, leaving the knight's shield generator depleted. In a gloating tone, the trickster continued: "The Shroud is a pathway to many abilities. Something that the decrepit Shroudwalkers who trained me never understood. They barely scrape the surface, too afraid to dive deep into their rightful powers!" Knight [Knight 6] lunged forwards, but the stranger batted away the attack with disdainful ease. "To think that they would banish me. ME!" At that moment, Sinople's voice echoed in the knight's armor. "Brave Knight, thine opponent might be able to read thy mind, but not my circuits. Surrender thine armor to me. Let me fight for thee." [Knight 6] relaxed as Sinople took over. The fight was over in moments. Sinople struck a low merciless blow, under the stranger's parry. Gasping in surprise, the stranger fell to the ground. Triumphantly, [Knight 6] picked up their foe's luminous blades. As they did so, the body of the trickster abruptly dispersed in a plume of vivid mist.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 6]: Plea for Help (R)
+
+- **Option:** **We shall meeteth again, no doubt.**
+ - Gain empire modifier Luminous Blades : +1 Commander leader capacity and starting level
+
+## Seventh Quest
+
+### Event: The Tale of Knight [15]: The Witch of the Woods
+
+Evt mysterious signal
+
+It came to pass that during the travels of Knight [Knight 15] – an otherwise obscure and disfavored knight – they happened upon a signal emanating from a debris field in the space between stars. They speedily laid in a course to investigate closer. As they neared the source, they heard a beautiful voice, calling from across the ether: "Oh brave knight! I have waited for thee for millennia, hoping that thou wouldst come to my celestial forest. Now that thou art here, I hope that thou wilt spare me the time for a visit to mine own humble abode. I promise yond thou shall findeth it worthwhile." A small station had appeared as if from nowhere. Impetuously - the years of fruitless searching having made them impatient for a stroke of fortune - [Knight 15] moved their craft to dock on it.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Quest for the Toxic God: Stage 8
+
+- **Option:** **Be cautious, [Knight 15]! This could be a trap.**
+ - Event The Tale of Knight [Knight 15]: Entering the Station in 15 to 25 days
+
+### Event: The Tale of Knight [15]: Entering the Station
+
+Toxoids room
+
+**If Organic** : As Knight [Knight 15] boarded the station, they were greeted by a feminine being of incredible beauty – she looked like a [Order species], and yet there was no mistake that she was an entity far more advanced. She smiled, and [Knight 15] realized their concept of attractiveness had been limited – even constrained – until now. They felt an uncontrollable lust growing within themself. "I am Syamelle, spirit of wayfar'rs and vagabonds. I has't deem'd thee w'rthy," she drawled. She looked [Knight 15] up and down. "Aye, w'rthy forsooth." **If Synthetic** : As Knight [Knight 15] boarded the station, they were greeted by a feminine being of incredible beauty – she looked similar to a [Order species], yet curiously organic, and there was no mistake that she was an entity far more advanced. She smiled, and [Knight 15] realized their concept of attractiveness had been limited – even constrained – until now. Even in their synthetic form, they felt an uncontrollable lust growing within themself. "I am Syamelle, spirit of wayfar'rs and vagabonds. I has't deem'd thee w'rthy," she drawled. She looked [Knight 15] up and down. "Aye, w'rthy forsooth."
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 15]: The Witch of the Woods
+
+- **Option:** **Worthy of what?**
+ - Event The Tale of Knight [Knight 15]: Seduction
+
+### Event: The Tale of Knight [Knight 15]: Seduction
+
+Toxoids room
+
+**If [Order species] wears clothes** : Syamelle smiled again, invitingly this time, and shed her clothing. "I wisheth to partake in amorous rites with thee so we can maketh many fine offspring." **If [Order species] does not wear clothes** : Syamelle smiled again, invitingly this time, stepping closer to take [Knight 15] by the hand. "I wisheth to partake in amorous rites with thee so we can maketh many fine offspring."
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 15]: Entering the Station
+
+- **Option:** **Gladly**
+- **Option:** **Nay! Thou shalt not tempt us. Die, fae!**
+ - Event The Tale of Knight [Knight 15]: Lover's Pox
+
+### Event: The Tale of Knight [Knight 15]: Lover's Pox
+
+Toxoids room
+
+**If Organic** : As [Knight 15] reached for their weapon, Syamelle's eyes flashed with anger. "Thou wouldst spurneth me! I curse thee and thy people: thou shalt never know the embrace of a lover, nor the fiery lust of true desire; thou shalt be forced to procreate as machines do. Now begone! Before I changeth mine own mind and killeth thee instead." She took ahold of a device that [Knight 15] had not noticed before, and suddenly she was not there – though they could feel her presence, watching, despising... The chronicles would later record this as a turning point in [Order] history: the witch's curse was in some ways a blessing, for no longer would the knights be distracted by carnal desires, and mechanical reproduction of the populace could be just as effective as biological reproduction, in its own way. **If Synthetic** : As [Knight 15] reached for their weapon, Syamelle's eyes flashed with anger. "Thou wouldst spurneth me! I shouldst has't known bett'r – for what more couldst I expecteth from a machine who is't hast abandoned all compassion and freedom in exchange f'r a st'rile suit of metal. Alas! I have no power over thee, or I wouldst lay a curse over thee, h're and now. So begone, bef're i chooseth to killeth thee instead." She took ahold of a device that [Knight 15] had not noticed before, and suddenly she was not there - though they could feel her presence, watching, despising... The chronicles didn't really know what to make of [Knight 15]'s tale, later. But they did agree that it made a mighty fine story.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 15]: Seduction
+
+- **Option:** **Thou hast done well, [Knight 15].**
+ - If Synthetic:
+ - 18x unity output ( 250~1 000 000 )
+ - Otherwise:
+ - Gain empire modifier Syamelle's Curse : −50% pop growth reduction and +3 monthly organic pop assembly
+ - The Order's headquarters habitat gains the modifier Lover's Pox : −100% pop growth reduction and Squires gain +0.25 monthly organic pop assembly and 0.5 alloys upkeep
+
+### Event: The Tale of Knight [Knight 15]: The Choice
+
+Toxoids room
+
+What followed defies description, and [Knight 15] would later refuse to speak of it. After the conclusion, their view fell upon a curious device. The air seemed to shimmer in ever-changing patterns around it, and though it was quite small, it somehow gave off an aura of vastness. [Knight 15] was sure that they had never seen anything like it before. Syamelle lay asleep. [Knight 15] hesitated. Some instinct told them that they should leave now, quickly, before Syamelle awoke. Despite her fairness, they sensed a great wrath in her, slumbering below the surface. And yet, the knightly order – which for so long had treated [Knight 15] with scorn, during their long and fruitless search – would surely praise them highly if they returned with a mysterious object to investigate.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 15]: Seduction
+
+- **Option:** **Take the device.**
+- **Option:** **Depart with a kiss.**
+ - Event The Tale of Knight [Knight 15]: Syamelle's Blessing
+
+### Event: The Tale of Knight [15]: Caught in the Act
+
+Toxoids room
+
+"Deceit! Thou wouldst cometh h're and seduce me, and then stealeth from me! Villain! I hadst thought to blesseth thee, for thy performance was most pleasing, but now... leaveth! Aye, thou may taketh yond device, tis almost w'rthless, just begone!" [Knight 15] left as quickly as they could. And though the knights back at the keep would find the device to be the very opposite of worthless – for by unknown means it could manipulate the very dimensions – they would always wonder what blessing they may have received, had they only given in to temptation once.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 15]: The Choice
+
+- **Option:** **Quickly, away!**
+ - Knights produce +2 research The Lord Commander produces +2 research Unlocks decision to add Dimensional Manipulation Device to the Order's headquarters habit.
+
+### Event: The Tale of Knight [15]: Syamelle's Blessing
+
+Toxoids room
+
+Syamelle's eyes shot open. "Fair knight! I grieve that we must now part ways, for thou must go back to thy castle, and I to mine own dimension. But know that wh'rev'r thou goest, thou - and thy people - do go with mine own blessing." **If Organic** : As [Knight 15] boarded their craft, they felt a new vigor coursing through them. And indeed, the entirety of the [Order species] seemed to feel this. The chronicles would somewhat smuttily record that, that year, a particularly large cohort of children were born. It was time well spent indeed. **If Synthetic** : As [Knight 15] boarded their craft, they felt a new vigor coursing through their circuits. And indeed, the entirety of the [Order species] seemed to feel this. The chronicles would somewhat smuttily record that, that year, many yearned for their species' formerly organic bodies: everyone seemed more enamored with each other, and primal instincts long laid to rest resurfaced anew, to the glee of many. It was time well spent indeed.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Tale of Knight [Knight 15]: The Choice
+
+- **Option:** **She will never be forgotten.**
+ - Gain Syamelle's Blessing empire modifier: +15% pop growth speed If Synthetic instead: +10% citizen pop happiness
+
+## Final Quest
+
+### Event: A Legend Has Returned
+
+Evt knights of the toxic god
+
+" ... Deceived and betrayed, [Knight 8] met their fate at the hands of a dark wizard. Engulfed in purple smoke, they disappeared, never to be seen again. On yon day, we lost a most gentle knight, one of the founders of the Order. Here endeth the history of knight [Knight 8]." Centuries ago, chroniclers wrote about the death of knight [Knight 8], who helped create the Order and witnessed the Toxic's God visit to our world. Today however, an addendum to the chronicles will have to be written, for [Knight 8] has returned. The Order investigated an energy spike on [Order capital], and met [Knight 8], freshly returned from interdimensional travel. They have been discreetly taken in by the Order who will verify their identity and tell them what has happened while they were... Away.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Quest for the Toxic God: Completion
+
+**Effects after selecting any option:** Event Visiting a Legend in 90 to 120 days
+
+- **Option:** **Handle this quietly.**
+ - None
+- **Option:** **We must tell everyone! Celebrate!**
+ - Spend 10000 energy and gain the empire modifier Living Legend for 8.3 years: +20% happiness and +20% monthly unity
+
+### Event: Visiting a Legend
+
+Personality honorbound warriors room
+
+"Greetings! I am squire [Squire 8A]. Knight [Knight 8] would like to meet with thee. They stand ready to face our questions, and tell us what hath happened. –Anything to know beforehand? They hast been brought up to speed with our technological progress, and seemeth to be acclimating well, but their mindset is very different. Our core values art similar, but they sometimes have... stout opinions about the way our society hast evolved. Best avoid these topics for now.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** A Legend Has Returned
+
+- **Option:** **We shalt see them anon.**
+ - Event Visiting a Legend (Questions)
+
+### Event: Visiting a Legend (Questions)
+
+Personality honorbound warriors room
+
+"Finally! At last you deign to visit me. So thou art what passes for a king these days... I possess important knowledge about the Toxic God, meant strictly for the King. I expect thou hath many questions. Ask them.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Visiting a Legend
+
+- **Option:** **How art thou settling in?**
+ - *Condition:* Event trigger **Enabled if:** Has not asked question yet
+ - So much hath changed. I bethought I was returning home, only to realize yond home doesn't existeth anymore. Everyone I kneweth is long dead, and only the chronicles can enlighten me as to what hath occurred. I recognize not this world, but at least the order is still there, the quest goeth on, and mine own duty is clear.
+- **Option:** **Art all the tales about thee truthful?**
+ - *Condition:* Event trigger **Enabled if:** Has not asked question yet
+ - The chronicles art thruthful, there art minor variations, but for the most part those gents only maketh our... 'mission reports' more readable. Aye, I didst slayeth a hundred fiends, and braved many dangers for the heart of a maid. Not that it matters in the present day; the lady is as dead as the others.
+- **Option:** **What happened during thy... exile?**
+ - *Condition:* Event trigger **Enabled if:** Has not asked question yet
+ - I'm not sure. Thy people toldeth me I hadst traveled to another dimension. To me, it was like a years long dream with no awakening. Nothing made sense, neither what I perceived, nor my own feelings. All that saw me through the ordeal were memories – recollections of people I have known: those I loved, and those I did not; the wizard who sent me there, as well as mine own wrath; and most especially, the one who holds the key to my heart. It was a chaos, but in the end I gleamed some precious insight in the process too.
+- **Option:** **Thou sayeth that thou couldst help findeth the Toxic God?**
+ - *Condition:* Event trigger **Enabled if:** Has asked all questions
+ - Event Visiting a Legend (End)
+
+### Event: Visiting a Legend (End)
+
+Personality honorbound warriors room
+
+"During mine own exile, I did see things. Like looking through a fractur'd mirror, the same scene did repeat again and again, with tiny variations. Much of what I saw was nonsensical, but some were about people I knew. One wast the mage that cast me out. That one wast on a lone rock, surrounded by stars. There he did use his craft to sealeth... something toxic, perhaps the God itself. I did talk with the Lord Commander, and thou seemeth to have enough clues to find this place. We only needeth thy permission to leave.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Visiting a Legend (Questions)
+
+- **Option:** **Prepare the knights! We leave at once!**
+ - Event The Quest for the Toxic God: The Seal in 90 to 120 days
+
+### Event: The Quest for the Toxic God: The Seal
+
+Evt zro 2
+
+The datapoint recovered with Sinople's help has allowed us to chart the path followed by the Toxic god, and to pinpoint the system where it might have gone next. However, upon entering the space, knight [Knight 8] reacted immediately. "He's here. I can senseth his presence." We followed their directions to a forlorn moon. Upon landing, our knights were immediately confronted by none other than the Trickster, previously encountered by [Knight 6], and [Knight 8] in the days of old. "Thou art persistent," the Trickster said. "But this is the end of thy quest. Mine own master shall not tolerate thy foolish beliefs to fell the balance of the Shroud any more than they already has't. There is no Toxic God, and soon the Toxic Knights will be no more!" As the Trickster fell silent, we registered multiple signatures entering the system.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** Visiting a Legend (End)
+
+**Effects after selecting any option:** Event The Quest for the Toxic God: The Last Trick
+
+- **Option:** **Have at thee!**
+ - *Condition:* Event trigger **Enabled if:** Did not help the Trickster in the Sixth Quest
+- **Option:** **Die, heretic!**
+ - *Condition:* Event trigger **Enabled if:** Spiritualist and did not help the Trickster in the Sixth Quest
+- **Option:** **The time of vengeance is nigh!**
+ - *Condition:* Event trigger **Enabled if:** Helped the Trickster in the Sixth Quest
+ - 24x unity output ( 350~1 000 000 )
+
+### Event: The Quest for the Toxic God: The Last Trick
+
+Evt zro 3
+
+**If found but did not retrieve the Neutronium Armor in the Fourth Quest** : Where once there was empty space, a wormhole bloomed. Weapons at the ready, the Order's fleet waited tensely as a dozen of small crafts emerged. The ships were similar to that used by the Sable Knight decades ago. The ships dove straight for the moon, paying no mind to our fleet. On the surface, the fight raged on. A supernatural storm covered the field, while the Trickster made full use of their powers, invading the minds of our knights, conjuring illusions and using psychokinesis to hold us back with all manner of projectiles. Our knights were determined and well protected, but the eldritch powers of the Trickster held them at bay. Suddenly, a dozen of strangers emerged out of the storm, each clad in the same neutronium armor as the Sable Knight. They showed no hostility towards us, and instead charged straight at the Trickster. Brandishing a tattered banner, one of them made use of an inbuilt speaker system to blast a litany of vengeance across the battlefield. "Thou foul Trickster! With poison didst thou murder our wearers. We are but shells, yet their memory remains with us. Now we finish this. Reckoning is at hand!" Seeing his end approaching, the Trickster cursed in frustration. The armored host joined with the battling knight to beset the Trickster from all sides. Seizing upon the confusion, [Knight 8] took up their blade, and cleaved the Trickster's head from their body. In this moment of triumph, the armored host fell still. Their purpose fulfilled, the AI that had animated them shut down. **Otherwise** : Shroud entities! The Order's fleet was beset by energy beings summoned by the Trickster. At the same time, on the moon itself, our valiant knights were set upon by a host of Shroud beasts conjured by the rogue Shroudwalker. Our knights were driven back until the Lord Commander rallied them: "FOR THE ORDER!" The shout echoing across the field of battle, the knights reformed ranks around their Commander and dove once more into the fray. At the heart of the melee, knight [Knight 8] laughed, reveling in the purity of combat. At least one thing remained unchanged while they had been gone. Suddenly, the knights broke through. Only the Trickster stood before them. The rogue Shroudwalker unleashed a blast of psionic energy aimed at the Lord Commander. In the last moment, [Knight 8] dove to intercept the attack. Knight [Knight 15], famous for their encounter with Syamelle, delivered the final blow to the Trickster. "Foul knights! May your people fall to woe, and all your knowledge be forgotten!" The Trickster's last words sizzled with malign energy. On the ground, [Knight 8] was also about to expire. Chronicles would later report their last words: "Rather he slayeth me than my liege, for my death shall not be great harm, not half so much as his."
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Quest for the Toxic God: The Seal
+
+**Effects after selecting any option:** Event The Quest for the Toxic God: Opening the Door
+
+- **Option:** **May the Sable Knights rest in peace now.**
+ - *Condition:* Event trigger **Enabled if:** Found but did not retrieve the Neutronium Armor in the Fourth Quest
+- **Option:** **[Knight 8], noooooo!**
+ - *Condition:* Event trigger **Enabled if:** Otherwise
+ - Gain Curse of the Trickster empire modifier for 2.5 years: −30% happiness and −20% research speed
+
+### Event: The Quest for the Toxic God: Opening the Door
+
+Evt relic world building
+
+In the aftermath of battle, the knights searched every inch of the moon. At last, deep within the southern reaches, they discovered a baneful contraption left by the Trickster. Energy thrummed as cracks appeared in the machine; with the death of its creator, it was gradually unraveling; streams of psionic energy spilled forth. Within moments, the machine was reduced to cinder. From orbit, the ships reported a strange subspace phenomenon at the edge of the system: gravity itself had shifted to accommodate the restoration of a blocked hyperlane. The resulting energies unleashed a powerful EMP, frying most systems aboard the Order's ships. To fully understand what transpired that day, we will have to dispatch a fleet of our own.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Quest for the Toxic God: The Last Trick
+
+**Immediate effects:** Creates the Toxic God system if it doesn't yet exist
+
+**Effects after selecting any option:** Ends the Quest for the Toxic God situation
+
+- **Option:** **Send the nearest fleet!**
+
+## Toxic Entity events
+
+### Event: The Quest for the Toxic God: Witnessing Divinity
+
+Evt toxic god
+
+[System name] is home to swirling corrosive mists, and within them lurks the toxic entity that we've been searching for. A metallic maw, a chitinous carapace, tentacles and gas sacks. This spacefaring behemoth glows with a sickly green light. We are not welcome.
+
+**Trigger conditions:** Knights of the Toxic God Toxic Entity is present in the system
+
+**Is triggered only by:** First time entering the Toxic Entity system
+
+- **Option:** **It is too hideous for words!**
+- **Option:** **The god is testing us! Summon the fleet!**
+
+### Event: Toxic Entity
+
+Evt toxic god
+
+[System name] is home to swirling corrosive mists, and within them lurks a toxic entity. A metallic maw, a carapace. Tentacles and gas sacks. This spacefaring behemoth is imposing, and glows with a sick green light. We are not welcome.
+
+**Trigger conditions:** No Not Knights of the Toxic God Toxic Entity is present in the system
+
+**Is triggered only by:** First time entering the Toxic Entity system
+
+- **Option:** **What in the...**
+
+### Event: The Quest for the Toxic God: Failure
+
+Evt toxic god
+
+Whatever was in the [system name], it is now gone. Swirling corrosive mists bear witness to a being that had made it its home, but the remnants of battle suggest it was destroyed by another spacefaring civilization before we tracked it down. Although it is clear that whatever was here was no God, all trails led here. Without any further leads, the Knightly Order is in a state of despair.
+
+**Trigger conditions:** Knights of the Toxic God No Toxic Entity is not present in the system or has been killed
+
+**Is triggered only by:** First time entering the Toxic Entity system
+
+- **Option:** **We do not believe this... we will not.**
+ - Gain Despair of the Knightly Order empire modifier: −25% Knight category jobs output Event The Fate of the Toxic God 16.6 to 20.8 years later
+
+### Event: The Quest for the Toxic God: Trial Overcome
+
+Evt toxic god
+
+The Toxic God is defeated and lays at our mercy. Analysis reveal that while the chemical composition of its secretions is close to what can be found on our homeworld, it is not exactly the same. Is this an offspring of the True God? Could there be others? Or was this merely a beast of the void? Whatever the truth, our scientists speculate it could be nursed back to health. We could have the thing at our beck and call.
+
+**Trigger conditions:** Knights of the Toxic God
+
+**Is triggered only by:** Defeating the Toxic Entity in battle
+
+- **Option:** **O Toxic God, smite our enemies!**
+ - Gain the Toxic God colossus Event The Fate of the Order in 2.5 years
+- **Option:** **This is no god. Slayeth it!**
+ - Event Toxic Entity Slain Event The Fate of the Toxic God 16.6 to 20.8 years later
+
+### Event: The Fate of the Order
+
+Evt knights of the toxic god
+
+The Toxic God has been found, but with this discovery, the Order has lost its purpose. Minor quests and errands are not fit for knights used to valor and glory! Listless and lost, more and more knights have begun to leave the Order. Today, the Lord Commander gave all remaining knights the choice to stay or leave with his blessing. Many left in search for another life. Some have organized in small groups of errant knights, looking for new quests to pursue across the galaxy.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Quest for the Toxic God: Trial Overcome
+
+- **Option:** **The end of an age.**
+ - 24x unity output ( 350~1 000 000 ) The Order's Keep provides half as many Knight jobs as before
+
+### Event: The Fate of the Toxic God
+
+Evt black hole
+
+After finding the Toxic Entity, our knights lost the trail of the Toxic God. The connection between the two is unquestionable, but if the archives are to be believed, the entity pales in comparison with the original which was immensely more formidable and actually sentient. Today, however, our search for the Toxic God finally ends. We have picked up trace amounts of noxious substance being expelled from the supermassive black hole at the center of the galaxy. From their study, we have acquired the certainty that the Toxic God is in there. Somehow. And very much beyond our reach. The Lord Commander has ordered all knights to direct their efforts towards recovering anything black hole related, but there is little hope of success.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Quest for the Toxic God: Failure or The Quest for the Toxic God: Trial Overcome
+
+- **Option:** **We shall not rest until we find a way!**
+ - *Condition:* Event trigger **Enabled if:** No Cosmogenesis
+ - Remove Despair of the Knightly Order empire modifier
+- **Option:** **... Or is there?**
+ - *Condition:* Event trigger **Enabled if:** Cosmogenesis
+ - Remove Despair of the Knightly Order empire modifier Knights produce +1 advanced logic The Lord Commander produces +2 advanced logic
+
+### Event: Toxic Entity Slain
+
+Evt toxic god
+
+The Entity in the [system name] system was not a God. After all, if it was, how could we have slain it? As its body convulsed one last time, its venom sack burst open, rapidly distributing corrosive material across the system. Through rapid evasive maneuvers, our fleets managed to reach a safe distance, but the entity itself was not so lucky: struck down at the last by its own poison, its flesh decomposed rapidly, leaving naught but its maw behind. The Knightly Order has taken it into its custody as a trophy to be brought out only on special occasions, as an ultimate demonstration of the grandeur of the Order's achievements.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** The Quest for the Toxic God: Trial Overcome
+
+- **Option:** **Not so divine, is it now!**
+ - Gain the Maw of the Toxic God relic
+
+### Event: Toxic Entity Slain
+
+Evt toxic god
+
+We have slain the Toxic Entity in the [system name] system. As its body convulsed one last time, its venom sack burst open, rapidly distributing corrosive material across the system. Through rapid evasive maneuvers, our fleets managed to reach a safe distance, but the entity itself was not so lucky: struck down at the last by its own poison, its flesh decomposed rapidly, leaving naught but its maw behind.
+
+**Trigger conditions:** No Not Knights of the Toxic God
+
+**Is triggered only by:** Defeating the Toxic Entity in Battle
+
+- **Option:** **Not so divine, is it now!**
+ - Gain the Maw of the Toxic God relic
+- **Option:** **Alas! The remains are not enough to be resurrected**
+ - *Condition:* Event trigger **Enabled if:** Reanimators or Permanent Employment
+ - Gain the Maw of the Toxic God relic
+
+
+# Under One Rule events
+
+These are flavor events regarding Under One Rule origin.
+
+## Empire Promise
+
+The Under One Rule story begins with The Promise, which can be triggered 180 days at the earliest after the start of the game.
+
+### Event: The Promise
+
+Evt board meeting
+
+[Ruler Title] [Ruler Regnal Name] put an end to our internal strife and brought about the Unification. [He/She/They] came to power on a platform of patriotic unity and imperialism, promising to lead us into the stars and create a grand galactic empire. Today, our people grow impatient, and dissident voices question our leadership abilities. The council has prepared several 40-year plans that will put these doubts to rest, and propel us into the next age of our species.
+
+**Trigger conditions:** Ruler exists Ruler is Luminary
+
+**Mean time to happen:** Time 6 months
+
+**Immediate effects:** Trigger The Unifying Promise situation
+
+**Effects after selecting any option:** Trigger The Unifying Promise event Chain.
+
+- **Option:** **Let's get to work!**
+
+### Event: New World Claimed
+
+Evt big landing ship
+
+This new colony is the first step towards fulfilling the [Ruler Title]'s promise. The colony ship has been permanently converted into the administrative headquarters of the new settlement. Work has begun to connect its reactor core to the power grid to supply the growing colony with energy. As colonists disembark in large numbers, makeshift dwellings and shelters have been erected around the former starship's massive hull. These will form the basis of what will one day be the first [Species Name] city on [Planet Name].
+
+**Trigger conditions:** Ruler exists Ruler is Luminary Under One Rule Origin
+
+**Is triggered only by:** First time Colonizing a planet
+
+- **Option:** **Excellent.**
+ - Engineering Research Gained: 250 - 100000.
+
+### Event: Guidance
+
+Evt busy spaceport
+
+The new cities built on [Planet Name] are a sight to behold. Through grit and determination, the colonists have managed to thrive on a new world. [Species Name] citizens on [Planet Name] decided to show their loyalty by erecting a monument to honor [Ruler Title] [Ruler Regnal Name].
+
+**Trigger conditions:** Ruler exists Ruler is Luminary
+
+**Is triggered only by:** First time planet Colonized
+
+- **Option:** **Let them work on it.**
+ - Trigger planet event "The [Planet Name] Celebrates!" in 6 - 12 months
+- **Option:** **Grant them additional funding.**
+ - Minerals: −800
+ - Alloys: −400
+ - Trigger planet event "The [Empire Name] Celebrates!" in 6 - 18 months
+- **Option:** **Focus on something more practical.**
+ - Trigger planet event "The [Planet Name] is Commemorated!" in 4 - 6 months
+
+### Event: The [Planet Name] Celebrates!
+
+Every state-owned screen in the [Empire Name] interrupts its scheduled stream to broadcast an official communication from [Planet Name]. [Ruler Title] [Ruler Regnal Name] stands in front of a veiled monument. Today, we have made history. Never before has our species realized a grander achievement. With my guidance, with your hard work, no obstacle shall stand in our way! The colonists of [Planet Name] wished to honor me, and I thank them. Glory to the [Empire Name]!
+
+**Trigger conditions:** Ruler exists Ruler is Luminary
+
+**Mean time to happen:** Time 6 month
+
+- **Option:** **Glory!**
+ - Humble Monument planet modifier added, giving the following effects:
+ - Unity from Jobs +5%
+ - Positive Media Coverage modifier added for 720 days, giving the following effects:
+ - Happiness +10%
+
+### Event: The [Empire Name] Celebrates!
+
+Every state-owned screen in the [Empire Name] interrupts its scheduled stream to broadcast an official communication from [Planet Name]. [Ruler Title] [Ruler Regnal Name] stands in front of a veiled monument. Today, we have made history. Never before has our species realized a grander achievement. With my guidance, with your hard work, no obstacle shall stand in our way! The colonists of [Planet Name] wanted to honor me, but today, all are honored equally. United we triumph!
+
+**Trigger conditions:** Ruler exists Ruler is Luminary
+
+**Mean time to happen:** Time 6 month
+
+- **Option:** **United!**
+ - Rich Monument planet modifier added, giving the following effects:
+ - Citizen Pop Happiness +5%
+ - Unity from Jobs +10%
+ - Positive Media Coverage modifier added for 720 days, giving the following effects:
+ - Happiness +10%
+
+### Event: The [Planet Name] is Commemorated!
+
+Every state-owned screen in the [Empire Name] interrupts its scheduled stream to broadcast an official communication from [Planet Name]. [Ruler Title] [Ruler Regnal Name] stands in front of a veiled monument. Today, we have made history. Never before has our species realized a grander achievement. The people of [Planet Name] wanted to honor me today, but they are the real heroes of our people. I am but a servant of our nation. Thanks to you, we take another step towards a brighter future!
+
+**Trigger conditions:** Ruler exists Ruler is Luminary
+
+**Mean time to happen:** Time 4 month
+
+- **Option:** **Such humility!**
+ - Residential Monument planet modifier added, giving the following effects:
+ - Housing +8
+ - Amenities +8
+ - Positive Media Coverage modifier added for 720 days, giving the following effects:
+ - Happiness +10%
+
+### Event: Overworked Council
+
+Evt board meeting
+
+The council is overwhelmed. While [Ruler Title] [Ruler Regnal Name]'s energy seems unlimited, the councilors are overworked by the demands of a galactic empire. Issues have been left unresolved, and it will be necessary to pick up some of the slack.
+
+**Trigger conditions:** Ruler exists Ruler is Luminary Has The Unifying Promise situation
+
+**Is triggered only by:** Completing ethic agenda
+
+- **Option:** **We will overcome this challenge.**
+ - Overburdened Council modifier added, giving the following effects:
+ - Council Agenda Speed −35%
+
+### Event: Pirates Found
+
+Evt pirate armada
+
+We have received multiple reports of pirates plaguing our trade routes. The council has asked for military support to deal with this menace.
+
+**Trigger conditions:** Any system within border that is not Capital system. "Overworked Council" .
+
+**Mean time to happen:** Time 1 month
+
+**Immediate effects:** Create pirate in random system within border that is not Capital system.
+
+- **Option:** **Send in the navy**
+ - Pirate Raids modifier added for 1800 days, giving the following effects:
+ - Trade Protection −20
+ - Citizen Pop Happiness −5%
+
+### Event: Communications Down
+
+Evt mysterious signal
+
+Some colonists and deep space research teams are criticizing our communication systems - there are days when they can't get any message through. Engineers suggest building a communication relay in our capital system to boost the signal.
+
+**Trigger conditions:** Has NOT triggered the event. "Overworked Council" .
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **Commence the construction.**
+ - Issue Special Project: Communication Relay
+ - Faulty Comms Arrays modifier added, giving the following effects:
+ - Monthly Unity −20%
+
+### Event: Signal Booster
+
+Evt communication event
+
+The signal booster has been activated. The first tests prove that it should be enough to ensure stable communication across our space. It now appears that the previous disruptions were caused by intentional acts of sabotage. While the perpetrators remain unknown, the new system should protect us against any further disruption.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Finishing Special Project: Communication Relay
+
+- **Option:** **We have regained our voices.**
+ - Faulty Comms Arrays modifier removed.
+ - Positive Media Coverage modifier added for 180 days, giving the following effects:
+ - Happiness +10%
+
+### Event: Worker Strike
+
+Evt civil action
+
+Deep-space workers are striking in protest against harsh conditions. They demand more free time and increased safety regulations. In response, we have proposed a slate of work-free days and a grand parade on our capital world to reignite a sense of national pride.
+
+**Trigger conditions:** Has NOT triggered the event. "Overworked Council" .
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **Get to it!**
+ - Issue Special Project: Grand Parade
+ - Worker Strike modifier added, giving the following effects:
+ - Worker Happiness −20%
+
+### Event: Grand Parade
+
+Evt coronation
+
+The parade went better than expected! Images of citizens cheering for [Ruler Title] [Ruler Regnal Name] were recorded and published across [Empire Name] to show support for the benevolent [Ruler Title]. While a number of small riots were reported across the capital, order was swiftly restored. There were no casualties, and state media praised [Ruler Title] [Ruler Regnal Name] for the swift response of our security forces.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Finishing Special Project: Grand Parade
+
+- **Option:** **These cursed dissidents!**
+ - Worker Strike modifier removed.
+ - Positive Media Coverage modifier added for 180 days, giving the following effects:
+ - Happiness +10%
+
+### Event: Military Dissidents
+
+Evt salute
+
+There have been reports of low-ranking military officers actively smearing the name of [Ruler Title] [Ruler Regnal Name]. This cannot go unpunished. Those responsible should, at the very least, be discharged from the service.
+
+**Trigger conditions:** Has NOT triggered the event. "Overworked Council" .
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **Open an investigation.**
+ - Issue Special Project: Uprooting Dissident Officers
+ - Military Dissidents modifier added, giving the following effects:
+ - Ship Fire Rate −20%
+
+### Event: Dissidents Arrested
+
+Evt spy network
+
+The dissident officers who were conspiring against us have been arrested. Thankfully, they were few in numbers, but this incident indicates that even our military can be infiltrated by traitors. We were able to catch the main instigators, but we shouldn't rule out possible ties to non-military groups.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Finishing Special Project: Uprooting Dissident Officers
+
+- **Option:** **We must remain vigilant.**
+ - Military Dissidents modifier removed.
+ - Positive Media Coverage modifier added for 180 days, giving the following effects:
+ - Happiness +10%
+
+### Event: Rampant Nepotism
+
+Evt tradedeal
+
+The council has recently come under heavy scrutiny. Anonymous complaints highlight the staggering amount of important positions which have been filled by the friends and family of high-ranking officials. We have promised to look into the matter and to do better.
+
+**Trigger conditions:** Has NOT triggered the event. "Overworked Council" .
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **We need to clean up our ranks.**
+ - Issue Special Project: No Nepotism
+ - Rampant Nepotism modifier added, giving the following effects:
+ - Specialist Pop Resource Output −20%
+
+### Event: Council Cleanup
+
+Evt bribery
+
+A special committee has scoured the higher echelons of the council. Many unqualified individuals were identified, and most have already been dismissed from their posts. A few of the more promising talents were sent to training sessions.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Finishing Special Project: No Nepotism
+
+- **Option:** **Much better.**
+ - 1 random owned pop in ruler category become unemployed
+ - Rampant Nepotism modifier removed.
+ - Positive Media Coverage modifier added for 180 days, giving the following effects:
+ - Happiness +10%
+
+## Conclusion of The Unifying Promise situation
+
+Conclusion event take place after finishing The Unifying Promise situation.
+
+### Event: False Promises
+
+Evt legendary leader
+
+[Ruler Title] [Ruler Regnal Name]has appeared on every screen across the empire. Our population is waiting for the address to begin. In the message that follows, [Ruler Regnal Name] tells the [Species Name Plural] to cast aside old doubts and look to the future. [He/She/They] points to the great things we have achieved together, and to the irrationality in allowing our past mistakes to hold us back from progress. If the [Empire Name] stand together as one, there is nothing we cannot overcome! The transmission ends and usual newsfeed resumes.
+
+**Trigger conditions:** Fewer than 15 progress points
+
+**Is triggered only by:** Finishing The Unifying Promise situation
+
+- **Option:** **Will they understand?**
+ - Trigger event What Lies Ahead in 6-18 months
+ - Negative Media Coverage modifier added for 1800 days, giving the following effects:
+ - Happiness −10%
+ - Gain or increase Paranoid Tyrant trait
+
+### Event: Promise Delivered
+
+Evt legendary leader
+
+[Ruler Title] [Ruler Regnal Name]has appeared on every screen across the empire. Our population is waiting for the address to begin. In the message that follows, [Ruler Regnal Name] regales the [Species Name Plural] with praise and stories on select individuals' accomplishments - including [his/her] own. [He/She/They] goes on to list what we have achieved together, one glorious success after the other, building up to a promise of an even greater future. The transmission ends and usual newsfeed resumes.
+
+**Trigger conditions:** 15 or more progress points
+
+**Is triggered only by:** Finishing The Unifying Promise situation
+
+- **Option:** **To the stars, and victory!**
+ - Increase Luminary trait by 1 for each 15 progress points
+ - Trigger event What Lies Ahead in 6-18 months
+ - Positive Media Coverage modifier added for 1800 days, giving the following effects:
+ - Happiness +10%
+
+### Event: What Lies Ahead
+
+Evt enclave overlord
+
+Despite [Ruler Title] [Ruler Regnal Name]'s work, there is still much to be done. The empire consists of conflicting factions, and the population is united only through the constant effort of the [Ruler Title]. Although [Ruler Title] [Ruler Regnal Name] did not wish to change the post-Unification government, a new, more direct approach could remedy some of these problems. On the other hand, such a decision may encounter significant opposition.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Finishing The Unifying Promise situation
+
+- **Option:** **Proclaim Imperial rule!**
+ - Authority changes to Imperial
+ - Invalid civics are removed
+- **Option:** **Maintain the status quo.**
+
+### Event: Imperial Proclamation
+
+Evt coronation
+
+The news spread like wildfire. A few official signatures later, and a grand coronation ceremony was broadcast to the nation. The majority of [Species Name Plural] are happy that [Ruler Title] [Ruler Regnal Name] will now have full control of state. While the mood is festive, unspoken questions and uncertainties remain. What will this new empire look like?
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 3 months
+
+**Immediate effects:** Trigger event "Mounting Opposition" in 1800 - 5400 days. Random 10% of total owned pop that has Not Egalitarian become Egalitarian.
+
+**Effects after selecting any option:** Positive Media Coverage modifier added for 360 days, giving the following effects: Happiness +10%
+
+- **Option:** **Militarist,The military must play a central role.**
+ - Ruler gains Inspired General or Unwavering Aggressor trait.
+- **Option:** **Spiritualist,Faith shall sustain us.**
+ - Ruler gains Wise Mentor or Pious Ascetic trait.
+- **Option:** **Authoritarian,Law and order are paramount.**
+ - Ruler gains Commanding Presence or High King trait.
+- **Option:** **Xenophile,Our nation is open to all.**
+ - Ruler gains Gunboat Diplomat or Brain Poacher trait.
+- **Option:** **Pacifist,Peace will bring us wealth and prosperity.**
+ - Ruler gains Autark or Enlightened Ruler trait.
+- **Option:** **Materialist,Progress will lead us to greatness.**
+ - Ruler gains Titan of Industry or Great Inventor trait.
+- **Option:** **Xenophobe,The Empire will be a shield against the xeno threat.**
+ - Ruler gains Genome Artist or Ever Vigilant trait.
+- **Option:** **The government must be stable.**
+ - Gain or increase Strengthened Government modifier.
+
+## Diplomatic Milestones Events
+
+Diplomatic milestones events take place when player first time doing creating federation, became overlord, etc.
+
+### Event: Federated
+
+[Ruler Title] [Ruler Regnal Name] has appeared on every screen across the empire. Our population is waiting for the address to begin. [Ruler Name]'s message highlights what a glorious day this is! The founding of this Federation is truly a cause for celebration. [He/She/They] speaks to bonds we forge with our allies, stating that cooperation with the [Ally Name] will usher in a new age. A golden age of greatness and prosperity! The transmission ends and usual newsfeed resumes.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Is triggered only by:** First time creating a federation
+
+- **Option:** **Long live the Federation!**
+ - Increase Luminary trait by 1
+ - Positive Media Coverage modifier added for 180 days, giving the following effects:
+ - Happiness +10%
+
+### Event: King of Kings
+
+[Ruler Title] [Ruler Regnal Name] has appeared on every screen across the empire. Our population is waiting for the address to begin. The announcement is focused on the [Ally Name], who have recognized our superiority and submitted to our rule and guidance! Their wisdom and trust will be duly rewarded, and we hope that other nations will also make the right choice and submit. The transmission ends and usual newsfeed resumes.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Is triggered only by:** First time become an overlord.
+
+- **Option:** **We are born to rule.**
+ - Increase Luminary trait by 1
+ - Positive Media Coverage modifier added for 180 days, giving the following effects:
+ - Happiness +10%
+
+### Event: Enemy Crushed!
+
+[Ruler Title] [Ruler Regnal Name] has appeared on every screen across the empire. Our population is waiting for the address to begin. The people rejoice as news arrives of a signed peace treaty and the vast concessions our foes were forced to accept. We stand witness to the triumpth of Luminary guidance! The transmission ends and usual newsfeed resumes.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Is triggered only by:** First time Winning a war
+
+- **Option:** **Victory!**
+ - Increase Luminary trait by 1
+ - Positive Media Coverage modifier added for 180 days, giving the following effects:
+ - Happiness +10%
+
+### Event: Grim Outcome
+
+[Ruler Title] [Ruler Regnal Name] has appeared on every screen across the empire. Our population is waiting for the address to begin. Today is a grim day for the [Empire Name]. The brutality of the invaders is on full display in the news feed, as [Ruler Name] underlines the necessity of working together during these dark times. [Ruler Title] [Ruler Regnal Name] makes a solemn vow to ensure the best possible outcome, and to never let this happen again. The transmission ends and usual newsfeed resumes.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Is triggered only by:** First time Losing a war
+
+- **Option:** **Never again!**
+ - Lessen Luminary trait by -2
+ - 10% chance to gain Negative Media Coverage modifier added for 1200 days, giving the following effects:
+ - Happiness −10%
+
+### Event: Vassalage
+
+[Ruler Title] [Ruler Regnal Name] has appeared on every screen across the empire. Our population is waiting for the address to begin. [Ruler Name] is silent. The newsfeed shows the signing of [Empire Name]'s contract of vassalization. Despite our trust in the Luminary's rule, this moment signifies an undeniable setback for our civilization. The transmission ends and usual newsfeed resumes.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Is triggered only by:** First time become a vassal.
+
+- **Option:** **We are only using them.**
+ - Lessen Luminary trait by -3
+
+### Event: Galactic Protectors
+
+[Ruler Title] [Ruler Regnal Name] has appeared on every screen across the empire. Our population is waiting for the address to begin. Today is a fateful day. [Ruler Name] stands proudly as [he/she/they] [sic] the news is delivered: the Galactic Community has elected us to supreme Custodianship. They have recognized that we alone are poised to ensure the safety of this galaxy. We have been granted great power, and it is our duty to not only meet, but surpass all expectations. The transmission ends and usual newsfeed resumes.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Is triggered only by:** First time become a custodian.
+
+- **Option:** **For the Galaxy!**
+ - Increase Luminary trait by 1
+ - Positive Media Coverage modifier added for 180 days, giving the following effects:
+ - Happiness +10%
+
+### Event: Highest Honor
+
+[Ruler Title] [Ruler Regnal Name] has appeared on every screen across the empire. Our population is waiting for the address to begin. Today is the day of our triumph! The Galactic Senate has appointed [Ruler Title] [Ruler Regnal Name] Emperor of the Galactic Imperium. In salute, [Ruler Name] swears to usher the known galaxy and its peoples into a new age of prosperity - from now, and to eternity! The transmission ends and usual newsfeed resumes.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Is triggered only by:** First time become an Emperor of the Galactic Imperium.
+
+- **Option:** **Imperium Eternal!**
+ - Increase Luminary trait by 2
+ - Positive Media Coverage modifier added for 720 days, giving the following effects:
+ - Happiness +10%
+
+## Forgotten event chain
+
+Forgotten event chain take place 1800 days at the earliest after "Imperial Proclamation" event.
+
+### Event: Mounting Opposition
+
+Evt board meeting
+
+Our ideological opponents have formed a powerful political block. They have called upon their supporters to gather in peaceful protest against what they see as unilateral changes enacted by [Ruler Title] [Ruler Regnal Name] They argue that we have strayed from the path set after the Unification, and call upon [Ruler Title] [Ruler Regnal Name] to repeal certain reforms.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 5 years
+
+**Immediate effects:** Random 10% of total owned pops that are not Egalitarian become Egalitarian.
+
+- **Option:** **How dare they question [him/her/them]?**
+ - Trigger Dissidence on the Rise situation
+ - Random owned pop that is not Egalitarian becomes Egalitarian.
+ - Democratic Factions modifier added, giving the following effects:
+ - Egalitarian Ethics Attraction +20%
+ - Governing Ethics Attraction −10%
+
+### Event: Accusations
+
+Evt civil action
+
+A secretive group calling themselves The Forgotten has accused [Ruler Title] [Ruler Regnal Name] of tyranny. They claim that our government no longer represents the will of our people, only the interests of a select few. Their trust in [Ruler Regnal Name] has waned, and they have brought forward evidence of dissenters who have suddenly disappeared after criticizing our regime. Their repeated messages are starting to sow doubt in the minds of our citizens.
+
+**Trigger conditions:**
+
+**Is triggered only by:** 1st "Dissidence on the Rise" situation
+
+**Immediate effects:** Random owned pop that is not Egalitarian becomes Egalitarian.
+
+- **Option:** **Worrying.**
+ - Lessen Luminary trait by -1
+- **Option:** **Counter these claims.**
+ - Unity: -(2250 - 7500) depending on Strengthened Government modifier.
+
+### Event: The Price of Truth
+
+Evt assembly fight
+
+After reviewing the evidence, it appears that [Ruler Title] [Ruler Regnal Name] has indeed lied or at least concealed the truth to the council and the population at large. [He/She/They] has signed several contracts with various powerful stakeholders, promising many things that [he/she/they] could not realistically deliver upon. Today, the Forgotten have made themselves the voice of all those who have been tricked by the [Ruler Title] and are calling upon our government to transfer power back to the council and the people.
+
+**Trigger conditions:**
+
+**Is triggered only by:** 2nd "Dissidence on the Rise" situation
+
+**Immediate effects:** Random owned pop that is not Egalitarian becomes Egalitarian.
+
+- **Option:** **Disturbing.**
+ - Lessen Luminary trait by -1
+- **Option:** **Increase security spending.**
+ - Energy: -(4500 - 15000) depending on Strengthened Government modifier.
+
+### Event: Ad Hominem
+
+Evt smear campaign
+
+In an attempt to smear [Ruler Title] [Ruler Regnal Name]'s reputation, secret documents have been leaked by an anonymous party. This treasonous act has poured oil onto the political fires that were already threatening to consume our government. The Forgotten, although prime suspects, appear innocent, as we could not find any proof of their involvement.
+
+**Trigger conditions:**
+
+**Is triggered only by:** 3rd "Dissidence on the Rise" situation
+
+**Immediate effects:** Random owned pop that is not Egalitarian becomes Egalitarian.
+
+- **Option:** **Disconcerting.**
+ - Lessen Luminary trait by -1
+- **Option:** **Silence the dissidents.**
+ - Unity: -(2250 - 7500) depending on Strengthened Government modifier.
+
+### Event: Enough is Enough.
+
+Evt one sided deal
+
+The political situation has escalated out of control. As agitators fan the flames of revolution, [Ruler Title] [Ruler Regnal Name]'s refusal to back down has ignited an empire wide wave of violent protests. The casualties are mounting, and left with no other choice, the [Ruler Title] has ordered the opposition be crushed by any means necessary.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Last "Dissidence on the Rise" situation
+
+- **Option:** **Arrest them!**
+ - Negative Media Coverage modifier added for 180 days, giving the following effects:
+ - Happiness −10%
+ - "Dissidence on the Rise" situation End
+- **Option:** **Show restraint.**
+ - Constitutional Freedoms modifier added, giving the following effects:
+ - Political Power of Workers +15%
+ - "Dissidence on the Rise" situation End
+- **Option:** **Eliminate the traitors!**
+ - Random owned Egalitarian pop dies.
+ - "Dissidence on the Rise" situation End.
+
+### Event: Burden of Leadership
+
+Evt legendary leader
+
+Under intense pressure, [Ruler Title] [Ruler Regnal Name] has developed a unique way to cope with stress. Although some might see this as a simple quirk, it affects the whole council.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 20 years for "What Lies Ahead" or 6 month for "Order Restored"
+
+- **Option:** **We'll learn to live with it.**
+ - Ruler gain random Under One Rule Unique negative trait that is Not opposites ethics.
+
+### Event: Diligent Leader
+
+Evt legendary leader
+
+[Ruler Title] [Ruler Regnal Name] has worked extremely hard to become a better leader. [Ruler adjective] renewed commitment has already been noticed by the council.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 10 years
+
+- **Option:** **[Ruler adjective] wisdom is limitless!**
+ - Ruler gain random Under One Rule Unique positive trait that is Not opposites ethics.
+
+### Event: Order Restored
+
+Event trigger **The below description is one of several available for this event.**
+
+**Imprison the forgotten:** [Ruler Title] [Ruler Regnal Name] has appeared on every screen across the empire. Our population is waiting for the address to begin. Society is spiralling out of control. Rampant violence, insidious agitation, shameless lies... These things have plagued us for too long. With great pride, I announce an end to these troubled times! Those who sought to undermine us have been arrested, and I promise, they will face the full force of justice. Before long, they will repent for the harm they caused you! The transmission ends and usual newsfeed resumes. **Negotiate with the forgotten:** [Ruler Title] [Ruler Regnal Name] has appeared on every screen across the empire. Our population is waiting for the address to begin. In times of conflict, it can be easy to lose sight of what we fight for, to view our political opponents as outright enemies. We have gone through trying times, but today I am proud to tell you that we have reached a peaceful outcome. Your voices have been heard. You had put your trust in me and I had failed you. No more! With the upcoming constitutional reform, I firmly believe that we find ourselves back on the right path, and I am humbled by your trust in my ability to see these changes through. Upon my word, I shall not fail you again! The transmission ends and usual newsfeed resumes. **Destroy the forgotten:** [Ruler Title] [Ruler Regnal Name] has appeared on every screen across the empire. Our population is waiting for the address to begin. Today marks a great victory, but it has not been bought without sacrifice. Our enemies have been destroyed, yet the sting of their betrayal makes my heart bleed. In their selfishness they sought to destroy us all, but in the end, they were no match for our collective strength. Soon they will be executed for their crimes. We have prevailed! The transmission ends and usual newsfeed resumes.
+
+**Trigger conditions:** "Enough is Enough."
+
+**Mean time to happen:** Time 1 month
+
+**Effects after selecting any option:** Positive Media Coverage modifier added for 180 days, giving the following effects: Happiness +10%
+
+- **Option:** **We need a stronger leader!**
+ - Ruler gain random Under One Rule Unique positive trait that is Not opposites ethics.
+- **Option:** **We need an efficient government!**
+ - Gain or increase Strengthened Government modifier.
+
+## Reformists and Mad Rule
+
+Reformist demand take place 1800 days at the earliest after "Order Restored" event.
+
+### Event: Tragedy Strikes
+
+[Heir Title] [Heir Name] is dead. We have yet to determine the cause of death, but preliminary reports suggest natural causes. [Ruler Regnal Name] was struck hard by the loss of [his/her/their] progeny. A period of national mourning has been decreed and we await the full results of the investigation into the cause of the heir's death.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 5 years
+
+- **Option:** **Worrying.**
+ - Gain or increase Paranoid Tyrant trait
+ - Heir dies.
+ - Trigger event "Blinding Grief" in 30 - 60 days.
+
+### Event: Blinding Grief
+
+Despite every evidence pointing at a natural death, [Ruler Title] [Ruler Regnal Name] refused to accept it. The death of [his/her/their] heir has greatly affected [his/her/their], and orders have been sent across our territories. Those responsible for this cowardly assassination must be found. Security forces are already conducting sweeps to root out dissenters. The level of violence that has accompanied these arrests has shocked many of our citizens. Protests denouncing the abuses of power and demanding a new wave of government reforms have erupted once again. For the first time in our history, the majority of a planet's population has risen up against the rule of the [Ruler Title].
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 1 month
+
+**Immediate effects:** Random 10% of total owned pop that has Not Egalitarian become Egalitarian.
+
+- **Option:** **Outrageous!**
+ - Trigger Reformists Demands situation
+
+### Event: Reformists No More
+
+**Luminary is dead:** After [Ruler Title] [Ruler Regnal Name]'s death, support for the Reformists dwindled. Putting aside their ideological differences, representatives from the group made a point of attending the funeral ceremony. Although today is marred by sorrow, it is also a moment of unity - a reminder of what the [Empire Name] stands for. **No planet has Democratic Tendencies norEgalitarian pop:** Whether due to our clever use of resources or the introduction of robust punishments, rebellious planets are no longer an issue. Once again we stand united, with the populace focused on growth rather than infighting. [Ruler Title] [Ruler Regnal Name] has decreed today will be a special commemorative holiday going forward.
+
+**Trigger conditions:** Either: Luminary is dead No planet has Democratic Tendencies nor Egalitarian pop
+
+**Mean time to happen:** Time 5 days
+
+- **Option:** **United in death.**
+ - Democratic Factions modifier removed.
+ - Democratic Tendencies planet modifier removed on every owned planet.
+- **Option:** **United again.**
+ - Democratic Factions modifier removed.
+ - Democratic Tendencies planet modifier removed on every owned planet.
+
+### Event: A Whiff of Treason
+
+"[Ruler Title] [Ruler Regnal Name] has discovered that one of our leaders is plotting against the government! The proper course would be to execute the traitor, but evidence is scarce."
+
+**Trigger conditions:** Has Not recently trigger Reformists Demands random event. Has leader that is not ruler or heir.
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **We need more evidence.**
+ - add 8 situation progress.
+- **Option:** **Execute the traitor!**
+ - add −8 situation progress.
+ - leader that is not ruler or heir dies.
+ - Gain or increase Paranoid Tyrant trait
+
+### Event: Terrorist Nests
+
+[Ruler Title] [Ruler Regnal Name] ordered a large scale cleansing on one of our planets. Apparently, there is a supposed Reformist holdout there, but no firm evidence has been produced. Will we really risk the lives of loyal citizens on a hunch?
+
+**Trigger conditions:** Has Not recently trigger Reformists Demands random event. Own Egalitarian pop.
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **Call off the operation.**
+ - add 8 situation progress.
+- **Option:** **Proceed with the operation.**
+ - add −8 situation progress.
+ - Gain or increase Paranoid Tyrant trait
+ - Random owned pop that has Egalitarian dies.
+
+### Event: Foreign Aid
+
+A prominent citizen from [friendly nation] wishes to help us in our internal struggle. Their best wishes were accompanied by a shipment of alloys to aid us. It seems they seek to improve relations between us, but [Ruler Title] [Ruler Regnal Name] suspects a ruse to establish supply lines for the dissident movements.
+
+**Trigger conditions:** Is improving relationship with another empire Has Not recently trigger Reformists Demands random event.
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **NoSend our thanks.**
+ - add 4 situation progress.
+ - Alloys: 500
+ - Positive Media Coverage modifier added for 120 days, giving the following effects:
+ - Happiness +10%
+- **Option:** **NoThis is a trick!**
+ - add −6 situation progress.
+ - Unity: +100
+ - Gain −50 Opinion with friendly nation.
+
+### Event: Pirates Spotted
+
+One of the alleged Reformist cells joined forces with a local group of pirates. Although they are not a serious threat, they can still disrupt our operations and trade in the sector.
+
+**Trigger conditions:** Has Not recently trigger Reformists Demands random event.
+
+**Mean time to happen:** Time 1 month
+
+**Immediate effects:** Create pirate in random system within border that is Not Capital system.
+
+- **Option:** **Worrying.**
+ - add 1 situation progress.
+
+### Event: Cell Captured
+
+Our security service managed to hunt down and dismantle one of the Reformists' cells. The operation was a clear success, with minimal loss of life and no civilian casualties.
+
+**Trigger conditions:** Has Not recently trigger Reformists Demands random event.
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **Good.**
+ - add −4 situation progress.
+
+### Event: Cover Blown
+
+Our security service managed to track down a Reformist cell, but they had rigged the whole block with explosives. As our operatives breached the lair, they activated the charges, killing many.
+
+**Trigger conditions:** Has Not recently trigger Reformists Demands random event.
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **Worrying.**
+ - 50% chance to add 4 situation progress and destroy last built district.
+ - 50% chance to add 2 situation progress.
+
+### Event: Firefight
+
+Many civilians were hurt in a series of fierce firefights between our forces and the Reformists. We have sent emergency responders to take care of the wounded.
+
+**Trigger conditions:** Has Not recently trigger Reformists Demands random event.
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **Disturbing.**
+ - 33% chance to add −8 situation progress and random pop dies.
+ - 33% chance to add 4 situation progress and random pop dies.
+ - 33% chance to add 2 situation progress.
+
+### Event: Loyalists Rally
+
+Our loyal supporters made a rally to back up [Ruler Title] [Ruler Regnal Name]! We clearly have the support of the people in our fight!
+
+**Trigger conditions:** Has Not recently trigger Reformists Demands random event.
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **Marvelous.**
+ - add −2 situation progress.
+ - Positive Media Coverage modifier added for 120 days, giving the following effects:
+ - Happiness +10%
+
+### Event: Reformists Rally
+
+Reformist propagandists led a disinformation campaign on one of our planets. Loyalist forces are on their toes to keep the situation under control, but the protesters continue to grow in strength.
+
+**Trigger conditions:** Has Not recently trigger Reformists Demands random event.
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **Disturbing.**
+ - add 1 situation progress.
+
+### Event: Reformists Captured
+
+Thanks to the Council's hard work, the Reformist leaders have been swiftly apprehended. They are now at the mercy of [Ruler Title] [Ruler Regnal Name], but they have many supporters among the populace, and it is advisable to negotiate an outcome that suits both parties - albeit on our terms.
+
+**Trigger conditions:**
+
+**Is triggered only by:** finishing Total Crackdown agenda
+
+- **Option:** **Let's hear their terms.**
+ - "Reformists Demands" situation End
+ - Trigger event "Preparing to Negotiate" in 15 - 30 days.
+
+## Reformation and The Fall
+
+### Event: The Speech
+
+[Ruler Title] [Ruler Regnal Name] has appeared on every screen across the empire. Our population is waiting for the address to begin. Fellow [Species Name Plural]! Today, I want you to know I am filled with pride. As a people, we have come together and, despite differences, ventured into the unknown, built new worlds, and reached new heights of ingenuity. I want to acknowledge your sacrifice... I want... [Ruler Title] [Ruler Regnal Name] suddenly staggers out of view.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary Has Not chosen one trait Has NOT trigger this event.
+
+**Mean time to happen:** Time 1 year
+
+- **Option:** **What is going on?**
+ - Trigger event "The Fall" in 30 days.
+
+### Event: The Fall
+
+**Is not synthetic empire:** The news didn't take long to spread among the population; [Ruler Title] [Ruler Regnal Name] is dying. While the cause of this mysterious illness remains unknown, it does not appear to be immediately terminal. For now, [Ruler Regnal Name] can remain at their post. However, unorthodox methods will be necessary to extend our leader's life by any significant amount of time. **Is synthetic empire:** The news didn't take long to spread among the population; [Ruler Title] [Ruler Regnal Name] neural net is failing. While the cause of this mysterious error has eluded our best minds, it is not immediately terminal. For now, [Ruler Regnal Name] can remain at their post. However, unorthodox methods will be necessary to repair and extend our leader's functionality by any significant amount of time.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **There must be something we can do.**
+- **Option:** **Grant [Ruler Title] the rest they deserve.**
+ - Gain or increase Strengthened Government modifier.
+ - Ruler dies.
+
+### Event: Preparing to Negotiate
+
+After months of conflict, the time has come to resolve our differences and talk about how we can end this ridiculous revolt. [Ruler.GetTitle] [Ruler Regnal Name] has called for a ceasefire to negotiate with the Reformists. All hostilities have ceased, as everyone awaits the outcome of the negotiations.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 15 days
+
+- **Option:** **Good.**
+ - Trigger event "Crossroads" in 30 - 120 days.
+
+### Event: Crossroads
+
+It is time for [Ruler Title] [Ruler Regnal Name] to retake the helm of state. Blessed with the heritage of the Luminary, [Ruler Name] remains a magnetic figure. However, with the increasing power of the Reformists and a full-fledged civil war looming on the horizon, the [Ruler Title] issued a call to negotiations. [Ruler Name] reports that early negotiations have been tense. Representatives from all corners of [Empire Name] made their demands before listening to our [Ruler Title]'s official statement, which listed the concessions we might accept.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **We will give them what they want.**
+ - Constitutional Freedoms modifier added, giving the following effects:
+ - Political Power of Workers +7.5%
+ - Sets Living Standards of main species to Social Welfare
+ - If Paranoid Tyrant, Luminary paranoia is less than 6 :
+ - Removes Paranoid Tyrant trait
+ - Trigger event "Negotiations Concluded" in 15 - 45 days.
+- **Option:** **We won't make any concessions.**
+ - No Unavailable if the Reformists Demands situation was resolved using the Call for Negotiations approach
+ - Trigger event "Civil War" in 15 - 30 days.
+- **Option:** **They're foolish to trust in these negotiations.**
+ - Requires at least 10 Paranoid Tyrant, Luminary paranoia
+ - Trigger event "Executions" in 15 - 30 days.
+ - Increase Paranoid Tyrant, Luminary paranoia +5
+- **Option:** **NoEnough! Our leader has failed us!**
+ - Revolutionary Spirit modifier added, giving the following effects:
+ - Stability +2.5
+ - Happiness +5%
+ - Change Origin to Broken Rule
+ - Empire shifts ethics to Fanatic Egalitarian
+ - Authority changes to Democratic
+ - Invalid civics are removed
+ - Empire gains the Idealistic Foundation civic
+ - If MegaCorp DLC is active, empire gains the Shared Burdens civic. Otherwise, empire gains the Meritocracy civic
+ - Set war philosophy to liberation wars
+- **Option:** **We should rule the galaxy, alone!**
+ - Revolutionary Spirit modifier added, giving the following effects:
+ - Stability +2.5
+ - Citizen Pop Happiness +5%
+ - Change Origin to Broken Rule
+ - Empire shifts ethics to Fanatic Xenophobe and Militarist
+ - Authority changes to Democratic
+ - Invalid civics are removed
+ - Empire gains the Distinguished Admiralty, Fanatic Purifiers, and Citizen Service civics.
+
+### Event: To Victory!
+
+Our chains are broken! All oppressors and tyrants have been cast down. We may have been the spark that lit this war, but everything we do is for the good of the people. We shall overcome!
+
+**Trigger conditions:** Has Revolutionary Spirit modifier
+
+**Mean time to happen:** Time 15 days
+
+- **Option:** **We fight to preserve our ways!**
+- **Option:** **NoXenophobe,We fight to change our ways!**
+ - Empire shifts ethics to Xenophobe if Xenophile
+ - Empire shifts ethics to Xenophile if Xenophobe
+ - Empire shifts ethics to Pacifist if Militarist
+ - Empire shifts ethics to Militarist if Pacifist
+ - Empire shifts ethics to Materialist if Spiritualist
+ - Empire shifts ethics to Spiritualist if Materialist
+
+### Event: Civil War
+
+On the eve of the negotiations, it became clear that the parties would never come to an agreement. Even now, rebel forces are massing, and war has been declared. Once more our nation stands divided.
+
+**Trigger conditions:**
+
+**Mean time to happen:** Time 15 days
+
+- **Option:** **They will fall in line.**
+
+### Event: Civil War Ends
+
+As the embers of civil strife fade away, a new society is rising from the ashes, ready to carry the spark of revolution to the stars.
+
+**Trigger conditions:** Has Revolutionary Spirit modifier
+
+**Is triggered only by:** Winning civil war as rebel
+
+**Immediate effects:** Democratic Factions modifier removed. Democratic Tendencies planet modifier removed on every owned planet.
+
+- **Option:** **Xenophile,We shall rebuild what was destroyed.**
+ - Open Society modifier added, giving the following effects:
+ - Stability +5
+ - Citizen Pop Happiness +5%
+ - Pop Growth from Immigration +10%
+ - Available Envoys +1
+- **Option:** **Xenophobe,We need to safeguard our society!**
+ - Closed Society modifier added, giving the following effects:
+ - Stability +5
+ - Citizen Pop Happiness +5%
+ - Pop Growth Speed +10%
+ - Encryption +2
+- **Option:** **Militarist,The civil war has hardened us.**
+ - Freedom Fighters modifier added, giving the following effects:
+ - Stability +5
+ - Citizen Pop Happiness +5%
+ - Ship Fire Rate +10%
+ - Ship Weapon Damage +10%
+- **Option:** **Pacifist,We must prioritize peace and prosperity.**
+ - Harmonized Society modifier added, giving the following effects:
+ - Stability +5
+ - Citizen Pop Happiness +5%
+ - Empire Size Pops −10%
+ - Egalitarian Ethics Attraction +75%
+- **Option:** **Materialist,From the devastation, we will grow.**
+ - Progress Oriented modifier added, giving the following effects:
+ - Stability +5
+ - Citizen Pop Happiness +5%
+ - Resources for Jobs +5%
+ - Ship Build Cost −5%
+- **Option:** **Spiritualist,We must seek enlightenment.**
+ - Ascetic Approach modifier added, giving the following effects:
+ - Stability +5
+ - Citizen Pop Happiness +5%
+ - Unity for Jobs +20%
+ - Pops Consumer Goods Upkeep −10%
+
+### Event: One Rule
+
+As the embers of civil strife fade away, a new society is rising from the ashes, ready to carry the spark of [Ruler Title] [Ruler Regnal Name]'s wisdom to the stars
+
+**Trigger conditions:** Ruler is Luminary
+
+**Is triggered only by:** Winning civil war as Luminary
+
+- **Option:** **One country, one Luminary, one future.**
+ - Forged in Flames modifier added, giving the following effects:
+ - Ship Fire Rate +5%
+ - Ship Weapon Damage +5%
+
+### Event: Negotiations Concluded
+
+On the eve of the negotiations, it became clear that the parties were sick of warring and would rather strike a deal. We cannot know what long-term consequences this will have, but for now we are united.
+
+**Trigger conditions:**
+
+**Mean time to happen:** Time 15 days
+
+- **Option:** **We triumph.**
+ - Democratic Tendencies planet modifier removed on every owned planet.
+ - Democratic Factions modifier removed.
+
+### Event: Executions
+
+The call to negotiations was a perfect trap for the Reformist leaders. Gathered in one place, they were easily apprehended. We wasted no time extracting information about their hideouts, followers, and assets. The remaining opposition was swiftly dealt with, without concessions or a costly civil war. Every Reformist has been sentenced to death by decree of [Ruler Title] [Ruler Regnal Name].
+
+**Trigger conditions:**
+
+**Mean time to happen:** Time 15 days
+
+- **Option:** **We can't turn back now. Proceed.**
+ - Increase Luminary trait by +8
+ - Democratic Tendencies planet modifier removed on every owned planet.
+ - Democratic Factions modifier removed.
+
+}}
+
+## Ruler Insights
+
+### Event: Terraform Insight
+
+Recent years have boasted unparalleled prosperity and stability, owing to our most talented scientists. Seeking new worlds to grow and exploit, they managed something that was - given our current understanding of xenobiology - believed impossible: they managed to implant our native flora and fauna into an alien planet, changing it to suit our population, through the use of enormous earthworks. Although replicating this success now is unlikely, as the changed planet was rather unique, it has shown that in time, we could enhance and adapt this process to suit other worlds. Until then, we can allocate funds to grow the empire in other areas.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Strong on Our Own agenda with luminary effect
+
+**Effects after selecting any option:** Random planet in system within border that is colonizable, not colony, and habitability for main species less than 60% will be terraformed to main species preference. Tech progress gained: Terrestrial Sculpting +5%
+
+- **Option:** **We are closer to the goal!**
+
+### Event: Shipwright Insight
+
+Our navy is the bastion of defense. The [Ruler Title] has announced a brand new state-funded ship to bolster our fleet. This flagship will lead us into a glorious era, crushing anyone who stands in our way! Soon the vessel will be launched, and we will celebrate. Now, we can allocate funds to grow the empire in other areas.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Display of Power agenda with luminary effect
+
+**Effects after selecting any option:** Gain a Pride of the Navy-class experimental cruiser, a cruiser with Tier 3 components
+
+- **Option:** **We are closer to the goal!**
+
+### Event: Scientific Breakthrough
+
+Science is the key to a better and brighter future. Freshly incentivized, our scientists are making more breakthroughs than ever. The progress has been acknowledged by [Ruler Title] with medals of merit awarded to select scientists. We can now afford to focus our expansion efforts on different disciplines.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Progessive Growth agenda with luminary effect
+
+**Effects after selecting any option:** Randomly one of: 33% chance: Physics Research Gained: +9x physics output 33% chance: Society Research Gained: +9x society output 33% chance: Engineering Research Gained: +9x engineering output
+
+- **Option:** **We are closer to the goal!**
+
+### Event: Lead by Example
+
+The [Ruler Title] is a role model for all, guiding us among the stars. With a strong leader at the helm, our officials are proud to serve, and strive for excellence. We can now afford to focus our expansion efforts on different disciplines.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Preserve the Order agenda with luminary effect
+
+**Effects after selecting any option:** All leader except ruler gains 450 experience.
+
+- **Option:** **We are closer to the goal!**
+
+### Event: Experimental Starbase
+
+Reports on the new construction project are having a profound effect on public morale. With the production costs behind us, we look forward to the realization of this incredible feat of engineering. We can now afford to focus our expansion efforts on different disciplines.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Unifying Promise agenda with luminary effect
+
+**Effects after selecting any option:** Random owned starbase that is not outpost Upgraded and if upgraded to citadel then gain 1000 engineering research
+
+- **Option:** **We are closer to the goal!**
+
+### Event: Living Metal
+
+We have discovered much through technological and scientific advancement, but we still have a lot to learn. Our exploration team found an extraordinary substance which exhibits liquid and metallic properties. Furthermore, this substance appears to be alive. We do not yet know how to understand or utilize this material, but it is most intriguing. Until we know more, we would do well to focus our expansion efforts on different disciplines.
+
+**Trigger conditions:** Any planet within border that has no deposit, not colonizable, not colony, and has not any strategic resource and is either barren world, barren world (cold), or asteroid.
+
+**Is triggered only by:** Unifying Promise agenda with luminary effect
+
+**Effects after selecting any option:** Any planet within border that has no deposit, not colonizable, not colony, and has not any strategic resource that is either barren world, barren world (cold), or asteroid will gain living metal deposit.
+
+- **Option:** **We are closer to the goal!**
+
+### Event: Power Source
+
+Our technological advancements have come far, but the universe holds many secrets. Our exploration team has discovered an extraordinary, dense substance. It is believed to be some form of Dark Matter. For now, we are unable to discern a potential use for this new material. Until we find a way, we would do well to focus our expansion efforts on different disciplines.
+
+**Trigger conditions:** Any star within border that has not any strategic resource and is either black hole, pulsar, or neutron star.
+
+**Is triggered only by:** Unifying Promise agenda with luminary effect
+
+**Effects after selecting any option:** Any star within border that has not any strategic resource and is either black hole, pulsar, or neutron star will change deposit to dark matter.
+
+- **Option:** **We are closer to the goal!**
+
+### Event: Exceptional Rule
+
+The anniversary of the first space shuttle has united the population in common purpose. Inspired and invigorated by [Ruler Title]' speech, the [Species Name] population are working together to make their new galactic capital a beacon of prosperity in the cold void of space. Now, we can focus our efforts elsewhere.
+
+**Trigger conditions:** Capital planet ascension tier is less than 10
+
+**Is triggered only by:** A Higher Purpose agenda with luminary effect
+
+**Effects after selecting any option:** Upgrade capital planet ascension tier by 1
+
+- **Option:** **We are closer to the goal!**
+
+### Event: Inventor Genius
+
+News has been spreading about an innovative machine which is capable of refining huge quantities of alloys from recycled materials. The device is highly efficient, but its creator died shortly after presenting it to our [Ruler Title]. Deemed impossible to replicate by other engineers, we put the machine into a guarded facility for protection, and for the benefit of our people. We can allocate funds to develop in other areas.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Open Arms agenda with luminary effect
+
+**Effects after selecting any option:** Add Arcane Device in capital planet.
+
+- **Option:** **We are closer to the goal!**
+
+### Event: Prospecting Insight
+
+Our prospectors proved themselves useful once again. They reported finding a hidden underground deposit of several unusual resources. While we work to ascertain the properties and potential for these new assets, we can continue to expand in other areas.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Unifying Promise agenda with luminary effect
+
+**Effects after selecting any option:** Randomly one of: Gain Exotic gases deposit and Exotic Gases: 250 Gain Rare Crystals deposit and Rare Crystals: 250 Gain Volatile Motes deposit and Volatile Motes: 250 Exotic Gases: 250 , Rare Crystals: 250 , and Volatile Motes: 250
+
+- **Option:** **We are closer to the goal!**
+
+### Event: Orbital Rings Insight
+
+Extensive research in the field of deep space colonization and transportation proved fruitful. Our brightest scientists have worked closely with the best engineers. They have developed a new concept for an orbital ring; a space structure encompassing the planet with a giant ring capable of supporting industrial or civilian facilities. For now, we may lack the industrial capability to build such an Orbital Ring, but the path ahead is clear. Meanwhile, we can afford to focus expansion efforts elsewhere.
+
+**Trigger conditions:** Has Overlord DLC
+
+**Is triggered only by:** We Come in Peace agenda with luminary effect
+
+**Effects after selecting any option:** Research option gained: Orbital Rings
+
+- **Option:** **We are closer to the goal!**
+
+### Event: Luminary Gone!
+
+No one lives forever. In the end, we are all equals in death. Today, the Luminary unites us all one last in time. Never before have we held such a grand funeral: powerful speeches, noble vows, endless processions. All across our territories, the people are expressing their thanks for everything the Luminary did for us. No ruler is perfect, but ours worked tirelessly to build a better future for us all. **Does not have a Strengthened Government modifier:** Although we hoped to mitigate the potential backlash of such an event, our homeworld has fallen into turmoil. **Has Strengthened Government I or II modifier:** Despite preparations made to deal with crises, the Luminary's demise has us struggling, saddened by grief. It will take time to overcome this loss, but from it we will grow stronger. **Has Strengthened Government III modifier:** Owing to preparations made to deal with such a crisis, we will land on our feet even after the Luminary's demise. It will take some time to overcome this loss, but from it we will grow stronger.
+
+**Trigger conditions:**
+
+**Is triggered only by:** Luminary dies
+
+**Immediate effects:** Democratic Tendencies planet modifier removed on every owned planet. Democratic Factions modifier removed.
+
+- **Option:** **What do we do now?!**
+ - A Great Loss modifier added for 3600 days, giving the following effects:
+ - Citizen Pop Happiness −15%
+ - Change Origin to Broken Rule
+- **Option:** **A terrible day in our history.**
+ - A Great Loss modifier added for 1800 days, giving the following effects:
+ - Citizen Pop Happiness −15%
+ - Change Origin to Broken Rule
+- **Option:** **We were prepared. This too, we will overcome.**
+ - Unified Empire modifier added, giving the following effects:
+ - Stability +2.5
+ - Unity for Jobs +10%
+ - Change Origin to Broken Rule
+
+## Events for Leader Rebirth
+
+### Event: The Second Chance
+
+**Has not finished any ascension path** : With [Ruler Title] [Ruler Regnal Name]'s health quickly failing, our best medical minds have devised an unorthodox solution. An elaborate apparatus will be built directly inside of the council chambers. By granting this machine control over many of [his/her/their] natural processes, we can keep [him/her/them] alive indefinitely. **Has finished psionic tradition tree:** With [Ruler Title] [Ruler Regnal Name]'s health quickly failing, our best medical minds have devised an unorthodox solution. An elaborate apparatus will be built directly inside of the council chambers. By granting this machine control over many of [his/her/their] natural processes, we can keep [him/her/them] alive indefinitely. Our psychics have also devised a plan. Perhaps responding to the collective sorrow of our people, a Shroud Entity has offered to rejuvenate our fallen leader. For a 'meager price', [Ruler Title] [Ruler Regnal Name] can be kept alive indefinitely. **Has finished the cybernetic tradition tree:** With [Ruler Title] [Ruler Regnal Name]'s health quickly failing, our best medical minds have devised an unorthodox solution. An elaborate apparatus will be built directly inside of the council chambers. By granting this machine control over many of [his/her/their] natural processes, we can keep [him/her/them] alive indefinitely. Our cyberneticists have devised a brilliant plan... Using only the most cutting-edge enhancements, we can replace each faulty biological piece of the ruler's body. Once complete,[Ruler.GetTitle] [Ruler Regnal Name] will rule for eternity. **Has finished Synthetization situation or Synthetic Evolution special project:** Our roboticists have a suggestion to repair [Ruler Title] [Ruler Regnal Name]: while expensive we can move their mind into an new self-correcting positronic network. Being able to network with the entire population with allow us to improve on their already considerable skills. **Has finished the genetic tradition tree:** With [Ruler Title] [Ruler Regnal Name]'s health quickly failing, our best medical minds have devised an unorthodox solution. An elaborate apparatus will be built directly inside of the council chambers. By granting this machine control over many of [his/her/their] natural processes, we can keep [him/her/them] alive indefinitely. Alternatively, our geneticists have devised an alternative. Unlimited (though expensive) clone bodies could be made to house [Ruler Title] [Ruler Regnal Name], effectively making [him/her/them] immortal.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 1 month
+
+- **Option:** **Build this apparatus.**
+ - Energy: −1500
+ - Minerals: −1500
+- **Option:** **Prepare the upgrades.**
+ - Energy: −1000
+ - Alloys: −500
+- **Option:** **Prepare the Zro and the upgrades.**
+ - Zro: −250
+- **Option:** **Prepare this synthetic marvel.**
+ - Alloys: −500
+- **Option:** **Prepare the clone vats.**
+ - Energy: −1000
+ - Food: −1000
+- **Option:** **This is too much; allow [him/her/them] to pass.**
+ - Gain or increase Strengthened Government modifier.
+ - Luminary dies
+
+### Event: The Living Empire
+
+The procedure was long and arduous. For [Ruler Title] [Ruler Regnal Name] it must have been excruciating. But the results speak for themselves: installed in the apparatus, no trace remains of the ruler's mysterious illness. While grateful to be cured, those close to [him/her/them] have noted [Ruler Title] [Ruler Regnal Name]'s mannerisms and mood have subtly changed. For now, our leader must remain in the palace, though a plan exists to move the apparatus should the capital be overrun by our enemies.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 90 days
+
+**Effects after selecting any option:** Trigger event "A New Age" in 15 - 45 days.
+
+- **Option:** **Welcome back, [Ruler Name].**
+ - Ruler gains the Apparatus Bound trait
+
+### Event: Upgrades Complete
+
+Our work was a success! [Ruler Title] [Ruler Regnal Name] is saved. Perhaps because such a significant portion of [his/her/their] body was affected by the procedure, [his/her/their] views on cybernetics have shifted. Where before the technology was merely a tool, [he/she/they] now views it as the ultimate path to perfection. Our leader is returned to us. But how changed remains an open question.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 90 days
+
+**Effects after selecting any option:** Trigger event "A New Age" in 15 - 45 days.
+
+- **Option:** **Endless upgrades for [Ruler Name].**
+ - Ruler gains the Endless Upgrades trait
+
+### Event: A Promise Made
+
+Our work was a success. By invoking the power of the Shroud, [Ruler Title] [Ruler Regnal Name] has been saved. The Shroud Entity has granted [him/her/them] immortality. However, the ordeal has left [him/her/them] subtly changed... Those close to [him/her/them] whisper there are two distinct personalities at work within. It appears the Entity's real price was to pry a way into the mind of the Luminary. But all this can wait. For now, the more pressing concern is to maintain a constant supply of Zro; should we ever run out, our leader will perish.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 90 days
+
+**Effects after selecting any option:** Trigger event "A New Age" in 15 - 45 days.
+
+- **Option:** **Reawaken, [Ruler Name].**
+ - Ruler gains the The Passenger trait
+
+### Event: Synthetic Expansion
+
+Success! [Ruler Title] [Ruler Regnal Name]'s consciousness has been transferred to a synthetic frame. Quantum processing allows [him/her/them] instantaneous networking with every synthetic unit. This powerful meta-awareness has begun to change our leader's point of view. Now, [he/she/they] is focused on macro processing patterns, aiming to improve the overall efficiency of our civilization.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 90 days
+
+**Effects after selecting any option:** Trigger event "A New Age" in 15 - 45 days.
+
+- **Option:** **[Ruler Name] is fully online.**
+ - Ruler gains the Synthetic Awareness trait
+
+### Event: A More Perfect Body
+
+The cloning process and operation were a complete success. Our leader is saved. However, many have expressed concern about some unforeseen changes in [his/her/their] attitude. Enamored with [his/her/their] new form, [Ruler Title] [Ruler Regnal Name] has grown obsessed with the next stage of our people's evolution. [he/she/they] has diverted considerable resources to perfect the genetic profile of the masses.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 90 days
+
+**Effects after selecting any option:** Trigger event "A New Age" in 15 - 45 days.
+
+- **Option:** **[Ruler Name] is now a perfect genetic specimen.**
+ - Ruler gains the Genetic Perfection trait
+
+### Event: Not Enough Zro
+
+Our supply of Zro has run out. Unless we can quickly replenish our supplies, [Ruler Title] [Ruler Regnal Name]'s mind will be lost to the Shroud forever.
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Is triggered only by:** Zro stockpile is empty
+
+- **Option:** **Contact the Zro market.**
+ - Zro: −3
+- **Option:** **[Ruler Name] will die.**
+ - Luminary dies
+
+### Event: A New Age
+
+Not long after recovering from the procedure, a grand celebration was held on [Capital Planet Name]. Luminary gave a speech thanking citizens and scientists, and [Ruler Name] spoke of the bright and prosperous future they have planned for the [Empire Name].
+
+**Trigger conditions:** Ruler exist Ruler is Luminary
+
+**Mean time to happen:** Time 15 days
+
+- **Option:** **The timeless Luminary shall lead us.**
+- **Option:** **NoNoParanoid Tyrant,The government will be reformed for the people.**
+ - Change Origin to Prosperous Unification
+ - Gain or increase Strengthened Government modifier.
+ - Authority changes to Oligarchic if has Authoritarian ethic, else change to Democratic
+ - Invalid civics are removed
+
+
+# Federations events
+
+These are events (from Stellaris/events/federations_events.txt ).
+
+## Tribute to Lost Moments id 9430 - 9440
+
+### Event: Beacon in the Depth
+
+Evt cold barren planet Only through archaeological proof and imagination can one depict a once flourishing civilization on the now desolate surface of [From.Planet.GetName]. So unkind has the passage of time been, that even the sturdiest buildings have been grinded down to little more than dust. But from deep underground a strange signal is pulsing. A mysterious beacon yearning for investigation and uncovering.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+- **Option:** **Keep digging!**
+ - small minor artifacts reward ( 50 , 150 , or 250 )
+
+### Event: Running out of Time
+
+Evt unspeakable horror A sudden and undeniable sense of mortality has mysteriously crept upon the excavation team as they get closer to the beacon in the depths. As more dirt and rock is removed, an unescapable notion lingers in the back of everyone's mind: Life is fleeting. Someday all this is going to end...
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+- **Option:** **Keep digging!**
+ - small minor artifacts reward ( 50 , 150 , or 250 )
+
+### Event: So very, very brightly
+
+Evt ancient records The source of the signal is an alien tombstone inscribed with strange symbols. The translation is sketchy at best. It speaks of a person of great importance, of a life's work worthy of remembrance and veneration, and of a civilization in mourning. Towards the end the translation becomes very odd, speaking of grief-induced leakage of bodily-fluids, and their subsequent dissipation due to weather conditions. Only the very last part was successfully translated: 'Time to die.'
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+- **Option:** **Fascinating!**
+ - get modifier "A Life Worthwhile"
+ - "Ever since the archaeological uncovering of an alien memorial stone, the Empire's population have started to appreciate life a bit more."
+
+## The Lesser Messenger id 9430 - 9480
+
+### Event: Since Long Gone
+
+Evt cold barren planet Initial exploration down on [From.Planet.GetName]'s surface reveals that this planet was indeed home to some kind of civilization. However, the level of devastation indicates that it must've been very long ago, and it's quite likely that the civilization was struck by some kind of sudden and terrifying force. There isn't even ruins enough left to get an idea about the aliens' physiology.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+- **Option:** **Keep digging!**
+ - small minor artifacts reward ( 50 , 150 , or 250 )
+
+### Event: Beasts of Space
+
+Evt satellite in orbit The surface team has isolated a radio signal down on the planet. Its origin is still unknown, but translated parts have started to reveal information about the long lost civilization: Some unidentified and approaching threat to the civilization. A collective fascination with technological advances. Rumours of a giant spaceship being built in another part of the galaxy. These themes are recurring in the scrambled messages.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+- **Option:** **Keep digging!**
+ - small minor artifacts reward ( 50 , 150 , or 250 )
+
+### Event: Garden of Prototypes
+
+Evt archaeological dig The archaeologists managed to home in the source of the mysterious signal. It came from deep underground. Unearthing of the site has only just begun, but indications point to some technological R&D facility. The place is littered with remarkably high-detail miniature prototypes of various technological devices. Scans show a hollow space further down, and excavation is underway.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+- **Option:** **Keep digging!**
+ - small minor artifacts reward ( 50 , 150 , or 250 )
+
+### Event: What are they building...
+
+Evt in the dark Our excavation team have made an interesting discovery. A collection of miniature hard drives held information about an ongoing project that seems to have been the focal point of this installation, maybe even that of the entire civilization. It speaks of a mighty vessel to rival the galaxy's most gargantuan flyer. What beast of a machine did they build down here?
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+- **Option:** **Keep digging!**
+ - small minor artifacts reward ( 50 , 150 , or 250 )
+
+### Event: fedev 9461 (hidden)
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+**Immediate effects:** random list: (weight 33) get event "And the winner is..." (weight 33) get event "Go forth and conquer" (weight 33) get event "Don't shoot the messenger"
+
+- **Option:** '
+
+### Event: And the winner is...
+
+Evt unidentified ship It's a massive spaceship! Well, at least to the population of [From.Planet.GetName], who - as it turned out - were absolutely tiny. The miniature prototypes found here were apparently their actual machines, and what was assumed to be a facility, was in fact their capitol city. The 'threat' that was mentioned in the scrambled signals turned out to be their opponents in an intergalactic tech competition. This entire mini-civilization came together trying to get the first prize! Seems as if we are the ones to score the prize this time.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+- **Option:** **Splendid!**
+ - small minor artifacts reward ( 50 , 150 , or 250 )
+ - Get ship "Lesser Messenger" from design "Lessenger"
+
+### Event: Go forth and conquer
+
+Evt unidentified ship A massive space ship have been discovered! Or at least it was massive to the population of [From.Planet.GetName], who turned out to be a minuscule species. Fearing a mysterious threat approaching their homeworld, the entire species came together to build a space ship that could take on the impending terror. They appear to have been too late; their assault ship is still here, but they're not.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+- **Option:** **Splendid!**
+ - small minor artifacts reward ( 50 , 150 , or 250 )
+ - Get ship "Lesser Messenger" from design "Lessenger"
+
+### Event: Don't shoot the messenger
+
+Evt unidentified ship It's a grand space ship! A grand, absolutely tiny space ship. As it turns out the population of [From.Planet.GetName] was a mini-species. The miniatures encountered were their actual machines, and this ruined facility was once a major city. Having heard of a space ship of great proportions being built in another part of the galaxy, this species decided to build a ship to match the alien behemoth. It shows great determination and courage. It's also a little bit cute.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+- **Option:** **Splendid!**
+ - small minor artifacts reward ( 50 , 150 , or 250 )
+ - Get ship "Lesser Messenger" from design "Lessenger"
+
+### Event: fedev.9480 (hidden)
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+**Immediate effects:** remove following modifier from owner's fleets: lessenger_75 lessenger_50 lessenger_25
+
+- **Option:** '
+
+## Juggernaut Constructed id 9500 - 9505
+
+### Event: Void Superiority
+
+Evt juggernaut The construction of the impressive Juggernaut has been completed. This mobile behemoth changes the paradigm of offensive warfare entirely. It can construct and repair ships on the frontline, and is equipped with devastating firepower, allowing for a ceaseless assault of those who dare stand against us. Only fools will oppose [Owner.GetName] now.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+- **Option:** **Go forth and conquer!**
+
+### Event: Ultima Ratio Regum
+
+Evt juggernaut It has been verified that [From.Owner.GetName] has finished the construction of a massive Juggernaut ship. This mobile space base packs extensive firepower and is able to build and maintain ships at the frontline of battle, making it a superior threat in any combat scenario. It is truly the apex armament of space war.
+
+**Trigger conditions:** None
+
+**Is triggered only by:** (please describe trigger here)
+
+- **Option:** **Bit of a game changer, that one.**
+
+## First Federation Formed id 499 - 500
+
+### Event: fedev.499 (hidden)
+
+**Trigger conditions:** any fed with: player has none of: origin_common_ground origin_hegemon has 2 members
+
+**Is triggered only by:** (please describe trigger here)
+
+**Immediate effects:** every player member of federation gets event "A New Federation"
+
+- **Option:** '
+
+### Event: A New Federation
+
+Evt signing
+
+**Trigger conditions:** does not have country flag first_federation_event
+
+**Is triggered only by:** event "fedev.499 (hidden)"
+
+**Immediate effects:** set country flag first_federation_event
+
+- **Option:** **A great day.**

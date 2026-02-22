@@ -226,6 +226,12 @@ def resolve_composite_subpages(session):
             for pt in page_titles:
                 if pt not in subpages:
                     subpages.append(pt)
+        # Merge extra_subpages from config
+        page_config = cfg.composite_pages.get(title)
+        if page_config and page_config.extra_subpages:
+            for pt in page_config.extra_subpages:
+                if pt not in subpages:
+                    subpages.append(pt)
         composite_subpages[title] = subpages
         print(f"    Found {len(subpages)} sub-pages for '{title}'")
     return composite_subpages
@@ -238,17 +244,28 @@ def _fetch_categories_batch(batch: list[str]) -> dict[str, list[str]]:
         "action": "query",
         "titles": "|".join(batch),
         "prop": "categories",
-        "cllimit": "50",
+        "cllimit": "max",
+        "format": "json",
     }
-    data = api_get(session, params)
-    partial = {}
-    if data is None:
-        return partial
-    for page_info in data.get("query", {}).get("pages", {}).values():
-        title = page_info.get("title", "")
-        cats = [c.get("title", "").replace("Category:", "")
-                for c in page_info.get("categories", [])]
-        partial[title] = cats
+    partial: dict[str, list[str]] = {}
+    # Handle continuation — cllimit="max" returns up to 500 results per
+    # response; if there are more we need to follow the "continue" token.
+    while True:
+        data = api_get(session, params)
+        if data is None:
+            break
+        for page_info in data.get("query", {}).get("pages", {}).values():
+            title = page_info.get("title", "")
+            cats = [c.get("title", "").replace("Category:", "")
+                    for c in page_info.get("categories", [])]
+            if title in partial:
+                partial[title].extend(cats)
+            else:
+                partial[title] = cats
+        if "continue" in data:
+            params.update(data["continue"])
+        else:
+            break
     return partial
 
 
@@ -278,33 +295,60 @@ PATCH_PATTERN = re.compile(r"^(Patch\s+\d|Dev diary|Developer diary)", re.IGNORE
 
 
 def classify_page(title: str, wiki_categories: list[str]) -> str:
-    """Classify a page: 'mod', 'dlc', 'patch', 'modding', or 'game_content'."""
+    """Classify a page into: 'mod', 'disambiguation', 'patch', 'dlc', 'modding', or 'game_content'."""
     title_lower = title.lower()
+    wiki_cats_set = set(wiki_categories)
+
+    # 1. Mod: title prefix
     for prefix in cfg.classification.mod_prefixes:
         if title_lower.startswith(prefix.lower()):
             return "mod"
+    # 2. Mod: wiki category
+    if wiki_cats_set & cfg.classification.mod_categories:
+        return "mod"
+
+    # 3. Disambiguation
+    if wiki_cats_set & cfg.classification.disambiguation_categories:
+        return "disambiguation"
+
+    # 4. Patch/version
     if VERSION_PATTERN.match(title.strip()):
         return "patch"
     if PATCH_PATTERN.match(title.strip()):
         return "patch"
-    if "Patches" in wiki_categories:
+    if "Patches" in wiki_cats_set:
         return "patch"
+
+    # 5. DLC
     if title_lower.strip() in cfg.classification.dlc_titles:
         return "dlc"
-    if "DLC" in wiki_categories:
+    if "DLC" in wiki_cats_set:
         return "dlc"
+
+    # 6. Modding
     if "modding" in title_lower or "moddable" in title_lower:
         return "modding"
-    if "Modding" in wiki_categories:
+    if "Modding" in wiki_cats_set:
         return "modding"
+
     return "game_content"
 
 
 def get_content_categories(wiki_categories: list[str]) -> list[str]:
-    """Filter out version numbers and wiki maintenance tags from categories."""
-    return [c.strip() for c in wiki_categories
-            if not VERSION_PATTERN.match(c.strip())
-            and c.strip() not in cfg.classification.wiki_maintenance_categories]
+    """Filter out version numbers, wiki maintenance, and irrelevant categories."""
+    result = []
+    for c in wiki_categories:
+        cs = c.strip()
+        if not cs:
+            continue
+        if VERSION_PATTERN.match(cs):
+            continue
+        if cs in cfg.classification.wiki_maintenance_categories:
+            continue
+        if any(cs.startswith(pfx) for pfx in cfg.classification.wiki_maintenance_prefixes):
+            continue
+        result.append(cs)
+    return result
 
 
 def get_display_categories(wiki_categories: list[str]) -> list[str]:
@@ -370,8 +414,13 @@ def prepare_report_data(
 
     not_fetched = {t for t in content_titles_set if normalize_title(t) not in all_fetched}
 
+    # Also exclude optional pages from not_fetched (they get their own section)
+    optional_normalized = {normalize_title(t) for t in cfg.optional_pages}
+    not_fetched -= {t for t in not_fetched if normalize_title(t) in optional_normalized}
+
     # Classify
-    classified = {"game_content": [], "mod": [], "dlc": [], "patch": [], "modding": []}
+    classified = {"game_content": [], "mod": [], "dlc": [], "patch": [],
+                  "modding": [], "disambiguation": []}
     for title in sorted(not_fetched):
         wiki_cats = categories_map.get(title, [])
         classified[classify_page(title, wiki_cats)].append(title)
@@ -396,7 +445,7 @@ def prepare_report_data(
         if normalize_title(tgt) in all_fetched
     ])
 
-    # Group mods by prefix (case-insensitive)
+    # Group mods by prefix or wiki category
     mod_groups = {}
     for t in classified["mod"]:
         matched = False
@@ -406,7 +455,15 @@ def prepare_report_data(
                 matched = True
                 break
         if not matched:
-            mod_groups.setdefault("Other mods", []).append(t)
+            # Try grouping by mod-specific wiki category
+            page_cats = set(categories_map.get(t, []))
+            mod_cat_match = page_cats & cfg.classification.mod_categories
+            mod_cat_match.discard("Mods")  # Too generic for grouping
+            if mod_cat_match:
+                group_name = sorted(mod_cat_match)[0]
+                mod_groups.setdefault(group_name, []).append(t)
+            else:
+                mod_groups.setdefault("Other mods", []).append(t)
 
     # Collect all unique categories across ALL pages (keep everything except versions)
     all_categories = set()
@@ -462,6 +519,7 @@ def prepare_report_data(
         "fetched_breakdown": fetched_breakdown,
         "all_categories": sorted(all_categories),
         "has_uncategorized": has_uncategorized,
+        "optional_pages": cfg.optional_pages,
     }
 
 
@@ -500,7 +558,8 @@ def generate_markdown_report(data: dict, output_path: Path) -> str:
     w("| Classification | Count |")
     w("|---------------|-------|")
     for key, label in [("game_content", "Game content"), ("dlc", "DLC"),
-                        ("patch", "Patch notes"), ("modding", "Modding"), ("mod", "Mods")]:
+                        ("patch", "Patch notes"), ("disambiguation", "Disambiguation"),
+                        ("modding", "Modding"), ("mod", "Mods")]:
         w(f"| {label} | {len(d['classified'][key])} |")
     w("")
 
@@ -548,6 +607,12 @@ def generate_markdown_report(data: dict, output_path: Path) -> str:
     if d["classified"]["patch"]:
         w(", ".join(sorted(d["classified"]["patch"])))
     w("")
+
+    # Disambiguation
+    if d["classified"]["disambiguation"]:
+        w(f"## Disambiguation Pages ({len(d['classified']['disambiguation'])})\n")
+        w(", ".join(sorted(d["classified"]["disambiguation"])))
+        w("")
 
     # Modding
     w(f"## Modding ({len(d['classified']['modding'])})\n")
@@ -723,6 +788,7 @@ tr:hover {{ background: rgba(59,130,246,.05); }}
 .tag:hover {{ background: var(--blue); color: white; }}
 .file-link {{ font-size: 0.85rem; margin-left: 0.3rem; text-decoration: none; opacity: 0.6; }}
 .file-link:hover {{ opacity: 1; text-decoration: none; }}
+.cat-checkbox {{ width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; accent-color: var(--green); margin: 0; }}
 .fetch-btn {{ width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--border);
               background: var(--card-bg); cursor: pointer; font-size: 1rem; line-height: 1;
               display: inline-flex; align-items: center; justify-content: center; padding: 0; }}
@@ -764,19 +830,23 @@ def _html_nav(data):
     gc = len(d["classified"]["game_content"])
     dlc = len(d["classified"]["dlc"])
     patch = len(d["classified"]["patch"])
+    disambig = len(d["classified"]["disambiguation"])
     modding = len(d["classified"]["modding"])
     mods = len(d["classified"]["mod"])
     redir = len(d["relevant_redirects"])
     fetched = len(d["fetched_pages_info"])
+    optional = len(d.get("optional_pages", []))
     return f'''
 <nav class="nav">
     <div class="nav-brand"><img src="data:image/x-icon;base64,{_STELLARIS_FAVICON_B64}" alt="Stellaris">Stellaris Wiki Analysis</div>
     <div class="nav-links">
         <a href="#dashboard">Dashboard</a>
         <a href="#fetched">Fetched ({fetched})</a>
+        {"" if not optional else f'<a href="#optional">Optional ({optional})</a>'}
         <a href="#game-content">Game Content ({gc})</a>
         <a href="#dlc">DLC ({dlc})</a>
         <a href="#patches">Patches ({patch})</a>
+        {"" if not disambig else f'<a href="#disambiguation">Disambig ({disambig})</a>'}
         <a href="#modding">Modding ({modding})</a>
         <a href="#mods">Mods ({mods})</a>
         <a href="#redirects">Redirects ({redir})</a>
@@ -853,6 +923,7 @@ def _html_dashboard(data):
         {"label": "Game Content", "value": len(cl["game_content"]), "color": "#3b82f6"},
         {"label": "DLC", "value": len(cl["dlc"]), "color": "#f97316"},
         {"label": "Patches", "value": len(cl["patch"]), "color": "#14b8a6"},
+        {"label": "Disambiguation", "value": len(cl["disambiguation"]), "color": "#eab308"},
         {"label": "Modding", "value": len(cl["modding"]), "color": "#a855f7"},
         {"label": "Total-conversion Mods", "value": len(cl["mod"]), "color": "#ef4444"},
     ])
@@ -1006,10 +1077,15 @@ def _html_game_content(data):
             )
         tbody = "\n".join(rows)
         parts.append(f'''
-        <div class="sub-section">
-            <div class="sub-header" onclick="toggleSection(this)">
-                <span class="chevron">&#9656;</span>
-                <h3>{_esc(cat_name)} <span class="count">({len(titles)})</span></h3>
+        <div class="sub-section" data-category="{_esc(cat_name)}">
+            <div class="sub-header">
+                <input type="checkbox" class="cat-checkbox"
+                       onclick="toggleCategory(this, event)"
+                       title="Select/deselect all pages in this category">
+                <span class="chevron" onclick="toggleSection(this.closest('.sub-header'))"
+                      style="cursor:pointer">&#9656;</span>
+                <h3 onclick="toggleSection(this.closest('.sub-header'))"
+                    style="cursor:pointer">{_esc(cat_name)} <span class="count">({len(titles)})</span></h3>
             </div>
             <div class="section-body open">
                 <table><thead><tr>
@@ -1031,10 +1107,15 @@ def _html_game_content(data):
             )
         tbody = "\n".join(rows)
         parts.append(f'''
-        <div class="sub-section">
-            <div class="sub-header" onclick="toggleSection(this)">
-                <span class="chevron">&#9656;</span>
-                <h3>No wiki categories <span class="count">({len(data["game_uncategorized"])})</span></h3>
+        <div class="sub-section" data-category="__none__">
+            <div class="sub-header">
+                <input type="checkbox" class="cat-checkbox"
+                       onclick="toggleCategory(this, event)"
+                       title="Select/deselect all pages in this category">
+                <span class="chevron" onclick="toggleSection(this.closest('.sub-header'))"
+                      style="cursor:pointer">&#9656;</span>
+                <h3 onclick="toggleSection(this.closest('.sub-header'))"
+                    style="cursor:pointer">No wiki categories <span class="count">({len(data["game_uncategorized"])})</span></h3>
             </div>
             <div class="section-body open">
                 <table><thead><tr><th style="width:2rem"></th><th>Page</th></tr></thead><tbody>{tbody}</tbody></table>
@@ -1094,6 +1175,55 @@ def _html_patches_section(data):
     </div>
     <div class="section-body">
         <p>{items}</p>
+    </div>
+</section>'''
+
+
+def _html_disambiguation_section(data):
+    """Generate disambiguation pages section (collapsed by default)."""
+    pages = data["classified"]["disambiguation"]
+    if not pages:
+        return ""
+    items = ", ".join(f'<a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a>'
+                      for t in sorted(pages))
+    return f'''
+<section id="disambiguation" class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <span class="chevron">&#9656;</span>
+        <h2>Disambiguation Pages <span class="count">({len(pages)})</span></h2>
+    </div>
+    <div class="section-body">
+        <p>{items}</p>
+    </div>
+</section>'''
+
+
+def _html_optional_section(data):
+    """Generate optional pages section (disabled-by-default modding reference pages)."""
+    pages = data.get("optional_pages", [])
+    if not pages:
+        return ""
+    rows = []
+    for t in pages:
+        add_btn = (
+            f'<button class="fetch-btn fetch-btn-add" data-page="{_esc(t)}" '
+            f'onclick="toggleFetchPage(this)" title="Add to config">+</button>'
+        )
+        rows.append(
+            f'<tr><td>{add_btn}</td>'
+            f'<td><a href="{_esc(page_url(t))}" target="_blank">{_esc(t)}</a></td>'
+            f'<td>Optional — not fetched by default</td></tr>'
+        )
+    tbody = "\n".join(rows)
+    return f'''
+<section id="optional" class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <span class="chevron">&#9656;</span>
+        <h2>Optional Pages <span class="count">({len(pages)})</span></h2>
+    </div>
+    <div class="section-body">
+        <p style="margin-bottom:0.75rem">Modding reference pages available in config but not fetched by default.</p>
+        <table><thead><tr><th style="width:2rem"></th><th>Page</th><th>Notes</th></tr></thead><tbody>{tbody}</tbody></table>
     </div>
 </section>'''
 
@@ -1227,6 +1357,7 @@ def _html_modals_and_config(data):
     if config_path.exists():
         config_yaml_escaped = _json.dumps(config_path.read_text(encoding="utf-8"))
     pages_json = _json.dumps(cfg.pages_to_fetch)
+    generated_at_json = _json.dumps(data["generated_at"])
     return f'''
 <div id="pending-bar" class="pending-bar">
     <span id="pending-info"></span>
@@ -1261,6 +1392,7 @@ python analyze_wiki_pages.py</pre>
 <script>
 const PAGES_TO_FETCH = {pages_json};
 const CONFIG_YAML = {config_yaml_escaped};
+const GENERATED_AT = {generated_at_json};
 </script>'''
 
 
@@ -1279,6 +1411,7 @@ function toggleSection(header) {
         body.classList.add('open');
         if (chevron) chevron.style.transform = 'rotate(90deg)';
     }
+    saveDashboardState();
 }
 
 function expandAllSections() {
@@ -1511,6 +1644,7 @@ function applyCategoryFilter() {
         const visible = sub.querySelectorAll('tbody tr:not([style*="display: none"]):not([data-cat-hidden="true"])');
         sub.style.display = visible.length > 0 ? '' : 'none';
     });
+    saveDashboardState();
 }
 
 /* --- Fetched Table Toggle Filter --- */
@@ -1556,7 +1690,42 @@ function toggleFetchPage(btn) {
             btn.classList.add('toggled');
         }
     }
+    updateCategoryCheckbox(btn);
     updatePendingBar();
+    saveDashboardState();
+}
+
+function toggleCategory(checkbox, event) {
+    event.stopPropagation();
+    const subSection = checkbox.closest('.sub-section');
+    if (!subSection) return;
+    const buttons = subSection.querySelectorAll('.fetch-btn-add');
+    const isChecked = checkbox.checked;
+    buttons.forEach(btn => {
+        const page = btn.dataset.page;
+        if (isChecked && !pagesToAdd.has(page)) {
+            pagesToAdd.add(page);
+            btn.classList.add('toggled');
+        } else if (!isChecked && pagesToAdd.has(page)) {
+            pagesToAdd.delete(page);
+            btn.classList.remove('toggled');
+        }
+    });
+    updatePendingBar();
+    saveDashboardState();
+}
+
+function updateCategoryCheckbox(btn) {
+    const subSection = btn.closest('.sub-section');
+    if (!subSection) return;
+    const checkbox = subSection.querySelector('.cat-checkbox');
+    if (!checkbox) return;
+    const buttons = subSection.querySelectorAll('.fetch-btn-add');
+    let total = 0, selected = 0;
+    buttons.forEach(b => { total++; if (pagesToAdd.has(b.dataset.page)) selected++; });
+    if (selected === 0) { checkbox.checked = false; checkbox.indeterminate = false; }
+    else if (selected === total) { checkbox.checked = true; checkbox.indeterminate = false; }
+    else { checkbox.checked = false; checkbox.indeterminate = true; }
 }
 
 function updatePendingBar() {
@@ -1578,7 +1747,9 @@ function discardPageChanges() {
     pagesToAdd.clear();
     pagesToRemove.clear();
     document.querySelectorAll('.fetch-btn.toggled').forEach(b => b.classList.remove('toggled'));
+    document.querySelectorAll('.cat-checkbox').forEach(cb => { cb.checked = false; cb.indeterminate = false; });
     updatePendingBar();
+    saveDashboardState();
 }
 
 function downloadUpdatedConfig() {
@@ -1640,6 +1811,88 @@ function hideModal(id) {
     document.getElementById(id).classList.remove('visible');
 }
 
+// --- localStorage persistence ---
+const _STORAGE_KEY = 'stellaris-wiki-dashboard';
+const _STORAGE_VER_KEY = 'stellaris-wiki-dashboard-ver';
+
+function saveDashboardState() {
+    try {
+        const state = {
+            pagesToAdd: Array.from(pagesToAdd),
+            pagesToRemove: Array.from(pagesToRemove),
+            disabledCats: Array.from(disabledCats),
+            expandedSections: [],
+        };
+        document.querySelectorAll('.section-body.open').forEach(body => {
+            const sec = body.closest('section') || body.closest('.sub-section');
+            const id = sec?.id || sec?.dataset?.category || '';
+            if (id) state.expandedSections.push(id);
+        });
+        localStorage.setItem(_STORAGE_KEY, JSON.stringify(state));
+        localStorage.setItem(_STORAGE_VER_KEY, GENERATED_AT);
+    } catch (e) { /* localStorage unavailable */ }
+}
+
+function restoreDashboardState() {
+    try {
+        if (localStorage.getItem(_STORAGE_VER_KEY) !== GENERATED_AT) {
+            localStorage.removeItem(_STORAGE_KEY);
+            return;
+        }
+        const raw = localStorage.getItem(_STORAGE_KEY);
+        if (!raw) return;
+        const state = JSON.parse(raw);
+
+        // Restore pagesToAdd
+        (state.pagesToAdd || []).forEach(page => {
+            const btn = document.querySelector('.fetch-btn-add[data-page="' + CSS.escape(page) + '"]');
+            if (btn) { pagesToAdd.add(page); btn.classList.add('toggled'); }
+        });
+        // Restore pagesToRemove
+        (state.pagesToRemove || []).forEach(page => {
+            const btn = document.querySelector('.fetch-btn-remove[data-page="' + CSS.escape(page) + '"]');
+            if (btn) { pagesToRemove.add(page); btn.classList.add('toggled'); }
+        });
+        updatePendingBar();
+
+        // Restore category checkboxes
+        document.querySelectorAll('.cat-checkbox').forEach(cb => {
+            const btn = cb.closest('.sub-section')?.querySelector('.fetch-btn-add');
+            if (btn) updateCategoryCheckbox(btn);
+        });
+
+        // Restore disabled category filters
+        if (state.disabledCats && state.disabledCats.length > 0) {
+            state.disabledCats.forEach(cat => {
+                disabledCats.add(cat);
+                const chip = document.querySelector('.cat-chip[data-cat="' + CSS.escape(cat) + '"]');
+                if (chip) chip.classList.remove('active');
+            });
+            applyCategoryFilter();
+        }
+
+        // Restore section expand/collapse
+        if (state.expandedSections) {
+            const expanded = new Set(state.expandedSections);
+            document.querySelectorAll('.section, .sub-section').forEach(sec => {
+                const id = sec.id || sec.dataset?.category || '';
+                if (!id) return;
+                const body = sec.querySelector(':scope > .section-body');
+                const header = sec.querySelector(':scope > .section-header, :scope > .sub-header');
+                if (!body || !header) return;
+                const chevron = header.querySelector('.chevron');
+                if (expanded.has(id)) {
+                    body.classList.add('open');
+                    if (chevron) chevron.style.transform = 'rotate(90deg)';
+                } else {
+                    body.classList.remove('open');
+                    if (chevron) chevron.style.transform = 'rotate(0deg)';
+                }
+            });
+        }
+    } catch (e) { /* ignore restore errors */ }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.section-body.open').forEach(body => {
         const chevron = body.previousElementSibling?.querySelector('.chevron');
@@ -1659,6 +1912,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target === overlay) overlay.classList.remove('visible');
         });
     });
+    // Restore saved state (overrides defaults)
+    restoreDashboardState();
 });
 </script>
 </div>
@@ -1674,9 +1929,11 @@ def generate_html_report(data: dict, output_path: Path) -> str:
         _html_dashboard(data),
         _html_category_filter(data),
         _html_fetched_table(data),
+        _html_optional_section(data),
         _html_game_content(data),
         _html_dlc_section(data),
         _html_patches_section(data),
+        _html_disambiguation_section(data),
         _html_modding_section(data),
         _html_mods_section(data),
         _html_redirects_section(data),

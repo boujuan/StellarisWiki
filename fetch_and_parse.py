@@ -282,22 +282,50 @@ def extract_astral_rift_subpage_links(html: str) -> list[tuple[str, list[str]]]:
     return []
 
 
+def extract_situation_subpage_links(html: str) -> list[tuple[str, list[str]]]:
+    """Extract situation sub-page links from the Situations page HTML.
+
+    Looks for internal links to pages ending with 'situations' (but not the
+    main Situations page itself).
+
+    Returns:
+        List of (category_name, [page_titles]) tuples
+    """
+    soup = BeautifulSoup(html, 'lxml')
+    subpages = []
+
+    for a in soup.find_all('a'):
+        href = a.get('href', '').lstrip('/')
+        if not href or href.startswith('http'):
+            continue
+        title = unquote(href.replace('_', ' '))
+        if (title.lower().endswith('situations')
+                and title.lower() != 'situations'
+                and title not in subpages):
+            subpages.append(title)
+
+    if subpages:
+        return [("Situation Details", subpages)]
+    return []
+
+
 # Map config function-name strings to actual callables
 _COMPOSITE_EXTRACTORS = {
     "extract_event_subpage_links": extract_event_subpage_links,
     "extract_astral_rift_subpage_links": extract_astral_rift_subpage_links,
+    "extract_situation_subpage_links": extract_situation_subpage_links,
 }
 
 # Pages that are index pages — their sub-page links are extracted from HTML
 # and each sub-page's content is appended to the parent page's markdown.
 COMPOSITE_PAGES = {}
-for _title, _func_name in cfg.composite_pages.items():
-    if _func_name not in _COMPOSITE_EXTRACTORS:
+for _title, _page_cfg in cfg.composite_pages.items():
+    if _page_cfg.extractor not in _COMPOSITE_EXTRACTORS:
         raise ValueError(
-            f"Unknown composite extractor '{_func_name}' for page '{_title}'. "
+            f"Unknown composite extractor '{_page_cfg.extractor}' for page '{_title}'. "
             f"Available: {list(_COMPOSITE_EXTRACTORS.keys())}"
         )
-    COMPOSITE_PAGES[_title] = _COMPOSITE_EXTRACTORS[_func_name]
+    COMPOSITE_PAGES[_title] = _COMPOSITE_EXTRACTORS[_page_cfg.extractor]
 
 
 def _fetch_and_convert_body(title: str) -> tuple[str, str, bool]:
@@ -343,6 +371,14 @@ def process_composite_page(title: str, pages_dir: Path,
     # Step 3: Extract sub-page links from the raw HTML
     extract_fn = COMPOSITE_PAGES[title]
     categories = extract_fn(data["html"])
+
+    # Merge extra_subpages from config (pages the extractor can't auto-discover)
+    page_config = cfg.composite_pages.get(title)
+    if page_config and page_config.extra_subpages:
+        existing = {p for _, pages in categories for p in pages}
+        extra = [p for p in page_config.extra_subpages if p not in existing]
+        if extra:
+            categories.append(("Additional Sub-pages", extra))
 
     # Collect all unique sub-page titles
     all_subpages = []

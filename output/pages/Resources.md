@@ -1,6 +1,6 @@
 ---
 title: "Resources"
-categories: ["Potentially_outdated", "4.1", "Economy", "Pages_with_math_errors", "Pages_with_math_render_errors"]
+categories: ["Potentially_outdated", "4.1", "Economy"]
 ---
 
 # Resources
@@ -135,7 +135,7 @@ Once 5 years have passed, the second random roll happens, determining the planet
 
 For example, a planet with a Strong nomination that produces 90 trade value, with another planet in the system that produces 10 trade value, would have a winning weight of (4 * 100) 1.5 = 8000. The other planet in the same system would have a winning weight of (4 * 100 / 10) 1.5 = 252.98. A planet in another system with 10 trade value, owned by the same empire, would have a winning weight of (4 * 10 / 10) 1.5 = 8.
 
-Winning weight is effectively the chance of each planet succeeding in the bid. Your chance of winning is calculated using Your Winning Weight over All Winning Weights
+Winning weight is effectively the chance of each planet succeeding in the bid. Your chance of winning is calculated using YourWinningWeight over AllWinningWeights
 
 The lottery weights are:
 

@@ -1,6 +1,6 @@
 ---
 title: "Situations"
-categories: ["Potentially_outdated", "3.14", "Articles_with_potentially_outdated_sections", "Game_concepts", "Exploration", "Pages_with_math_errors", "Pages_with_math_render_errors"]
+categories: ["Potentially_outdated", "3.14", "Articles_with_potentially_outdated_sections", "Game_concepts", "Exploration"]
 ---
 
 # Situations
@@ -939,3 +939,689 @@ Reaching a new stage results in an event with options to enhance the Class IV Be
 | 7 | Neural Boosters<br>action:<br>- Every friendly biological ship in the system gains +25% Fire rate and +10 Evasion chance for Time 1 month.<br>- 500 Exotic Gases cost.<br>- Time 6 months cooldown. | Spawn Fleet<br>action:<br>- Spawns a biological fleet of size 64 that does not take up naval capacity. This fleet is destroyed after six months.<br>- 30000 Food cost.<br>- Time 1 year cooldown. | Restorative Pheromones<br>action:<br>- Repairs Health 30% Hull and Armor Armor on every friendly biological ship in the system.<br>- 1000 Exotic Gases cost.<br>- Time 6 months cooldown. | |
 | 8 | The Class IV Behemoth gains<br>Behemoth Frenzy<br>for<br>Time<br>2 months whenever entering combat:<br>- +40% Fire rate and +20% Sublight speed<br>- Health −2% Daily hull regen and Armor −5 Daily armor regen | The Class IV Behemoth gains the following permanent modifiers:<br>- +10% Fire rate and +5% Sublight speed<br>- Health −0.4% Daily hull regen and Armor −1 Daily armor regen | Every friendly biological ship in the system gains<br>Behemoth Inspiration<br>for<br>Time<br>4 months whenever the Class IV Behemoth enters combat:<br>- +20% Fire rate and +10% Sublight speed | The first two options' hull regeneration penalties are percentages, but their armor regeneration penalties are flat numbers. |
 | Conclusion | Removes the<br>Indomitable Lord of Beasts<br>empire modifier that renders the Elder Voidspawn invulnerable.<br>Thermoclastic Roar action:<br>- Deals Devastating Damage to all fleets and colonies in the same system.<br>- 25000 Food cost.<br>- Time 5 years cooldown. | | | |
+
+
+---
+
+## Situation Details
+
+
+# Ascension situations
+
+These situations are triggered as part of an ascension path upon adopting the Cybernetics, Synthetics, or Psionics tradition tree, or the Synthetic Age or Biomorphosis ascension perks. The related ascension traditions require these situations to be completed before their potential is unlocked.
+
+## Biomorphosis
+
+This situation is triggered when empires adopt the Biomorphosis ascension perk. The situation starts at **0** progress and completes when it reaches **1800** . The base monthly progress is **+15** , with +1.25% for every 100 Genomic Researchers. There are three possible approaches with no effect on situation progress, but they do affect which events can occur and which modifiers and flexible traditions will be available to the empire:
+
+1. Purity
+2. Cloning
+3. Mutation
+
+There are three stages, with all of them firing an event when entered. These events are the only way to change the approach.
+
+| Stage | Progress | Event when entered | Requirement to continue |
+|---|---|---|---|
+| 1 | 0-600 | - Altering the Essence<br>- Unlocks the Genomic Research Facility building. | Build a Genomic Research Facility. |
+| 2 | 601-1200 | - The Tipping Point<br>- Grants +33% progress towards the Gene Tailoring technology. | Research the Gene Tailoring technology. |
+| 3 | 1201-1800 | - Evolutionary Crossroads<br>- No other effect. | |
+| End | 1800 | - The Path Taken<br>- Allows selecting the Purity, Cloning or Mutation tradition tree depending on earlier choices. | |
+
+Choosing an approach in each of these fixed events has four different effects. It determines which two random events will occur during that stage (one will match the current approach, with the other matching any approach taken so far), it determines a flexible tradition , it allows the empire to choose the corresponding tradition tree at the end of the situation, and it gives one of the permanent empire modifiers listed below. If an approach is taken multiple times, the second and third modifiers stack with the previous ones.
+
+For example, if the ascending empire chooses Purity twice and Cloning once, the empire gains +10% Pop growth speed per 100 Genomic researchers, −1 Leader maximum negative traits and +1 Organic pop assembly per 100 Genomic researchers. The order in which the approaches are selected has no effect on these modifiers, but it does matter for flexible traditions.
+
+| Times taken | Purity | Cloning | Mutation |
+|---|---|---|---|
+| 1 | +10% Pop growth speed per 100 Genomic researchers | +1 Organic pop assembly per 100 Genomic researchers | +10% Habitability per Genomic Research Facility |
+| 2 | −1 Leader maximum negative traits | +100 Amenities per 100 Genomic researchers | Unknown +100 Pops with auto-modding traits optimized per month per Genomic Research Facility |
+| 3 | Grants +50% progress towards the Gene Seed Purification technology. | Grants +50% progress towards the Gene Banks technology. | Grants +50% progress towards the Targeted Gene Expressions technology. |
+| If the technology is unavailable or already researched, grants 24x Unity output ( 350~1000000 ) instead. | | | |
+
+### Flexible traditions
+
+The following traditions are added to the tradition tree selected at the end of the situation. Which traditions are added depend on the event choices selected at each stage.
+
+| Stage Choice | I | II | III |
+|---|---|---|---|
+| Cloning | **Genomic Growth**<br>- +1 Monthly organic pop growth per 100 Genomic Researchers<br>- Upkeep −10% Pop upkeep<br>- −10% Pop amenities usage | **Artificial Population**<br>- +5% Organic pop job efficiency per medical building tier<br>- +15% Organic pop job efficiency per Genomic Research Facility<br>- −10 Crime per 100 Genomic Researchers<br>- +50% Governing ethics attraction | **Biochemical Composure / Regenerative Cloning**<br>- Organic leaders gain the Backup Clone trait<br>- New organic leaders may have the Backup Clone trait<br>- If a Cloning advanced authority is taken, effects upgraded to:<br>  - New organic leaders always have the Backup Clone trait<br>  - Leaders can periodically regain the Backup Clone trait<br>  - The backup clone trait provides additional effects |
+| Mutation | **Environmental Integration/Empowered Environmental Integration**<br>- Founder species gains the Mutagenic Habitability trait<br>- Divergence Directive agenda gives all organic species the Mutagenic Habitability trait<br>- Mutagenic Habitability trait can reach 175% habitability (250% if a Mutation advanced authority is taken) and give the following for every 1% above 100%:<br>  - +0.25% Job efficiency<br>  - −0.25% Pop housing usage<br>  - −0.25% Pop amenities usage | **Somatic Subversiveness**<br>- +5% Organic pop job efficiency per medical building tier<br>- +15% Organic pop job efficiency per Genomic Research Facility<br>- +10 years Leader lifespan<br>- +10% Leader experience gain | **Nucleotide Isolation**<br>- Feature Unlocks Nucleotide Isolation traits<br>- Feature Can unlock organic leviathan traits |
+| Purity | **Optimized Neurology**<br>- Unknown +1 Leader starting traits<br>- +1 Effective leader skill level<br>- −25% Leader starting age | **Heightened Attributes**<br>- +5% Organic pop job efficiency per medical building tier<br>- +15% Organic pop job efficiency per Genomic Research Facility<br>- −10% Empire size from pops | **Imperfection Remediation**<br>- No Xenophile:<br>  - Unknown +25 Sub-species pops integrated per month<br>  - +33% Pop purge speed<br>  - Purge policy can be set to Allowed<br>- Xenophile:<br>  - Unknown +50 Sub-species pops integrated per month if Xenophile |
+
+## The Conclave of Fusion
+
+| Progress modifiers | |
+|---|---|
+| Per Technophant | +2 |
+| Per Haruspex | +0.5 |
+| Extra Funds or People Powered approach | ×1.2 |
+| Augmentation Bazaars civic | ×1.1 |
+| Each Cybernetics tradition | ×1.05 |
+| Completed Cybernetics tree | ×1.25 |
+| Cyberization is ongoing | ×0.01 |
+
+This situation is triggered for empires with the Cybernetic Creed origin when they adopt the Cybernetics tradition tree. The situation starts at **0** progress and completes when it reaches **1000** . Base monthly progress is **+1** and is modified by the factors in the table on the right. It has three approaches which can be changed at any time after reaching stage II:
+
+1. Church Funded – −20% Research speed (engineering) and −20% unity
+2. Extra Funds – −20% Research speed (engineering) and −20% energy
+3. People Powered – −20% Research speed (engineering) and −10% resources from jobs
+
+There are six stages; each after the first fires an event when entered.
+
+| Stage | Progress | Event when entered |
+|---|---|---|
+| I | 0-100 | None |
+| II | 101-300 | The Fusion of Faith Allows changing approaches |
+| III | 301-500 | The Codex of Augmentation Promote one creed or a unified faith |
+| IV | 501-700 | The False Faiths Choose how to deal with other creeds |
+| V | 701-900 | The Tithe of Time Choose a tithe bonus |
+| VI | 901-1000 | Blood and Circuits Begins cyberization |
+
+Once stage VI has been reached, the situation pauses and the empire must build an Augmentation Center to continue the situation. Once an Augmentation Center has been constructed, a number of pops of the primary species (including sub-species) are cyberized each month (gain Cybernetic). Spiritualist pops gain the Augmentation of the creed that was chosen in stage III or Ritualistic Implants if the faith was unified; non-spiritualist pops have those traits removed. This process ends when no more non-cybernetic pops of the original species remain.
+
+When the situation completes, the event The Future of Flesh fires which grants a final permanent modifier based on which creed was chosen in stage III.
+
+## Cyberization
+
+| Progress modifiers | |
+|---|---|
+| Overdrive approach | +20% |
+| Cautious approach | −20% |
+| Augmentation Bazaars civic | +10% |
+| Each Cybernetics tradition | +5% |
+| Completed Cybernetics tree | +25% |
+| Cyberization is ongoing | ×0.01 |
+| Situation event choices | Varies |
+
+This situation is triggered for empires without the Cybernetic Creed origin or Driven Assimilator civic when they adopt the Cybernetics tradition tree. The situation starts at **0** progress and completes when it reaches **1000** . Base monthly progress is **+10** and is modified by the factors in the table on the right. It has three approaches which can be changed at any time:
+
+1. Cautious – −5% Research speed (engineering), multiplies weight of "opportunity" events by 5
+2. Streamlined – −10% Research speed (engineering)
+3. Overdrive – −15% Research speed (engineering), multiplies weight of "challenge" events by 5
+
+There are four stages; each fires an event when entered.
+
+| Stage | Progress | Event when entered | Event when entered |
+|---|---|---|---|
+| I | 0-250 | Controlling the Future Set situation as government or corporate controlled | Many bodies. One purpose. For a single field, gain 24x research output ( 500~1 000 000 of each) |
+| II | 251-500 | Augmentation Centers Allows building Augmentation Centers Centers are required to progress situation | One Goal: Augmentation Allows building Augmentation Centers Centers are required to progress situation |
+| III | 501-750 | Rollout Begins cyberization | Many Drones. One Plan. Begins cyberization; choose to prioritize cyberizing or unity |
+| IV | 751-1000 | Opposition event Opposition disrupts cyberization | Many Thoughts. One Brain. Prioritize indivuality or unity |
+
+The situation stops advancing after reaching stage II if the empire has no active Augmentation Centers. Once an Augmentation Center has been constructed and stage II has been reached, a number of pops of the primary species (including sub-species) are cyberized each month (gain Cybernetic). This process ends when no more non-cybernetic pops of the original species remain.
+
+While the situation is active, a number of random events can occur.
+
+## Psionic Ascension
+
+This situation is triggered when an empire adopts the Psionics tradition tree. It starts at **0** progress and completes when it reaches **1000** . The situation's base monthly progress is **+10** . There are three (four with Astral Planes) approaches which can be changed at any time and at no cost. Two of them are always available:
+
+1. Watch and Wait - −25% Monthly progress
+2. Organized Meditation - Increases the chance of beneficial events, −25% Monthly unity
+
+The third approach is Material Meditation if the ascending empire has not researched Zro Distillation, and Distribute Zro if it has.
+
+1. Material Meditation - +1% Monthly progress towards Zro Distillation, −50% Monthly unity
+2. Distribute Zro - +25% Monthly unity, increases the chance of chaotic events. 1 Zro upkeep.
+
+The fourth approach is Astral Meditation if the ascending empire has not researched Astral Harvesting, and Unravel Thread if it has.
+
+1. Astral Meditation - +1% Monthly progress towards Astral Harvesting, −50% Monthly unity
+2. Unravel Thread - +10% Monthly progress, +10% Monthly unity, increases the chance of chaotic events. 10 Astral Thread upkeep.
+
+There are three stages. Four random events will fire throughout the situation (two in the first stage, one in the second and one in the third) and are drawn from four pools: beneficial, balanced, chaotic and social events. Social events are narrative with small, temporary bonuses and maluses; whilst the beneficial, balanced, and chaotic events also alter your shroud attunement. The first event in the situation is always a social event, and the rest are beneficial, balanced, or chaotic.
+
+| Stage | Progress | Requirement to continue |
+|---|---|---|
+| I | 0-500 | none |
+| II | 500-750 | Building a Psi Corps building |
+| III | 750-1000 | Adopting the Great Awakening tradition |
+
+## Synthesization
+
+| Progress modifiers | |
+|---|---|
+| Overclocked approach | ×1.2 |
+| Error Correcting approach | ×0.8 |
+| Each Synthetics tradition | ×1.05 |
+| Completed Synthetics tree | ×1.25 |
+| Synthesization is ongoing | ×0.01 |
+| Situation event choices | Varies |
+
+This situation is triggered when an empire adopts the Synthetics tradition tree. Empires with the Synthetic Fertility origin have a modified version of this situation . The situation starts at **0** progress and completes when it reaches **1000** . Base monthly progress is **+10** and is modified by the factors in the table on the right. It has three approaches which can be changed at any time:
+
+1. Error Correcting – −5% Research speed (engineering), multiplies weight of "opportunity" events by 5
+2. Real Time – −10% Research speed (engineering)
+3. Overclocked – −15% Research speed (engineering), multiplies weight of "challenge" events by 5
+
+There are four stages; each fires an event when entered.
+
+| Stage | Progress | Event when entered |
+|---|---|---|
+| I | 0-250 | Booting Up Allows building an Identity Complex Identity Complex is required to progress situation |
+| II | 251-500 | Philosophy of Mind Deal with objections to synthesization |
+| III | 501-750 | Mass Identity Upload Begins synthesization |
+| IV | 751-1000 | A Perfect Copy Gain **Identity Copies** |
+
+The situation stops advancing after reaching stage III if the empire has no active Identity Complex. Once an Identity Complex has been constructed and stage III has been reached, a number of pops of the primary species (including sub-species) are synthesized each month (become Mechanical). This process ends when no more non-synthetic pops of the original species remain.
+
+While the situation is active, a number of random events can occur.
+
+Six months after completing the situation and finishing the Synthetics tradition tree, the Digital Refactoring event chain will start to determine advanced government authorities .
+
+## Transformation
+
+This situation is triggered when an empire takes the Synthetic Age ascension perk. The situation starts at **0** progress and completes when it reaches **1000** . Base monthly progress is **+10** and is modified by the factors in the table on the right. It has three approaches which can be changed at any time:
+
+1. Error Correcting – ×0.8 Monthly progress
+2. Real Time – −10% Unity
+3. Overclocked – −20% Unity, ×1.2 monthly progress
+
+There are four stages: the first three stages focus on studying each potential path, and the fourth stage determines which path is chosen.
+
+| Stage | Progress | Study focus | Resource type |
+|---|---|---|---|
+| I | 0-250 | Nanotech | Nanites |
+| II | 251-500 | Modularity | Living Metal |
+| III | 501-750 | Virtuality | Energy and Dark Matter |
+| IV | 751-1000 | Choose ascension path | |
+
+In each study stage, the opening event allows setting the focus to high, medium, or low priority at the cost of research speed, which then creates a medium, small, or tiny deposit related to that path on the capital. Once a path is selected, the related deposit has its output tripled. When the situation completes, the traditions of the chosen path are unlocked, if there are any free tradition tree slots available.
+
+
+# Origin situations
+
+The following situations only occur for empires with certain origins .
+
+## Embodied Identity
+
+This situation occurs for Hard Reset empires.
+
+## Quest for the Toxic God
+
+Empires with the Knights of the Toxic God origin start with the Quest for the Toxic God situation. It starts at **0** progress and completes at **1000** progress. There are eight stages, each taking **125** progress; when each stage after the first is reached, a narrative event chain occurs.
+
+There are three approaches for this situation, which each apply an empire-wide modifier. It is possible to change approaches at any time.
+
+1. Regular Funding – −10% alloys from jobs and −20% monthly energy
+2. Generous Funding – −15% alloys from jobs, −30% monthly energy, and +10% monthly unity
+3. Frugal Funding – −5% alloys from jobs and −10% monthly energy; it costs 100 influence to select this approach
+
+Base monthly progress is +0.4 , with the following modifiers:
+
+| Progress modifiers | Progress |
+|---|---|
+| Generous Funding approach | +0.2 |
+| Frugal Funding approach | −0.2 |
+| Knightly Duties policy set to Knight Commanders or Herald Knights | −0.2 |
+| Per employed Knight | +0.05 |
+| Per Order's Commandery holding | +0.05 |
+| Per Knightly Fair Grounds branch office building | +0.01 |
+| Motivated Knights empire modifier | +20% |
+| Demotivated Knights empire modifier | −20% |
+
+Each month, there is approximately 1% chance of triggering either the Quest Reward event or, if the current approach is Frugal Funding , the Request for Additional Funds event.
+
+1. The Quest Reward event can happen only once every 10 years and gives a random reward of either 100~1000 society, engineering, physics, or alloys; 1, 3 or 5 minor artifacts; or +2 Progress situation progress.
+2. The Request for Additional Funds event gives three options – choosing either of the first two options prevents the event from triggering again, while choosing the third prevents it from triggering again for four years:
+ 1. Switch the approach to Regular Funding
+ 2. Gain the Malcontent Knights empire modifier for 10 years ( −50% monthly unity, −15% happiness, and −50% Knight output)
+ 3. Spend 1000 energy and 500 alloys
+
+If 100 years pass before the situation has completed, the empire receives the event The Hundred Years Quest which has three options:
+
+1. Spend 5000 energy and 3000 consumer goods to gain the Motivated Knights empire modifier for five years ( +10% monthly unity, +10% happiness, and +20% Knight output)
+2. Gain the Demotivated Knights empire modifier for five years ( −20% Knight output)
+3. Abandon the quest and disband the order: gain 15000 energy and 8000 alloys; ends the situation and removes the Order's Keep building and all Order's Desmene districts from the Order's habitat.
+
+If the empire loses ownership of the Knights' Order headquarters habitat, the situation is locked and does not progress until the habitat is regained. If the habitat is destroyed by a World Cracker or shielded by a Global Pacifier, the situation ends.
+
+### Quest events
+
+Main article: Quest for the Toxic God events
+
+There are eight "quest" event chains; seven start when first reaching a new stage, and the eighth and final at the completion of the situation. Each event chain except the last has at least two choices for different permanent bonuses. Several quests give a choice to improve the homeworld by changing one of its special deposits or to increase either the unity or the research production of Knights and the Lord Commander. Changing the special deposits always add +2 Knight jobs and +4 Squire jobs.
+
+| Quest | Final event choices 0 |
+|---|---|
+| The first quest A banished knight discovers and returns the AI Sinople; Materialists can gain 6x physics output ( 100~1000 ). | 1. Increase unity production of Knights and the Lord Commander.<br>2. Increase research production of Knights and the Lord Commander. |
+| The second quest A knight searches for their partner who had departed years ago. | 1. Increase unity production of Knights and the Lord Commander.<br>2. Increase research production of Knights and the Lord Commander.<br>3. Change the homeworld deposit Pools Most Venomous from −1 max districts to:<br>  - +10% Ship weapons damage (empire-wide)<br>  - +1 Research per 100 Researchers<br>  - +200 Knights |
+| The third quest A visitor comes to the Order's headquarters and sends a knight into the Shroud. The knight is given an offer. | 1. Accepted the offer:<br>  1. Add +200 Knight jobs to Order's Keep<br>  2. Spend **1000** unity to change the homeworld deposit A Blight Upon the Land from −1 max districts to:<br>    - +10% Citizen pop happiness (empire-wide)<br>    - +1 Unity per 100 Administrators<br>    - +200 Knights<br>  3. Both of the above options give the Low Motivation modifier for 10 years:<br>    - −10% Citizen pop happiness<br>    - −10% Pop growth speed<br>    - −10% Resources from jobs<br>2. Refused the offer:<br>  - gives 18x society output ( 350~100 000 ) if the empire has researched **Psionic Theory** or has Mind over Matter<br>  - otherwise, adds **Psionic Theory** as a research option. |
+| The fourth quest A stranger defeats three knights in a tournament and yields to a fourth; the three knights seek to follow the stranger afterward and can be prevented or allowed. | 1. Prevented from following:<br>  - +5 amenities per 100 Knights and unlocks the Herald Knights option for the Knightly Duties policy<br>2. Allowed to follow:<br>  1. Change the homeworld deposit Pestilential Wasteland from −1 max districts to:<br>    - +1 Max districts<br>    - +15% Resources from jobs<br>    - +200 Knights<br>  2. Leave with no immediate effect |
+| The fifth quest A knight and their squire are sent to explore a distant system; they encounter a robot who asks a riddle, then kills the knight regardless of answer; asking what the question means gives 6x unity output ( 100~100 000 ). | 1. Increase unity production of Knights and the Lord Commander.<br>2. Increase research production of Knights and the Lord Commander.<br>3. Change the homeworld deposit Swarms of the Deity from −1 max districts to:<br>  - +25% Strike craft attack speed (empire-wide)<br>  - +2 food per 100 Squires<br>  - +200 Knights |
+| The sixth quest A knight is sent to explore coordinates and encounters a pilgrim who asks for their protection. | 1. Protecting the pilgrim changes the homeworld deposit Envenomed Seas from −1 max districts to:<br>  - +1 Max districts<br>  - +500 Gas Extractor jobs<br>2. Refusing to protect the pilgrim adds empire modifier giving commander leader capacity and starting level. |
+| The seventh quest A disfavored knight encounters a beautiful entity. | 1. Refusing the entity's seduction applies the following modifiers:<br>  - Syamelle's Curse empire modifier: −50% pop growth reduction<br>  - Lover's Pox planet modifier on Order's headquarters habitat:<br>    - −100% pop growth reduction<br>    - Squires gain +0.1 monthly organic pop assembly<br>  - Synthetic empires gain 18x unity output ( 250~1 000 000 ) instead.<br>2. Agreeing to the seduction gives a choice to steal a device or depart with a kiss:<br>  - Stealing the device increases the research production of Knights and the Lord Commander and unlocks a decision to add the Dimensional Manipulation Device feature to the headquarters habitat.<br>  - Departing with a kiss adds Syamelle's Blessing empire modifier: +15% pop growth speed, Synthetic empires gain +10% citizen pop happiness instead. |
+| The final quest A legendary knight from ages past suddenly reappears. Their return can be handled quietly or celebrated by spending 10000 energy to gain the empire modifier Living Legend for 8.3 years: +20% happiness and +20% monthly unity. | - If the player protected the pilgrim in the sixth quest, they gain 24x unity output ( 350~1 000 000 )<br>- If the player did not order the knights in the fourth quest to follow and then leave, the empire gains the Curse of the Trickster modifier for 2.5 years: −30% happiness and −20% research speed |
+
+After the final quest is completed, the location of the Toxic Entity guardian is revealed, and the situation ends.
+
+## The Last Gift
+
+This situation is triggered by surveying the Fevorian planet revealed by the mid-game resolution of the Fear of the Dark origin. It has three stages, from **0** to **25** , from **26** to **80** , and from **81** to **100** . If the situation reaches 100 progress, the empire's homeworld is destroyed and the pre-FTL partner planet becomes the new capital of the empire. The situation initially progresses at +2 per month. When first reaching the second stage, four special projects become available, each taking about a year to complete. For each completed project, the situation's monthly progress is reduced by −0.5 . Completing all four ends the situation and saves the empire's homeworld. The situation also ends if the empire does not own its homeworld.
+
+## Under One Rule situations
+
+See also: Under One Rule events
+
+There are a number of situations related to the Under One Rule origin. If the luminary no longer rules, these situations end with no effects.
+
+### The Unifying Promise
+
+| Reward source | Points |
+|---|---|
+| Owned planets | 5 |
+| Owned systems | 1 |
+| Defensive pacts | 1 |
+| Federation members | 1 |
+| Subjects | 1 |
+| Is federation leader | 10 |
+| Is in a federation | 4 |
+| Is a subject | ×0.5 |
+
+This situation starts between 6 and 18 months after game start. It has a single stage which takes 480 progress to complete, with a monthly progress of **+1** . When the situation completes, the total reward count is calculated and divided by 15. This result is added to the Luminary trait multiplier. If the final result is less than 1 , it increases the ruler's Paranoid Tyrant trait multiplier by 1 and adds the empire modifier Negative Media Coverage for 5 years; if the final result is 1 or more, it adds the empire modifier Positive Media Coverage for 5 years.
+
+There are four approaches for this situation, other than the first, they are locked behind completing the Unifying Promise agenda:
+
+1. Internal Affairs – +5 Stability and −0.25 influence
+2. New Resources – +20% Station output and −50% survey speed
+3. Construction Projects – +25% Planetary build speed, +35% shipyard build speed, and −15% Metallurgists alloys output
+4. New Technologies – Researchers +10% output and +35% upkeep
+
+After completing any of the ethic agendas except for Egalitarian, there is an approximately ~0.02% chance of triggering one of the following events each month while the situation is active. Each event can only be triggered once.
+
+- Communications Down
+- Worker Strike
+- Military Dissidents
+- Rampant Nepotism
+- Pirates Found
+
+### Dissidence on the Rise
+
+This situation starts between 5 and 15 years after the Imperial Proclamation event. It has four stages which each take 45 progress to complete, with a monthly progress of **+1** . Entering each stage after the first triggers an event , with the option to reduce the Luminary trait multiplier by 1 or spend a large amount of unity or energy.
+
+There are three approaches for this situation:
+
+1. Use Propaganda – −10% Resources from jobs
+2. Seek Compromise – −5% Resources from jobs and −5 Stability
+3. Crack Down – −10 Stability
+
+When the situation completes, it triggers the event Enough is Enough with options to imprison, negotiate with, or eliminate the dissidents. Eliminating them increases the ruler's Paranoid Tyrant trait multiplier by 1.
+
+### Reformists Demands
+
+| Stage | Modifier |
+|---|---|
+| I | −2.5 Stability +10% Egalitarian ethic attraction |
+| II | −5 Stability +20% Egalitarian ethic attraction |
+| III | −10 Stability +40% Egalitarian ethic attraction |
+
+This situation starts 5 to 10 years after the Order Restored event from the Dissidence on the Rise situation. It has three stages which each take 60 progress to complete. Each stage has an increasing stability penalty and pop attraction to Egalitarian. There are two approaches for this situation:
+
+1. Maintain Control – Monthly progress **+1** ; switching to this approach removes all progress gained from Call for Negotiations . This approach unlocks the Total Crackdown agenda, which ends the situation.
+2. Call for Negotiations – Monthly progress **+15** ; only available if the ruler's Paranoid Tyrant trait modifier is below 6.
+
+In addition to the approach progress, if the negotiation option was chosen in Dissidence on the Rise situation conclusion, the sitatuion gains **+0.1** progress monthly; if the elimination option was chosen it gains **-0.1** monthly instead.
+
+Each month there is a chance of the following events being triggered, while the Maintain Control approach is currently active. No more than one event can be triggered for each year.
+
+- A Whiff of Treason (~18%)
+- Terrorist Nests (~18%)
+- Pirates Spotted (~6%)
+- Foreign Aid (~6%)
+- Cell Captured (~12%)
+- Cover Blown (~12%)
+- Firefight (~12%)
+- Loyalists Rally (~6%)
+- Reformists Rally (~12%)
+
+When the situation completes, or if the Total Crackdown agenda is completed, the event Crossroads is triggered, potentially starting a civil war.
+
+## The Conclave of Fusion
+
+| Progress modifiers | |
+|---|---|
+| Per Technophant | +2 |
+| Per Haruspex | +0.5 |
+| Extra Funds or People Powered approach | ×1.2 |
+| Augmentation Bazaars civic | ×1.1 |
+| Each Cybernetics tradition | ×1.05 |
+| Completed Cybernetics tree | ×1.25 |
+| Cyberization is ongoing | ×0.01 |
+
+This situation is triggered for empires with the Cybernetic Creed origin when they adopt the Cybernetics tradition tree. The situation starts at **0** progress and completes when it reaches **1000** . Base monthly progress is **+1** and is modified by the factors in the table on the right. It has three approaches which can be changed at any time after reaching stage II:
+
+1. Church Funded – −20% Research speed (engineering) and −20% unity
+2. Extra Funds – −20% Research speed (engineering) and −20% energy
+3. People Powered – −20% Research speed (engineering) and −10% resources from jobs
+
+There are six stages; each after the first fires an event when entered.
+
+| Stage | Progress | Event when entered |
+|---|---|---|
+| I | 0-100 | None |
+| II | 101-300 | The Fusion of Faith Allows changing approaches |
+| III | 301-500 | The Codex of Augmentation Promote one creed or a unified faith |
+| IV | 501-700 | The False Faiths Choose how to deal with other creeds |
+| V | 701-900 | The Tithe of Time Choose a tithe bonus |
+| VI | 901-1000 | Blood and Circuits Begins cyberization |
+
+Once stage VI has been reached, the situation pauses and the empire must build an Augmentation Center to continue the situation. Once an Augmentation Center has been constructed, a number of pops of the primary species (including sub-species) are cyberized each month (gain Cybernetic). Spiritualist pops gain the Augmentation of the creed that was chosen in stage III or Ritualistic Implants if the faith was unified; non-spiritualist pops have those traits removed. This process ends when no more non-cybernetic pops of the original species remain.
+
+When the situation completes, the event The Future of Flesh fires which grants a final permanent modifier based on which creed was chosen in stage III.
+
+## Rapid Identity Preservation
+
+Empires with the Synthetic Fertility origin start with the Rapid Identity Preservation situation. The situation tracks how much of the primary species population is still alive and is removed when progress reaches **0** or the empire adopts the Synthetics tradition tree.
+
+The situation starts at **0** progress and gains +30 progress each month, completing when it reaches **6000** progress. Each point of monthly progress kills a pop, digitizing their identity and housing it in the Identity Repository (each pop counts as 1 identity).
+
+There are three approaches for this situation, which each apply an empire-wide modifier. It is possible to change approaches at any time.
+
+1. Economy First – +5% Unity from jobs, +5% research speed (engineering), and −10% monthly energy
+2. Extra Funding – +10% Research speed (engineering) and −20% monthly energy
+3. Research Focus – +20% Research speed (engineering) and −40% monthly energy
+
+After researching **Artificial Administration** , the second and third approaches are replaced by the following:
+
+1. Virtual Designing – +10% Unity and −20% monthly energy
+2. Emergency Measures – +20% Unity and −40% monthly energy
+
+**Synthesization**
+
+This version of the Synthesization situation has two stages. During the first stage, all primary species pops are synthesized, at a rate determined by the situation's approaches, which can be changed at any time.
+
+1. Careful Approach – −50% Research speed (engineering) and −50% monthly alloys; synthesizes one pop monthly
+2. Full Speed – −100% Research speed (engineering) and −100% monthly alloys; synthesizes two pops monthly
+
+Once all primary species pops are synthesized, the second stage starts the following month. This triggers the event Virtual Salvation which gives the choice of maintaining digital identities in Identity Repositories or creating synthetic bodies for the remaining digital identities and demolishing all Identity Repositories, which prevents building any more.
+
+The situation completes after the next month which allows constructing an Identity Complex and triggers two events:
+
+1. Synthetic Rebirth which grants **Identity Copies** as well as the choice of either Identity Fusion or Identity Initialization as permanent research options
+2. Synthetic Dawning which gives the Synthetic Dawn empire modifier ( +2 robotic trait points and +1 robotic trait pick) and adds the Synthetic Salvation trait to the primary species
+
+Six months after both completing the situation and finishing the Synthetics tradition tree, the Digital Refactoring event chain will start to determine advanced government authorities . The choice made during Virtual Salvation also applies to this event, giving +1 Virtual weight if Identity Repositories are kept, and +1 Physical if they were not.
+
+## Stormfall
+
+| Progress modifiers | Progress |
+|---|---|
+| Leader storm boosting | +100% |
+| Capital has any storm attraction building | +10% |
+| Capital system starbase has Storm Attraction Array | +10% |
+
+Empires with the Storm Chasers origin start with the Stormfall situation. It starts at **0** progress and completes at **750** progress. There are three stages, each taking **250** progress, with a base monthly progress of +10 , modified according to approach and the factors in the table on the right.
+
+This situation has three approaches, these can be changed at any time after the Tempest Brewing special project has been completed.
+
+1. Chill – Progress −20% Monthly progress
+2. Balanced – −10% Research speed
+3. Shredding – Progress +20% Monthly progress and −20% research speed
+
+There are a number of narrative events chains associated with this situation; most occur upon reaching certain progress thresholds.
+
+**Situation events**
+
+| Event | Trigger | Effect |
+|---|---|---|
+| Stormfall | Start of situation | Activates Tempest Brewing special project (costs 1000 physics to complete); pauses situation progress until the project is complete |
+| Tempest Brewing | Completing the special project | Grants Storm Manipulation technology; unpauses situation progress |
+| The Advent | **100** or more progress | Choose to seed a planetary storm type: electric, magnetic, or gravity |
+| Get Out There | **200** or more progress | Initiates the planetary storm; while the storm is ongoing: +20% happiness, +5% monthly unity |
+| Good Vibrations | **250** progress | Initiates a cosmic storm in the capital system; adds a situation modifier for two years:<br>- If the storm is same type as the planetary storm, +5% monthly unity, otherwise<br>  - For an electric storm, +20% unity and −50% energy monthly<br>  - For a magnetic storm, +20% unity and −50% minerals monthly<br>  - For a gravity storm, +20% unity and −25% alloys monthly |
+| After the Storm | **450** or more progress | Ends the planetary storm and adds a planetary deposit (Buzzing Plains, Geothermal Vents, or Rich Mountain) |
+| Cosmic Shapes | **500** progress | If a valid scientist or commander is available, can choose to send the leader into exile to boost progress, with a 90% chance of success and 10% of killing the leader |
+| The First of Many | Situation completion | The cosmic storm becomes a full storm; gain<br>18x<br>unity output (<br>250~1 000 000<br>) if waited,<br>24x<br>unity output (<br>350~1 000 000<br>) if leader succeeded, or<br>48x<br>unity output (<br>700~2 000 000<br>) if leader died<br>- Gain Storm Fruition empire modifier for 10 years: +10% happiness and +25% governing ethics attraction; +5 stability and −10% amenities usage |
+
+After completing the situation and the mid-game year is reached, the empire begins the Storm Frenzy event chain.
+
+## Black Needle Saboteurs
+
+This situation occurs for Treasure Hunters empires after activating the Voidworm infested gateway and rejecting the deal with the captain of the Black Needle pirates. It starts at **25** progress and has two stages, from **0** to **100** and **101** to **150** . The situation ends by reaching **0** or **150** progress or by defeating the main Black Needle fleet.
+
+While the situation is active, it reduces the following by −25% :
+
+- Resources from jobs
+- Resources from starbases
+- Resources from orbital stations
+- Pop growth speed
+- Pop assembly speed
+- Happiness
+
+Additionally, every 4 to 7 months, a large pirate fleet has a 25% chance of spawning in a random owned system. Destroying one of these fleets blocks further spawns for 10 years.
+
+There are three approaches, which can be changed at any time:
+
+1. Do nothing – −0.5 Monthly progress
+2. Purge Saboteurs – +4 Monthly progress; −25% monthly energy, unity, and happiness
+3. Mitigate Damages – +2 Monthly progress; −10% monthly minerals, alloys, and engineering
+
+When the second stage is first reached, it triggers an event with three options:
+
+1. Execute the traitors – Kill a random leader and one pop on each planet, and gain +20 progress, and −5 stability for one year
+2. Re-educate the traitors – Random leader gains two levels of negative traits, gain +10 progress, and −10 amenities, Upkeep +100% pop upkeep, and −5% unity from jobs for one year
+3. Expose the traitors' identities – Random leader dies or gains one level of negative traits, and gain −10 crime and +5% unity from jobs permanently; not available for gestalt consciousness
+
+All options also give 6x unity output ( 100~100 000 ).
+
+When the situation ends, one of three modifiers is applied to the empire depending on the ending:
+
+- Reached **0** progress – Collapsed Infrastructure ( −10% all monthly resources and stability) for 10 years
+- Reached **150** progress – Resilient Infrastructure ( +5% resources from jobs and stability) permanently
+- Defeated Black Needle fleet – Pirates Supreme ( +5% fire rate and +50% damage to pirates) permanently
+
+## Frenzied Voidworms
+
+This situation occurs for Primal Calling empires after the mid-game year once they have encountered every type of space fauna. It starts at **0** progress and completes at **300** with a single stage with a base monthly progress of **+1** . When the situation starts, it spawns a special Voidworm system connected to the empire's home system, or the capital system if the home system is not owned. The home or capital system is used as a target for several situation effects. The voidworms have a hostility and strength value that is tracked, and the hostility value determines the outcome of the situation when it reaches **300** progress. The situation can also end if the voidworm system is cleared of voidworms.
+
+There are four approaches which can be changed at any time:
+
+1. Do nothing – Adds +3 hostility monthly
+2. Hide our Presence – Adds −1000% Shipyard, starbase module, starbase building, and defense platform building speed to the system starbase and −1000% building and army build speed and −30% resources from jobs to all planets in the system.
+3. Stir the nests – Costs 100 energy monthly, and adds +30% society output and +6 hostility monthly
+4. Feed the nests – Costs 100 minerals monthly, and adds −1 hostility monthly; not available to genocidal empires
+
+Each approach except Do Nothing adds **+3** monthly progress. Each approach except Hide our Presence removes the modifiers added by that approach.
+
+While the situation is active, if voidworm hostility is 60 or more for 12 months, it spawns a fleet of voidworms which attack the home or capital system.
+
+If the situation completes while the voidworm hostility is −60 or less, the voidworms are pacified and all voidworms in the special system become controlled by the empire with −50% naval capacity usage. The empire also gains the Mutated Voidworm Nest relic and 48x unity output ( 700~2 000 000 ).
+
+Clearing the system of voidworms grants the Mutated Voidworm Nest relic and 24x unity output ( 350~1 000 000 ); if another empire clears the system, it gains just the relic. Either case ends the situation with no further effects.
+
+If the situation completes while the voidworm hostility is above −60 , the voidworms attack the home or capital system. If hostility is above 60 , they become enraged and gain +30% damage, fire rate, hull, and Armor armor. If the voidworms bombard the home or capital planet to 100% devastation, the planet is destroyed and becomes a shattered world. Clearing the voidworm system after enraging the voidworms adds +10% space fauna ship damage to the Mutated Voidworm Nest relic's passive effect.
+
+## Adaptive Evolution
+
+This is a repeating situation for empires with the Evolutionary Predators origin. It starts at **0** progress and completes at **1000** with a single stage. The situation repeats with an additional **1000** progress required to complete it each time. Monthly progress is increased with Planetary Biology (colonies), Species Diversity, and more.
+
+There are three approaches which can be changed at any time:
+
+1. Consume – Increases Situation Progress from Livestock and Purged Pops by **+50%** . Can only be selected by Authoritarian, Xenophobe, or Gestalt empires.
+2. Incorporate – Increases Situation Progress from Planet Colonies by **+50%** .
+3. Synthesize – Increases Situation Progress from alien Species that are slaves or better, Leaders, and Subjects by **+50%** .
+
+There is no base monthly progress for the situation, monthly progress is provided by the following modifiers:
+
+| Progress modifiers | Progress |
+|---|---|
+| Per Genetic Soup planet modifier | +10 |
+| Per Fresh Biosphere planet modifier | +10 |
+| Per Exhausted Biosphere planet modifier | +1 |
+| Per unique non-founder organic species in empire | +5 |
+| Per non-founder organic species leader on council | +5 |
+| Per non-founder organic species subject with the DNA Tithe agreement term | +3 |
+| Per commercial pact non-founder organic species if corporate empire | +10 |
+| Per 100 Livestock pops | +0.2 |
+| Per 100 organic pops being purged | +1 |
+| If the empire has the Environmental Integration tradition | +25% |
+| Divergence Directive agenda launch effect | +10% |
+| If Gestalt with mutation Authority, per Livestock pops and organic pops being purged | +100% |
+| If Democratic with mutation Authority, per unique non-founder species in empire | +100% |
+| If corporate with mutation Authority, per commercial pact | +100% |
+
+In addition, numerous events have additional options for Evolutionary Predators that can add progress and new DNA types to the situation.
+
+When the situation finishes, 5 options are presented (6 if the Unnatural Selection Tradition has been unlocked), including Embrace the chaos - let our instincts guide us! (giving a random trait), and We are complex enough. , which rewards 48x society output ( 1000~1 000 000 ) instead. Options will only appear if at least one of the possible traits are not part of the main species. Traits are added regardless of conflicts. A species class is added to the situation whenever it contributes to one of the above monthly progress modifiers, and can also be added by anomaly and event choices. In addition, the species class of the founder species is always present.
+
+| Option | Additional Requirements | Possible Traits |
+|---|---|---|
+| Our species needs to grow faster! | | - Rapid Breeders<br>- Incubators<br>- Existential Iteroparity<br>- If Unnatural Selection:<br>  - Polymelic<br>  - Fertile |
+| Can we be made more productive? | | - Natural Physicists<br>- Natural Sociologists<br>- Natural Engineers<br>- Traditional<br>- Strong<br>- Agrarian<br>- Ingenious<br>- Industrious<br>- Intelligent<br>- Thrifty<br>- Charismatic<br>- Very Strong<br>- If Unnatural Selection:<br>  - Natural Machinist<br>  - Robust<br>  - Erudite |
+| Our leaders need every advantage. | | - Talented<br>- Quick Learners<br>- Enduring<br>- Venerable<br>- If Unnatural Selection:<br>  - Robust<br>  - Erudite |
+| We need to adapt to shifting climates. | | - Adaptive<br>- Extremely Adaptive<br>- If Unnatural Selection:<br>  - Voidling<br>  - Robust |
+| Reduce the upkeep required to sustain our people. | | - If Individualist:<br>  - Conservationist<br>- If Unnatural Selection:<br>  - Voidling |
+| Humanoid traits could enhance our versatility. | Has consumed Humanoid genes | - Genetic Memory<br>- If Individualist:<br>  - Familial |
+| Mammalian DNA holds more secrets. | Has consumed Mammalian genes | - Seasonal Dormancy<br>- Genetic Memory<br>- If Individualist:<br>  - Familial |
+| Reptilians are quite unique. | Has consumed Reptilian genes | - Camouflage<br>- Egg Laying<br>- Seasonal Dormancy<br>- Chromalogs |
+| Avians could grant us unmatched agility. | Has consumed Avian genes | - Flight<br>- Egg Laying<br>- Spatial Mastery<br>- If Individualist:<br>  - Familial |
+| Arthropoids are delightfully crunchy. | Has consumed Arthropod genes | - Flight<br>- Camouflage<br>- Chromalogs<br>- Spatial Mastery |
+| Even a molluscoid can teach us something. | Has consumed Molluscoid genes | - Spare Organs<br>- Shelled |
+| Fungoids spread rapidly - we could too. | Has consumed Fungoid genes | - Bloomed<br>- Phototrophic<br>- Radiotrophic<br>- Budding<br>- Invasive Species |
+| The energy efficiency of the plantoids could be useful. | Has consumed Plantoid genes | - Bloomed<br>- Phototrophic<br>- Radiotrophic<br>- Budding<br>- Invasive Species |
+| Difficult to consume, lithoid DNA offers delicious possibilities. | Has consumed Lithoid genes | - Scintillating Skin<br>- Gaseous Byproducts<br>- Volatile Excretions<br>- Radiotrophic<br>- Crystallization |
+| Necrotic flesh is still flesh. | Has consumed Necroid genes | - Acidic Vascularity<br>- Spare Organs<br>- Shelled<br>- Genetic Memory |
+| Aquatic adaptations offer survival strategies beyond the sea. | Has consumed Aquatic genes | - Camouflage<br>- Egg Laying<br>- Chromalogs |
+| The Toxoids are sour . | Has consumed Toxoid genes | - Acidic Vascularity<br>- Spare Organs |
+| What within the Psionic genome fuels such cognitive prowess? | Has consumed Psionic genes | - Cranial Hypertrophy<br>- Cranial Megatrophy<br>- Uncanny Intuition |
+| The Thermophiles burn , but now we can handle it. | Has consumed Infernal genes | - Unbreakable Resolve<br>- Crucible Community<br>- Pyroclastic Channeling<br>- Shell Slag |
+| Stabilizing Plasmic DNA would be an impressive feat. | Used Plasmic Core | Plasmic |
+| What can the Titans of the galaxy teach us? | - Has the Nucleotide Isolation tradition<br>- Harvested (but didn't mutate) DNA of a Guardian | - Picked randomly among harvested, unused Guardians:<br>  - Drake-Scaled<br>  - Polymelic<br>  - Voidling |
+| Embrace the chaos - let our instincts guide us! | | - Any above-mentioned non-phenotype trait, plus:<br>  - Communal<br>  - Nomadic<br>  - Resilient<br>  - Docile<br>  - Vocational Genomics<br>  - If Unnatural Selection:<br>    - Delicious<br>    - Felsic |
+| Let mutation unlock abilities beyond our natural limitations! | Has the Unnatural Selection tradition | Any above-mentioned phenotype trait |
+
+## Forged by the Shroud
+
+| Stage | | **Drone conversion** | **Other effects** |
+|---|---|---|---|
+| Oppressed | −20% | None | +10 Stability |
+| Controlled | −10% | Minimal | +5 Stability |
+| Balanced | — | Medium | — |
+| Unrestricted | +5% | None | - +0.5 Consumer Goods upkeep for Shroud-Forged pops<br>- +15% Deviancy |
+| Liberated | +10% | High | - +0.5 Consumer Goods upkeep for Shroud-Forged pops<br>- +30% Deviancy Can no longer select Observe |
+
+Empires with the Shroud-Forged origin start with the Forged by the Shroud situation. It starts at **1500** progress and has two outcomes, one at **0** and one at **3000** progress. There are five stages with **600** progress each.
+
+This situation has three approaches, which can be changed at the cost of 100 Unity and with a cooldown of Time 6 months.
+
+1. Suppress - −5 monthly progress, −15% Deviancy, −10% Monthly unity. 3 Zro upkeep.
+2. Observe - **−50%** monthly progress.
+3. Support - +5 monthly progress, +15% Deviancy, +10% Monthly unity. 3 Zro upkeep.
+
+Aside from the approach, there are several factors that affect the situation's monthly progress:
+
+- **+0.4** per 100 Shroud-Forged pops.
+- **−0.15** per 100 Machine pops.
+- **+1** per colony with the Shroud-Touched Region planetary feature.
+- **−1** per colony without the Shroud-Touched Region planetary feature.
+- **+1** per active Shroud Observation Tower building, increased to **+2** and **+3** if the building is upgraded.
+
+The amount of progress from pops is multiplied by a factor ranging from **0.8** to **1.2** , depending on the stage. The progress from Shroud-Forged pops is increased during the stages that oppress them, while the negative progress from Machine pops grows during the stages that do not oppress the Shroud-Forged.
+
+When a stage is entered for the first time, an event occurs in the form of a transmission from the Animator of Clay. Random events can occur throughout the situation as well.
+
+- Oppressed: Narrative only.
+- Controlled: Option between **−1** or + **1** monthly progress for 5 years. The option for positive progress also converts a number of Machine pops into Shroud-Forged pops.
+- Unrestricted: Option to gain **+1** monthly progress for 5 years, and convert a number of Machine pops into Shroud-Forged pops.
+- Liberated: Narrative only.
+
+Reaching **0** progress converts all Shroud-Forged pops into Machine pops, and unlocks a special project that costs 2000 Engineering research. It also blocks the Psionics tradition tree and the Pierce the Shroud decision. Finishing the special project permanently grants +10% Complex Drone output. A follow-up event adds the Materiality Engine technology as a permanent research option and allows adopting the Galactic Nemesis ascension perk, even if the empire does not have three other ascension perks yet.
+
+Reaching **3600** progress unlocks assembling Shroud-Forged pops, the Shroud-Bonded edict and a special project that costs 2000 Society research. It also unlocks the Psionics tradition tree and grants 50% progress towards the Psionic Theory technology. However, this outcome blocks the Galactic Nemesis ascension perk. Finishing the special project permanently grants −15% Deviancy and +10% Observator Drone output. A follow-up event starts the The Zroni Legacy event chain.
+
+
+# Paragon situations
+
+There are a number of situations related to Skrand Sharpbeak , a legendary paragon. These situations generally have approximately a 10% chance of starting while a country has hired Skrand Sharpbeak each 10 to 25 years since recruiting him. Most multistage situations trigger an event on entering each stage after the first; most of these events are narrative only. These situations end if Skrand is no longer hired by the country with them.
+
+## Feather Rot
+
+These are two paired situations, Illness Progression and Cure Progression that are started together.
+
+### Illness Progression
+
+This situation has three approaches:
+
+1. Intensive Care – Costs 30 food, 60 energy, and 20 society research monthly, reduces monthly progress by −2
+2. Standard Care – Costs 10 food and 20 energy monthly, reduces monthly progress by −1.5
+3. Minimal Care – Costs 2 food and 4 energy monthly
+
+Base progress is +3 monthly; monthly progress is reduced by the approaches above as well as another by −0.5 with each of the technology Vitality Boosters and the ascension perk Engineered Evolution.
+
+There are four stages which each take 25 progress to complete. Upon entering each stage after the first, an event is triggered:
+
+- Stage II – Sickness Spreads : narrative only
+- Stage III – New Symptoms : Skrand loses the Warlike II, Hostility II trait
+- Stage IV – Worsening State : Skrand loses the Resilient II trait
+
+If the situation reaches 100 progress, Skrand dies – ending both situations.
+
+### Cure Progression
+
+This situation has three approaches:
+
+1. Extensive Research – −30% Society research output, increases monthly progress by +1.2
+2. Standard Research – −10% Society research output, increases monthly progress by +0.6
+3. Minimal Research – −3% Society research output
+
+Base progress is +1 monthly; monthly progress is increased by the approaches above as well as another by +0.4 with the ascension perk Engineered Evolution. There is only a single stage which takes 100 progress to complete. If completed, both situations end with no further effects.
+
+## Command Integration
+
+This situation can be started as part of the Command Issue event chain. It has three stages which each take 33 progress to complete. Completing the situation adds the permanent empire modifier Integrated Command which improves Strike Craft with Speed +10% speed, +5% damage, and +5% fire rate. There are two approaches for this situation:
+
+1. Balanced Funding – +25% Leader experience gain, and −25% ship speed, evasion, fire rate, Tracking tracking, and accuracy; adds +0.8 progress monthly
+2. Minimal Funding – +5% Leader experience gain, and −10% ship speed, evasion, fire rate, Tracking tracking, and accuracy; adds +0.2 progress monthly
+
+## The Talon
+
+There are three situations related to Skrand's ship, the Last Talon .
+
+### Study The Talon
+
+This situation acts as a gateway for the other two situations related to the First Talon. It has a single stage which takes 100 progress to complete. Completing the situation adds the permanent empire modifier Hull Hardening which adds +5% ship hull. There are two approaches for this situation:
+
+1. Balanced Funding – −25% Engineering research output and −25% shipyard build speed; adds +0.8 progress monthly
+2. Minimal Funding – −10% Engineering research output and −10% shipyard build speed; adds +0.2 progress monthly
+
+The situation ends with no effect if the Last Talon no longer exists.
+
+### Upgrade The Talon
+
+This situation can start after completing Study The Talon . It has three stages which each take 33 progress to complete; when first entering the third stage, progress is reduced −5 . Completing the situation adds the permanent empire modifier Armor Layering which adds +5% ship armor; the First Talon also gains the permanent modifier Talon Upgrades which adds +5000 hull, Armor +5000 armor, and Shield +2000 shield. There are two approaches for this situation:
+
+1. Balanced Funding – −40% Engineering research output and 10 alloys monthly; adds +0.8 progress monthly
+2. Minimal Funding – −20% Engineering research output and 10 alloys monthly; adds +0.2 progress monthly
+
+The situation ends with no effect if the original Last Talon no longer exists.
+
+### Rebuild The Talon
+
+This situation has an 80% chance to start any time the Last Talon is destroyed; the player can also choose to scrap the Talon for 20000 alloys instead. It has a single stage which takes 360 progress to complete. Completing the situation rebuilds the Last Talon. There are two approaches for this situation:
+
+1. Balanced Funding – −5% Engineering research output, −5% shipyard build speed and 65 alloys monthly; adds +1 progress monthly
+2. No Funding – 2 Alloys monthly
+
+## Study The Crisis
+
+This situation can start while one of the endgame crises is ongoing. It has three stages which each take 33 progress to complete. Completing the situation adds the permanent empire modifier Skrand Crisis Insight which adds +20% damage against all endgame crises, the Gray Tempest, and Become the Crisis empires. There are three approaches for this situation:
+
+1. Generous Funding – −40% Researchers output and −20% energy output, increases monthly progress by +1.4
+2. Standard Funding – −20% Researchers output and −10% energy output, increases monthly progress by +0.8
+3. Minimal Funding – −10% Researchers output and −5% energy output, increases monthly progress by +0.2
+
+## New Species
+
+This situation can start if the empire has the ascension perk Engineered Evolution and its policies do not allow purges or slavery. It has two stages which each take 50 progress to complete. Completing the situation creates a single pop on the empire's capital of a new species with the traits Starborn, Survivor, and Nomadic. There are two approaches for this situation:
+
+1. Balanced Funding – −30% Society research output, +20% modify species cost, and 30 food monthly; adds +0.8 progress monthly
+2. Minimal Funding – −10% Society research output, +10% modify species cost, and 10 food monthly; adds +0.2 progress monthly
+
+## Lessons of the Past
+
+This situation has four stages which each take 25 progress to complete. Completing the situation adds the permanent empire modifier United in History which adds +5% unity output. There are two approaches for this situation:
+
+1. Balanced Funding – +20% Society research output, +0.5 Researchers energy upkeep; adds +0.05 progress per researcher monthly
+2. Minimal Funding – +0.1 Researchers energy upkeep; adds +0.01 progress per researcher monthly
+
+It has a base progress of +0.1 monthly.

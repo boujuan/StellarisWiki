@@ -1,6 +1,6 @@
 ---
 title: "Weapon components"
-categories: ["Potentially_outdated", "3.14", "Game_concepts", "Warfare", "Pages_with_math_errors", "Pages_with_math_render_errors"]
+categories: ["Potentially_outdated", "3.14", "Game_concepts", "Warfare"]
 ---
 
 # Weapon components

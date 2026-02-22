@@ -1,6 +1,6 @@
 ---
 title: "Factions"
-categories: ["4.2", "Game_concepts", "Governance", "Pages_with_math_errors", "Pages_with_math_render_errors"]
+categories: ["4.2", "Game_concepts", "Governance"]
 ---
 
 # Factions
@@ -45,7 +45,7 @@ Unless they have extremely low approval, all factions produce Unity if the empir
 
 Faction Support is Faction's Political Power divided by the global sum of political power of all pops in all factions (except for slaves):
 
-Faction Support = (Faction's Political Power / Sum Political power of all pops in all factions) / 10000
+Faction Support = (Faction's Political Power/Sum Political power of all pops in all factions)/10000
 
 Note: Pops that have an ethic, but did not form a faction, are not counted in this global sum. Faction Support is always rounded down, but that is pure cosmetic.
 
