@@ -81,6 +81,9 @@ class HTMLToMarkdown:
         # Pre-process component icons before images are stripped
         self._preprocess_component_icons(soup)
 
+        # Flatten tabbed content into sequential sections
+        self._preprocess_tabber(soup)
+
         # Convert math/LaTeX elements to plain text
         self._preprocess_math(soup)
 
@@ -208,6 +211,49 @@ class HTMLToMarkdown:
             else:
                 span.replace_with(NavigableString(''))
 
+    def _preprocess_tabber(self, soup: BeautifulSoup) -> None:
+        """Flatten tabbed content (MediaWiki Tabber extension) into sequential sections.
+
+        Tabber renders as:
+          <div class="tabber">
+            <header class="tabber__header">...</header>
+            <section class="tabber__section">
+              <article class="tabber__panel" data-title="Tab1">...content...</article>
+              <article class="tabber__panel" data-title="Tab2">...content...</article>
+            </section>
+          </div>
+
+        We replace each tabber with the contents of all panels in sequence,
+        with a bold label for each tab's title.
+        """
+        for tabber in list(soup.find_all('div', class_='tabber')):
+            # Remove the JS-required header
+            header = tabber.find('header', class_='tabber__header')
+            if header:
+                header.decompose()
+
+            # Extract all tab panels
+            panels = tabber.find_all('article', class_='tabber__panel')
+            if not panels:
+                continue
+
+            # Replace the tabber div with the sequential panel contents
+            # We'll build replacement nodes and insert them before the tabber
+            for panel in panels:
+                title = panel.get('data-title', '')
+
+                # Add a bold label for the tab if there are multiple panels
+                if title and len(panels) > 1:
+                    label_tag = soup.new_tag('p')
+                    label_tag.string = f'**{title}**'
+                    tabber.insert_before(label_tag)
+
+                # Move all children of the panel before the tabber
+                for child in list(panel.children):
+                    tabber.insert_before(child)
+
+            tabber.decompose()
+
     def _preprocess_math(self, soup: BeautifulSoup) -> None:
         """Convert LaTeX math elements to readable plain text.
 
@@ -240,7 +286,14 @@ class HTMLToMarkdown:
                         continue
 
             plain = self._latex_to_plain(latex)
-            el.replace_with(NavigableString(plain))
+            # Block-level math (div) needs wrapping in <p> so the converter
+            # picks it up; inline math (span) can stay as NavigableString
+            if el.name == 'div':
+                p_tag = soup.new_tag('p')
+                p_tag.string = plain
+                el.replace_with(p_tag)
+            else:
+                el.replace_with(NavigableString(plain))
 
         # Pattern 2: Failed math renders — error messages with embedded LaTeX
         for el in list(soup.find_all('strong', class_='error')):
